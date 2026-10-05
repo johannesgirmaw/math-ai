@@ -1,0 +1,253 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000004",
+    "worldId": "10000000-0000-4000-8000-000000000001",
+    "slug": "closer-point",
+    "title": "Closer point",
+    "promise": "You can tell which point is closer.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000003"
+    ],
+    "sortOrder": 3,
+    "pipAbility": "Pip can pick the nearer point.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000005",
+      "skillNodeId": "20000000-0000-4000-8000-000000000004",
+      "title": "Pick the nearer point",
+      "version": 1,
+      "screens": [
+        {
+          "id": "near-x",
+          "prompt": "The target is at x = 1. Which point is closer?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "x = 2"
+              },
+              {
+                "id": "b",
+                "label": "x = 9"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "x = 2 is one step away. x = 9 is eight steps away."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The smaller gap is the closer point."
+        },
+        {
+          "id": "dist",
+          "prompt": "How far is x = 2 from the target at x = 1?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 1,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The gap is one step. Move higher.",
+            "too_high": "That gap is larger than one step. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Closer means the smaller gap."
+        },
+        {
+          "id": "near-y",
+          "prompt": "The target is at y = 8. Which point is closer?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "y = 7"
+              },
+              {
+                "id": "b",
+                "label": "y = 1"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "y = 7 is one step from 8. y = 1 is much farther down."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Stay with the smaller vertical gap."
+        },
+        {
+          "id": "mark",
+          "prompt": "Drag the tip to the nearer mark at (3, 6).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 6
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The nearer mark is up and a little to the right.",
+            "wrong_length": "The aim is right. Match the short distance to (3, 6)."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "You landed on the nearer mark."
+        },
+        {
+          "id": "tie",
+          "prompt": "Two points sit the same distance from the target. They are...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Equally close"
+              },
+              {
+                "id": "b",
+                "label": "The left one, always"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The same gap means neither point wins."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Equal gaps mean a tie."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Nearest match is the first idea in similarity."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000006",
+      "skillNodeId": "20000000-0000-4000-8000-000000000004",
+      "title": "Compare gaps",
+      "version": 1,
+      "screens": [
+        {
+          "id": "pair",
+          "prompt": "The target is (5, 5). Which point is closer?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(6, 5)"
+              },
+              {
+                "id": "b",
+                "label": "(5, 1)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(6, 5) is one step right. (5, 1) is four steps down."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "One step beats four steps."
+        },
+        {
+          "id": "one",
+          "prompt": "How many steps from (5, 5) to (6, 5) along x?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 1,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The x numbers differ by one. Move higher.",
+            "too_high": "The x numbers differ by less than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Only x changes, by 1."
+        },
+        {
+          "id": "origin",
+          "prompt": "The target is (0, 0). Which point is closer?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(1, 0)"
+              },
+              {
+                "id": "b",
+                "label": "(4, 4)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(1, 0) is one step away. (4, 4) is far on both axes."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The origin's neighbor is the short step."
+        },
+        {
+          "id": "zero",
+          "prompt": "What is the distance from y = 3 to y = 3?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 0,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "A distance is not below zero. This gap is zero.",
+            "too_high": "Same y means the gap is zero. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "A point is zero away from itself."
+        },
+        {
+          "id": "model",
+          "prompt": "A model uses the smaller gap to do what?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Pick a nearest match"
+              },
+              {
+                "id": "b",
+                "label": "Pick a random label"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The smaller gap is the nearer match, not a coin flip."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Nearest match is the smaller gap."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A model picks a neighbor by the smaller gap."
+    }
+  ]
+}

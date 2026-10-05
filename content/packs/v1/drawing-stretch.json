@@ -1,0 +1,382 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000014",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "drawing-stretch",
+    "title": "Drawing stretch",
+    "promise": "You can watch a drawing stretch.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000013"
+    ],
+    "sortOrder": 19,
+    "pipAbility": "Pip can stretch a drawing.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000002d",
+      "skillNodeId": "20000000-0000-4000-8000-000000000014",
+      "title": "Stretch sideways",
+      "version": 1,
+      "screens": [
+        {
+          "id": "every",
+          "prompt": "A tiny drawing is a few points. The same matrix moves...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Every point"
+              },
+              {
+                "id": "b",
+                "label": "Only the first point"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "One table applies to every point in the drawing."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Every point uses the same warp."
+        },
+        {
+          "id": "wide",
+          "prompt": "Use 2, 0 / 0, 1 to stretch the drawing sideways.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              2,
+              0,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "Top left is 2, bottom right is 1, and the other cells stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That stretch doubles width."
+        },
+        {
+          "id": "corner",
+          "prompt": "A corner at x = 1 moves to...",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "x doubles. Move higher.",
+            "too_high": "x doubles to less than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The corner's x is 2."
+        },
+        {
+          "id": "travel",
+          "prompt": "That corner travels from (1, 2) to (2, 2). Drag the tip.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 2,
+              "y": 2
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The corner moves straight right.",
+            "wrong_length": "The aim is right. x grows from 1 to 2."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The corner moved with the stretch."
+        },
+        {
+          "id": "shape",
+          "prompt": "The height stays put. The drawing gets...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Wider"
+              },
+              {
+                "id": "b",
+                "label": "Taller"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "y is multiplied by 1. Only x grows, so the drawing gets wider."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Width grows. Height stays."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Features move together when a matrix warps space."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000002e",
+      "skillNodeId": "20000000-0000-4000-8000-000000000014",
+      "title": "Stretch upward",
+      "version": 1,
+      "screens": [
+        {
+          "id": "tall",
+          "prompt": "Set 1, 0 / 0, 2 to stretch upward.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              1,
+              0,
+              0,
+              2
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "Top left is 1 and bottom right is 2. The other cells stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That table doubles height."
+        },
+        {
+          "id": "gets",
+          "prompt": "The drawing gets...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Taller"
+              },
+              {
+                "id": "b",
+                "label": "Only wider"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "y doubles and x stays, so the drawing grows upward."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Height doubles."
+        },
+        {
+          "id": "top",
+          "prompt": "A top at y = 2 moves to...",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "y doubles. Move higher.",
+            "too_high": "y doubles to less than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The top moves to 4."
+        },
+        {
+          "id": "rise",
+          "prompt": "From (3, 1) to (3, 2). Drag the tip.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 3,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 2
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "This corner moves straight up.",
+            "wrong_length": "The aim is up. The rise is 1."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The corner rose."
+        },
+        {
+          "id": "line",
+          "prompt": "Points that sat on a line still sit on a line. The warp is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Even"
+              },
+              {
+                "id": "b",
+                "label": "A scribble"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A matrix moves lines to lines. It does not scribble."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Lines stay lines."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The same rule can stretch height instead of width."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000002f",
+      "skillNodeId": "20000000-0000-4000-8000-000000000014",
+      "title": "Grow both ways",
+      "version": 1,
+      "screens": [
+        {
+          "id": "both",
+          "prompt": "Set 2, 0 / 0, 2.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              2,
+              0,
+              0,
+              2
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1
+          },
+          "feedback": {
+            "wrong_cell": "Both diagonal cells are 2. The other cells stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Both axes double."
+        },
+        {
+          "id": "shape",
+          "prompt": "Both axes double. The drawing...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Grows and keeps its shape"
+              },
+              {
+                "id": "b",
+                "label": "Flips upside down"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both scales are positive and equal, so the shape grows without a flip."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same scale on both axes keeps the shape."
+        },
+        {
+          "id": "x",
+          "prompt": "A point at (1, 1) moves to x = ...",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "x doubles. Move higher.",
+            "too_high": "x doubles to less than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The new x is 2."
+        },
+        {
+          "id": "y",
+          "prompt": "And y = ...",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "y doubles too. Move higher.",
+            "too_high": "y doubles to less than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The new y is 2."
+        },
+        {
+          "id": "why",
+          "prompt": "Features move together. A matrix can...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Stretch a whole drawing"
+              },
+              {
+                "id": "b",
+                "label": "Paint one pixel and stop"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Every point of the drawing uses the same table."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The whole drawing stretches together."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Doubling both axes grows the drawing and keeps its shape."
+    }
+  ]
+}

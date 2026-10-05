@@ -1,0 +1,162 @@
+{
+  "cases": [
+    {
+      "id": "choice-correct",
+      "primitive": {
+        "type": "choice",
+        "options": [
+          { "id": "a", "label": "Yes" },
+          { "id": "b", "label": "No" }
+        ],
+        "correctOptionId": "a"
+      },
+      "answer": "a",
+      "expect": { "correct": true, "errorCode": null }
+    },
+    {
+      "id": "choice-wrong",
+      "primitive": {
+        "type": "choice",
+        "options": [
+          { "id": "a", "label": "Yes" },
+          { "id": "b", "label": "No" }
+        ],
+        "correctOptionId": "a"
+      },
+      "answer": "b",
+      "expect": { "correct": false, "errorCode": "wrong_option" }
+    },
+    {
+      "id": "slider-too-low",
+      "primitive": {
+        "type": "slider",
+        "min": 0,
+        "max": 10,
+        "step": 0.1,
+        "correctValue": 5,
+        "tolerance": 0.4
+      },
+      "answer": 4,
+      "expect": { "correct": false, "errorCode": "too_low" }
+    },
+    {
+      "id": "slider-too-high",
+      "primitive": {
+        "type": "slider",
+        "min": 0,
+        "max": 10,
+        "step": 0.1,
+        "correctValue": 5,
+        "tolerance": 0.4
+      },
+      "answer": 6,
+      "expect": { "correct": false, "errorCode": "too_high" }
+    },
+    {
+      "id": "slider-within",
+      "primitive": {
+        "type": "slider",
+        "min": 0,
+        "max": 10,
+        "step": 0.1,
+        "correctValue": 5,
+        "tolerance": 0.4
+      },
+      "answer": 5.2,
+      "expect": { "correct": true, "errorCode": null }
+    },
+    {
+      "id": "drag-wrong-direction",
+      "primitive": {
+        "type": "dragArrow",
+        "planeWidth": 10,
+        "planeHeight": 10,
+        "start": { "x": 0, "y": 0 },
+        "targetTip": { "x": 10, "y": 0 },
+        "tolerance": 0.5
+      },
+      "answer": { "x": 0, "y": 10 },
+      "expect": { "correct": false, "errorCode": "wrong_direction" }
+    },
+    {
+      "id": "drag-wrong-length",
+      "primitive": {
+        "type": "dragArrow",
+        "planeWidth": 10,
+        "planeHeight": 10,
+        "start": { "x": 0, "y": 0 },
+        "targetTip": { "x": 10, "y": 0 },
+        "tolerance": 0.5
+      },
+      "answer": { "x": 5, "y": 0 },
+      "expect": { "correct": false, "errorCode": "wrong_length" }
+    },
+    {
+      "id": "drag-on-target",
+      "primitive": {
+        "type": "dragArrow",
+        "planeWidth": 10,
+        "planeHeight": 10,
+        "start": { "x": 0, "y": 0 },
+        "targetTip": { "x": 10, "y": 0 },
+        "tolerance": 0.5
+      },
+      "answer": { "x": 10, "y": 0 },
+      "expect": { "correct": true, "errorCode": null }
+    },
+    {
+      "id": "matrix-bad-cell",
+      "primitive": {
+        "type": "matrixWarp",
+        "target": [1, 0, 0, 1],
+        "initial": [1, 0, 0, 1],
+        "tolerance": 0.1
+      },
+      "answer": [1, 0, 0, 2],
+      "expect": { "correct": false, "errorCode": "wrong_cell" }
+    },
+    {
+      "id": "match-incomplete",
+      "primitive": {
+        "type": "match",
+        "left": [
+          { "id": "a", "label": "Arrow" },
+          { "id": "b", "label": "Point" }
+        ],
+        "right": [
+          { "id": "1", "label": "Move" },
+          { "id": "2", "label": "Place" }
+        ],
+        "pairs": [
+          { "leftId": "a", "rightId": "1" },
+          { "leftId": "b", "rightId": "2" }
+        ]
+      },
+      "answer": [{ "leftId": "a", "rightId": "1" }],
+      "expect": { "correct": false, "errorCode": "incomplete" }
+    },
+    {
+      "id": "match-wrong-pair",
+      "primitive": {
+        "type": "match",
+        "left": [
+          { "id": "a", "label": "Arrow" },
+          { "id": "b", "label": "Point" }
+        ],
+        "right": [
+          { "id": "1", "label": "Move" },
+          { "id": "2", "label": "Place" }
+        ],
+        "pairs": [
+          { "leftId": "a", "rightId": "1" },
+          { "leftId": "b", "rightId": "2" }
+        ]
+      },
+      "answer": [
+        { "leftId": "a", "rightId": "2" },
+        { "leftId": "b", "rightId": "1" }
+      ],
+      "expect": { "correct": false, "errorCode": "wrong_pair" }
+    }
+  ]
+}

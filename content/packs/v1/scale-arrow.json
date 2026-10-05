@@ -1,0 +1,249 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000008",
+    "worldId": "10000000-0000-4000-8000-000000000001",
+    "slug": "scale-arrow",
+    "title": "Scale an arrow",
+    "promise": "You can make an arrow longer or shorter.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000007"
+    ],
+    "sortOrder": 7,
+    "pipAbility": "Pip can stretch a move.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000000c",
+      "skillNodeId": "20000000-0000-4000-8000-000000000008",
+      "title": "Twice as long",
+      "version": 1,
+      "screens": [
+        {
+          "id": "twice",
+          "prompt": "Twice as long means you do what?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Keep the direction and double the length"
+              },
+              {
+                "id": "b",
+                "label": "Turn the arrow around"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Scaling stretches the move. It does not reverse it."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Direction stays. Length doubles."
+        },
+        {
+          "id": "double",
+          "prompt": "An arrow is 3 long. Set twice that length.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Twice 3 is higher. Move up.",
+            "too_high": "Twice 3 is lower than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The scaled length is 6."
+        },
+        {
+          "id": "stretch",
+          "prompt": "The short arrow ends at (4, 2) from (2, 2). Drag twice as far, to (6, 2).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 6,
+              "y": 2
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "Stay on the horizontal line. Twice as far is still to the right.",
+            "wrong_length": "The direction is right. Twice the short arrow reaches x = 6."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Same direction, double length."
+        },
+        {
+          "id": "half",
+          "prompt": "An arrow is 8 long. Set half of that.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Half of 8 is higher. Move up.",
+            "too_high": "Half of 8 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Half the length is 4."
+        },
+        {
+          "id": "weight",
+          "prompt": "A weight scales a signal by changing what?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Its length"
+              },
+              {
+                "id": "b",
+                "label": "Only its color"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The weight multiplies the size of the move."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Scaling changes length."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A weight scales how much an input matters."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000000d",
+      "skillNodeId": "20000000-0000-4000-8000-000000000008",
+      "title": "Half as long",
+      "version": 1,
+      "screens": [
+        {
+          "id": "half-draw",
+          "prompt": "Full length would reach (8, 3) from (2, 3). Stop halfway, at (5, 3).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "Halfway is still straight right, not a new direction.",
+            "wrong_length": "The aim is right. Half of the 6-unit run stops at x = 5."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Half the length keeps the direction."
+        },
+        {
+          "id": "times3",
+          "prompt": "Length 2, times 3, is what?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "2 times 3 is higher. Move up.",
+            "too_high": "2 times 3 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The scale multiplies the length."
+        },
+        {
+          "id": "zero",
+          "prompt": "Scaling by 0 leaves what?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "No arrow"
+              },
+              {
+                "id": "b",
+                "label": "The same arrow"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A scale of 0 shrinks every step to nothing."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Zero scale is a zero move."
+        },
+        {
+          "id": "half10",
+          "prompt": "Length 10, halved, is what?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Half of 10 is higher. Move up.",
+            "too_high": "Half of 10 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Half of 10 is 5."
+        },
+        {
+          "id": "closer",
+          "prompt": "Half as long keeps the direction. The tip moves...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Closer to the tail"
+              },
+              {
+                "id": "b",
+                "label": "Onto a new heading"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Shorter means the tip stops sooner on the same line."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The heading stays. The tip comes in."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A smaller weight shortens the arrow and keeps its aim."
+    }
+  ]
+}

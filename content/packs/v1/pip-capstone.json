@@ -1,0 +1,256 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000017",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "pip-capstone",
+    "title": "Teach Pip",
+    "promise": "You can teach Pip to match patterns.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000016"
+    ],
+    "sortOrder": 22,
+    "pipAbility": "Pip can match a pattern with a dot product.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000036",
+      "skillNodeId": "20000000-0000-4000-8000-000000000017",
+      "title": "Match by agreement",
+      "version": 1,
+      "screens": [
+        {
+          "id": "same",
+          "prompt": "Match the gray arrow. It points right.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 7,
+              "y": 2
+            },
+            "tolerance": 0.8,
+            "guideStart": {
+              "x": 2,
+              "y": 5
+            },
+            "guideTip": {
+              "x": 7,
+              "y": 5
+            }
+          },
+          "feedback": {
+            "wrong_direction": "The gray arrow points right. Aim the same way.",
+            "wrong_length": "The direction matches. Reach the mark."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Same direction means the patterns agree."
+        },
+        {
+          "id": "agree",
+          "prompt": "That match means the patterns...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Agree"
+              },
+              {
+                "id": "b",
+                "label": "Point opposite ways"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Same direction is agreement, not opposition."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The patterns agree."
+        },
+        {
+          "id": "opposite",
+          "prompt": "Now point the opposite way from the gray arrow.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 7,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 2,
+              "y": 3
+            },
+            "tolerance": 0.8,
+            "guideStart": {
+              "x": 2,
+              "y": 5
+            },
+            "guideTip": {
+              "x": 7,
+              "y": 5
+            }
+          },
+          "feedback": {
+            "wrong_direction": "Opposite is left if the gray arrow points right.",
+            "wrong_length": "You are aimed the other way. Match the length."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Opposite arrows get a negative score."
+        },
+        {
+          "id": "keep",
+          "prompt": "Pip keeps the pattern with...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The higher agreement"
+              },
+              {
+                "id": "b",
+                "label": "The first name in the list"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The name is not the score. The higher agreement wins."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Higher agreement stays."
+        },
+        {
+          "id": "scores",
+          "prompt": "Match each direction with its score.",
+          "primitive": {
+            "type": "match",
+            "left": [
+              {
+                "id": "agree",
+                "label": "Agree"
+              },
+              {
+                "id": "oppose",
+                "label": "Oppose"
+              },
+              {
+                "id": "square",
+                "label": "Right angle"
+              }
+            ],
+            "right": [
+              {
+                "id": "pos",
+                "label": "Positive"
+              },
+              {
+                "id": "neg",
+                "label": "Negative"
+              },
+              {
+                "id": "zero",
+                "label": "Zero"
+              }
+            ],
+            "pairs": [
+              {
+                "leftId": "agree",
+                "rightId": "pos"
+              },
+              {
+                "leftId": "oppose",
+                "rightId": "neg"
+              },
+              {
+                "leftId": "square",
+                "rightId": "zero"
+              }
+            ]
+          },
+          "feedback": {
+            "incomplete": "Pair all three directions.",
+            "wrong_pair": "Agree is positive, oppose is negative, and a right angle is zero."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Each direction has a score."
+        },
+        {
+          "id": "high",
+          "prompt": "Set a high score for the matching pattern.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 9,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The match scores high. Move up.",
+            "too_high": "9 is the high mark. Come down a little."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The match scores high."
+        },
+        {
+          "id": "name",
+          "prompt": "A tiny layer scores that agreement with a...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Dot product"
+              },
+              {
+                "id": "b",
+                "label": "Stored photo"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The score is computed. It is not a saved picture."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The score is a dot product."
+        },
+        {
+          "id": "taught",
+          "prompt": "You taught Pip to match. The math...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Scored which pattern agrees"
+              },
+              {
+                "id": "b",
+                "label": "Memorized the picture"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Matching here is a score, not a stored photo."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Pip matches by agreement."
+        }
+      ],
+      "capstone": true,
+      "whyItMatters": "Matching by agreement is how a tiny network recognizes a pattern."
+    }
+  ]
+}

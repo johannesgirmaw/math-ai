@@ -1,0 +1,138 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000009",
+    "worldId": "10000000-0000-4000-8000-000000000001",
+    "slug": "arrow-length",
+    "title": "Arrow length",
+    "promise": "You can tell which arrow is longer.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000008"
+    ],
+    "sortOrder": 8,
+    "pipAbility": "Pip can compare lengths.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000000e",
+      "skillNodeId": "20000000-0000-4000-8000-000000000009",
+      "title": "Which is longer",
+      "version": 1,
+      "screens": [
+        {
+          "id": "longer",
+          "prompt": "Arrow A spans 2 units. Arrow B spans 6. Which is longer?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "B"
+              },
+              {
+                "id": "b",
+                "label": "A"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "6 is a bigger move than 2."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The longer arrow has the bigger length."
+        },
+        {
+          "id": "span",
+          "prompt": "How long is a flat arrow from x = 1 to x = 7?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The ends are farther apart. Move higher.",
+            "too_high": "The ends are closer than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The length is the gap, 6."
+        },
+        {
+          "id": "aim",
+          "prompt": "A longer arrow is a larger move. Its direction can...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Stay the same"
+              },
+              {
+                "id": "b",
+                "label": "Be forced to turn"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Length and direction are separate. You can stretch without turning."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Size can change while the aim stays."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw the longer move, 6 right from (1, 4).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 4
+            },
+            "targetTip": {
+              "x": 7,
+              "y": 4
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The longer move is straight right.",
+            "wrong_length": "The direction is right. The length is 6."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That arrow is the long one."
+        },
+        {
+          "id": "compare",
+          "prompt": "A model can compare two features by...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Which arrow is longer"
+              },
+              {
+                "id": "b",
+                "label": "Which name is louder"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Length is the size you can compare."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Bigger length, bigger feature."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Length is the size of a feature, not its direction."
+    }
+  ]
+}

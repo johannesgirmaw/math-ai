@@ -1,0 +1,374 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-00000000000e",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "length-unit",
+    "title": "Length and direction",
+    "promise": "You can separate length from direction.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000000d"
+    ],
+    "sortOrder": 13,
+    "pipAbility": "Pip can tell size from aim.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000019",
+      "skillNodeId": "20000000-0000-4000-8000-00000000000e",
+      "title": "Size and aim",
+      "version": 1,
+      "screens": [
+        {
+          "id": "split",
+          "prompt": "Length is the size of the move. Direction is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Which way it points"
+              },
+              {
+                "id": "b",
+                "label": "The same number as length"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Two arrows can share an aim and still have different lengths."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Aim and size are different facts."
+        },
+        {
+          "id": "three",
+          "prompt": "An arrow (3, 0) has what length?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Along one axis, the length is the absolute component. Move higher.",
+            "too_high": "The length is the size 3, not more. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "A flat arrow's length is its run."
+        },
+        {
+          "id": "longer",
+          "prompt": "(0, 4) and (0, 2) share a direction. Which is longer?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(0, 4)"
+              },
+              {
+                "id": "b",
+                "label": "(0, 2)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both point up. 4 is a longer rise than 2."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same aim, greater length."
+        },
+        {
+          "id": "unit",
+          "prompt": "Draw a unit step right, from (2, 3) to (3, 3).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "A unit step right stays on the horizontal line.",
+            "wrong_length": "The aim is right. A unit step is 1 unit long."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Length 1, direction right."
+        },
+        {
+          "id": "unit-name",
+          "prompt": "A unit direction keeps the aim and sets the length to...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "1"
+              },
+              {
+                "id": "b",
+                "label": "0"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Zero length has no direction left. A unit length is 1."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Unit length is 1."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Normalization keeps direction and drops raw size."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000001a",
+      "skillNodeId": "20000000-0000-4000-8000-00000000000e",
+      "title": "Drop the size",
+      "version": 1,
+      "screens": [
+        {
+          "id": "six",
+          "prompt": "(6, 0) is twice (3, 0). Set the length of (6, 0).",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The flat arrow is longer than that. Move up.",
+            "too_high": "The flat arrow is shorter than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The length is 6."
+        },
+        {
+          "id": "divide",
+          "prompt": "Dividing by the length keeps...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The direction"
+              },
+              {
+                "id": "b",
+                "label": "A new turn"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "You shrink the arrow onto length 1. The aim stays."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The aim survives the resize."
+        },
+        {
+          "id": "same",
+          "prompt": "(5, 0) points the same way as...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(1, 0)"
+              },
+              {
+                "id": "b",
+                "label": "(0, 1)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(0, 1) points up. (5, 0) and (1, 0) both point right."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same direction, different length."
+        },
+        {
+          "id": "up",
+          "prompt": "Set the length of a pure up arrow (0, 4).",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The rise is the length. Move higher.",
+            "too_high": "The rise is shorter than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Straight up, length 4."
+        },
+        {
+          "id": "norm",
+          "prompt": "Normalization drops raw size so that...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A huge number cannot drown the aim"
+              },
+              {
+                "id": "b",
+                "label": "Every vector becomes zero"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The aim stays. Only the raw size is removed."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Direction stays. Size is set aside."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Dividing by the length keeps the direction."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000001b",
+      "skillNodeId": "20000000-0000-4000-8000-00000000000e",
+      "title": "Keep the aim",
+      "version": 1,
+      "screens": [
+        {
+          "id": "greater",
+          "prompt": "Two arrows point the same way. The longer one has...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Greater length"
+              },
+              {
+                "id": "b",
+                "label": "A different direction"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Same way means the direction matches. Length is what differs."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Longer means greater length."
+        },
+        {
+          "id": "four",
+          "prompt": "The length of (2, 0) doubled is...",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Double 2 is higher. Move up.",
+            "too_high": "Double 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Doubling length does not turn the arrow."
+        },
+        {
+          "id": "up",
+          "prompt": "Draw the direction of (0, 1) with length 4. Tail (3, 1), tip (3, 5).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 3,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 5
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "That direction is straight up.",
+            "wrong_length": "The aim is up. The length is 4."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Same aim as (0, 1), longer body."
+        },
+        {
+          "id": "down",
+          "prompt": "(0, -3) points which way?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Down"
+              },
+              {
+                "id": "b",
+                "label": "Up"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A negative second number points down."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Negative y is down."
+        },
+        {
+          "id": "separate",
+          "prompt": "You can change the length and...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Keep the direction"
+              },
+              {
+                "id": "b",
+                "label": "Lose the vector"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Length and direction come apart. Changing one can leave the other."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Size and aim are separate."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "You can change length and keep the direction."
+    }
+  ]
+}

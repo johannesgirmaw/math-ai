@@ -1,0 +1,247 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000001",
+    "worldId": "10000000-0000-4000-8000-000000000001",
+    "slug": "coordinate-plane",
+    "title": "Coordinate plane",
+    "promise": "You can place a point on the plane.",
+    "prereqIds": [],
+    "sortOrder": 0,
+    "pipAbility": "Pip can land on a point.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000001",
+      "skillNodeId": "20000000-0000-4000-8000-000000000001",
+      "title": "Place a point",
+      "version": 1,
+      "screens": [
+        {
+          "id": "pair",
+          "prompt": "A point needs two numbers. Which pair places it?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(3, 1)"
+              },
+              {
+                "id": "b",
+                "label": "Only 3"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "One number sits on a line. A point needs x and y."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "x and y together name one point."
+        },
+        {
+          "id": "x",
+          "prompt": "The point is 4 units right of the origin. Set x.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "x counts steps to the right. Move higher.",
+            "too_high": "That x is past the point. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "x is the horizontal step."
+        },
+        {
+          "id": "y",
+          "prompt": "The same point is 2 units up. Set y.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "y counts steps up. Move higher.",
+            "too_high": "That y is above the point. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "y is the vertical step."
+        },
+        {
+          "id": "order",
+          "prompt": "Which way do you write those two numbers?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(x, y)"
+              },
+              {
+                "id": "b",
+                "label": "(y, x)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "x comes first. y comes second."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The pair is horizontal, then vertical."
+        },
+        {
+          "id": "land",
+          "prompt": "Drag the tip to the point at (7, 3).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 7,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The point sits up and to the right.",
+            "wrong_length": "The direction is right. Match the distance to (7, 3)."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The tip lands on the point the pair names."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A model stores a position as two numbers."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000002",
+      "skillNodeId": "20000000-0000-4000-8000-000000000001",
+      "title": "Read a point",
+      "version": 1,
+      "screens": [
+        {
+          "id": "mark",
+          "prompt": "Drag the tip onto the marked point.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 6,
+              "y": 4
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The mark sits up and to the right of the tail.",
+            "wrong_length": "The aim is right. Stretch or shorten to the mark."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The tip is on the mark."
+        },
+        {
+          "id": "read-x",
+          "prompt": "What is the x of the point you reached?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Count the steps right from zero. Move higher.",
+            "too_high": "That count goes past the mark. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The mark is 6 units right."
+        },
+        {
+          "id": "read-y",
+          "prompt": "What is the y of that point?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Count the steps up. Move higher.",
+            "too_high": "That count is above the mark. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The mark is 4 units up."
+        },
+        {
+          "id": "origin",
+          "prompt": "Where is the point (0, 0)?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The origin"
+              },
+              {
+                "id": "b",
+                "label": "High on the y axis"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both numbers are zero, so the point sits where the axes cross."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The origin is the crossing of the axes."
+        },
+        {
+          "id": "swap",
+          "prompt": "Which pair is 2 right and 5 up?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(2, 5)"
+              },
+              {
+                "id": "b",
+                "label": "(5, 2)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(5, 2) is 5 right and 2 up. You want the smaller x."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Right is the first number. Up is the second."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Swapping the two numbers sends a model to the wrong place."
+    }
+  ]
+}

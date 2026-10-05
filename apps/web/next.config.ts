@@ -1,0 +1,8 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  transpilePackages: ["@axiom/content-schema", "@axiom/algorithm-vectors"],
+  allowedDevOrigins: ["127.0.0.1", "localhost", "10.0.2.2"],
+};
+
+export default nextConfig;

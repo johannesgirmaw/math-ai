@@ -1,0 +1,393 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000015",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "two-warps",
+    "title": "Two warps",
+    "promise": "You can apply one warp, then another.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000014"
+    ],
+    "sortOrder": 20,
+    "pipAbility": "Pip can stack two warps.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000030",
+      "skillNodeId": "20000000-0000-4000-8000-000000000015",
+      "title": "One, then the other",
+      "version": 1,
+      "screens": [
+        {
+          "id": "order",
+          "prompt": "You apply the first matrix, then the second. The point moves...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Twice, in order"
+              },
+              {
+                "id": "b",
+                "label": "Only by the first matrix"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The second matrix sees the point the first matrix produced."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Two warps, in order."
+        },
+        {
+          "id": "first",
+          "prompt": "Set the first warp: 2, 0 / 0, 1.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              2,
+              0,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "Top left is 2 and bottom right is 1. The other cells stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The first warp doubles x."
+        },
+        {
+          "id": "second",
+          "prompt": "Set the second warp: 1, 0 / 0, 2.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              1,
+              0,
+              0,
+              2
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "Top left is 1 and bottom right is 2. The other cells stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The second warp doubles y."
+        },
+        {
+          "id": "x",
+          "prompt": "Start at 1. After x doubles, x ends at...",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "1 doubled is higher. Move up.",
+            "too_high": "1 doubled is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "x ends at 2."
+        },
+        {
+          "id": "y",
+          "prompt": "After y doubles, y ends at...",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "1 doubled is higher. Move up.",
+            "too_high": "1 doubled is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "y ends at 2."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Stacked layers are transformations applied in order."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000031",
+      "skillNodeId": "20000000-0000-4000-8000-000000000015",
+      "title": "Order matters",
+      "version": 1,
+      "screens": [
+        {
+          "id": "matters",
+          "prompt": "Doing A then B can differ from B then A. Order...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Matters"
+              },
+              {
+                "id": "b",
+                "label": "Never matters"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The second warp acts on an already moved point."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Order can change the result."
+        },
+        {
+          "id": "a",
+          "prompt": "Warp A is 1, 1 / 0, 1. Set it.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              1,
+              1,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "Top row is 1, 1. Bottom row is 0, 1."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Warp A is set."
+        },
+        {
+          "id": "land",
+          "prompt": "(1, 1) through A lands at...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(2, 1)"
+              },
+              {
+                "id": "b",
+                "label": "(1, 1)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "New x is 1 plus 1. y stays 1."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A slides the point to (2, 1)."
+        },
+        {
+          "id": "b",
+          "prompt": "Warp B is 2, 0 / 0, 1. Set it.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              2,
+              0,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "Top left is 2 and bottom right is 1. The other cells stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Warp B doubles x."
+        },
+        {
+          "id": "sees",
+          "prompt": "The second warp sees...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The first warp's output"
+              },
+              {
+                "id": "b",
+                "label": "Only the original point"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Stacking means the output of one becomes the input of the next."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The second warp sees the first result."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The second warp sees the first warp's output."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000032",
+      "skillNodeId": "20000000-0000-4000-8000-000000000015",
+      "title": "Two identities",
+      "version": 1,
+      "screens": [
+        {
+          "id": "stay",
+          "prompt": "Two identity matrices in a row leave a point...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Where it started"
+              },
+              {
+                "id": "b",
+                "label": "At the origin"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Each identity keeps the point, so two of them still keep it."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The point never moves."
+        },
+        {
+          "id": "one",
+          "prompt": "Set the identity: 1, 0 / 0, 1.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              1,
+              0,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1
+          },
+          "feedback": {
+            "wrong_cell": "Diagonal cells are 1. The other two stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The first identity is set."
+        },
+        {
+          "id": "two",
+          "prompt": "Set the second identity: 1, 0 / 0, 1.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              1,
+              0,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1
+          },
+          "feedback": {
+            "wrong_cell": "Diagonal cells are 1 again. The other two stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The second identity is set."
+        },
+        {
+          "id": "x",
+          "prompt": "Start x = 4. After both, x is...",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The identity keeps 4. Move higher.",
+            "too_high": "The identity does not grow 4. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "x is still 4."
+        },
+        {
+          "id": "read",
+          "prompt": "A deep stack still applies the warps...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "In order"
+              },
+              {
+                "id": "b",
+                "label": "With the order thrown away"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "You can combine them later. The phone still applies them in order."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Order stays, even in a stack."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Two copies of the identity leave a point where it started."
+    }
+  ]
+}

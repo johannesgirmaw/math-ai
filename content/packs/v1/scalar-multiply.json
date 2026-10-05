@@ -1,0 +1,364 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-00000000000d",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "scalar-multiply",
+    "title": "Scalar multiplication",
+    "promise": "You can scale both components together.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000000c"
+    ],
+    "sortOrder": 12,
+    "pipAbility": "Pip can scale a vector.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000016",
+      "skillNodeId": "20000000-0000-4000-8000-00000000000d",
+      "title": "Scale both numbers",
+      "version": 1,
+      "screens": [
+        {
+          "id": "both",
+          "prompt": "Multiply (2, 3) by 2. You scale which numbers?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Both numbers"
+              },
+              {
+                "id": "b",
+                "label": "Only the first"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A scalar hits every component, not just the first."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Both places double."
+        },
+        {
+          "id": "first",
+          "prompt": "2 times 2. Set the first number.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "2 times 2 is higher. Move up.",
+            "too_high": "2 times 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The first place is 4."
+        },
+        {
+          "id": "second",
+          "prompt": "3 times 2. Set the second number.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "3 times 2 is higher. Move up.",
+            "too_high": "3 times 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The second place is 6."
+        },
+        {
+          "id": "result",
+          "prompt": "(2, 3) times 2 is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(4, 6)"
+              },
+              {
+                "id": "b",
+                "label": "(2, 6)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(2, 6) leaves the first number unscaled."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Both numbers doubled."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw the doubled arrow (4, 2) from (1, 1).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The doubled arrow goes right and up.",
+            "wrong_length": "The direction matches. Stop at (5, 3)."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Doubling scales the whole arrow."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A weight multiplies every part of a signal."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000017",
+      "skillNodeId": "20000000-0000-4000-8000-00000000000d",
+      "title": "Scale by a half",
+      "version": 1,
+      "screens": [
+        {
+          "id": "half-first",
+          "prompt": "Half of 6. Set the first number of (6, 4) halved.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Half of 6 is higher. Move up.",
+            "too_high": "Half of 6 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The first place is 3."
+        },
+        {
+          "id": "half-second",
+          "prompt": "Half of 4. Set the second number.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Half of 4 is higher. Move up.",
+            "too_high": "Half of 4 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The second place is 2."
+        },
+        {
+          "id": "pair",
+          "prompt": "(6, 4) times 1/2 is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(3, 2)"
+              },
+              {
+                "id": "b",
+                "label": "(6, 2)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(6, 2) halves only the second number."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Both places are halved."
+        },
+        {
+          "id": "zero",
+          "prompt": "Times 0 gives...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(0, 0)"
+              },
+              {
+                "id": "b",
+                "label": "The same vector"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Every component times 0 is 0."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A zero scale clears the vector."
+        },
+        {
+          "id": "weight",
+          "prompt": "A weight multiplies a signal by scaling...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Every component"
+              },
+              {
+                "id": "b",
+                "label": "Only the label"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The weight is one number applied to each place."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Every component feels the weight."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Halving multiplies every component by the same amount."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000018",
+      "skillNodeId": "20000000-0000-4000-8000-00000000000d",
+      "title": "Scale a signed pair",
+      "version": 1,
+      "screens": [
+        {
+          "id": "signed",
+          "prompt": "(1, -2) times 3 is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(3, -6)"
+              },
+              {
+                "id": "b",
+                "label": "(-3, 2)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "3 times 1 is 3. 3 times -2 is -6. The signs stay with their places."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Both places triple, signs included."
+        },
+        {
+          "id": "three",
+          "prompt": "1 times 3. Set the first number.",
+          "primitive": {
+            "type": "slider",
+            "min": -8,
+            "max": 8,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "1 times 3 is higher. Move up.",
+            "too_high": "1 times 3 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The first place is 3."
+        },
+        {
+          "id": "neg",
+          "prompt": "-2 times 3. Set the second number.",
+          "primitive": {
+            "type": "slider",
+            "min": -8,
+            "max": 8,
+            "step": 1,
+            "correctValue": -6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "That is past -6. Move toward zero.",
+            "too_high": "-2 times 3 is -6. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The second place is -6."
+        },
+        {
+          "id": "flat",
+          "prompt": "Draw (3, 0) from (2, 4).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 4
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 4
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "This scaled arrow is straight right.",
+            "wrong_length": "The aim is right. The run is 3."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The second number stayed 0."
+        },
+        {
+          "id": "aim",
+          "prompt": "A positive scale keeps the direction. The arrow...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Stays aimed the same way"
+              },
+              {
+                "id": "b",
+                "label": "Must turn"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Multiplying by a positive number stretches. It does not turn."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Positive scale, same aim."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A positive scale keeps the direction."
+    }
+  ]
+}

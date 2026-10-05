@@ -1,0 +1,255 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000007",
+    "worldId": "10000000-0000-4000-8000-000000000001",
+    "slug": "add-arrows",
+    "title": "Add arrows",
+    "promise": "You can add arrows tip to tail.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000006"
+    ],
+    "sortOrder": 6,
+    "pipAbility": "Pip can chain two moves.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000000a",
+      "skillNodeId": "20000000-0000-4000-8000-000000000007",
+      "title": "Tip to tail",
+      "version": 1,
+      "screens": [
+        {
+          "id": "place",
+          "prompt": "To add two arrows, where do you put the second tail?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "On the first tip"
+              },
+              {
+                "id": "b",
+                "label": "Back at the origin only"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The second move starts where the first move ends."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Tip to tail chains the moves."
+        },
+        {
+          "id": "first",
+          "prompt": "Draw the first move: 3 right from (1, 2).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 4,
+              "y": 2
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The first move is straight right.",
+            "wrong_length": "The direction is right. Stop 3 units out."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The first arrow is drawn."
+        },
+        {
+          "id": "sum-x",
+          "prompt": "Then add 2 more right. The tail was at x = 1. Where does x land?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "1, then 3, then 2 more. Move higher.",
+            "too_high": "That landing is past the chain. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The chained x is 6."
+        },
+        {
+          "id": "order",
+          "prompt": "Adding the arrows in the other order lands where?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "On the same point"
+              },
+              {
+                "id": "b",
+                "label": "On a different point"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The two paths form a parallelogram and meet."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Order does not change the sum."
+        },
+        {
+          "id": "sum",
+          "prompt": "The combined move is 5 right and 2 up from (1, 1). Drag the tip.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 6,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The sum goes right and a little up.",
+            "wrong_length": "The direction matches. The sum is 5 right and 2 up."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "One arrow can stand for the chain."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Adding vectors is how layers combine signals."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000000b",
+      "skillNodeId": "20000000-0000-4000-8000-000000000007",
+      "title": "Combine moves",
+      "version": 1,
+      "screens": [
+        {
+          "id": "cancel-part",
+          "prompt": "3 right plus 1 left is how many right?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Left takes one step back from 3. Move higher.",
+            "too_high": "You gave back less than one step. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Opposite steps shrink the sum."
+        },
+        {
+          "id": "zero",
+          "prompt": "Opposite arrows of the same length add to what?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "No move"
+              },
+              {
+                "id": "b",
+                "label": "A longer arrow"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The second arrow walks back what the first arrow walked."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Equal opposites sum to a zero move."
+        },
+        {
+          "id": "up",
+          "prompt": "Add a move of 4 up. Tail at (3, 1), tip at (3, 5).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 3,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 5
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "This move is straight up, not sideways.",
+            "wrong_length": "The aim is up. The rise is 4."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "You added a vertical arrow."
+        },
+        {
+          "id": "ups",
+          "prompt": "2 up plus 3 up is how far up?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Add the rises. Move higher.",
+            "too_high": "The rises add to less than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Same direction means the lengths add."
+        },
+        {
+          "id": "layer",
+          "prompt": "A layer adds two signals of the same shape by...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Adding their arrows"
+              },
+              {
+                "id": "b",
+                "label": "Picking a color"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The signals are arrows. Adding them combines the moves."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Combined signals are a sum of arrows."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A residual path adds a second arrow onto the first."
+    }
+  ]
+}

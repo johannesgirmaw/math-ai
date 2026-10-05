@@ -1,0 +1,128 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000003",
+    "worldId": "10000000-0000-4000-8000-000000000001",
+    "slug": "axis-distance",
+    "title": "Axis distance",
+    "promise": "You can measure distance along one axis.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000002"
+    ],
+    "sortOrder": 2,
+    "pipAbility": "Pip can measure a straight gap.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000004",
+      "skillNodeId": "20000000-0000-4000-8000-000000000003",
+      "title": "Measure one axis",
+      "version": 1,
+      "screens": [
+        {
+          "id": "x-gap",
+          "prompt": "From x = 1 to x = 6, how far along the axis?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Subtract the smaller x from the larger. Move higher.",
+            "too_high": "The gap is smaller than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The horizontal gap is 5."
+        },
+        {
+          "id": "y-gap",
+          "prompt": "From y = 2 to y = 8, how far up the axis?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The rise is larger than that. Move higher.",
+            "too_high": "The rise is smaller than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The vertical gap is 6."
+        },
+        {
+          "id": "sign",
+          "prompt": "Distance along an axis counts what?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The gap, either way"
+              },
+              {
+                "id": "b",
+                "label": "Only the larger coordinate"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A step left and a step right of the same size have the same distance."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Distance is the size of the gap."
+        },
+        {
+          "id": "flat",
+          "prompt": "Drag straight right from (2, 3) to (8, 3).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 8,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "Stay on the horizontal line. The mark is to the right.",
+            "wrong_length": "The direction is right. The gap is 6 units."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "You moved along one axis."
+        },
+        {
+          "id": "shared-x",
+          "prompt": "Points (4, 1) and (4, 7) share x. What is the vertical gap?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The y numbers are farther apart. Move higher.",
+            "too_high": "The y numbers are closer than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Same x means the whole gap is vertical."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Error along one axis is the simplest loss."
+    }
+  ]
+}

@@ -1,0 +1,364 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-00000000000c",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "component-add",
+    "title": "Component addition",
+    "promise": "You can add vectors component by component.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000000b"
+    ],
+    "sortOrder": 11,
+    "pipAbility": "Pip can add two vectors.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000013",
+      "skillNodeId": "20000000-0000-4000-8000-00000000000c",
+      "title": "Add each place",
+      "version": 1,
+      "screens": [
+        {
+          "id": "how",
+          "prompt": "Add (2, 1) and (3, 4) by adding what?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Each place separately"
+              },
+              {
+                "id": "b",
+                "label": "Only the first numbers"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The second numbers add too. Both places get a sum."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Add the firsts, then add the seconds."
+        },
+        {
+          "id": "first",
+          "prompt": "2 + 3. Set the first number of the sum.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "2 + 3 is higher. Move up.",
+            "too_high": "2 + 3 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The first place sums to 5."
+        },
+        {
+          "id": "second",
+          "prompt": "1 + 4. Set the second number of the sum.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "1 + 4 is higher. Move up.",
+            "too_high": "1 + 4 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The second place sums to 5."
+        },
+        {
+          "id": "sum",
+          "prompt": "The sum of (2, 1) and (3, 4) is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(5, 5)"
+              },
+              {
+                "id": "b",
+                "label": "(6, 3)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(6, 3) mixes the places. Add 2 with 3, and 1 with 4."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Each place has its own sum."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw the sum (5, 2) from (1, 1).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 6,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The sum goes right and up.",
+            "wrong_length": "The direction matches. The sum ends at (6, 3)."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The sum is one arrow."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Residual connections add vectors of the same shape."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000014",
+      "skillNodeId": "20000000-0000-4000-8000-00000000000c",
+      "title": "Add a negative",
+      "version": 1,
+      "screens": [
+        {
+          "id": "back",
+          "prompt": "4 + (-1). Set the first number.",
+          "primitive": {
+            "type": "slider",
+            "min": -2,
+            "max": 8,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "4 plus negative 1 is higher than that. Move up.",
+            "too_high": "You subtracted less than 1. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "4 and -1 meet at 3."
+        },
+        {
+          "id": "up",
+          "prompt": "2 + 2. Set the second number.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The seconds add to more. Move up.",
+            "too_high": "The seconds add to less. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The second place is 4."
+        },
+        {
+          "id": "pair",
+          "prompt": "(4, 2) + (-1, 2) is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(3, 4)"
+              },
+              {
+                "id": "b",
+                "label": "(5, 0)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "First place: 4 + -1 = 3. Second place: 2 + 2 = 4."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Subtract on the first place, add on the second."
+        },
+        {
+          "id": "double",
+          "prompt": "Adding a vector to itself is the same as...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Doubling it"
+              },
+              {
+                "id": "b",
+                "label": "Erasing it"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Each place is added to itself, so each place doubles."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "v + v is 2v."
+        },
+        {
+          "id": "three",
+          "prompt": "Draw (3, 4) from (2, 1).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 5
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The arrow goes right and up.",
+            "wrong_length": "The direction matches. Stop at (5, 5)."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Tail plus the pair is the tip."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A negative component pulls that place back."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000015",
+      "skillNodeId": "20000000-0000-4000-8000-00000000000c",
+      "title": "Add without a scaffold",
+      "version": 1,
+      "screens": [
+        {
+          "id": "axes",
+          "prompt": "(1, 0) + (0, 1) is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(1, 1)"
+              },
+              {
+                "id": "b",
+                "label": "(0, 0)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The first place gets 1. The second place gets 1. Nothing cancels."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "One step right plus one step up."
+        },
+        {
+          "id": "five",
+          "prompt": "5 + 0. Set the first number.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Adding zero leaves 5. Move higher.",
+            "too_high": "Adding zero does not grow past 5. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Zero adds nothing."
+        },
+        {
+          "id": "residual",
+          "prompt": "A residual connection adds two vectors by adding...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Matching places"
+              },
+              {
+                "id": "b",
+                "label": "Their titles"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The shapes match, so each place has a partner to add."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Matching places add."
+        },
+        {
+          "id": "three",
+          "prompt": "0 + 3. Set the second number.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The second place is higher. Move up.",
+            "too_high": "The second place is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The second place is 3."
+        },
+        {
+          "id": "order",
+          "prompt": "(1, 2) + (3, 0) equals...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(4, 2)"
+              },
+              {
+                "id": "b",
+                "label": "(1, 5)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "1 + 3 is 4. 2 + 0 is 2. (1, 5) adds across places."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Add straight down the pair."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Order does not change a sum of vectors."
+    }
+  ]
+}

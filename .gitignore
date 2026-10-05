@@ -1,0 +1,16 @@
+node_modules
+.pnpm-store
+.next
+dist
+coverage
+.turbo
+.env
+.env.local
+*.tsbuildinfo
+.DS_Store
+apps/mobile/.dart_tool
+apps/mobile/build
+apps/mobile/.flutter-plugins
+apps/mobile/.flutter-plugins-dependencies
+apps/mobile/ios/Pods
+apps/mobile/android/.gradle

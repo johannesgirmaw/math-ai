@@ -1,0 +1,298 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000012",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "matrix-numbers",
+    "title": "Matrix numbers",
+    "promise": "You can read a matrix as four numbers.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000011"
+    ],
+    "sortOrder": 17,
+    "pipAbility": "Pip can read a 2 by 2 matrix.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000027",
+      "skillNodeId": "20000000-0000-4000-8000-000000000012",
+      "title": "Four numbers",
+      "version": 1,
+      "screens": [
+        {
+          "id": "count",
+          "prompt": "A 2 by 2 matrix holds how many numbers?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Four"
+              },
+              {
+                "id": "b",
+                "label": "One"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Two rows of two numbers is four cells."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Four cells, two rows."
+        },
+        {
+          "id": "identity",
+          "prompt": "Set the cells, left to right, top then bottom: 1, 0, 0, 1.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              1,
+              0,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "A cell still misses 1, 0, 0, 1. Check the diagonal."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That table leaves a point where it was."
+        },
+        {
+          "id": "a",
+          "prompt": "In 2, 0 / 0, 1, the top left number is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "2"
+              },
+              {
+                "id": "b",
+                "label": "0"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Top left is the first cell. The zeros sit beside and below it."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Top left is the first weight."
+        },
+        {
+          "id": "row",
+          "prompt": "Set 2, 1 / 0, 1. Top row first.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              2,
+              1,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "One cell is off 2, 1, 0, 1. The bottom left stays 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "You set all four weights."
+        },
+        {
+          "id": "layer",
+          "prompt": "These four numbers are weights. A small layer is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A table of weights"
+              },
+              {
+                "id": "b",
+                "label": "A single label"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The layer is the table, not one name."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A small layer is this table."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A small layer is a table of weights."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000028",
+      "skillNodeId": "20000000-0000-4000-8000-000000000012",
+      "title": "Read the cells",
+      "version": 1,
+      "screens": [
+        {
+          "id": "build",
+          "prompt": "Build 1, 2 / 3, 0 from zeros.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              1,
+              2,
+              3,
+              0
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "A cell is still off 1, 2, 3, 0. Bottom right stays 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Those are the four weights."
+        },
+        {
+          "id": "c",
+          "prompt": "The bottom left cell is called...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "c"
+              },
+              {
+                "id": "b",
+                "label": "b"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "b is top right. Bottom left is c."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Bottom left is c."
+        },
+        {
+          "id": "identity",
+          "prompt": "1, 0 / 0, 1 leaves a point...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Where it was"
+              },
+              {
+                "id": "b",
+                "label": "At the origin always"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The identity keeps each point. It does not send everything to the origin."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The identity keeps the point."
+        },
+        {
+          "id": "again",
+          "prompt": "Set the identity again: 1, 0 / 0, 1.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              1,
+              0,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1
+          },
+          "feedback": {
+            "wrong_cell": "The diagonal cells are 1. The other two stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "You can rebuild the identity from the four numbers."
+        },
+        {
+          "id": "axes",
+          "prompt": "Match the matrix words with the way you read them.",
+          "primitive": {
+            "type": "match",
+            "left": [
+              {
+                "id": "row",
+                "label": "Row"
+              },
+              {
+                "id": "col",
+                "label": "Column"
+              }
+            ],
+            "right": [
+              {
+                "id": "across",
+                "label": "Across"
+              },
+              {
+                "id": "down",
+                "label": "Down"
+              }
+            ],
+            "pairs": [
+              {
+                "leftId": "row",
+                "rightId": "across"
+              },
+              {
+                "leftId": "col",
+                "rightId": "down"
+              }
+            ]
+          },
+          "feedback": {
+            "incomplete": "Pair both words.",
+            "wrong_pair": "A row runs across. A column runs down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Rows across, columns down."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The identity table is 1, 0 on the top row and 0, 1 below."
+    }
+  ]
+}

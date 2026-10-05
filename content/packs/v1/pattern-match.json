@@ -1,0 +1,418 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000010",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "pattern-match",
+    "title": "Pattern match",
+    "promise": "You can match the closer pattern.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000000f"
+    ],
+    "sortOrder": 15,
+    "pipAbility": "Pip can tell which pattern is closer.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000020",
+      "skillNodeId": "20000000-0000-4000-8000-000000000010",
+      "title": "Keep the match",
+      "version": 1,
+      "screens": [
+        {
+          "id": "keep",
+          "prompt": "One pattern points with the sample. One points against it. Pip keeps...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The one that agrees"
+              },
+              {
+                "id": "b",
+                "label": "The longer title"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Agreement is the score. The title length is not."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Pip keeps the agreeing pattern."
+        },
+        {
+          "id": "pairs",
+          "prompt": "Match each pattern with the way it points.",
+          "primitive": {
+            "type": "match",
+            "left": [
+              {
+                "id": "sample",
+                "label": "Sample"
+              },
+              {
+                "id": "other",
+                "label": "Other"
+              }
+            ],
+            "right": [
+              {
+                "id": "same",
+                "label": "Same way"
+              },
+              {
+                "id": "opp",
+                "label": "Opposite way"
+              }
+            ],
+            "pairs": [
+              {
+                "leftId": "sample",
+                "rightId": "same"
+              },
+              {
+                "leftId": "other",
+                "rightId": "opp"
+              }
+            ]
+          },
+          "feedback": {
+            "incomplete": "Pair both patterns.",
+            "wrong_pair": "The sample matches the same way. The other matches the opposite way."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Each pattern has a direction relative to the sample."
+        },
+        {
+          "id": "high",
+          "prompt": "The matching pattern scores higher. Set 8.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 8,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "A match scores high. Move up.",
+            "too_high": "8 is the high mark here. Move down a little."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The match scores higher."
+        },
+        {
+          "id": "low",
+          "prompt": "A low score means the patterns...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Point apart"
+              },
+              {
+                "id": "b",
+                "label": "Match"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A match scores high. A low score means they point apart."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Low agreement means they differ."
+        },
+        {
+          "id": "tool",
+          "prompt": "Pip compares the patterns with a...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Dot product"
+              },
+              {
+                "id": "b",
+                "label": "Coin flip"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The comparison is the agreement score, the dot product."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The dot product is the comparison."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Attention starts by scoring which pattern agrees."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000021",
+      "skillNodeId": "20000000-0000-4000-8000-000000000010",
+      "title": "Closer means agreement",
+      "version": 1,
+      "screens": [
+        {
+          "id": "pick",
+          "prompt": "Pattern A agrees. Pattern B is perpendicular. Pip picks...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A"
+              },
+              {
+                "id": "b",
+                "label": "B"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Perpendicular scores zero. The agreeing pattern scores higher."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Higher agreement is the closer pattern."
+        },
+        {
+          "id": "zero",
+          "prompt": "Set the agreement of the perpendicular pattern.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 0,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "A right angle does not score below zero here. The score is zero.",
+            "too_high": "A right angle scores zero. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Perpendicular agreement is 0."
+        },
+        {
+          "id": "meaning",
+          "prompt": "Closer, on this path, means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Higher agreement"
+              },
+              {
+                "id": "b",
+                "label": "Drawn nearer on the page"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The page position is not the score. Agreement is."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Closer means the higher score."
+        },
+        {
+          "id": "aim",
+          "prompt": "Aim at the matching pattern, to the right.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 8,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The matching pattern sits to the right.",
+            "wrong_length": "The aim is right. Reach the mark."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "You aimed at the match."
+        },
+        {
+          "id": "store",
+          "prompt": "You did not store a photo. You stored...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A score"
+              },
+              {
+                "id": "b",
+                "label": "A filename"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The match is a number, the agreement."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The match is a score."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Closer, here, means a higher agreement score."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000022",
+      "skillNodeId": "20000000-0000-4000-8000-000000000010",
+      "title": "Pick the winner",
+      "version": 1,
+      "screens": [
+        {
+          "id": "winner",
+          "prompt": "Scores are 1, 5, and 0. Pip keeps...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The score of 5"
+              },
+              {
+                "id": "b",
+                "label": "The score of 0"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "5 agrees more than 1 or 0."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The highest score wins."
+        },
+        {
+          "id": "five",
+          "prompt": "Set that winning score.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The winner is higher. Move up.",
+            "too_high": "The winner is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The winner is 5."
+        },
+        {
+          "id": "tie",
+          "prompt": "If two scores tie, the patterns...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Agree equally"
+              },
+              {
+                "id": "b",
+                "label": "Cancel the lesson"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A tie means the agreements match. Nothing is cancelled."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Equal scores, equal agreement."
+        },
+        {
+          "id": "kinds",
+          "prompt": "Match each score with its directions.",
+          "primitive": {
+            "type": "match",
+            "left": [
+              {
+                "id": "high",
+                "label": "High score"
+              },
+              {
+                "id": "zero",
+                "label": "Zero score"
+              }
+            ],
+            "right": [
+              {
+                "id": "same",
+                "label": "Same direction"
+              },
+              {
+                "id": "right",
+                "label": "Right angle"
+              }
+            ],
+            "pairs": [
+              {
+                "leftId": "high",
+                "rightId": "same"
+              },
+              {
+                "leftId": "zero",
+                "rightId": "right"
+              }
+            ]
+          },
+          "feedback": {
+            "incomplete": "Pair both scores.",
+            "wrong_pair": "A high score is the same direction. Zero is a right angle."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The score names the directions."
+        },
+        {
+          "id": "next",
+          "prompt": "Score the patterns, then...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Keep the stronger match"
+              },
+              {
+                "id": "b",
+                "label": "Keep every pattern equally"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Equal keeping ignores the score you just computed."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The stronger match stays."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Keep the pattern with the higher agreement."
+    }
+  ]
+}

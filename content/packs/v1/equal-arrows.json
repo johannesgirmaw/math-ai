@@ -1,0 +1,138 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000006",
+    "worldId": "10000000-0000-4000-8000-000000000001",
+    "slug": "equal-arrows",
+    "title": "Equal arrows",
+    "promise": "You can spot arrows with the same displacement.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000005"
+    ],
+    "sortOrder": 5,
+    "pipAbility": "Pip treats equal arrows as the same move.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000009",
+      "skillNodeId": "20000000-0000-4000-8000-000000000006",
+      "title": "Same displacement",
+      "version": 1,
+      "screens": [
+        {
+          "id": "same",
+          "prompt": "Two arrows each go 3 right from different tails. They are...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The same move"
+              },
+              {
+                "id": "b",
+                "label": "Different because the tails differ"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The tails can sit anywhere. The shared move is what matches."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Equal arrows share a displacement."
+        },
+        {
+          "id": "rise",
+          "prompt": "Both arrows rise 4. Set that shared rise.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The shared rise is higher. Move up.",
+            "too_high": "The shared rise is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Equal arrows share this rise."
+        },
+        {
+          "id": "copy",
+          "prompt": "Match the move: 4 right and 2 up. Start at (1, 1).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The move goes right and a little up.",
+            "wrong_length": "The direction matches. The move is 4 right and 2 up."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That displacement matches the other arrow."
+        },
+        {
+          "id": "feature",
+          "prompt": "A model treats equal arrows as what?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The same feature"
+              },
+              {
+                "id": "b",
+                "label": "Unrelated pictures"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The start point can change. The move is the feature."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same displacement, same feature."
+        },
+        {
+          "id": "unequal",
+          "prompt": "Arrow A is (+2, +0). Arrow B is (+2, +1). Are they equal?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "No"
+              },
+              {
+                "id": "b",
+                "label": "Yes"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "They share the run, but B also rises. The moves differ."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "One extra step up makes a different arrow."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Equal vectors are the same feature, wherever they start."
+    }
+  ]
+}

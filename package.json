@@ -1,0 +1,20 @@
+{
+  "name": "axiom",
+  "private": true,
+  "packageManager": "pnpm@11.13.1",
+  "scripts": {
+    "dev": "pnpm --filter @axiom/web dev",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:migrate": "pnpm --filter @axiom/web db:migrate",
+    "db:seed": "pnpm --filter @axiom/web db:seed",
+    "content:validate": "pnpm --filter @axiom/web content:validate",
+    "content:publish": "pnpm --filter @axiom/web content:publish"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.6"
+  }
+}

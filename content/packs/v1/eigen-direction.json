@@ -1,0 +1,398 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000016",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "eigen-direction",
+    "title": "Eigen direction",
+    "promise": "You can find a direction that only stretches.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000015"
+    ],
+    "sortOrder": 21,
+    "pipAbility": "Pip can find a stretch direction.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000033",
+      "skillNodeId": "20000000-0000-4000-8000-000000000016",
+      "title": "A direction that stays",
+      "version": 1,
+      "screens": [
+        {
+          "id": "stay",
+          "prompt": "2, 0 / 0, 1 takes a rightward arrow to a longer rightward arrow. The direction...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Stays"
+              },
+              {
+                "id": "b",
+                "label": "Turns up"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "x doubles and y stays 0, so a rightward arrow stays rightward."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "It stretches and does not turn."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw that stretch. Tail (2, 3), tip (6, 3). It stays horizontal.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 6,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The stretch stays on the horizontal line.",
+            "wrong_length": "The aim is right. The stretched arrow is longer."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Same direction, greater length."
+        },
+        {
+          "id": "set",
+          "prompt": "Set 2, 0 / 0, 1.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              2,
+              0,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "Top left is 2 and bottom right is 1. The other cells stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That table stretches x."
+        },
+        {
+          "id": "name",
+          "prompt": "An arrow that only scales, and does not turn, lies on an...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Eigen direction"
+              },
+              {
+                "id": "b",
+                "label": "Unrelated heading"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The special name is the direction the matrix only scales."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "That direction is an eigen direction."
+        },
+        {
+          "id": "right",
+          "prompt": "An up arrow stays up but does not get longer. A right arrow...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Gets longer"
+              },
+              {
+                "id": "b",
+                "label": "Turns left"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "x is doubled. A rightward arrow grows and stays right."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The rightward direction stretches."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Some directions only scale, and those directions structure a transformation."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000034",
+      "skillNodeId": "20000000-0000-4000-8000-000000000016",
+      "title": "Every direction scales",
+      "version": 1,
+      "screens": [
+        {
+          "id": "all",
+          "prompt": "2, 0 / 0, 2 scales every direction by 2. Arrows...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Stay aimed the same way"
+              },
+              {
+                "id": "b",
+                "label": "All turn"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both coordinates double, so the aim of any arrow stays."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Everything stretches, nothing turns."
+        },
+        {
+          "id": "set",
+          "prompt": "Set 2, 0 / 0, 2.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              2,
+              0,
+              0,
+              2
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1
+          },
+          "feedback": {
+            "wrong_cell": "Both diagonal cells are 2. The other cells stay 0."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Both axes scale by 2."
+        },
+        {
+          "id": "diag",
+          "prompt": "A diagonal that does not turn goes from (2, 2) to (4, 4).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 4,
+              "y": 4
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The diagonal stays on the line y = x.",
+            "wrong_length": "The aim matches. The tip is twice as far."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The diagonal only got longer."
+        },
+        {
+          "id": "scale",
+          "prompt": "The scale on each axis is...",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Each diagonal cell is 2. Move higher.",
+            "too_high": "Each diagonal cell is less than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The scale is 2."
+        },
+        {
+          "id": "found",
+          "prompt": "You found a direction the matrix only scales. That direction...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Structures the warp"
+              },
+              {
+                "id": "b",
+                "label": "Is only decoration"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Those directions organize how the warp acts."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Stretch directions structure the warp."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Equal scales on both axes leave every aim in place."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000035",
+      "skillNodeId": "20000000-0000-4000-8000-000000000016",
+      "title": "One direction turns",
+      "version": 1,
+      "screens": [
+        {
+          "id": "up",
+          "prompt": "1, 1 / 0, 1 slides points sideways. A straight-up arrow...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Tilts"
+              },
+              {
+                "id": "b",
+                "label": "Only gets longer"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(0, 1) becomes (1, 1). It gains a sideways part, so it tilts."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Up is not an eigen direction of this matrix."
+        },
+        {
+          "id": "flat",
+          "prompt": "The direction that does not turn is horizontal. Tail (2, 2), tip (6, 2).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 6,
+              "y": 2
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The stable direction is straight right.",
+            "wrong_length": "The aim is right. Stretch along the axis."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Horizontal arrows stay horizontal."
+        },
+        {
+          "id": "tilt",
+          "prompt": "The upward arrow gains a sideways part. It...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Turns"
+              },
+              {
+                "id": "b",
+                "label": "Stays vertical"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A new horizontal part means it is no longer vertical."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "It turns."
+        },
+        {
+          "id": "set",
+          "prompt": "Set 1, 1 / 0, 1.",
+          "primitive": {
+            "type": "matrixWarp",
+            "target": [
+              1,
+              1,
+              0,
+              1
+            ],
+            "initial": [
+              0,
+              0,
+              0,
+              0
+            ],
+            "tolerance": 0.1,
+            "showTarget": true
+          },
+          "feedback": {
+            "wrong_cell": "Top row is 1, 1. Bottom row is 0, 1."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That is the sideways slide."
+        },
+        {
+          "id": "organize",
+          "prompt": "Directions the matrix only stretches...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Organize the warp"
+              },
+              {
+                "id": "b",
+                "label": "Are decoration"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The warp is understood by the directions it only scales."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Those directions organize the transformation."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A sideways slide turns an upward arrow and leaves a horizontal arrow."
+    }
+  ]
+}

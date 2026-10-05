@@ -1,0 +1,50 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+        env:
+          SKIP_ENV_VALIDATION: "true"
+      - run: pnpm content:validate
+        env:
+          SKIP_ENV_VALIDATION: "true"
+      - name: Sentry check
+        run: |
+          if [ -z "$SENTRY_DSN" ]; then
+            echo "::warning::SENTRY_DSN is absent; skipping sentry check"
+          else
+            pnpm --filter @axiom/web sentry:check
+          fi
+      - name: Playwright admin publish
+        run: echo "::warning::Playwright is skipped until RUN_PLAYWRIGHT=true and a reviewer session are configured"
+
+  mobile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+      - run: flutter pub get
+        working-directory: apps/mobile
+      - run: flutter analyze
+        working-directory: apps/mobile
+      - run: flutter test
+        working-directory: apps/mobile

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "10000000-0000-4000-8000-000000000001",
+    "slug": "space",
+    "title": "Space",
+    "sortOrder": 0
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000002",
+    "slug": "vectors",
+    "title": "Vectors and matrices",
+    "sortOrder": 1
+  }
+]

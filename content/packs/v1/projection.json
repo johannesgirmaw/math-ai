@@ -1,0 +1,490 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000011",
+    "worldId": "10000000-0000-4000-8000-000000000002",
+    "slug": "projection",
+    "title": "Projection",
+    "promise": "You can see one arrow's shadow on another.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000010"
+    ],
+    "sortOrder": 16,
+    "pipAbility": "Pip can cast a shadow.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000023",
+      "skillNodeId": "20000000-0000-4000-8000-000000000011",
+      "title": "Shadow on a line",
+      "version": 1,
+      "screens": [
+        {
+          "id": "keep",
+          "prompt": "The shadow of an arrow on a rightward line keeps...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The rightward part"
+              },
+              {
+                "id": "b",
+                "label": "The upward part"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The line points right, so the shadow keeps the rightward part."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The shadow keeps the part along the line."
+        },
+        {
+          "id": "along",
+          "prompt": "Drag along the rightward line, from (1, 3) to (6, 3).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 6,
+              "y": 3
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The shadow lies on the horizontal line.",
+            "wrong_length": "The aim is right. Match the shadow's length."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The shadow stays on the line."
+        },
+        {
+          "id": "len",
+          "prompt": "Arrow (4, 3) onto a horizontal line. Set the shadow length.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The horizontal part is 4. Move higher.",
+            "too_high": "The upward 3 is not on this line. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The shadow length is the matching part, 4."
+        },
+        {
+          "id": "drop",
+          "prompt": "The leftover upward part is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Left off the shadow"
+              },
+              {
+                "id": "b",
+                "label": "Added onto the shadow"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The shadow keeps only the part along the line."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The rest drops away."
+        },
+        {
+          "id": "rest",
+          "prompt": "A projection keeps one direction. The rest...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Drops away"
+              },
+              {
+                "id": "b",
+                "label": "Doubles"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Doubling would grow the leftover. A projection removes it."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Only the matching part stays."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A projection keeps the part of a signal along one direction."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000024",
+      "skillNodeId": "20000000-0000-4000-8000-000000000011",
+      "title": "Onto the vertical",
+      "version": 1,
+      "screens": [
+        {
+          "id": "len",
+          "prompt": "Arrow (2, 5) onto the vertical axis. Set the shadow length.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The vertical part is 5. Move higher.",
+            "too_high": "The horizontal 2 is not on this axis. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The shadow is the vertical part."
+        },
+        {
+          "id": "pair",
+          "prompt": "Onto the y axis, (2, 5) leaves a shadow of...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(0, 5)"
+              },
+              {
+                "id": "b",
+                "label": "(2, 0)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(2, 0) is the shadow on the x axis. The y axis keeps (0, 5)."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Vertical shadow, horizontal part gone."
+        },
+        {
+          "id": "up",
+          "prompt": "Draw that vertical shadow from (4, 1) to (4, 6).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 4,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 4,
+              "y": 6
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The shadow is straight up.",
+            "wrong_length": "The aim is up. The length is 5."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The shadow stands on the vertical line."
+        },
+        {
+          "id": "none",
+          "prompt": "A perpendicular arrow casts...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "No shadow"
+              },
+              {
+                "id": "b",
+                "label": "A full copy"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Perpendicular means no shared direction, so the shadow length is 0."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Nothing lands on the line."
+        },
+        {
+          "id": "zero",
+          "prompt": "(0, 3) onto the x axis. Set the shadow length.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 0,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "There is no horizontal part below zero. The shadow is zero.",
+            "too_high": "The arrow is vertical, so the horizontal shadow is zero. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "No horizontal part, no shadow."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The shadow on the y axis keeps the vertical part."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000025",
+      "skillNodeId": "20000000-0000-4000-8000-000000000011",
+      "title": "Project twice",
+      "version": 1,
+      "screens": [
+        {
+          "id": "stay",
+          "prompt": "(3, 0) onto the x axis is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(3, 0)"
+              },
+              {
+                "id": "b",
+                "label": "(0, 3)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "It already lies on the x axis. The shadow is itself."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Already on the line, so it stays."
+        },
+        {
+          "id": "three",
+          "prompt": "Set that shadow length.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The length on the axis is 3. Move higher.",
+            "too_high": "The length on the axis is shorter. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The shadow length is 3."
+        },
+        {
+          "id": "twice",
+          "prompt": "Projecting twice onto the same line...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Changes nothing the second time"
+              },
+              {
+                "id": "b",
+                "label": "Doubles the arrow"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The second projection sees an arrow that is already on the line."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The second pass is the same shadow."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw (3, 0) from (2, 2) to (5, 2).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 2
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The shadow is horizontal.",
+            "wrong_length": "The aim is right. The length is 3."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The shadow is the horizontal arrow."
+        },
+        {
+          "id": "name",
+          "prompt": "Keeping only the part along one direction is a...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Projection"
+              },
+              {
+                "id": "b",
+                "label": "Random crop"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The kept part is chosen by the direction, not by chance."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "That kept part is a projection."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Projecting twice onto the same line changes nothing the second time."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000026",
+      "skillNodeId": "20000000-0000-4000-8000-000000000011",
+      "title": "Name the shadow",
+      "version": 1,
+      "screens": [
+        {
+          "id": "which",
+          "prompt": "Arrow (4, 2) onto (1, 0). The shadow is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(4, 0)"
+              },
+              {
+                "id": "b",
+                "label": "(0, 2)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(1, 0) is horizontal, so the shadow keeps 4 and drops 2."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The horizontal part stays."
+        },
+        {
+          "id": "first",
+          "prompt": "Set the shadow's first number.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The matching part is 4. Move higher.",
+            "too_high": "The matching part is smaller. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The first number is 4."
+        },
+        {
+          "id": "second",
+          "prompt": "The second number of that shadow is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "0"
+              },
+              {
+                "id": "b",
+                "label": "2"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "2 was the part off the line. The shadow drops it."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The off-line part is 0 on the shadow."
+        },
+        {
+          "id": "zero",
+          "prompt": "Set the second number of the shadow.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 5,
+            "step": 1,
+            "correctValue": 0,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The second number is not negative. It is zero.",
+            "too_high": "The upward part is gone. Move down to zero."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The second number is 0."
+        },
+        {
+          "id": "discard",
+          "prompt": "The rest of the arrow...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Is discarded"
+              },
+              {
+                "id": "b",
+                "label": "Becomes the shadow"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The shadow is the matching part. The rest is discarded."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Only the agreement along the line stays."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "You used the agreement with (1, 0) to keep the matching part."
+    }
+  ]
+}

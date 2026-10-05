@@ -1,0 +1,137 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000002",
+    "worldId": "10000000-0000-4000-8000-000000000001",
+    "slug": "quadrants",
+    "title": "Quadrants",
+    "promise": "You can name the quadrant of a point.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000001"
+    ],
+    "sortOrder": 1,
+    "pipAbility": "Pip knows which side of the plane it is on.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000003",
+      "skillNodeId": "20000000-0000-4000-8000-000000000002",
+      "title": "Name the side",
+      "version": 1,
+      "screens": [
+        {
+          "id": "q1",
+          "prompt": "x is positive and y is positive. Where is the point?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Upper right"
+              },
+              {
+                "id": "b",
+                "label": "Lower left"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Positive x is right. Positive y is up. That corner is the upper right."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Both positive means the upper right."
+        },
+        {
+          "id": "q2",
+          "prompt": "x is negative and y is positive. Where is the point?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Upper left"
+              },
+              {
+                "id": "b",
+                "label": "Upper right"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Negative x is left. Positive y is still up."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Left and up is the upper left."
+        },
+        {
+          "id": "neg-x",
+          "prompt": "A point in the upper left has negative x. Set x.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": -2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "That x is farther left than this point. Move toward zero.",
+            "too_high": "The upper left stays negative. Move left of zero."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Negative x sits left of the origin."
+        },
+        {
+          "id": "q3",
+          "prompt": "Both numbers are negative. Where is the point?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Lower left"
+              },
+              {
+                "id": "b",
+                "label": "Upper right"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Negative x is left and negative y is down."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Both negative means the lower left."
+        },
+        {
+          "id": "axis",
+          "prompt": "A point with y = 0 sits where?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "On the x axis"
+              },
+              {
+                "id": "b",
+                "label": "Inside a quadrant"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "y = 0 means no step up or down, so the point is on the x axis."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A zero coordinate puts the point on an axis, not in a quadrant."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Signs tell a model which direction a value points."
+    }
+  ]
+}

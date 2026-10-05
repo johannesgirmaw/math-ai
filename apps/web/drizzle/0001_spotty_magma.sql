@@ -1,0 +1,1 @@
+ALTER TABLE "lessons" DROP CONSTRAINT "lesson_skill_version";

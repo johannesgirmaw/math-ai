@@ -1,0 +1,101 @@
+import 'package:axiom/core/ui/pip_mark.dart';
+import 'package:axiom/features/auth/application/auth_providers.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+/// Email and password sign-in.
+class SignInPage extends ConsumerStatefulWidget {
+  const SignInPage({super.key});
+
+  @override
+  ConsumerState<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends ConsumerState<SignInPage> {
+  final _email = TextEditingController();
+  final _password = TextEditingController();
+  String? _error;
+  var _busy = false;
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
+  Future<void> _submit() async {
+    final email = _email.text.trim();
+    final password = _password.text;
+    if (email.isEmpty) {
+      setState(() => _error = 'Enter your email.');
+      return;
+    }
+    if (password.isEmpty) {
+      setState(() => _error = 'Enter your password.');
+      return;
+    }
+    setState(() {
+      _busy = true;
+      _error = null;
+    });
+    final message = await ref
+        .read(sessionControllerProvider.notifier)
+        .signIn(email: email, password: password);
+    if (!mounted) return;
+    setState(() {
+      _busy = false;
+      _error = message;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(24),
+          children: [
+            const SizedBox(height: 32),
+            const PipMark(),
+            const SizedBox(height: 16),
+            Text('Axiom', style: Theme.of(context).textTheme.headlineLarge),
+            const SizedBox(height: 8),
+            const Text('Sign in to continue the path.'),
+            const SizedBox(height: 32),
+            TextField(
+              controller: _email,
+              keyboardType: TextInputType.emailAddress,
+              autofillHints: const [AutofillHints.email],
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
+            const SizedBox(height: 12),
+            TextField(
+              controller: _password,
+              obscureText: true,
+              decoration: const InputDecoration(labelText: 'Password'),
+            ),
+            if (_error != null) ...[
+              const SizedBox(height: 12),
+              Text(
+                _error!,
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ),
+            ],
+            const SizedBox(height: 24),
+            FilledButton(
+              key: const Key('sign-in-submit'),
+              onPressed: _busy ? null : _submit,
+              child: Text(_busy ? 'Signing in' : 'Sign in'),
+            ),
+            TextButton(
+              onPressed: () => context.go('/sign-up'),
+              child: const Text('Create an account'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

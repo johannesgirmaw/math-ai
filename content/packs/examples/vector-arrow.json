@@ -1,0 +1,105 @@
+{
+  "id": "30000000-0000-4000-8000-0000000000aa",
+  "skillNodeId": "20000000-0000-4000-8000-0000000000aa",
+  "title": "Vector arrow",
+  "version": 1,
+  "capstone": false,
+  "whyItMatters": "A vector is an arrow a model can add and scale.",
+  "screens": [
+    {
+      "id": "tail",
+      "prompt": "An arrow starts at its tail. Where is the tail?",
+      "primitive": {
+        "type": "choice",
+        "options": [
+          { "id": "a", "label": "At the start" },
+          { "id": "b", "label": "At the tip" }
+        ],
+        "correctOptionId": "a"
+      },
+      "feedback": {
+        "wrong_option": "The tail is the start. The tip is where it points."
+      },
+      "easyWithinMs": 8000,
+      "correctMessage": "The tail stays put. You move the tip."
+    },
+    {
+      "id": "length",
+      "prompt": "How long is an arrow from 0 to 4?",
+      "primitive": {
+        "type": "slider",
+        "min": 0,
+        "max": 10,
+        "step": 1,
+        "correctValue": 4,
+        "tolerance": 0
+      },
+      "feedback": {
+        "too_low": "A little longer.",
+        "too_high": "A little shorter."
+      },
+      "easyWithinMs": 10000,
+      "correctMessage": "That length matches the picture."
+    },
+    {
+      "id": "aim",
+      "prompt": "Drag the tip onto the target.",
+      "primitive": {
+        "type": "dragArrow",
+        "planeWidth": 10,
+        "planeHeight": 10,
+        "start": { "x": 2, "y": 2 },
+        "targetTip": { "x": 8, "y": 4 },
+        "tolerance": 0.8
+      },
+      "feedback": {
+        "wrong_direction": "The arrow points a different way.",
+        "wrong_length": "The direction is close. Adjust the length."
+      },
+      "easyWithinMs": 12000,
+      "correctMessage": "Tail and tip tell the whole move."
+    },
+    {
+      "id": "pair",
+      "prompt": "Match the arrow with the move it makes.",
+      "primitive": {
+        "type": "match",
+        "left": [
+          { "id": "a", "label": "Arrow" },
+          { "id": "b", "label": "Point" }
+        ],
+        "right": [
+          { "id": "1", "label": "A move" },
+          { "id": "2", "label": "A place" }
+        ],
+        "pairs": [
+          { "leftId": "a", "rightId": "1" },
+          { "leftId": "b", "rightId": "2" }
+        ]
+      },
+      "feedback": {
+        "incomplete": "Pair both sides.",
+        "wrong_pair": "An arrow is a move. A point is a place."
+      },
+      "easyWithinMs": 12000,
+      "correctMessage": "An arrow is a move, not a place."
+    },
+    {
+      "id": "why",
+      "prompt": "Why does a model store an arrow?",
+      "primitive": {
+        "type": "choice",
+        "options": [
+          { "id": "a", "label": "It has direction and size" },
+          { "id": "b", "label": "It is only a color" }
+        ],
+        "correctOptionId": "a"
+      },
+      "feedback": {
+        "wrong_option": "The useful part is the direction and the size."
+      },
+      "easyWithinMs": 8000,
+      "correctMessage": "Direction and size are what the model can use."
+    }
+  ]
+}
