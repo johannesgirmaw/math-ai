@@ -1,24 +1,37 @@
 import 'package:axiom/core/ui/app_theme.dart';
 import 'package:axiom/features/lesson_player/domain/lesson.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_math_fork/flutter_math.dart';
 
 /// Large bottom action used by the lesson player.
 class AxiomButton extends StatelessWidget {
   const AxiomButton({
     required this.label,
     required this.onPressed,
+    this.loading = false,
     super.key,
   });
 
   final String label;
   final VoidCallback? onPressed;
+  final bool loading;
 
   @override
   Widget build(BuildContext context) {
-    return FilledButton(
-      key: const Key('lesson-action'),
-      onPressed: onPressed,
-      child: Text(label),
+    return Semantics(
+      button: true,
+      label: label,
+      child: FilledButton(
+        key: const Key('lesson-action'),
+        onPressed: loading ? null : onPressed,
+        child: loading
+            ? const SizedBox(
+                width: 22,
+                height: 22,
+                child: CircularProgressIndicator(strokeWidth: 2),
+              )
+            : Text(label),
+      ),
     );
   }
 }
@@ -36,24 +49,27 @@ class ProgressDots extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        for (var dot = 0; dot < count; dot++)
-          Container(
-            width: dot == index ? 22 : 8,
-            height: 8,
-            margin: const EdgeInsets.only(right: 8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: dot <= index ? AxiomColors.accent : AxiomColors.line,
+    return Semantics(
+      label: 'Step ${index + 1} of $count',
+      child: Row(
+        children: [
+          for (var dot = 0; dot < count; dot++)
+            Container(
+              width: dot == index ? 22 : 8,
+              height: 8,
+              margin: const EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: dot <= index ? AxiomColors.accent : AxiomColors.line,
+              ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
 
-/// Prompt copy, including the math words as plain text.
+/// Prompt copy. Spans wrapped in `$` render as math.
 class PromptText extends StatelessWidget {
   const PromptText({required this.text, super.key});
 
@@ -61,7 +77,27 @@ class PromptText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text, style: Theme.of(context).textTheme.headlineSmall);
+    final style = Theme.of(context).textTheme.headlineSmall;
+    if (!text.contains(r'$')) {
+      return Semantics(label: text, child: Text(text, style: style));
+    }
+    final parts = text.split(RegExp(r'(\$[^$]+\$)'));
+    return Semantics(
+      label: text.replaceAll(r'$', ''),
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          for (final part in parts)
+            if (part.startsWith(r'$') && part.endsWith(r'$') && part.length > 2)
+              Math.tex(
+                part.substring(1, part.length - 1),
+                textStyle: style,
+              )
+            else
+              Text(part, style: style),
+        ],
+      ),
+    );
   }
 }
 
@@ -79,24 +115,28 @@ class FeedbackBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = correct ? AxiomColors.success : AxiomColors.miss;
-    return Container(
-      key: const Key('feedback-banner'),
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AxiomColors.surface,
-        borderRadius: BorderRadius.circular(20),
-        border: Border(left: BorderSide(color: color, width: 4)),
-      ),
-      child: Row(
-        children: [
-          Icon(
-            correct ? Icons.check_circle_outline : Icons.highlight_off,
-            color: color,
-          ),
-          const SizedBox(width: 12),
-          Expanded(child: Text(message)),
-        ],
+    return Semantics(
+      label: message,
+      child: Container(
+        key: const Key('feedback-banner'),
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: AxiomColors.surface,
+          borderRadius: BorderRadius.circular(20),
+          border: Border(left: BorderSide(color: color, width: 4)),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              correct ? Icons.check_circle_outline : Icons.highlight_off,
+              color: color,
+              semanticLabel: correct ? 'Correct' : 'Miss',
+            ),
+            const SizedBox(width: 12),
+            Expanded(child: Text(message)),
+          ],
+        ),
       ),
     );
   }

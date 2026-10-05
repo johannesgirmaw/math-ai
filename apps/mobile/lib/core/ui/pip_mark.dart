@@ -11,17 +11,20 @@ class PipMark extends StatelessWidget {
   Widget build(BuildContext context) {
     final reduce = MediaQuery.disableAnimationsOf(context);
     final scale = mastered ? 1.0 : 0.6;
-    return TweenAnimationBuilder<double>(
-      tween: Tween<double>(end: scale),
-      duration: reduce ? Duration.zero : const Duration(milliseconds: 400),
-      curve: Curves.easeOut,
-      builder: (context, value, _) {
-        return CustomPaint(
-          key: const Key('pip-mark'),
-          size: const Size(64, 64),
-          painter: _PipPainter(eyeScale: value),
-        );
-      },
+    return Semantics(
+      label: mastered ? 'Pip mastered' : 'Pip resting',
+      child: TweenAnimationBuilder<double>(
+        tween: Tween<double>(end: scale),
+        duration: reduce ? Duration.zero : const Duration(milliseconds: 400),
+        curve: Curves.easeOut,
+        builder: (context, value, _) {
+          return CustomPaint(
+            key: const Key('pip-mark'),
+            size: const Size(64, 64),
+            painter: _PipPainter(eyeScale: value),
+          );
+        },
+      ),
     );
   }
 }

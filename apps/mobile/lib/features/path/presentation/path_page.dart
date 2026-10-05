@@ -248,6 +248,12 @@ class _NodeButton extends ConsumerWidget {
                 textAlign: TextAlign.center,
                 style: theme.bodyMedium,
               ),
+            if (node.available && node.progress > 0 && node.progress < 0.8)
+              Text(
+                'Not solid yet.',
+                textAlign: TextAlign.center,
+                style: theme.bodyMedium,
+              ),
             if (mastered)
               Text(
                 node.pipAbility,
@@ -365,13 +371,13 @@ class _Marker extends StatelessWidget {
         : available
         ? AxiomColors.accent
         : AxiomColors.line;
-    return Container(
-      width: 72,
-      height: 72,
+    final face = Container(
+      width: 64,
+      height: 64,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: available ? AxiomColors.accent : AxiomColors.surface,
-        border: Border.all(color: ring, width: 3),
+        border: Border.all(color: ring, width: mastered ? 0 : 3),
       ),
       child: mastered
           ? const FittedBox(child: PipMark(mastered: true))
@@ -381,6 +387,23 @@ class _Marker extends StatelessWidget {
                   ? AxiomColors.surface
                   : AxiomColors.ink.withValues(alpha: 0.45),
             ),
+    );
+    if (!available && !mastered) return face;
+    return SizedBox(
+      width: 76,
+      height: 76,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          CircularProgressIndicator(
+            value: mastered ? 1 : node.progress.clamp(0, 1),
+            strokeWidth: 4,
+            backgroundColor: AxiomColors.line,
+            color: mastered ? AxiomColors.success : AxiomColors.accent,
+          ),
+          face,
+        ],
+      ),
     );
   }
 }

@@ -1,4 +1,7 @@
-export const metadata = { title: "Terms · Axiom" };
+export const metadata = {
+  title: "Terms",
+  description: "Axiom is educational practice. Accounts are for the learner.",
+};
 
 export default function TermsPage() {
   return (

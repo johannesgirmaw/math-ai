@@ -100,6 +100,7 @@ export async function getPath(userId: string) {
       pipAbility: skill.pipAbility,
       rank,
       lane,
+      progress: Number(snap.score.toFixed(2)),
       state,
       lessonId: (lessonsBySkill.get(skill.id) ?? []).find((id) => !done.has(id)) ?? lessonsBySkill.get(skill.id)?.[0] ?? null,
     };
@@ -256,11 +257,29 @@ export async function completeAttempt(userId: string, attemptId: string) {
     .select({ total: sql<number>`coalesce(sum(${xpEvents.amount}), 0)` })
     .from(xpEvents)
     .where(eq(xpEvents.userId, userId));
+  const facts = await db.select({ correct: itemResults.correct }).from(itemResults).where(eq(itemResults.attemptId, attemptId));
+  const misses = facts.filter((fact) => !fact.correct).length;
+  const mastery = snapshotFrom(
+    lesson
+      ? (
+          await db
+            .select()
+            .from(skillMastery)
+            .where(and(eq(skillMastery.userId, userId), eq(skillMastery.skillNodeId, lesson.skillNodeId)))
+        )[0]
+      : undefined,
+  );
+  const published = await getPublishedSkills();
+  const index = skill ? published.findIndex((item) => item.id === skill.id) : -1;
+  const follower = index >= 0 ? published.slice(index + 1).find((item) => item.worldId === skill?.worldId) : undefined;
   return {
     streakCurrent: current,
     xpTotal: Number(xp?.total ?? 0),
     pipAbility: skill?.pipAbility ?? "",
     whyItMatters: definition?.whyItMatters ?? "",
+    skillMastered: isMastered(mastery),
+    nextTitle: follower?.title ?? null,
+    misses,
   };
 }
 

@@ -42,5 +42,6 @@ PathNode pathNodeFromJson(Map<String, dynamic> json) {
     lane: json['lane'] as String? ?? 'left',
     state: json['state'] as String? ?? 'locked',
     lessonId: json['lessonId'] as String?,
+    progress: (json['progress'] as num?)?.toDouble() ?? 0,
   );
 }

@@ -19,7 +19,7 @@ class CompletePage extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(),
-              const PipMark(mastered: true),
+              PipMark(mastered: mission.skillMastered),
               const SizedBox(height: 24),
               Text(
                 mission.whyItMatters,
@@ -45,6 +45,10 @@ class CompletePage extends StatelessWidget {
                       ),
                       const SizedBox(height: 8),
                       Text('Streak ${mission.streakCurrent}'),
+                      if (_unlockLine(mission) case final line?) ...[
+                        const SizedBox(height: 8),
+                        Text(line, textAlign: TextAlign.center),
+                      ],
                     ],
                   ),
                 ),
@@ -70,4 +74,15 @@ class CompletePage extends StatelessWidget {
       ),
     );
   }
+}
+
+String? _unlockLine(MissionComplete mission) {
+  final next = mission.nextTitle;
+  if (next == null || next.isEmpty) return null;
+  if (mission.skillMastered) return '$next is open.';
+  if (mission.misses == 1) return 'One miss keeps $next locked.';
+  if (mission.misses > 1) {
+    return '${mission.misses} misses keep $next locked.';
+  }
+  return '$next stays locked for now.';
 }

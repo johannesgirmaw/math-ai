@@ -11,6 +11,7 @@ class PathNode {
     required this.lane,
     required this.state,
     required this.lessonId,
+    this.progress = 0,
   });
 
   final String id;
@@ -21,6 +22,7 @@ class PathNode {
   final String lane;
   final String state;
   final String? lessonId;
+  final double progress;
 
   bool get available => state == 'available' && lessonId != null;
 }
@@ -71,6 +73,9 @@ class MissionComplete {
     required this.pipAbility,
     required this.whyItMatters,
     this.offlineNote,
+    this.skillMastered = false,
+    this.nextTitle,
+    this.misses = 0,
   });
 
   final int streakCurrent;
@@ -78,6 +83,9 @@ class MissionComplete {
   final String pipAbility;
   final String whyItMatters;
   final String? offlineNote;
+  final bool skillMastered;
+  final String? nextTitle;
+  final int misses;
 }
 
 /// A lesson plus the attempt id that will receive its facts.

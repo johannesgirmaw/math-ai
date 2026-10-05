@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /// Paper, ink, and accent colors shared with the web app.
 abstract final class AxiomColors {
@@ -14,6 +15,7 @@ abstract final class AxiomColors {
 /// Light theme for the learning app.
 abstract final class AppTheme {
   static ThemeData light() {
+    final outfit = GoogleFonts.outfitTextTheme();
     const scheme = ColorScheme.light(
       primary: AxiomColors.accent,
       onPrimary: AxiomColors.surface,
@@ -32,37 +34,37 @@ abstract final class AppTheme {
         scrolledUnderElevation: 0,
         centerTitle: false,
       ),
-      textTheme: const TextTheme(
-        headlineLarge: TextStyle(
+      textTheme: outfit.copyWith(
+        headlineLarge: GoogleFonts.fraunces(
           fontSize: 40,
           height: 1.1,
           fontWeight: FontWeight.w600,
           color: AxiomColors.ink,
         ),
-        headlineMedium: TextStyle(
+        headlineMedium: GoogleFonts.fraunces(
           fontSize: 28,
           height: 1.15,
           fontWeight: FontWeight.w600,
           color: AxiomColors.ink,
         ),
-        headlineSmall: TextStyle(
+        headlineSmall: GoogleFonts.fraunces(
           fontSize: 22,
           height: 1.2,
           fontWeight: FontWeight.w600,
           color: AxiomColors.ink,
         ),
-        titleMedium: TextStyle(
+        titleMedium: GoogleFonts.outfit(
           fontSize: 16,
           height: 1.25,
           fontWeight: FontWeight.w600,
           color: AxiomColors.ink,
         ),
-        bodyLarge: TextStyle(
+        bodyLarge: GoogleFonts.outfit(
           fontSize: 16,
           height: 1.4,
           color: AxiomColors.ink,
         ),
-        bodyMedium: TextStyle(
+        bodyMedium: GoogleFonts.outfit(
           fontSize: 14,
           height: 1.4,
           color: AxiomColors.ink,

@@ -78,6 +78,9 @@ class HttpSyncApi implements SyncApi {
           xpTotal: (data['xpTotal'] as num?)?.toInt() ?? 0,
           pipAbility: data['pipAbility'] as String? ?? '',
           whyItMatters: data['whyItMatters'] as String? ?? '',
+          skillMastered: data['skillMastered'] as bool? ?? false,
+          nextTitle: data['nextTitle'] as String?,
+          misses: (data['misses'] as num?)?.toInt() ?? 0,
         ),
       );
     } on DioException catch (error) {

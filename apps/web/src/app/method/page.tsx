@@ -1,4 +1,7 @@
-export const metadata = { title: "Method · Axiom" };
+export const metadata = {
+  title: "Method",
+  description: "A mission, specific feedback, and old ideas that come back just before they fade.",
+};
 
 export default function MethodPage() {
   return (

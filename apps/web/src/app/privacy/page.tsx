@@ -1,4 +1,7 @@
-export const metadata = { title: "Privacy · Axiom" };
+export const metadata = {
+  title: "Privacy",
+  description: "What Axiom stores, and the contact for privacy questions.",
+};
 
 export default function PrivacyPage() {
   return (
