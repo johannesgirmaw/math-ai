@@ -17,30 +17,33 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-fraunces), ui-serif, Georgia, serif;
+  --color-teal: #005f73;
+  --color-gold: #d4af37;
+  --color-charcoal: #2b2d42;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-montserrat), ui-sans-serif, system-ui, sans-serif;
   --radius-sm: 0.75rem;
   --radius-md: 1.25rem;
   --radius-lg: 1.75rem;
 }
 
 :root {
-  --background: #f6f1e7;
-  --foreground: #1c1915;
-  --card: #fffcf7;
-  --card-foreground: #1c1915;
-  --primary: #2454ff;
-  --primary-foreground: #fffcf7;
-  --secondary: #efe7da;
-  --secondary-foreground: #1c1915;
-  --muted: #efe7da;
-  --muted-foreground: #5c564e;
-  --accent: #2454ff;
-  --accent-foreground: #fffcf7;
+  --background: #f4f8f9;
+  --foreground: #2b2d42;
+  --card: #ffffff;
+  --card-foreground: #2b2d42;
+  --primary: #005f73;
+  --primary-foreground: #ffffff;
+  --secondary: #d4af37;
+  --secondary-foreground: #2b2d42;
+  --muted: #e7eef0;
+  --muted-foreground: #5c6570;
+  --accent: #005f73;
+  --accent-foreground: #ffffff;
   --destructive: #8c3a32;
-  --border: #e4dccf;
-  --input: #e4dccf;
-  --ring: #2454ff;
+  --border: #d3e2e6;
+  --input: #d3e2e6;
+  --ring: #005f73;
 }
 
 body {
@@ -53,4 +56,6 @@ h1,
 h2,
 h3 {
   font-family: var(--font-heading);
+  font-weight: 700;
+  color: #005f73;
 }

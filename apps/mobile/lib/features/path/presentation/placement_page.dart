@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:axiom/core/error/failure.dart';
+import 'package:axiom/core/ui/brand_lockup.dart';
 import 'package:axiom/features/auth/application/auth_providers.dart';
 import 'package:axiom/features/lesson_player/data/lesson_parser.dart';
 import 'package:axiom/features/lesson_player/domain/lesson.dart';
@@ -87,10 +88,12 @@ class _PlacementPageState extends ConsumerState<PlacementPage> {
     final step = _step;
     if (step == null) return;
     final correct = result.facts.isNotEmpty && result.facts.first.correct;
-    final next = await ref.read(placementRepositoryProvider).answer(
-      sessionId: step.sessionId,
-      correct: correct,
-    );
+    final next = await ref
+        .read(placementRepositoryProvider)
+        .answer(
+          sessionId: step.sessionId,
+          correct: correct,
+        );
     if (!mounted) return;
     next.fold(
       (failure) => setState(() => _error = failure.message),
@@ -101,9 +104,11 @@ class _PlacementPageState extends ConsumerState<PlacementPage> {
   void _finish(PlacementStep step) {
     final learner = ref.read(sessionControllerProvider).asData?.value;
     if (learner != null) {
-      ref.read(sessionControllerProvider.notifier).replace(
-        learner.copyWith(placementSkillId: step.skillId ?? learner.id),
-      );
+      ref
+          .read(sessionControllerProvider.notifier)
+          .replace(
+            learner.copyWith(placementSkillId: step.skillId ?? learner.id),
+          );
     }
     unawaited(ref.read(telemetryProvider).capture('placement_completed'));
     context.go('/path');
@@ -112,10 +117,14 @@ class _PlacementPageState extends ConsumerState<PlacementPage> {
   @override
   Widget build(BuildContext context) {
     if (_loading) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return Scaffold(
+        appBar: brandAppBar(automaticallyImplyLeading: false),
+        body: const Center(child: CircularProgressIndicator()),
+      );
     }
     if (_error != null) {
       return Scaffold(
+        appBar: brandAppBar(automaticallyImplyLeading: false),
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -140,7 +149,10 @@ class _PlacementPageState extends ConsumerState<PlacementPage> {
     }
     final lesson = _lesson;
     if (lesson == null) {
-      return const Scaffold(body: Center(child: Text('Placement is ready.')));
+      return Scaffold(
+        appBar: brandAppBar(automaticallyImplyLeading: false),
+        body: const Center(child: Text('Placement is ready.')),
+      );
     }
     return LessonPage(
       key: ValueKey(lesson.id),

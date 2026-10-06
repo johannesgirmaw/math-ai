@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:axiom/core/ui/brand_lockup.dart';
 import 'package:axiom/features/lesson_player/application/lesson_player.dart';
 import 'package:axiom/features/lesson_player/domain/lesson.dart';
 import 'package:axiom/features/lesson_player/domain/reducer.dart';
@@ -57,6 +58,8 @@ class LessonPage extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const BrandStrip(),
+                const SizedBox(height: 12),
                 Row(
                   children: [
                     if (Navigator.of(context).canPop())
@@ -109,7 +112,8 @@ class LessonPage extends ConsumerWidget {
                   ),
                 AxiomButton(
                   label: state is LessonFeedback ? 'Continue' : 'Check',
-                  onPressed: state is LessonComplete ||
+                  onPressed:
+                      state is LessonComplete ||
                           (state is LessonPresenting && !hasAnswer)
                       ? null
                       : () => _act(ref, state),

@@ -38,7 +38,7 @@ class _PipPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final fill = Paint()..color = AxiomColors.accent;
-    final eye = Paint()..color = AxiomColors.paper;
+    final eye = Paint()..color = AxiomColors.surface;
     canvas
       ..drawRRect(
         RRect.fromRectAndRadius(

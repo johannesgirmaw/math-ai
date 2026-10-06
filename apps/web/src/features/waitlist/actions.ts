@@ -29,10 +29,10 @@ export async function joinWaitlist(formData: FormData) {
         method: "POST",
         headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
         body: JSON.stringify({
-          from: "Axiom <onboarding@resend.dev>",
+          from: "MATH SI <onboarding@resend.dev>",
           to: parsed.data,
           subject: "You are on the list",
-          text: "You are on the Axiom list.",
+          text: "You are on the MATH SI list.",
         }),
       });
     } catch (error) {

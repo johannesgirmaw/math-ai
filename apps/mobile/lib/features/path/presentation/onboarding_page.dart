@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:axiom/core/ui/app_theme.dart';
+import 'package:axiom/core/ui/brand_lockup.dart';
 import 'package:axiom/core/ui/pip_mark.dart';
 import 'package:axiom/features/auth/application/auth_providers.dart';
 import 'package:axiom/features/path/application/learning_providers.dart';
@@ -22,55 +23,70 @@ class OnboardingPage extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const PipMark(),
-              const SizedBox(height: 16),
-              Text(
-                'Skills you master become things Pip can do.',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const SizedBox(height: 24),
-              Text(
-                'How many minutes a day?',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'A short session is enough.',
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-              const SizedBox(height: 24),
-              for (final option in const [5, 10, 15])
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 56,
-                    child: OutlinedButton(
-                      key: Key('goal-$option'),
-                      style: OutlinedButton.styleFrom(
-                        backgroundColor: minutes == option
-                            ? AxiomColors.accent
-                            : AxiomColors.surface,
-                        foregroundColor: minutes == option
-                            ? AxiomColors.surface
-                            : AxiomColors.ink,
-                        side: BorderSide(
-                          color: minutes == option
-                              ? AxiomColors.accent
-                              : AxiomColors.line,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(28),
+              Expanded(
+                child: ListView(
+                  children: [
+                    const Center(child: BrandLockup()),
+                    const SizedBox(height: 12),
+                    const SizedBox(
+                      height: 2,
+                      width: double.infinity,
+                      child: ColoredBox(color: AxiomColors.gold),
+                    ),
+                    const SizedBox(height: 20),
+                    const PipMark(),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Skills you master become things Pip can do.',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      'How many minutes a day?',
+                      style: Theme.of(context).textTheme.headlineMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'A short session is enough.',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    const SizedBox(height: 24),
+                    for (final option in const [5, 10, 15])
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: 56,
+                          child: OutlinedButton(
+                            key: Key('goal-$option'),
+                            style: OutlinedButton.styleFrom(
+                              backgroundColor: minutes == option
+                                  ? AxiomColors.accent
+                                  : AxiomColors.surface,
+                              foregroundColor: minutes == option
+                                  ? AxiomColors.surface
+                                  : AxiomColors.ink,
+                              side: BorderSide(
+                                color: minutes == option
+                                    ? AxiomColors.accent
+                                    : AxiomColors.line,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(28),
+                              ),
+                            ),
+                            onPressed: () {
+                              ref
+                                  .read(goalDraftProvider.notifier)
+                                  .select(option);
+                            },
+                            child: Text('$option minutes'),
+                          ),
                         ),
                       ),
-                      onPressed: () {
-                        ref.read(goalDraftProvider.notifier).select(option);
-                      },
-                      child: Text('$option minutes'),
-                    ),
-                  ),
+                  ],
                 ),
-              const Spacer(),
+              ),
               FilledButton(
                 key: const Key('onboarding-continue'),
                 onPressed: minutes == null
@@ -87,32 +103,39 @@ class OnboardingPage extends ConsumerWidget {
 
   Future<void> _submit(BuildContext context, WidgetRef ref, int minutes) async {
     final timezone = await ref.read(timezoneSourceProvider).iana();
-    final result = await ref.read(profileRepositoryProvider).patch(
-      dailyGoalMinutes: minutes,
-      timezone: timezone,
-      onboardingCompletedAt: DateTime.now().toUtc().toIso8601String(),
-    );
-    if (!context.mounted) return;
-    result.fold((failure) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(failure.message)),
-      );
-    }, (summary) {
-      final learner = ref.read(sessionControllerProvider).asData?.value;
-      if (learner != null) {
-        ref.read(sessionControllerProvider.notifier).replace(
-          learner.copyWith(
-            dailyGoalMinutes: summary.dailyGoalMinutes,
-            timezone: summary.timezone,
-            onboardingCompletedAt:
-                summary.onboardingCompletedAt ??
-                DateTime.now().toUtc().toIso8601String(),
-          ),
+    final result = await ref
+        .read(profileRepositoryProvider)
+        .patch(
+          dailyGoalMinutes: minutes,
+          timezone: timezone,
+          onboardingCompletedAt: DateTime.now().toUtc().toIso8601String(),
         );
-      }
-      unawaited(ref.read(telemetryProvider).capture('onboarding_completed'));
-      context.go('/placement');
-    });
+    if (!context.mounted) return;
+    result.fold(
+      (failure) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(failure.message)),
+        );
+      },
+      (summary) {
+        final learner = ref.read(sessionControllerProvider).asData?.value;
+        if (learner != null) {
+          ref
+              .read(sessionControllerProvider.notifier)
+              .replace(
+                learner.copyWith(
+                  dailyGoalMinutes: summary.dailyGoalMinutes,
+                  timezone: summary.timezone,
+                  onboardingCompletedAt:
+                      summary.onboardingCompletedAt ??
+                      DateTime.now().toUtc().toIso8601String(),
+                ),
+              );
+        }
+        unawaited(ref.read(telemetryProvider).capture('onboarding_completed'));
+        context.go('/placement');
+      },
+    );
   }
 }
 

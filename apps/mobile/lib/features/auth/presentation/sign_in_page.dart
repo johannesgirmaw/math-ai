@@ -1,4 +1,5 @@
-import 'package:axiom/core/ui/pip_mark.dart';
+import 'package:axiom/core/ui/app_theme.dart';
+import 'package:axiom/core/ui/brand_lockup.dart';
 import 'package:axiom/features/auth/application/auth_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -69,12 +70,28 @@ class _SignInPageState extends ConsumerState<SignInPage> {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            const SizedBox(height: 32),
-            const PipMark(),
+            const SizedBox(height: 24),
+            const Center(child: BrandLockup(height: 160)),
+            const SizedBox(height: 12),
+            const SizedBox(
+              height: 2,
+              width: double.infinity,
+              child: ColoredBox(color: AxiomColors.gold),
+            ),
             const SizedBox(height: 16),
-            Text('Axiom', style: Theme.of(context).textTheme.headlineLarge),
+            Text(
+              'Function of AI',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: AxiomColors.accent,
+                letterSpacing: 0.4,
+              ),
+            ),
             const SizedBox(height: 8),
-            const Text('Sign in to continue the path.'),
+            const Text(
+              'Sign in to continue the path.',
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 8),
             TextButton(
               key: const Key('create-account'),

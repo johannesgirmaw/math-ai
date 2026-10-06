@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:axiom/core/telemetry.dart';
 import 'package:axiom/core/ui/app_theme.dart';
+import 'package:axiom/core/ui/brand_lockup.dart';
 import 'package:axiom/core/ui/pip_mark.dart';
 import 'package:axiom/features/lesson_player/data/lesson_parser.dart';
 import 'package:axiom/features/lesson_player/domain/lesson.dart';
@@ -24,8 +25,7 @@ class PathPage extends ConsumerWidget {
     final nodes = ref.watch(pathNodesProvider);
     final sync = ref.watch(syncControllerProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Axiom'),
+      appBar: brandAppBar(
         actions: [
           if (sync.running)
             const Padding(
@@ -398,14 +398,18 @@ class _NodeButton extends ConsumerWidget {
             if (current)
               const DecoratedBox(
                 decoration: BoxDecoration(
-                  color: AxiomColors.accent,
+                  color: AxiomColors.gold,
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
                   child: Text(
                     'You are here',
-                    style: TextStyle(color: AxiomColors.surface, fontSize: 12),
+                    style: TextStyle(
+                      color: AxiomColors.ink,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ),
               ),
@@ -450,13 +454,15 @@ class _NodeButton extends ConsumerWidget {
       },
       (launch) {
         unawaited(
-          ref.read(telemetryProvider).capture(
-            'lesson_started',
-            properties: {
-              'lessonId': launch.lesson.id,
-              'skillId': node.id,
-            },
-          ),
+          ref
+              .read(telemetryProvider)
+              .capture(
+                'lesson_started',
+                properties: {
+                  'lessonId': launch.lesson.id,
+                  'skillId': node.id,
+                },
+              ),
         );
         unawaited(
           Navigator.of(context).push(
@@ -466,23 +472,27 @@ class _NodeButton extends ConsumerWidget {
                 hapticsEnabled: ref.read(hapticsEnabledProvider),
                 onQuit: () {
                   unawaited(
-                    ref.read(telemetryProvider).capture(
-                      'lesson_quit',
-                      properties: {'lessonId': launch.lesson.id},
-                    ),
+                    ref
+                        .read(telemetryProvider)
+                        .capture(
+                          'lesson_quit',
+                          properties: {'lessonId': launch.lesson.id},
+                        ),
                   );
                 },
                 onChecked: (fact) {
                   unawaited(
-                    ref.read(telemetryProvider).capture(
-                      'screen_checked',
-                      properties: {
-                        'lessonId': launch.lesson.id,
-                        'screenId': fact.screenId,
-                        'correct': fact.correct,
-                        'latencyMs': fact.latencyMs,
-                      },
-                    ),
+                    ref
+                        .read(telemetryProvider)
+                        .capture(
+                          'screen_checked',
+                          properties: {
+                            'lessonId': launch.lesson.id,
+                            'screenId': fact.screenId,
+                            'correct': fact.correct,
+                            'latencyMs': fact.latencyMs,
+                          },
+                        ),
                   );
                 },
                 onFinished: (result) {
@@ -502,19 +512,23 @@ class _NodeButton extends ConsumerWidget {
     LessonLaunch launch,
     LessonResult result,
   ) async {
-    final mission = await ref.read(lessonSubmitterProvider).submit(
-      launch: launch,
-      result: result,
-    );
+    final mission = await ref
+        .read(lessonSubmitterProvider)
+        .submit(
+          launch: launch,
+          result: result,
+        );
     if (!context.mounted) return;
     unawaited(
-      ref.read(telemetryProvider).capture(
-        'lesson_completed',
-        properties: {
-          'lessonId': launch.lesson.id,
-          'skillId': launch.lesson.skillNodeId,
-        },
-      ),
+      ref
+          .read(telemetryProvider)
+          .capture(
+            'lesson_completed',
+            properties: {
+              'lessonId': launch.lesson.id,
+              'skillId': launch.lesson.skillNodeId,
+            },
+          ),
     );
     final complete = mission.fold(
       (failure) => MissionComplete(
@@ -551,7 +565,7 @@ class _CurrentHalo extends StatelessWidget {
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: AxiomColors.accent.withValues(alpha: 0.35 * value),
+                color: AxiomColors.gold.withValues(alpha: 0.55 * value),
                 spreadRadius: 6 * value,
               ),
             ],

@@ -41,16 +41,16 @@ export function ScreenPicture({ screen }: { screen: Screen }) {
     return (
       <svg viewBox="0 0 100 100" className="mt-3 h-40 w-full rounded-[20px] bg-background" aria-hidden="true">
         {Array.from({ length: 11 }, (_, index) => (
-          <g key={index} stroke="#E4DCCF" strokeWidth="0.4">
+          <g key={index} stroke="#D3E2E6" strokeWidth="0.4">
             <line x1={index * 10} y1="0" x2={index * 10} y2="100" />
             <line x1="0" y1={index * 10} x2="100" y2={index * 10} />
           </g>
         ))}
-        {guide ? <Arrow start={guide.start} tip={guide.tip} color="#1C191559" /> : null}
+        {guide ? <Arrow start={guide.start} tip={guide.tip} color="#2B2D4259" /> : null}
         {primitive.showTarget === false ? null : (
-          <circle cx={head.x} cy={head.y} r="3" fill="none" stroke="#E4DCCF" strokeWidth="1.5" />
+          <circle cx={head.x} cy={head.y} r="3" fill="none" stroke="#D3E2E6" strokeWidth="1.5" />
         )}
-        <Arrow start={tail} tip={head} color="#2454FF" />
+        <Arrow start={tail} tip={head} color="#005F73" />
         {primitive.score ? (
           <text x="92" y="12" textAnchor="end" fill={primitive.score === "negative" ? "#8C3A32" : "#1F7A4D"}>
             {primitive.score === "positive" ? "+" : primitive.score === "negative" ? "−" : "0"}
@@ -67,7 +67,7 @@ export function ScreenPicture({ screen }: { screen: Screen }) {
             key={index}
             start={point(arrow.start.x, arrow.start.y)}
             tip={point(arrow.tip.x, arrow.tip.y)}
-            color={arrow.guide ? "#1C191559" : "#2454FF"}
+            color={arrow.guide ? "#2B2D4259" : "#005F73"}
           />
         ))}
       </svg>
@@ -83,8 +83,8 @@ export function ScreenPicture({ screen }: { screen: Screen }) {
       [map(-1, -1, cells), map(1, -1, cells), map(1, 1, cells), map(-1, 1, cells)].join(" ");
     return (
       <svg viewBox="0 0 100 100" className="mt-3 h-40 w-full rounded-[20px] bg-background" aria-hidden="true">
-        <polygon points={square([1, 0, 0, 1])} fill="none" stroke="#E4DCCF" strokeWidth="2" />
-        <polygon points={square(primitive.target)} fill="none" stroke="#2454FF" strokeWidth="2" />
+        <polygon points={square([1, 0, 0, 1])} fill="none" stroke="#D3E2E6" strokeWidth="2" />
+        <polygon points={square(primitive.target)} fill="none" stroke="#005F73" strokeWidth="2" />
       </svg>
     );
   }

@@ -1,3 +1,5 @@
+import 'package:axiom/core/ui/app_theme.dart';
+import 'package:axiom/core/ui/brand_lockup.dart';
 import 'package:axiom/features/auth/application/auth_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -72,7 +74,14 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
                 icon: const Icon(Icons.arrow_back),
               ),
             ),
-            const SizedBox(height: 16),
+            const Center(child: BrandLockup()),
+            const SizedBox(height: 12),
+            const SizedBox(
+              height: 2,
+              width: double.infinity,
+              child: ColoredBox(color: AxiomColors.gold),
+            ),
+            const SizedBox(height: 24),
             Text(
               'Create account',
               style: Theme.of(context).textTheme.headlineLarge,

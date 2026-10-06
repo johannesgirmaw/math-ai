@@ -31,7 +31,10 @@ class AxiomButton extends StatelessWidget {
             ? const SizedBox(
                 width: 22,
                 height: 22,
-                child: CircularProgressIndicator(strokeWidth: 2),
+                child: CircularProgressIndicator(
+                  strokeWidth: 2,
+                  color: Colors.white,
+                ),
               )
             : Text(label),
       ),
@@ -60,7 +63,7 @@ class ProgressDots extends StatelessWidget {
           value: count == 0 ? 0 : (index + 1) / count,
           minHeight: 12,
           backgroundColor: AxiomColors.line,
-          color: AxiomColors.accent,
+          color: AxiomColors.gold,
         ),
       ),
     );
@@ -77,7 +80,10 @@ class PromptText extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.headlineSmall;
     if (!text.contains(r'$')) {
-      return Semantics(label: text, child: Text(text, style: style));
+      return Semantics(
+        label: text,
+        child: Text(text, style: style),
+      );
     }
     final parts = text.split(RegExp(r'(\$[^$]+\$)'));
     return Semantics(
@@ -789,18 +795,21 @@ class _MatchBoardState extends State<_MatchBoard> {
             Expanded(
               child: Column(
                 children: [
-                  for (var index = 0;
-                      index < widget.match.right.length;
-                      index++)
+                  for (
+                    var index = 0;
+                    index < widget.match.right.length;
+                    index++
+                  )
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8),
                       child: OutlinedButton(
                         key: _rightKeys[index],
                         style: OutlinedButton.styleFrom(
-                          backgroundColor: _paired(
-                            pairs,
-                            widget.match.right[index].id,
-                          )
+                          backgroundColor:
+                              _paired(
+                                pairs,
+                                widget.match.right[index].id,
+                              )
                               ? AxiomColors.line
                               : null,
                         ),

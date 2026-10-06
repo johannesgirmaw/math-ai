@@ -1,4 +1,5 @@
 import 'package:axiom/core/ui/app_theme.dart';
+import 'package:axiom/core/ui/brand_lockup.dart';
 import 'package:axiom/core/ui/pip_mark.dart';
 import 'package:axiom/features/path/domain/path_models.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class CompletePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: brandAppBar(
         leading: IconButton(
           key: const Key('complete-back'),
           tooltip: 'Back',
