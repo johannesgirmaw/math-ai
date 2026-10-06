@@ -44,7 +44,7 @@
         },
         {
           "id": "first",
-          "prompt": "2 + 3. Set the first number of the sum.",
+          "prompt": "Add the first places of (2, 1) and (3, 4). Set that sum.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -54,29 +54,29 @@
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "2 + 3 is higher. Move up.",
-            "too_high": "2 + 3 is lower. Move down."
+            "too_low": "2 and 3 add to more. Move up.",
+            "too_high": "2 and 3 add to less. Move down."
           },
           "easyWithinMs": 10000,
           "correctMessage": "The first place sums to 5."
         },
         {
           "id": "second",
-          "prompt": "1 + 4. Set the second number of the sum.",
+          "prompt": "Add the second places of (2, 1) and (3, 6). Set that sum.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 5,
+            "correctValue": 7,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "1 + 4 is higher. Move up.",
-            "too_high": "1 + 4 is lower. Move down."
+            "too_low": "1 and 6 add to more. Move up.",
+            "too_high": "1 and 6 add to less. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The second place sums to 5."
+          "correctMessage": "The second place has its own sum."
         },
         {
           "id": "sum",
@@ -91,19 +91,23 @@
               {
                 "id": "b",
                 "label": "(6, 3)"
+              },
+              {
+                "id": "c",
+                "label": "(5, 4)"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "(6, 3) mixes the places. Add 2 with 3, and 1 with 4."
+            "wrong_option": "(6, 3) crosses the places. (5, 4) leaves a second number out."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Each place has its own sum."
         },
         {
           "id": "draw",
-          "prompt": "Draw the sum (5, 2) from (1, 1).",
+          "prompt": "Draw the sum (4, 2) from (1, 1).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -113,14 +117,15 @@
               "y": 1
             },
             "targetTip": {
-              "x": 6,
+              "x": 5,
               "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The sum goes right and up.",
-            "wrong_length": "The direction matches. The sum ends at (6, 3)."
+            "wrong_length": "The direction matches. The run is 4 and the rise is 2."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The sum is one arrow."
@@ -137,7 +142,7 @@
       "screens": [
         {
           "id": "back",
-          "prompt": "4 + (-1). Set the first number.",
+          "prompt": "4 plus a step of 1 left. Set the result.",
           "primitive": {
             "type": "slider",
             "min": -2,
@@ -147,21 +152,21 @@
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "4 plus negative 1 is higher than that. Move up.",
-            "too_high": "You subtracted less than 1. Move down."
+            "too_low": "Left takes one step back from 4. Move up.",
+            "too_high": "You gave back more than one step. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "4 and -1 meet at 3."
+          "correctMessage": "4 and one step left meet at 3."
         },
         {
           "id": "up",
-          "prompt": "2 + 2. Set the second number.",
+          "prompt": "The second places are 2 and 5. Set their sum.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 4,
+            "correctValue": 7,
             "tolerance": 0
           },
           "feedback": {
@@ -169,27 +174,31 @@
             "too_high": "The seconds add to less. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The second place is 4."
+          "correctMessage": "The second place has its own sum."
         },
         {
           "id": "pair",
-          "prompt": "(4, 2) + (-1, 2) is...",
+          "prompt": "(4, 2) + (-1, 3) is...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "(3, 4)"
+                "label": "(3, 5)"
               },
               {
                 "id": "b",
-                "label": "(5, 0)"
+                "label": "(5, 5)"
+              },
+              {
+                "id": "c",
+                "label": "(3, -1)"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "First place: 4 + -1 = 3. Second place: 2 + 2 = 4."
+            "wrong_option": "(5, 5) adds 1 instead of subtracting. (3, -1) subtracts the seconds."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Subtract on the first place, add on the second."
@@ -215,11 +224,11 @@
             "wrong_option": "Each place is added to itself, so each place doubles."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "v + v is 2v."
+          "correctMessage": "v + v doubles v."
         },
         {
           "id": "three",
-          "prompt": "Draw (3, 4) from (2, 1).",
+          "prompt": "Draw (3, 2) from (2, 1).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -230,13 +239,14 @@
             },
             "targetTip": {
               "x": 5,
-              "y": 5
+              "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The arrow goes right and up.",
-            "wrong_length": "The direction matches. Stop at (5, 5)."
+            "wrong_length": "The direction matches. The run is 3 and the rise is 2."
           },
           "easyWithinMs": 12000,
           "correctMessage": "Tail plus the pair is the tip."
@@ -264,32 +274,45 @@
               {
                 "id": "b",
                 "label": "(0, 0)"
+              },
+              {
+                "id": "c",
+                "label": "(1, 0)"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The first place gets 1. The second place gets 1. Nothing cancels."
+            "wrong_option": "Nothing cancels. Each place receives the 1 from one arrow."
           },
           "easyWithinMs": 8000,
           "correctMessage": "One step right plus one step up."
         },
         {
-          "id": "five",
-          "prompt": "5 + 0. Set the first number.",
+          "id": "zero",
+          "prompt": "5 + 0 equals...",
           "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 5,
-            "tolerance": 0
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "5"
+              },
+              {
+                "id": "b",
+                "label": "0"
+              },
+              {
+                "id": "c",
+                "label": "10"
+              }
+            ],
+            "correctOptionId": "a"
           },
           "feedback": {
-            "too_low": "Adding zero leaves 5. Move higher.",
-            "too_high": "Adding zero does not grow past 5. Move lower."
+            "wrong_option": "Adding zero leaves the number. It does not erase it or double it."
           },
-          "easyWithinMs": 10000,
+          "easyWithinMs": 8000,
           "correctMessage": "Zero adds nothing."
         },
         {
@@ -304,7 +327,7 @@
               },
               {
                 "id": "b",
-                "label": "Their titles"
+                "label": "The two first numbers only"
               }
             ],
             "correctOptionId": "a"
@@ -317,13 +340,13 @@
         },
         {
           "id": "three",
-          "prompt": "0 + 3. Set the second number.",
+          "prompt": "The second places are 1 and 6. Set their sum.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 3,
+            "correctValue": 7,
             "tolerance": 0
           },
           "feedback": {
@@ -331,27 +354,31 @@
             "too_high": "The second place is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The second place is 3."
+          "correctMessage": "The seconds add on their own."
         },
         {
           "id": "order",
-          "prompt": "(1, 2) + (3, 0) equals...",
+          "prompt": "(2, 3) + (4, 0) equals...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "(4, 2)"
+                "label": "(6, 3)"
               },
               {
                 "id": "b",
-                "label": "(1, 5)"
+                "label": "(2, 7)"
+              },
+              {
+                "id": "c",
+                "label": "(8, 0)"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "1 + 3 is 4. 2 + 0 is 2. (1, 5) adds across places."
+            "wrong_option": "(2, 7) adds across places. (8, 0) drops the 3."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Add straight down the pair."

@@ -31,7 +31,7 @@
               },
               {
                 "id": "b",
-                "label": "Ignore both axes"
+                "label": "Move left, away from the mark"
               }
             ],
             "correctOptionId": "a"
@@ -44,7 +44,7 @@
         },
         {
           "id": "guide",
-          "prompt": "Guide Pip from (1, 1) to the mark at (6, 4).",
+          "prompt": "Guide Pip from (1, 1) onto the mark.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -61,43 +61,43 @@
           },
           "feedback": {
             "wrong_direction": "The mark is up and to the right.",
-            "wrong_length": "The aim is right. Match the distance to (6, 4)."
+            "wrong_length": "The aim is right. Match the distance to the mark."
           },
           "easyWithinMs": 12000,
           "correctMessage": "Pip reaches the mark."
         },
         {
           "id": "x",
-          "prompt": "The mark has x = 6. Set x.",
+          "prompt": "The mark is 3 right of x = 2. Set x.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 6,
+            "correctValue": 5,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "The mark is farther right. Move higher.",
-            "too_high": "The mark is not that far right. Move lower."
+            "too_low": "Start at 2 and step right. Move higher.",
+            "too_high": "Three steps right of 2 is not that far. Move lower."
           },
           "easyWithinMs": 10000,
           "correctMessage": "Pip's x matches the mark."
         },
         {
           "id": "y",
-          "prompt": "The mark has y = 4. Set y.",
+          "prompt": "The mark is 2 up from y = 3. Set y.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 4,
+            "correctValue": 5,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "The mark is higher. Move up.",
-            "too_high": "The mark is lower. Move down."
+            "too_low": "Start at 3 and climb. Move up.",
+            "too_high": "Two steps up from 3 is lower than that. Move down."
           },
           "easyWithinMs": 10000,
           "correctMessage": "Pip's y matches the mark."
@@ -110,43 +110,45 @@
             "options": [
               {
                 "id": "a",
-                "label": "An arrow"
+                "label": "An arrow with length and direction"
               },
               {
                 "id": "b",
-                "label": "Only a label"
+                "label": "Only the name of the mark"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "It has a tail, a tip, a length, and a direction. That is an arrow."
+            "wrong_option": "A name does not say how far or which way. The move does."
           },
           "easyWithinMs": 8000,
           "correctMessage": "You guided Pip with an arrow."
         },
         {
-          "id": "train",
-          "prompt": "Taking a step toward a target is the shape of what?",
+          "id": "step",
+          "prompt": "From (1, 1), Pip must go 4 right and 2 up.",
           "primitive": {
-            "type": "choice",
-            "options": [
-              {
-                "id": "a",
-                "label": "A training step"
-              },
-              {
-                "id": "b",
-                "label": "A stored photo"
-              }
-            ],
-            "correctOptionId": "a"
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 3
+            },
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
-            "wrong_option": "Training steps move toward a target. A photo just sits there."
+            "wrong_direction": "The step goes right and up.",
+            "wrong_length": "The run is 4 and the rise is 2."
           },
-          "easyWithinMs": 8000,
-          "correctMessage": "A training step aims at a target."
+          "easyWithinMs": 12000,
+          "correctMessage": "That step aims at the target."
         }
       ],
       "capstone": true,

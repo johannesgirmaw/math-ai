@@ -1,0 +1,257 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-00000000001e",
+    "worldId": "10000000-0000-4000-8000-000000000003",
+    "slug": "accumulation",
+    "title": "Accumulation",
+    "promise": "You can add slices into a total.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000001d"
+    ],
+    "sortOrder": 29,
+    "pipAbility": "Pip can add a running total.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000046",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001e",
+      "title": "Slices add",
+      "version": 1,
+      "screens": [
+        {
+          "id": "two",
+          "prompt": "Two slices each of height 3. The total is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "6"
+              },
+              {
+                "id": "b",
+                "label": "3"
+              },
+              {
+                "id": "c",
+                "label": "9"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "3 keeps one slice. 9 adds an extra slice."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The slices add."
+        },
+        {
+          "id": "three",
+          "prompt": "Slices of 2, 2, and 3. Set the total.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 7,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Add every slice. Move higher.",
+            "too_high": "That total is past the slices. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The running total adds the slices."
+        },
+        {
+          "id": "pair",
+          "prompt": "Slices of 4 and 5. Set the total.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 9,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "4 plus 5 is higher. Move up.",
+            "too_high": "4 plus 5 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Two slices add."
+        },
+        {
+          "id": "means",
+          "prompt": "Accumulation means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Adding the slices"
+              },
+              {
+                "id": "b",
+                "label": "Keeping only the tallest slice"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The tallest slice leaves the others out. A total adds them."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Add the slices."
+        },
+        {
+          "id": "rise",
+          "prompt": "The total rise is 4. Draw it straight up from (4, 1).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 4,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 4,
+              "y": 5
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "The total is a vertical rise.",
+            "wrong_length": "The rise is 4."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The slices stack into one rise."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Accumulated slices are a running total."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000047",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001e",
+      "title": "Same total",
+      "version": 1,
+      "screens": [
+        {
+          "id": "match",
+          "prompt": "A tall slice of 4, and two slices of 2. The totals...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Match"
+              },
+              {
+                "id": "b",
+                "label": "Differ, because the shapes differ"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The shapes differ. 4 and 2 + 2 are the same total."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same total, different shape."
+        },
+        {
+          "id": "wide",
+          "prompt": "Wide stack: slices of 1, 2, and 3. Set the total.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Add all three slices. Move higher.",
+            "too_high": "That is past the three slices. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The wide stack totals 6."
+        },
+        {
+          "id": "tall",
+          "prompt": "Tall stack: a piece of 5 plus a piece of 1. Set the total.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "5 plus 1 is higher. Move up.",
+            "too_high": "5 plus 1 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The tall stack matches the wide one."
+        },
+        {
+          "id": "shape",
+          "prompt": "Same total, different shape. The accumulation...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Can match"
+              },
+              {
+                "id": "b",
+                "label": "Must follow the shape"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Shape is not the total. Different slices can add to the same number."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Totals can match while shapes differ."
+        },
+        {
+          "id": "which",
+          "prompt": "Which stack totals 6?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A slice of 2 and a slice of 4"
+              },
+              {
+                "id": "b",
+                "label": "A slice of 2 and a slice of 2"
+              },
+              {
+                "id": "c",
+                "label": "A slice of 5 alone"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "2 and 2 make 4. 5 alone is short of 6."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "2 plus 4 is the matching total."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Different shapes can hide the same accumulated total."
+    }
+  ]
+}

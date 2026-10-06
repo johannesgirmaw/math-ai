@@ -1,0 +1,253 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-00000000001b",
+    "worldId": "10000000-0000-4000-8000-000000000003",
+    "slug": "rate",
+    "title": "Rate",
+    "promise": "You can find distance per step.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000001a"
+    ],
+    "sortOrder": 26,
+    "pipAbility": "Pip can compare rates.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000003f",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001b",
+      "title": "Per step",
+      "version": 1,
+      "screens": [
+        {
+          "id": "split",
+          "prompt": "A trip covers 6 in 2 equal steps. Each step covers...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "3"
+              },
+              {
+                "id": "b",
+                "label": "6"
+              },
+              {
+                "id": "c",
+                "label": "2"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "6 is the whole trip. 2 is the number of steps. Divide."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Each step covers 3."
+        },
+        {
+          "id": "twelve",
+          "prompt": "12 units in 3 equal steps. Set the rate per step.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "12 split into 3 is higher. Move up.",
+            "too_high": "12 split into 3 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The rate is distance divided by steps."
+        },
+        {
+          "id": "eight",
+          "prompt": "8 units in 2 equal steps. Set the rate.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "8 split into 2 is higher. Move up.",
+            "too_high": "8 split into 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Each step covers the same ground."
+        },
+        {
+          "id": "means",
+          "prompt": "Rate is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Distance divided by steps"
+              },
+              {
+                "id": "b",
+                "label": "Distance plus steps"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Adding the step count to the distance is not a rate."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Rate is distance per step."
+        },
+        {
+          "id": "two",
+          "prompt": "Each step runs 2 right. Draw two steps from (1, 3).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 3
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "The steps stay on the horizontal line.",
+            "wrong_length": "Two steps of 2 land 4 to the right."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The rate is 2, and two steps use it twice."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Learning rate is how far a step moves for each unit of slope."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000040",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001b",
+      "title": "Fewer steps",
+      "version": 1,
+      "screens": [
+        {
+          "id": "faster",
+          "prompt": "A covers 8 in 4 steps. B covers 8 in 2 steps. Which is faster?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "B"
+              },
+              {
+                "id": "b",
+                "label": "A, because it takes more steps"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "More steps for the same distance is the slower rate."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Fewer steps, same distance, faster rate."
+        },
+        {
+          "id": "quick",
+          "prompt": "Same distance 10, in 2 steps. Set the rate.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "10 split into 2 is higher. Move up.",
+            "too_high": "10 split into 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "This trip is the fast one."
+        },
+        {
+          "id": "slow",
+          "prompt": "Same distance 12, in 4 steps. Set the rate.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "12 split into 4 is higher. Move up.",
+            "too_high": "12 split into 4 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "More steps make a slower rate."
+        },
+        {
+          "id": "means",
+          "prompt": "Faster means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "More distance per step"
+              },
+              {
+                "id": "b",
+                "label": "More steps for the same distance"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "More steps for the same distance slows the rate."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Faster is more ground per step."
+        },
+        {
+          "id": "steep",
+          "prompt": "A short steep step and a long shallow trip cover the same ground. The steep step has...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The higher rate"
+              },
+              {
+                "id": "b",
+                "label": "The lower rate, because the trip is shorter"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A shorter trip with the same ground is the higher rate."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Steep here means the higher rate."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The same drop in fewer steps is a faster rate."
+    }
+  ]
+}

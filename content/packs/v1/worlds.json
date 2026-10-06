@@ -10,5 +10,17 @@
     "slug": "vectors",
     "title": "Vectors and matrices",
     "sortOrder": 1
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000003",
+    "slug": "change",
+    "title": "Change",
+    "sortOrder": 2
+  },
+  {
+    "id": "10000000-0000-4000-8000-000000000004",
+    "slug": "chance",
+    "title": "Chance",
+    "sortOrder": 3
   }
 ]

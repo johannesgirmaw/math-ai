@@ -47,7 +47,9 @@ export function ScreenPicture({ screen }: { screen: Screen }) {
           </g>
         ))}
         {guide ? <Arrow start={guide.start} tip={guide.tip} color="#1C191559" /> : null}
-        <circle cx={head.x} cy={head.y} r="3" fill="none" stroke="#E4DCCF" strokeWidth="1.5" />
+        {primitive.showTarget === false ? null : (
+          <circle cx={head.x} cy={head.y} r="3" fill="none" stroke="#E4DCCF" strokeWidth="1.5" />
+        )}
         <Arrow start={tail} tip={head} color="#2454FF" />
         {primitive.score ? (
           <text x="92" y="12" textAnchor="end" fill={primitive.score === "negative" ? "#8C3A32" : "#1F7A4D"}>

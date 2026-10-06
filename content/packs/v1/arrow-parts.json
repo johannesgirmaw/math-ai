@@ -34,19 +34,7 @@
                 "label": "Where it points"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 6
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "The tail stays put. The tip is where it points."
@@ -69,19 +57,7 @@
                 "label": "The middle of the shaft"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 6
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "The tip is the end you move. The middle is not a new place."
@@ -91,7 +67,7 @@
         },
         {
           "id": "aim",
-          "prompt": "The tail stays at (2, 2). Drag the tip to (8, 5).",
+          "prompt": "The tail stays. Drag the tip onto the mark.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -108,10 +84,28 @@
           },
           "feedback": {
             "wrong_direction": "The mark is up and to the right of the tail.",
-            "wrong_length": "The direction is right. Match the length to (8, 5)."
+            "wrong_length": "The direction is right. Match the length to the mark."
           },
           "easyWithinMs": 12000,
           "correctMessage": "Tail and tip tell the whole move."
+        },
+        {
+          "id": "rise",
+          "prompt": "From y = 2 to y = 7, how far does the tip rise?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The tip rises more than that. Move higher.",
+            "too_high": "The tip rises less than that. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The rise is the change in y."
         },
         {
           "id": "move",
@@ -121,50 +115,24 @@
             "options": [
               {
                 "id": "a",
-                "label": "A move"
+                "label": "A move with size and direction"
               },
               {
                 "id": "b",
-                "label": "Only a color"
+                "label": "Only where the tail sits"
+              },
+              {
+                "id": "c",
+                "label": "Only the length"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 6
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The useful part is the move from tail to tip."
+            "wrong_option": "The tail alone is a place. Length alone has no aim. Together they are a move."
           },
           "easyWithinMs": 8000,
           "correctMessage": "An arrow is a move with size and direction."
-        },
-        {
-          "id": "rise",
-          "prompt": "From y = 2 to y = 5, how far does the tip rise?",
-          "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 3,
-            "tolerance": 0
-          },
-          "feedback": {
-            "too_low": "The tip rises more than that. Move higher.",
-            "too_high": "The tip rises less than that. Move lower."
-          },
-          "easyWithinMs": 10000,
-          "correctMessage": "The rise is the change in y."
         }
       ],
       "capstone": false,
@@ -178,7 +146,7 @@
       "screens": [
         {
           "id": "flat",
-          "prompt": "Drag the tip. Leave the tail fixed.",
+          "prompt": "Leave the tail fixed. Drag the tip onto the mark.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -212,33 +180,10 @@
               },
               {
                 "id": "b",
-                "label": "Becomes a new direction"
+                "label": "Points a new way"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 2
-                },
-                "tip": {
-                  "x": 6,
-                  "y": 4
-                }
-              },
-              {
-                "start": {
-                  "x": 3,
-                  "y": 5
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 7
-                },
-                "guide": true
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "A shared shift moves the whole arrow. The move itself stays."
@@ -248,13 +193,13 @@
         },
         {
           "id": "run",
-          "prompt": "Tip x is 6 and tail x is 1. How far right is the move?",
+          "prompt": "Tip x is 9 and tail x is 2. How far right is the move?",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 5,
+            "correctValue": 7,
             "tolerance": 0
           },
           "feedback": {
@@ -279,19 +224,7 @@
                 "label": "Right"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 8,
-                  "y": 5
-                },
-                "tip": {
-                  "x": 2,
-                  "y": 5
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "The tip leads. If the tip is left, the arrow points left."
@@ -301,7 +234,7 @@
         },
         {
           "id": "up",
-          "prompt": "Point the arrow up. Tail at (4, 1), tip at (4, 7).",
+          "prompt": "Point straight up. The rise is 5. The tail is at (4, 1).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -312,13 +245,14 @@
             },
             "targetTip": {
               "x": 4,
-              "y": 7
+              "y": 6
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
-            "wrong_direction": "Straight up. The mark shares the tail's x.",
-            "wrong_length": "The aim is up. Match the height of the mark."
+            "wrong_direction": "Straight up. The tip shares the tail's x.",
+            "wrong_length": "The aim is up. The rise is 5."
           },
           "easyWithinMs": 12000,
           "correctMessage": "Same x means a vertical move."

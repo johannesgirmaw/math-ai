@@ -118,13 +118,13 @@
               },
               {
                 "id": "b",
-                "label": "The first name in the list"
+                "label": "The pattern that was drawn first"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The name is not the score. The higher agreement wins."
+            "wrong_option": "Drawing order is not the score. The higher agreement wins."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Higher agreement stays."
@@ -186,41 +186,41 @@
         },
         {
           "id": "high",
-          "prompt": "Set a high score for the matching pattern.",
+          "prompt": "(3, 0) dot (2, 0) for the match. Set the score.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 9,
+            "correctValue": 6,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "The match scores high. Move up.",
-            "too_high": "9 is the high mark. Come down a little."
+            "too_low": "The runs multiply. Move up.",
+            "too_high": "The second places add nothing. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The match scores high."
+          "correctMessage": "The match scores that product."
         },
         {
           "id": "name",
-          "prompt": "A tiny layer scores that agreement with a...",
+          "prompt": "A tiny layer scores that agreement with...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "Dot product"
+                "label": "A dot product"
               },
               {
                 "id": "b",
-                "label": "Stored photo"
+                "label": "The pattern's place in a list"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The score is computed. It is not a saved picture."
+            "wrong_option": "Place in a list is not the score. The score is a dot product."
           },
           "easyWithinMs": 8000,
           "correctMessage": "The score is a dot product."
@@ -237,13 +237,13 @@
               },
               {
                 "id": "b",
-                "label": "Memorized the picture"
+                "label": "Kept every pattern equally"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "Matching here is a score, not a stored photo."
+            "wrong_option": "Matching here is a score, not an equal keep."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Pip matches by agreement."

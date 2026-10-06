@@ -1,0 +1,240 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-00000000001f",
+    "worldId": "10000000-0000-4000-8000-000000000003",
+    "slug": "downhill-step",
+    "title": "Downhill step",
+    "promise": "You can step against the slope.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000001e"
+    ],
+    "sortOrder": 30,
+    "pipAbility": "Pip can step downhill.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000048",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001f",
+      "title": "Step against the slope",
+      "version": 1,
+      "screens": [
+        {
+          "id": "way",
+          "prompt": "The slope points uphill. A step that lowers the height points...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The other way"
+              },
+              {
+                "id": "b",
+                "label": "The same way as the slope"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Walking with the slope climbs. The lowering step goes against it."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Downhill is against the slope."
+        },
+        {
+          "id": "back",
+          "prompt": "The gray arrow climbs. Drag the downhill step onto the mark.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 6,
+              "y": 6
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 3
+            },
+            "tolerance": 0.8,
+            "guideStart": {
+              "x": 2,
+              "y": 2
+            },
+            "guideTip": {
+              "x": 6,
+              "y": 6
+            }
+          },
+          "feedback": {
+            "wrong_direction": "Downhill goes back along the climb.",
+            "wrong_length": "The aim matches the mark. Step back down the slope."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "You stepped against the slope."
+        },
+        {
+          "id": "with",
+          "prompt": "Walking with the slope makes the height...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Rise"
+              },
+              {
+                "id": "b",
+                "label": "Fall"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "With the slope is uphill. Against it is the fall."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "With the slope, you climb."
+        },
+        {
+          "id": "drop",
+          "prompt": "The slope is 3. You step 2 against it. Set the drop in height.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Slope times the step is a larger drop. Move up.",
+            "too_high": "The drop is smaller than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The drop is slope times the step."
+        },
+        {
+          "id": "steep",
+          "prompt": "Two slopes: 1 and 4. The steeper one calls for...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The larger downhill step"
+              },
+              {
+                "id": "b",
+                "label": "The same step as the gentle slope"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The gentle slope can take a smaller step. The steep one wants more."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A steeper slope wants a larger step against it."
+        },
+        {
+          "id": "which",
+          "prompt": "Which arrow decreases height?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The one against the gray uphill arrow"
+              },
+              {
+                "id": "b",
+                "label": "The one with the gray uphill arrow"
+              }
+            ],
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 6,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 3,
+                  "y": 3
+                }
+              }
+            ]
+          },
+          "feedback": {
+            "wrong_option": "The arrow with the gray one climbs. Against it, the height falls."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Against the slope, the height falls."
+        },
+        {
+          "id": "hide",
+          "prompt": "Slope rises 2 over run 2. From (6, 6), step back by that same run.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 6,
+              "y": 6
+            },
+            "targetTip": {
+              "x": 4,
+              "y": 4
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "Stepping back follows the slope downward.",
+            "wrong_length": "The run back is 2 and the drop is 2."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "You walked against the slope."
+        },
+        {
+          "id": "taught",
+          "prompt": "You taught Pip to train. The step...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Walks against the slope"
+              },
+              {
+                "id": "b",
+                "label": "Walks with the slope to climb"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Climbing would raise the loss. Training walks against the slope."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The step goes downhill."
+        }
+      ],
+      "capstone": true,
+      "whyItMatters": "A training step walks against the slope, toward lower loss."
+    }
+  ]
+}

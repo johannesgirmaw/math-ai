@@ -80,7 +80,12 @@ export async function seed() {
     })
     .onConflictDoUpdate({
       target: contentPacks.version,
-      set: { sha256: pack.sha256, manifest: pack.manifest, body: pack.body },
+      set: {
+        sha256: pack.sha256,
+        manifest: pack.manifest,
+        body: pack.body,
+        publishedAt: new Date(),
+      },
     });
 
   const count = await db.select().from(skillNodes).where(eq(skillNodes.status, "published"));

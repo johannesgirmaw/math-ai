@@ -1,0 +1,450 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000019",
+    "worldId": "10000000-0000-4000-8000-000000000003",
+    "slug": "slope-sign",
+    "title": "Sign of a slope",
+    "promise": "You can tell a rise from a fall.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000018"
+    ],
+    "sortOrder": 24,
+    "pipAbility": "Pip can read the sign of a slope.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000003a",
+      "skillNodeId": "20000000-0000-4000-8000-000000000019",
+      "title": "Uphill",
+      "version": 1,
+      "screens": [
+        {
+          "id": "up",
+          "prompt": "This arrow climbs as it runs right. The slope is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Positive"
+              },
+              {
+                "id": "b",
+                "label": "Negative"
+              }
+            ],
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                },
+                "guide": true
+              }
+            ]
+          },
+          "feedback": {
+            "wrong_option": "A climb to the right is a positive slope."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Uphill to the right is positive."
+        },
+        {
+          "id": "down",
+          "prompt": "This arrow falls as it runs right. The slope is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Negative"
+              },
+              {
+                "id": "b",
+                "label": "Positive"
+              }
+            ],
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 2
+                },
+                "guide": true
+              }
+            ]
+          },
+          "feedback": {
+            "wrong_option": "A fall to the right is a negative slope."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Downhill to the right is negative."
+        },
+        {
+          "id": "flat",
+          "prompt": "This arrow stays level. The slope is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Zero"
+              },
+              {
+                "id": "b",
+                "label": "Positive"
+              }
+            ],
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 4
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 4
+                },
+                "guide": true
+              }
+            ]
+          },
+          "feedback": {
+            "wrong_option": "No climb and no fall means a zero slope."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Level means slope zero."
+        },
+        {
+          "id": "mark",
+          "prompt": "Drag an uphill arrow onto the mark.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 7,
+              "y": 6
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "Uphill goes up and to the right.",
+            "wrong_length": "The aim is right. Match the climb of the mark."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The arrow climbs."
+        },
+        {
+          "id": "means",
+          "prompt": "A positive slope means the arrow...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Rises as it runs right"
+              },
+              {
+                "id": "b",
+                "label": "Falls as it runs right"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A fall to the right would be negative."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Positive means a rise to the right."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The sign says whether a step climbs or falls."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000003b",
+      "skillNodeId": "20000000-0000-4000-8000-000000000019",
+      "title": "Read the sign",
+      "version": 1,
+      "screens": [
+        {
+          "id": "sign",
+          "prompt": "What sign is this slope?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Negative"
+              },
+              {
+                "id": "b",
+                "label": "Zero"
+              },
+              {
+                "id": "c",
+                "label": "Positive"
+              }
+            ],
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 2
+                },
+                "guide": true
+              }
+            ]
+          },
+          "feedback": {
+            "wrong_option": "The arrow falls as it runs right. Length does not flip the sign."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A fall to the right is negative."
+        },
+        {
+          "id": "fall",
+          "prompt": "The arrow falls 4 while it runs 2 right. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": -2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "A fall of 4 over 2 is lower. Move down.",
+            "too_high": "That is past the fall. Move toward zero."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Fall over run is a negative slope."
+        },
+        {
+          "id": "rise",
+          "prompt": "The arrow rises 6 over a run of 3. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "6 over 3 is higher. Move up.",
+            "too_high": "6 over 3 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Rise over run is positive."
+        },
+        {
+          "id": "level",
+          "prompt": "A flat arrow has slope...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Zero"
+              },
+              {
+                "id": "b",
+                "label": "Positive, because it is long"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Length is not the sign. A level arrow has slope zero."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "No rise, slope zero."
+        },
+        {
+          "id": "down",
+          "prompt": "Draw a downhill arrow: run 3, fall 2, from (2, 6).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 6
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 4
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "Downhill to the right falls as it runs.",
+            "wrong_length": "The run is 3 and the fall is 2."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The slope is negative."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Read the sign from the picture, not from the length."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000003c",
+      "skillNodeId": "20000000-0000-4000-8000-000000000019",
+      "title": "Long and downhill",
+      "version": 1,
+      "screens": [
+        {
+          "id": "long",
+          "prompt": "A long arrow points down and right. Its slope is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Negative"
+              },
+              {
+                "id": "b",
+                "label": "Positive, because it is long"
+              },
+              {
+                "id": "c",
+                "label": "Zero"
+              }
+            ],
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 1,
+                  "y": 8
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 2
+                },
+                "guide": true
+              }
+            ]
+          },
+          "feedback": {
+            "wrong_option": "Length is large. The sign still follows the fall."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Long and downhill is still negative."
+        },
+        {
+          "id": "drop",
+          "prompt": "Fall 8 over run 4. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": -2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "8 over 4, downhill, is lower. Move down.",
+            "too_high": "That is past the slope. Move toward zero."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The long fall still has a modest negative slope."
+        },
+        {
+          "id": "fact",
+          "prompt": "Which fact sets the sign?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Whether the arrow rises or falls"
+              },
+              {
+                "id": "b",
+                "label": "How long the arrow is"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Length changes the size. Rise or fall changes the sign."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The sign follows the climb or the fall."
+        },
+        {
+          "id": "steep-down",
+          "prompt": "Fall 3 over run 1. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": -3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "A fall of 3 over 1 is lower. Move down.",
+            "too_high": "That is past the fall. Move toward zero."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Short run, large fall, negative slope."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw the long downhill move: 4 right and 3 down from (2, 7).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 7
+            },
+            "targetTip": {
+              "x": 6,
+              "y": 4
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "The long move still falls as it runs right.",
+            "wrong_length": "The run is 4 and the fall is 3."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Long, and still downhill."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A long step downhill is still a negative slope."
+    }
+  ]
+}

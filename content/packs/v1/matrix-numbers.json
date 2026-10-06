@@ -31,20 +31,24 @@
               },
               {
                 "id": "b",
+                "label": "Two"
+              },
+              {
+                "id": "c",
                 "label": "One"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "Two rows of two numbers is four cells."
+            "wrong_option": "Two rows of two numbers is four cells, not one reused cell."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Four cells, two rows."
         },
         {
           "id": "identity",
-          "prompt": "Set the cells, left to right, top then bottom: 1, 0, 0, 1.",
+          "prompt": "Match the shown table. It leaves a point where it was.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -63,44 +67,48 @@
             "showTarget": true
           },
           "feedback": {
-            "wrong_cell": "A cell still misses 1, 0, 0, 1. Check the diagonal."
+            "wrong_cell": "The diagonal cells stay 1. The other two stay 0."
           },
           "easyWithinMs": 12000,
           "correctMessage": "That table leaves a point where it was."
         },
         {
           "id": "a",
-          "prompt": "In 2, 0 / 0, 1, the top left number is...",
+          "prompt": "In 3, 0 / 0, 1, the top left number is...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "2"
+                "label": "3"
               },
               {
                 "id": "b",
                 "label": "0"
+              },
+              {
+                "id": "c",
+                "label": "1"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "Top left is the first cell. The zeros sit beside and below it."
+            "wrong_option": "Top left is the first cell. 0 is beside it. 1 is bottom right."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Top left is the first weight."
         },
         {
           "id": "row",
-          "prompt": "Set 2, 1 / 0, 1. Top row first.",
+          "prompt": "Top row 2, 1. Bottom row 0, 3. The phone does not show them.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
               2,
               1,
               0,
-              1
+              3
             ],
             "initial": [
               0,
@@ -108,11 +116,10 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
-            "wrong_cell": "One cell is off 2, 1, 0, 1. The bottom left stays 0."
+            "wrong_cell": "Read left to right, top row first. Bottom left stays 0."
           },
           "easyWithinMs": 12000,
           "correctMessage": "You set all four weights."
@@ -129,13 +136,13 @@
               },
               {
                 "id": "b",
-                "label": "A single label"
+                "label": "One weight reused four times"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The layer is the table, not one name."
+            "wrong_option": "The four cells can differ. The layer is the whole table."
           },
           "easyWithinMs": 8000,
           "correctMessage": "A small layer is this table."
@@ -152,14 +159,14 @@
       "screens": [
         {
           "id": "build",
-          "prompt": "Build the table that puts 1 and 2 on top, 3 and 0 below.",
+          "prompt": "Build the identity: the table that keeps every point.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
               1,
-              2,
-              3,
-              0
+              0,
+              0,
+              1
             ],
             "initial": [
               0,
@@ -170,14 +177,14 @@
             "tolerance": 0.1
           },
           "feedback": {
-            "wrong_cell": "A cell is still off 1, 2, 3, 0. Bottom right stays 0."
+            "wrong_cell": "The diagonal cells are 1. The other two stay 0."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "Those are the four weights."
+          "correctMessage": "Those four weights keep the point."
         },
         {
           "id": "c",
-          "prompt": "The bottom left cell is called...",
+          "prompt": "In a, b / c, d, the bottom left cell is...",
           "primitive": {
             "type": "choice",
             "options": [
@@ -188,12 +195,16 @@
               {
                 "id": "b",
                 "label": "b"
+              },
+              {
+                "id": "c",
+                "label": "d"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "b is top right. Bottom left is c."
+            "wrong_option": "b is top right. d is bottom right. Bottom left is c."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Bottom left is c."
@@ -223,7 +234,7 @@
         },
         {
           "id": "again",
-          "prompt": "Set the identity again: 1, 0 / 0, 1.",
+          "prompt": "Build the identity again, with no numbers shown.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -244,7 +255,7 @@
             "wrong_cell": "The diagonal cells are 1. The other two stay 0."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "You can rebuild the identity from the four numbers."
+          "correctMessage": "You can rebuild the identity from the rule."
         },
         {
           "id": "axes",

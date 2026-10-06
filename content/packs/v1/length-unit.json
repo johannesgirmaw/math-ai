@@ -31,7 +31,7 @@
               },
               {
                 "id": "b",
-                "label": "The same number as length"
+                "label": "The same number as the length"
               }
             ],
             "correctOptionId": "a"
@@ -44,31 +44,31 @@
         },
         {
           "id": "three",
-          "prompt": "An arrow (3, 0) has what length?",
+          "prompt": "A flat arrow runs from x = 2 to x = 7. Set its length.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 3,
+            "correctValue": 5,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "Along one axis, the length is the absolute component. Move higher.",
-            "too_high": "The length is the size 3, not more. Move lower."
+            "too_low": "Along one axis, the length is the gap. Move higher.",
+            "too_high": "The gap is smaller than that. Move lower."
           },
           "easyWithinMs": 10000,
           "correctMessage": "A flat arrow's length is its run."
         },
         {
           "id": "longer",
-          "prompt": "(0, 4) and (0, 2) share a direction. Which is longer?",
+          "prompt": "(0, 5) and (0, 2) share a direction. Which is longer?",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "(0, 4)"
+                "label": "(0, 5)"
               },
               {
                 "id": "b",
@@ -78,14 +78,14 @@
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "Both point up. 4 is a longer rise than 2."
+            "wrong_option": "Both point up. 5 is a longer rise than 2."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Same aim, greater length."
         },
         {
           "id": "unit",
-          "prompt": "Draw a unit step right, from (2, 3) to (3, 3).",
+          "prompt": "Draw a unit step right from (2, 3).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -98,7 +98,8 @@
               "x": 3,
               "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "A unit step right stays on the horizontal line.",
@@ -141,14 +142,37 @@
       "version": 1,
       "screens": [
         {
+          "id": "same",
+          "prompt": "(8, 0) points the same way as...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(1, 0)"
+              },
+              {
+                "id": "b",
+                "label": "(0, 1)"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "(0, 1) points up. (8, 0) and (1, 0) both point right."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same direction, different length."
+        },
+        {
           "id": "six",
-          "prompt": "(6, 0) is twice (3, 0). Set the length of (6, 0).",
+          "prompt": "Set the length of a flat arrow from x = 1 to x = 9.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 6,
+            "correctValue": 8,
             "tolerance": 0
           },
           "feedback": {
@@ -156,7 +180,7 @@
             "too_high": "The flat arrow is shorter than that. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The length is 6."
+          "correctMessage": "The length is the horizontal gap."
         },
         {
           "id": "divide",
@@ -182,31 +206,8 @@
           "correctMessage": "The aim survives the resize."
         },
         {
-          "id": "same",
-          "prompt": "(5, 0) points the same way as...",
-          "primitive": {
-            "type": "choice",
-            "options": [
-              {
-                "id": "a",
-                "label": "(1, 0)"
-              },
-              {
-                "id": "b",
-                "label": "(0, 1)"
-              }
-            ],
-            "correctOptionId": "a"
-          },
-          "feedback": {
-            "wrong_option": "(0, 1) points up. (5, 0) and (1, 0) both point right."
-          },
-          "easyWithinMs": 8000,
-          "correctMessage": "Same direction, different length."
-        },
-        {
           "id": "up",
-          "prompt": "Set the length of a pure up arrow (0, 4).",
+          "prompt": "Set the length of a pure up arrow from y = 2 to y = 6.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -220,7 +221,7 @@
             "too_high": "The rise is shorter than that. Move lower."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "Straight up, length 4."
+          "correctMessage": "Straight up, the length is the rise."
         },
         {
           "id": "norm",
@@ -280,25 +281,25 @@
         },
         {
           "id": "four",
-          "prompt": "The length of (2, 0) doubled is...",
+          "prompt": "A flat arrow of run 3 is doubled. Set the new length.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 4,
+            "correctValue": 6,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "Double 2 is higher. Move up.",
-            "too_high": "Double 2 is lower. Move down."
+            "too_low": "Double the run. Move up.",
+            "too_high": "Double the run is lower than that. Move down."
           },
           "easyWithinMs": 10000,
           "correctMessage": "Doubling length does not turn the arrow."
         },
         {
           "id": "up",
-          "prompt": "Draw the direction of (0, 1) with length 4. Tail (3, 1), tip (3, 5).",
+          "prompt": "Draw the direction of (0, 1) with length 4. Tail (3, 1).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -311,7 +312,8 @@
               "x": 3,
               "y": 5
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "That direction is straight up.",
@@ -333,12 +335,16 @@
               {
                 "id": "b",
                 "label": "Up"
+              },
+              {
+                "id": "c",
+                "label": "Right"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "A negative second number points down."
+            "wrong_option": "A negative second number points down, not up or right."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Negative y is down."
@@ -355,7 +361,7 @@
               },
               {
                 "id": "b",
-                "label": "Lose the vector"
+                "label": "Be forced to turn"
               }
             ],
             "correctOptionId": "a"

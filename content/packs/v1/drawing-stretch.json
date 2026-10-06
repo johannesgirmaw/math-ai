@@ -44,7 +44,7 @@
         },
         {
           "id": "wide",
-          "prompt": "Use 2, 0 / 0, 1 to stretch the drawing sideways.",
+          "prompt": "Set the table that doubles width and keeps height.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -59,8 +59,7 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
             "wrong_cell": "Top left is 2, bottom right is 1, and the other cells stay 0."
@@ -70,13 +69,13 @@
         },
         {
           "id": "corner",
-          "prompt": "A corner at x = 1 moves to...",
+          "prompt": "A corner at x = 3 doubles. Set the new x.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 2,
+            "correctValue": 6,
             "tolerance": 0
           },
           "feedback": {
@@ -84,28 +83,29 @@
             "too_high": "x doubles to less than that. Move lower."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The corner's x is 2."
+          "correctMessage": "The corner's x doubles."
         },
         {
           "id": "travel",
-          "prompt": "That corner travels from (1, 2) to (2, 2). Drag the tip.",
+          "prompt": "That corner travels from (2, 3) when x doubles. Drag the tip.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
             "planeHeight": 10,
             "start": {
-              "x": 1,
-              "y": 2
+              "x": 2,
+              "y": 3
             },
             "targetTip": {
-              "x": 2,
-              "y": 2
+              "x": 4,
+              "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The corner moves straight right.",
-            "wrong_length": "The aim is right. x grows from 1 to 2."
+            "wrong_length": "The aim is right. x doubles and y stays."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The corner moved with the stretch."
@@ -145,7 +145,7 @@
       "screens": [
         {
           "id": "tall",
-          "prompt": "Set the table that doubles height and leaves width alone.",
+          "prompt": "Set the table that doubles height and leaves width.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -193,13 +193,13 @@
         },
         {
           "id": "top",
-          "prompt": "A top at y = 2 moves to...",
+          "prompt": "A top at y = 3 doubles. Set the new y.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 4,
+            "correctValue": 6,
             "tolerance": 0
           },
           "feedback": {
@@ -207,28 +207,29 @@
             "too_high": "y doubles to less than that. Move lower."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The top moves to 4."
+          "correctMessage": "The top doubles."
         },
         {
           "id": "rise",
-          "prompt": "From (3, 1) to (3, 2). Drag the tip.",
+          "prompt": "From (3, 2), height doubles. Drag the tip.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
             "planeHeight": 10,
             "start": {
               "x": 3,
-              "y": 1
+              "y": 2
             },
             "targetTip": {
               "x": 3,
-              "y": 2
+              "y": 4
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "This corner moves straight up.",
-            "wrong_length": "The aim is up. The rise is 1."
+            "wrong_length": "The aim is up. y doubles and x stays."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The corner rose."
@@ -245,13 +246,13 @@
               },
               {
                 "id": "b",
-                "label": "A scribble"
+                "label": "A bend"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "A matrix moves lines to lines. It does not scribble."
+            "wrong_option": "A matrix moves lines to lines. It does not bend them."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Lines stay lines."
@@ -268,7 +269,7 @@
       "screens": [
         {
           "id": "both",
-          "prompt": "Set 2, 0 / 0, 2.",
+          "prompt": "Set the table that doubles both axes.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -304,25 +305,29 @@
               {
                 "id": "b",
                 "label": "Flips upside down"
+              },
+              {
+                "id": "c",
+                "label": "Grows wider and shrinks taller"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "Both scales are positive and equal, so the shape grows without a flip."
+            "wrong_option": "Both scales are positive and equal, so the shape grows without a flip or a squash."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Same scale on both axes keeps the shape."
         },
         {
           "id": "x",
-          "prompt": "A point at (1, 1) moves to x = ...",
+          "prompt": "A point at x = 3 doubles with both axes. Set the new x.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 2,
+            "correctValue": 6,
             "tolerance": 0
           },
           "feedback": {
@@ -330,17 +335,17 @@
             "too_high": "x doubles to less than that. Move lower."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The new x is 2."
+          "correctMessage": "The new x is twice the start."
         },
         {
           "id": "y",
-          "prompt": "And y = ...",
+          "prompt": "That point's y starts at 4. Set the new y.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 2,
+            "correctValue": 8,
             "tolerance": 0
           },
           "feedback": {
@@ -348,7 +353,7 @@
             "too_high": "y doubles to less than that. Move lower."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The new y is 2."
+          "correctMessage": "The new y is twice the start."
         },
         {
           "id": "why",
@@ -362,7 +367,7 @@
               },
               {
                 "id": "b",
-                "label": "Paint one pixel and stop"
+                "label": "Move one point and leave the rest"
               }
             ],
             "correctOptionId": "a"

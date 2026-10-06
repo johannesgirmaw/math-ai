@@ -103,6 +103,7 @@ final class DragArrowPrimitive extends Primitive {
     this.guideStart,
     this.guideTip,
     this.score,
+    this.showTarget = true,
   });
 
   final double planeWidth;
@@ -113,6 +114,7 @@ final class DragArrowPrimitive extends Primitive {
   final PlanePoint? guideStart;
   final PlanePoint? guideTip;
   final String? score;
+  final bool showTarget;
 
   @override
   String get type => 'dragArrow';

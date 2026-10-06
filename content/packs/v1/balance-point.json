@@ -1,0 +1,375 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000025",
+    "worldId": "10000000-0000-4000-8000-000000000004",
+    "slug": "balance-point",
+    "title": "Balance point",
+    "promise": "You can find the mean.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000024"
+    ],
+    "sortOrder": 36,
+    "pipAbility": "Pip can find the balance point.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000055",
+      "skillNodeId": "20000000-0000-4000-8000-000000000025",
+      "title": "A level set",
+      "version": 1,
+      "screens": [
+        {
+          "id": "level",
+          "prompt": "The numbers 4, 4, and 4 balance at...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "4"
+              },
+              {
+                "id": "b",
+                "label": "12"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "12 adds them and forgets to share. The balance is 4."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A level set balances at the repeated number."
+        },
+        {
+          "id": "mix",
+          "prompt": "The numbers are 2, 3, and 7. Set the balance point.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Share the total across three numbers. Move up.",
+            "too_high": "The balance is lower than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The mean is the shared total."
+        },
+        {
+          "id": "pull",
+          "prompt": "The numbers are 1, 1, and 10. Set the balance point.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The 10 pulls the balance up. Move up.",
+            "too_high": "The balance is not as high as the 10. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The mean sits between the cluster and the 10."
+        },
+        {
+          "id": "name",
+          "prompt": "The balance point is the...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Mean"
+              },
+              {
+                "id": "b",
+                "label": "Largest number"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The largest number is one score. The mean balances all of them."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The balance point is the mean."
+        },
+        {
+          "id": "repeat",
+          "prompt": "A level set balances at...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The repeated number"
+              },
+              {
+                "id": "b",
+                "label": "Zero"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Zero would ignore the scores. A level set sits on its own number."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The repeated number is the mean."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "An average is the balance point of a batch of scores."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000056",
+      "skillNodeId": "20000000-0000-4000-8000-000000000025",
+      "title": "Not the middle",
+      "version": 1,
+      "screens": [
+        {
+          "id": "list",
+          "prompt": "The list is 1, 2, 9. The middle item is 2. The mean is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "4"
+              },
+              {
+                "id": "b",
+                "label": "2"
+              },
+              {
+                "id": "c",
+                "label": "9"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "2 is the middle item. 9 is the large score. The mean balances all three."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The mean is not the middle item."
+        },
+        {
+          "id": "mean",
+          "prompt": "The numbers are 1, 2, and 9. Set the mean.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Share the total across three scores. Move up.",
+            "too_high": "The mean is lower than the 9. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The mean balances the three scores."
+        },
+        {
+          "id": "differ",
+          "prompt": "The middle item and the mean...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Can differ"
+              },
+              {
+                "id": "b",
+                "label": "Are always the same number"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A lopsided list pulls the mean off the middle item."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Mean and middle can differ."
+        },
+        {
+          "id": "zeros",
+          "prompt": "The numbers are 0, 0, and 9. Set the mean.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The 9 is shared across three scores. Move up.",
+            "too_high": "The mean is lower than the 9. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The mean is the shared 9."
+        },
+        {
+          "id": "want",
+          "prompt": "You want the balance, so you compute...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The mean"
+              },
+              {
+                "id": "b",
+                "label": "The middle item only"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The middle item ignores how far the ends sit. The mean balances them."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The balance is the mean."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The mean is the balance, not always the middle item."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000057",
+      "skillNodeId": "20000000-0000-4000-8000-000000000025",
+      "title": "One outlier",
+      "version": 1,
+      "screens": [
+        {
+          "id": "moved",
+          "prompt": "The numbers are 2, 2, 2, and 10. The middle is 2. The mean is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "4"
+              },
+              {
+                "id": "b",
+                "label": "2"
+              },
+              {
+                "id": "c",
+                "label": "10"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "2 is the middle. 10 is the outlier. The mean is pulled up between them."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The outlier moved the mean."
+        },
+        {
+          "id": "set",
+          "prompt": "Set the mean of 2, 2, 2, and 10.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Share the total across four scores. Move up.",
+            "too_high": "The mean is lower than the 10. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The mean sits above the middle."
+        },
+        {
+          "id": "which",
+          "prompt": "The outlier moved...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The mean, and left the middle at 2"
+              },
+              {
+                "id": "b",
+                "label": "The middle, and left the mean at 2"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The middle stays 2. The mean is the one that moved."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The outlier pulls the mean."
+        },
+        {
+          "id": "hide",
+          "prompt": "A model that reports only the mean can hide...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "One score far from the rest"
+              },
+              {
+                "id": "b",
+                "label": "Nothing, the mean shows every score"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The mean is one number. It does not show that one score sits far away."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The mean can hide an outlier."
+        },
+        {
+          "id": "stays",
+          "prompt": "Which summary stays at 2?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The middle"
+              },
+              {
+                "id": "b",
+                "label": "The mean"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The mean moved up. The middle of 2, 2, 2, 10 stays at 2."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The middle ignores the outlier."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "An average can hide an outlier that the middle item ignores."
+    }
+  ]
+}

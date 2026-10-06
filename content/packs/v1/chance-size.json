@@ -1,0 +1,370 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000021",
+    "worldId": "10000000-0000-4000-8000-000000000004",
+    "slug": "chance-size",
+    "title": "Size of a chance",
+    "promise": "You can compare favorable with possible.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000020"
+    ],
+    "sortOrder": 32,
+    "pipAbility": "Pip can size a chance.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000004b",
+      "skillNodeId": "20000000-0000-4000-8000-000000000021",
+      "title": "One out of two",
+      "version": 1,
+      "screens": [
+        {
+          "id": "half",
+          "prompt": "1 favorable out of 2 possible. The chance is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "1 out of 2"
+              },
+              {
+                "id": "b",
+                "label": "2 out of 1"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "2 out of 1 swaps the counts. Favorable comes first."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Favorable out of possible."
+        },
+        {
+          "id": "scale",
+          "prompt": "1 favorable out of 2. Set that chance out of 10.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Half of 10 is higher. Move up.",
+            "too_high": "Half of 10 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "1 out of 2 is half."
+        },
+        {
+          "id": "more",
+          "prompt": "A larger favorable count, with the same possible count, makes the chance...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Larger"
+              },
+              {
+                "id": "b",
+                "label": "Smaller"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "More favorable outcomes, same total, is a larger chance."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "More favorable, larger chance."
+        },
+        {
+          "id": "eight",
+          "prompt": "4 favorable out of 8. Set how many that is out of 10.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "4 out of 8 is half of 10. Move up.",
+            "too_high": "4 out of 8 is not more than half. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "4 out of 8 matches half."
+        },
+        {
+          "id": "compares",
+          "prompt": "Chance compares favorable outcomes with...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "All possible outcomes"
+              },
+              {
+                "id": "b",
+                "label": "Only the favorable ones"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Favorable alone has no total. Chance needs the possible count too."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Favorable out of possible."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A score between impossible and sure is a chance."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000004c",
+      "skillNodeId": "20000000-0000-4000-8000-000000000021",
+      "title": "Favorable out of possible",
+      "version": 1,
+      "screens": [
+        {
+          "id": "red",
+          "prompt": "The bag has 8 chips, and 3 are blue. Set how many are red.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Red is the rest of the bag. Move up.",
+            "too_high": "Red is not the whole bag. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Red is possible minus blue."
+        },
+        {
+          "id": "frac",
+          "prompt": "Favorable 1, possible 4. The chance is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "1 out of 4"
+              },
+              {
+                "id": "b",
+                "label": "4 out of 1"
+              },
+              {
+                "id": "c",
+                "label": "1 out of 3"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "4 out of 1 swaps them. 1 out of 3 drops a possible outcome."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Favorable out of possible."
+        },
+        {
+          "id": "not",
+          "prompt": "9 chips, 4 red. Set how many are not red.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The rest of the bag is larger. Move up.",
+            "too_high": "The rest is smaller than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Not red is the rest of the chips."
+        },
+        {
+          "id": "forgot",
+          "prompt": "You forgot the chips that are not favorable. The chance looks...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Too large"
+              },
+              {
+                "id": "b",
+                "label": "Too small"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Dropping the other chips shrinks the possible count, so the chance looks larger."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The missing chips were part of the total."
+        },
+        {
+          "id": "which",
+          "prompt": "2 of 5 chips are red. The chance of red is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "2 out of 5"
+              },
+              {
+                "id": "b",
+                "label": "2 out of 3"
+              },
+              {
+                "id": "c",
+                "label": "5 out of 2"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "2 out of 3 drops the other chips. 5 out of 2 swaps the counts."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Red out of all the chips."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The chance is the favorable count out of the possible count."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000004d",
+      "skillNodeId": "20000000-0000-4000-8000-000000000021",
+      "title": "At least one",
+      "version": 1,
+      "screens": [
+        {
+          "id": "exact",
+          "prompt": "Two tosses. Exactly one head means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "HT or TH"
+              },
+              {
+                "id": "b",
+                "label": "HH, HT, or TH"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "HH is both heads, not exactly one. Exactly one is HT or TH."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Exactly one leaves both heads out."
+        },
+        {
+          "id": "least",
+          "prompt": "At least one head means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "HH, HT, or TH"
+              },
+              {
+                "id": "b",
+                "label": "Only HT"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Only HT drops TH and HH. At least one keeps every listing with a head."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "At least one is the larger event."
+        },
+        {
+          "id": "three",
+          "prompt": "Out of HH, HT, TH, and TT, at least one head covers how many?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "TT is the one listing with no head. Move up.",
+            "too_high": "You counted TT. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Three listings have a head."
+        },
+        {
+          "id": "two",
+          "prompt": "Exactly one head covers how many of those four listings?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "HT and TH are the listings. Move up.",
+            "too_high": "HH is both heads, not exactly one. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Two listings have exactly one head."
+        },
+        {
+          "id": "why",
+          "prompt": "At least one is larger than exactly one because...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "It also counts both heads"
+              },
+              {
+                "id": "b",
+                "label": "It counts fewer outcomes"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both heads is extra, so at least one is the bigger event."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "At least one includes both heads."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "At least one is a bigger event than exactly one."
+    }
+  ]
+}

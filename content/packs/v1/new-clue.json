@@ -1,0 +1,201 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000027",
+    "worldId": "10000000-0000-4000-8000-000000000004",
+    "slug": "new-clue",
+    "title": "A new clue",
+    "promise": "You can update a count with a clue.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000026"
+    ],
+    "sortOrder": 38,
+    "pipAbility": "Pip can update a belief.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000005a",
+      "skillNodeId": "20000000-0000-4000-8000-000000000027",
+      "title": "Update the count",
+      "version": 1,
+      "screens": [
+        {
+          "id": "before",
+          "prompt": "Bag A has 4 red and 1 blue. Bag B has 1 red and 4 blue. A red draw is more likely from...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Bag A"
+              },
+              {
+                "id": "b",
+                "label": "Bag B"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Bag B has more blue. Red is more likely from the bag with more red."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Bag A holds more red."
+        },
+        {
+          "id": "count",
+          "prompt": "Bag A has 5 chips and 1 is blue. Set the red count.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Red is the rest of the bag. Move up.",
+            "too_high": "Red is not every chip. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Four chips are red."
+        },
+        {
+          "id": "red",
+          "prompt": "You draw a red chip. Which bag becomes more likely?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Bag A"
+              },
+              {
+                "id": "b",
+                "label": "Bag B"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A red chip fits Bag A better. Bag B is mostly blue."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The red clue raises Bag A."
+        },
+        {
+          "id": "raises",
+          "prompt": "A clue that matches Bag A better...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Raises Bag A's chance"
+              },
+              {
+                "id": "b",
+                "label": "Leaves the chances where they started"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A matching clue changes the count. It does not leave the chances put."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A matching clue updates the chance."
+        },
+        {
+          "id": "blue",
+          "prompt": "New clue: the chip is blue. Now the more likely bag is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Bag B"
+              },
+              {
+                "id": "b",
+                "label": "Bag A"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Blue fits the bag with more blue. That is Bag B."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The blue clue flips the pick."
+        },
+        {
+          "id": "same",
+          "prompt": "Both bags have 5 chips. The clue is only that you drew a chip. The odds...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Stay as they were"
+              },
+              {
+                "id": "b",
+                "label": "Jump to Bag A"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both bags explain a chip equally. The clue adds no new count."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A clue both bags share does not move the odds."
+        },
+        {
+          "id": "add",
+          "prompt": "Bag A started with 1 red out of 5. You add 3 red. Set the new red count.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Add the new red chips to the old count. Move up.",
+            "too_high": "The new count is smaller than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The clue updated the count."
+        },
+        {
+          "id": "pick",
+          "prompt": "After a red clue, Pip picks...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The bag with more red"
+              },
+              {
+                "id": "b",
+                "label": "The bag with more blue"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A red clue supports the bag that holds more red."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Pip picks the bag the clue supports."
+        }
+      ],
+      "capstone": true,
+      "whyItMatters": "A new clue updates the count a model uses to pick."
+    }
+  ]
+}

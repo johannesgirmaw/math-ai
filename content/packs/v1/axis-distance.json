@@ -20,67 +20,76 @@
       "version": 1,
       "screens": [
         {
-          "id": "x-gap",
-          "prompt": "From x = 1 to x = 6, how far along the axis?",
-          "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 5,
-            "tolerance": 0
-          },
-          "feedback": {
-            "too_low": "Subtract the smaller x from the larger. Move higher.",
-            "too_high": "The gap is smaller than that. Move lower."
-          },
-          "easyWithinMs": 10000,
-          "correctMessage": "The horizontal gap is 5."
-        },
-        {
-          "id": "y-gap",
-          "prompt": "From y = 2 to y = 8, how far up the axis?",
-          "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 6,
-            "tolerance": 0
-          },
-          "feedback": {
-            "too_low": "The rise is larger than that. Move higher.",
-            "too_high": "The rise is smaller than that. Move lower."
-          },
-          "easyWithinMs": 10000,
-          "correctMessage": "The vertical gap is 6."
-        },
-        {
-          "id": "sign",
-          "prompt": "Distance along an axis counts what?",
+          "id": "gap",
+          "prompt": "From x = 2 to x = 5, the gap along the axis is...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "The gap, either way"
+                "label": "3"
               },
               {
                 "id": "b",
-                "label": "Only the larger coordinate"
+                "label": "7"
+              },
+              {
+                "id": "c",
+                "label": "2"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "A step left and a step right of the same size have the same distance."
+            "wrong_option": "7 adds the ends. 2 is only the start. Subtract."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "Distance is the size of the gap."
+          "correctMessage": "The horizontal gap is 3."
+        },
+        {
+          "id": "which",
+          "prompt": "Points (4, 1) and (4, 6) share x. The gap is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Vertical"
+              },
+              {
+                "id": "b",
+                "label": "Horizontal"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "x does not change. The whole gap is in y."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same x means the gap is vertical."
+        },
+        {
+          "id": "y-gap",
+          "prompt": "From y = 2 to y = 9, how far up the axis?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 7,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The ends are farther apart. Move higher.",
+            "too_high": "The gap is the difference, not the larger end. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The vertical gap is 7."
         },
         {
           "id": "flat",
-          "prompt": "Drag straight right from (2, 3) to (8, 3).",
+          "prompt": "From (2, 3), move 6 right and stay on that line.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -93,32 +102,42 @@
               "x": 8,
               "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
-            "wrong_direction": "Stay on the horizontal line. The mark is to the right.",
-            "wrong_length": "The direction is right. The gap is 6 units."
+            "wrong_direction": "Stay on the horizontal line. The move is to the right.",
+            "wrong_length": "The direction is right. The gap is 6."
           },
           "easyWithinMs": 12000,
           "correctMessage": "You moved along one axis."
         },
         {
-          "id": "shared-x",
-          "prompt": "Points (4, 1) and (4, 7) share x. What is the vertical gap?",
+          "id": "either",
+          "prompt": "From x = 1 to x = 4 is a gap of 3. From x = 4 back to x = 1 is...",
           "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 6,
-            "tolerance": 0
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Also 3"
+              },
+              {
+                "id": "b",
+                "label": "A different distance, because it points left"
+              },
+              {
+                "id": "c",
+                "label": "0"
+              }
+            ],
+            "correctOptionId": "a"
           },
           "feedback": {
-            "too_low": "The y numbers are farther apart. Move higher.",
-            "too_high": "The y numbers are closer than that. Move lower."
+            "wrong_option": "Direction can flip. The size of the gap stays 3."
           },
-          "easyWithinMs": 10000,
-          "correctMessage": "Same x means the whole gap is vertical."
+          "easyWithinMs": 8000,
+          "correctMessage": "Distance is the size of the gap, either way."
         }
       ],
       "capstone": false,

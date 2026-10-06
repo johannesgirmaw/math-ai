@@ -438,14 +438,16 @@ class _ArrowPainter extends CustomPainter {
         AxiomColors.ink.withValues(alpha: 0.35),
       );
     }
-    canvas.drawCircle(
-      target,
-      10,
-      Paint()
-        ..color = AxiomColors.line
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 3,
-    );
+    if (arrow.showTarget) {
+      canvas.drawCircle(
+        target,
+        10,
+        Paint()
+          ..color = AxiomColors.line
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 3,
+      );
+    }
     _paintArrow(canvas, tail, head, AxiomColors.accent);
     canvas.drawCircle(head, 10, Paint()..color = AxiomColors.ink);
     _paintScore(canvas, size, arrow.score);

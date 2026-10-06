@@ -181,7 +181,7 @@ class _Submitter implements LessonSubmitter {
   }
 }
 
-const _nodes = [
+const _openNodes = [
   PathNode(
     id: 'left',
     title: 'Arrow parts',
@@ -193,6 +193,20 @@ const _nodes = [
     lessonId: '30000000-0000-4000-8000-000000000001',
   ),
   PathNode(
+    id: 'right',
+    title: 'Equal arrows',
+    promise: 'You can spot equal arrows.',
+    pipAbility: 'Pip treats equal arrows as the same move.',
+    rank: 1,
+    lane: 'right',
+    state: 'mastered',
+    lessonId: '30000000-0000-4000-8000-000000000002',
+  ),
+];
+
+final _lockedNodes = [
+  _openNodes.first,
+  const PathNode(
     id: 'right',
     title: 'Equal arrows',
     promise: 'You can spot equal arrows.',
@@ -217,7 +231,7 @@ void main() {
           timezoneSourceProvider.overrideWithValue(_Clock()),
           profileRepositoryProvider.overrideWithValue(profile),
           placementRepositoryProvider.overrideWithValue(_Placement()),
-          pathRepositoryProvider.overrideWithValue(_Path(_nodes)),
+          pathRepositoryProvider.overrideWithValue(_Path(_openNodes)),
           syncControllerProvider.overrideWith(_IdleSync.new),
           lessonLauncherProvider.overrideWithValue(launcher),
           lessonSubmitterProvider.overrideWithValue(_Submitter()),
@@ -269,7 +283,7 @@ void main() {
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
-          pathRepositoryProvider.overrideWithValue(_Path(_nodes)),
+          pathRepositoryProvider.overrideWithValue(_Path(_lockedNodes)),
           syncControllerProvider.overrideWith(_IdleSync.new),
           lessonLauncherProvider.overrideWithValue(launcher),
           lessonSubmitterProvider.overrideWithValue(_Submitter()),

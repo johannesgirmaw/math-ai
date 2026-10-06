@@ -128,6 +128,16 @@ function PrimitiveFields({ screen, onChange }: { screen: Screen; onChange: (scre
           value={primitive.tolerance}
           onChange={(tolerance) => onChange({ ...screen, primitive: { ...primitive, tolerance } })}
         />
+        <label className="flex items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={primitive.showTarget !== false}
+            onChange={(event) =>
+              onChange({ ...screen, primitive: { ...primitive, showTarget: event.target.checked } })
+            }
+          />
+          Show the target mark
+        </label>
       </>
     );
   }

@@ -101,6 +101,7 @@ Primitive _primitive(Object? raw) {
             : _point(json['guideStart']),
         guideTip: json['guideTip'] == null ? null : _point(json['guideTip']),
         score: json['score'] is String ? json['score'] as String : null,
+        showTarget: json['showTarget'] != false,
       );
     case 'matrixWarp':
       return MatrixWarpPrimitive(

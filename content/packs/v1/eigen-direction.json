@@ -44,7 +44,7 @@
         },
         {
           "id": "draw",
-          "prompt": "Draw that stretch. Tail (2, 3), tip (6, 3). It stays horizontal.",
+          "prompt": "A rightward arrow at (2, 3) has run 2. Double the run and keep the aim.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -57,18 +57,19 @@
               "x": 6,
               "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The stretch stays on the horizontal line.",
-            "wrong_length": "The aim is right. The stretched arrow is longer."
+            "wrong_length": "The aim is right. The run doubles."
           },
           "easyWithinMs": 12000,
           "correctMessage": "Same direction, greater length."
         },
         {
           "id": "set",
-          "prompt": "Set 2, 0 / 0, 1.",
+          "prompt": "Set the table that stretches x and leaves y.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -83,8 +84,7 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
             "wrong_cell": "Top left is 2 and bottom right is 1. The other cells stay 0."
@@ -94,23 +94,23 @@
         },
         {
           "id": "name",
-          "prompt": "An arrow that only scales, and does not turn, lies on an...",
+          "prompt": "An arrow that only scales, and does not turn, lies on...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "Eigen direction"
+                "label": "An eigen direction"
               },
               {
                 "id": "b",
-                "label": "Unrelated heading"
+                "label": "A direction the matrix turns"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The special name is the direction the matrix only scales."
+            "wrong_option": "A turned arrow left the eigen direction. This one only scaled."
           },
           "easyWithinMs": 8000,
           "correctMessage": "That direction is an eigen direction."
@@ -173,7 +173,7 @@
         },
         {
           "id": "set",
-          "prompt": "Set 2, 0 / 0, 2.",
+          "prompt": "Set the table that scales both axes by the same amount.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -194,11 +194,11 @@
             "wrong_cell": "Both diagonal cells are 2. The other cells stay 0."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "Both axes scale by 2."
+          "correctMessage": "Both axes scale together."
         },
         {
           "id": "diag",
-          "prompt": "A diagonal that does not turn goes from (2, 2) to (4, 4).",
+          "prompt": "A diagonal that does not turn doubles from (2, 2).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -211,7 +211,8 @@
               "x": 4,
               "y": 4
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The diagonal stays on the line y = x.",
@@ -222,7 +223,7 @@
         },
         {
           "id": "scale",
-          "prompt": "The scale on each axis is...",
+          "prompt": "A step of 3 becomes 6. Set the scale.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -232,25 +233,25 @@
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "Each diagonal cell is 2. Move higher.",
-            "too_high": "Each diagonal cell is less than that. Move lower."
+            "too_low": "6 is twice 3. The scale is higher. Move up.",
+            "too_high": "The scale is how many times 3 fits into 6. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The scale is 2."
+          "correctMessage": "The scale is the factor, not the new length."
         },
         {
           "id": "found",
-          "prompt": "You found a direction the matrix only scales. That direction...",
+          "prompt": "Directions the matrix only scales...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "Structures the warp"
+                "label": "Organize the warp"
               },
               {
                 "id": "b",
-                "label": "Is only decoration"
+                "label": "Are turned away"
               }
             ],
             "correctOptionId": "a"
@@ -296,31 +297,32 @@
         },
         {
           "id": "flat",
-          "prompt": "The direction that does not turn is horizontal. Tail (2, 2), tip (6, 2).",
+          "prompt": "The direction that does not turn is horizontal. From (2, 4), draw a run of 3.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
             "planeHeight": 10,
             "start": {
               "x": 2,
-              "y": 2
+              "y": 4
             },
             "targetTip": {
-              "x": 6,
-              "y": 2
+              "x": 5,
+              "y": 4
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The stable direction is straight right.",
-            "wrong_length": "The aim is right. Stretch along the axis."
+            "wrong_length": "The aim is right. The run is 3."
           },
           "easyWithinMs": 12000,
           "correctMessage": "Horizontal arrows stay horizontal."
         },
         {
           "id": "tilt",
-          "prompt": "The upward arrow gains a sideways part. It...",
+          "prompt": "(0, 1) through 1, 1 / 0, 1 becomes (1, 1). The arrow...",
           "primitive": {
             "type": "choice",
             "options": [
@@ -343,7 +345,7 @@
         },
         {
           "id": "set",
-          "prompt": "Set the sideways slide: top row 1, 1 and bottom row 0, 1.",
+          "prompt": "Set the sideways slide.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -368,26 +370,26 @@
         },
         {
           "id": "organize",
-          "prompt": "Directions the matrix only stretches...",
+          "prompt": "The horizontal arrow stays. The vertical arrow turns. The eigen direction is...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "Organize the warp"
+                "label": "Horizontal"
               },
               {
                 "id": "b",
-                "label": "Are decoration"
+                "label": "Vertical"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The warp is understood by the directions it only scales."
+            "wrong_option": "The direction that only stretches is the one that does not turn."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "Those directions organize the transformation."
+          "correctMessage": "Horizontal is the eigen direction here."
         }
       ],
       "capstone": false,

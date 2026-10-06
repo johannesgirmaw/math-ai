@@ -44,7 +44,7 @@
         },
         {
           "id": "first",
-          "prompt": "Set the first warp: 2, 0 / 0, 1.",
+          "prompt": "Set the first warp, the one that doubles x and leaves y.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -59,18 +59,17 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
-            "wrong_cell": "Top left is 2 and bottom right is 1. The other cells stay 0."
+            "wrong_cell": "Top left doubles x. Bottom right keeps y. The other cells stay 0."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The first warp doubles x."
         },
         {
           "id": "second",
-          "prompt": "Set the second warp: 1, 0 / 0, 2.",
+          "prompt": "Set the second warp, the one that doubles y and leaves x.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -85,50 +84,49 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
-            "wrong_cell": "Top left is 1 and bottom right is 2. The other cells stay 0."
+            "wrong_cell": "Top left keeps x. Bottom right doubles y. The other cells stay 0."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The second warp doubles y."
         },
         {
           "id": "x",
-          "prompt": "Start at 1. After x doubles, x ends at...",
+          "prompt": "Start at x = 3. After x doubles, set x.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 2,
+            "correctValue": 6,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "1 doubled is higher. Move up.",
-            "too_high": "1 doubled is lower. Move down."
+            "too_low": "3 doubled is higher. Move up.",
+            "too_high": "3 doubled is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "x ends at 2."
+          "correctMessage": "x ends at twice the start."
         },
         {
           "id": "y",
-          "prompt": "After y doubles, y ends at...",
+          "prompt": "Start at y = 4. After y doubles, set y.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 2,
+            "correctValue": 8,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "1 doubled is higher. Move up.",
-            "too_high": "1 doubled is lower. Move down."
+            "too_low": "4 doubled is higher. Move up.",
+            "too_high": "4 doubled is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "y ends at 2."
+          "correctMessage": "y ends at twice the start."
         }
       ],
       "capstone": false,
@@ -165,7 +163,7 @@
         },
         {
           "id": "a",
-          "prompt": "Warp A is 1, 1 / 0, 1. Set it.",
+          "prompt": "Warp A adds y into x and keeps y. Set it.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -180,8 +178,7 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
             "wrong_cell": "Top row is 1, 1. Bottom row is 0, 1."
@@ -191,30 +188,34 @@
         },
         {
           "id": "land",
-          "prompt": "(1, 1) through A lands at...",
+          "prompt": "(2, 3) through A lands at...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "(2, 1)"
+                "label": "(5, 3)"
               },
               {
                 "id": "b",
-                "label": "(1, 1)"
+                "label": "(2, 3)"
+              },
+              {
+                "id": "c",
+                "label": "(2, 5)"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "New x is 1 plus 1. y stays 1."
+            "wrong_option": "(2, 3) skips the mix. (2, 5) adds into y instead of x."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "A slides the point to (2, 1)."
+          "correctMessage": "A slides the point by adding y into x."
         },
         {
           "id": "b",
-          "prompt": "Set the table that doubles width and leaves height alone.",
+          "prompt": "Set the table that doubles width and leaves height.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -295,7 +296,7 @@
         },
         {
           "id": "one",
-          "prompt": "Set the identity: 1, 0 / 0, 1.",
+          "prompt": "Set the identity.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -320,7 +321,7 @@
         },
         {
           "id": "two",
-          "prompt": "Set the second identity: 1, 0 / 0, 1.",
+          "prompt": "Set the second identity.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -345,21 +346,30 @@
         },
         {
           "id": "x",
-          "prompt": "Start x = 4. After both, x is...",
+          "prompt": "Start at x = 4. After both identities, x is...",
           "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 4,
-            "tolerance": 0
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "4"
+              },
+              {
+                "id": "b",
+                "label": "0"
+              },
+              {
+                "id": "c",
+                "label": "8"
+              }
+            ],
+            "correctOptionId": "a"
           },
           "feedback": {
-            "too_low": "The identity keeps 4. Move higher.",
-            "too_high": "The identity does not grow 4. Move lower."
+            "wrong_option": "Each identity keeps x. It does not clear it or double it."
           },
-          "easyWithinMs": 10000,
-          "correctMessage": "x is still 4."
+          "easyWithinMs": 8000,
+          "correctMessage": "x is still where it started."
         },
         {
           "id": "read",
@@ -373,13 +383,13 @@
               },
               {
                 "id": "b",
-                "label": "With the order thrown away"
+                "label": "All at once, with order dropped"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "You can combine them later. The phone still applies them in order."
+            "wrong_option": "You can combine them later. The stack still applies them in order."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Order stays, even in a stack."

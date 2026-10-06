@@ -1,0 +1,385 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000018",
+    "worldId": "10000000-0000-4000-8000-000000000003",
+    "slug": "rise-run",
+    "title": "Rise and run",
+    "promise": "You can read rise, run, and slope.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000017"
+    ],
+    "sortOrder": 23,
+    "pipAbility": "Pip can read a slope.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000037",
+      "skillNodeId": "20000000-0000-4000-8000-000000000018",
+      "title": "Read the rise",
+      "version": 1,
+      "screens": [
+        {
+          "id": "rise",
+          "prompt": "The gray arrow runs right and climbs. The rise is the...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Vertical part"
+              },
+              {
+                "id": "b",
+                "label": "Horizontal part"
+              }
+            ],
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                },
+                "guide": true
+              }
+            ]
+          },
+          "feedback": {
+            "wrong_option": "The horizontal part is the run. The climb is the rise."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Rise is the vertical part."
+        },
+        {
+          "id": "climb",
+          "prompt": "The arrow climbs from y = 2 to y = 6. Set the rise.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The climb is larger. Move higher.",
+            "too_high": "The climb is smaller. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The rise is the change in y."
+        },
+        {
+          "id": "run",
+          "prompt": "The arrow runs from x = 1 to x = 7. Set the run.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The run is longer. Move higher.",
+            "too_high": "The run is shorter. Move lower."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The run is the change in x."
+        },
+        {
+          "id": "name",
+          "prompt": "Rise divided by run is the...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Slope"
+              },
+              {
+                "id": "b",
+                "label": "Run alone"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The run alone ignores the climb. Slope uses both."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Slope is rise over run."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw run 3 and rise 2. Tail at (2, 2).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 4
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "The arrow goes right and up.",
+            "wrong_length": "The run is 3 and the rise is 2."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That arrow has the rise and the run."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A training step measures how steep the loss is."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000038",
+      "skillNodeId": "20000000-0000-4000-8000-000000000018",
+      "title": "Find the slope",
+      "version": 1,
+      "screens": [
+        {
+          "id": "easy",
+          "prompt": "Rise 2, run 1. The slope is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "2"
+              },
+              {
+                "id": "b",
+                "label": "1"
+              },
+              {
+                "id": "c",
+                "label": "3"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "3 adds them. 1 is only the run. Divide the rise by the run."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Two up for each step right."
+        },
+        {
+          "id": "six",
+          "prompt": "Rise 6, run 2. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "6 spread over 2 is higher. Move up.",
+            "too_high": "6 spread over 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The slope is rise divided by run."
+        },
+        {
+          "id": "even",
+          "prompt": "Rise 3, run 3. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 1,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Equal rise and run is a slope of 1. Move up.",
+            "too_high": "Equal rise and run is not steeper than 1. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "One up for each step right."
+        },
+        {
+          "id": "longer",
+          "prompt": "A larger run with the same rise makes the slope...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Smaller"
+              },
+              {
+                "id": "b",
+                "label": "Larger"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The same climb spread over more run is flatter."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "More run, smaller slope."
+        },
+        {
+          "id": "along",
+          "prompt": "The slope is 2. From (2, 2), go 2 right along that slope.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 4,
+              "y": 6
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "Slope 2 climbs as it runs right.",
+            "wrong_length": "Each step right climbs 2. Two steps climb 4."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The tip follows the slope."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The slope is the rate a small step changes the loss."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000039",
+      "skillNodeId": "20000000-0000-4000-8000-000000000018",
+      "title": "The longer run",
+      "version": 1,
+      "screens": [
+        {
+          "id": "which",
+          "prompt": "Both rise 4. Arrow A runs 2. Arrow B runs 6. Which is steeper?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A"
+              },
+              {
+                "id": "b",
+                "label": "B"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "B is longer, but the same rise over a longer run is flatter."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The shorter run is the steeper slope."
+        },
+        {
+          "id": "steep",
+          "prompt": "Rise 8, run 2. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "8 over 2 is higher. Move up.",
+            "too_high": "8 over 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "That short run is steep."
+        },
+        {
+          "id": "shallow",
+          "prompt": "Rise 8, run 4. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "8 over 4 is higher. Move up.",
+            "too_high": "8 over 4 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The longer run is flatter."
+        },
+        {
+          "id": "why",
+          "prompt": "The longer arrow is flatter when...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "It uses a longer run for the same rise"
+              },
+              {
+                "id": "b",
+                "label": "It points up"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Pointing up only sets the sign. The run sets how flat it is."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same rise, longer run, smaller slope."
+        },
+        {
+          "id": "draw",
+          "prompt": "Match the steeper arrow: rise 3, run 1, from (2, 2).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 5
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "The steep arrow climbs sharply.",
+            "wrong_length": "The run is 1 and the rise is 3."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Short run, large rise."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A long shallow step can change the loss less than a short steep one."
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000020",
+    "worldId": "10000000-0000-4000-8000-000000000004",
+    "slug": "outcomes",
+    "title": "Outcomes",
+    "promise": "You can list what can happen.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000001f"
+    ],
+    "sortOrder": 31,
+    "pipAbility": "Pip can list outcomes.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000049",
+      "skillNodeId": "20000000-0000-4000-8000-000000000020",
+      "title": "One toss",
+      "version": 1,
+      "screens": [
+        {
+          "id": "lands",
+          "prompt": "A fair toss lands as...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Heads or tails"
+              },
+              {
+                "id": "b",
+                "label": "Heads only"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A fair toss has two landings, not one."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Two outcomes, equally open."
+        },
+        {
+          "id": "count",
+          "prompt": "How many outcomes does one toss have?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Two"
+              },
+              {
+                "id": "b",
+                "label": "One"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Heads and tails are both possible."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "One toss, two outcomes."
+        },
+        {
+          "id": "how",
+          "prompt": "Set how many outcomes a single toss has.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Heads and tails are two outcomes. Move up.",
+            "too_high": "A single toss has fewer than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Two ways to land."
+        },
+        {
+          "id": "fair",
+          "prompt": "Each outcome of a fair toss is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Equally likely"
+              },
+              {
+                "id": "b",
+                "label": "Sure to be heads"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Sure heads would erase tails. A fair toss shares the chance."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Fair means equal chances."
+        },
+        {
+          "id": "what",
+          "prompt": "An outcome is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "One way the toss can land"
+              },
+              {
+                "id": "b",
+                "label": "Only the toss that already happened"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "You can list outcomes before the toss. They are the ways it can land."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "An outcome is a possible landing."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A model scores an outcome before it knows which one happens."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000004a",
+      "skillNodeId": "20000000-0000-4000-8000-000000000020",
+      "title": "Two tosses",
+      "version": 1,
+      "screens": [
+        {
+          "id": "both",
+          "prompt": "Two tosses. Both heads is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "One outcome"
+              },
+              {
+                "id": "b",
+                "label": "The same as every result with a head"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Results with one head are different outcomes. Both heads is one of them."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Both heads is a single outcome."
+        },
+        {
+          "id": "more",
+          "prompt": "Which can happen in more ways?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Exactly one head"
+              },
+              {
+                "id": "b",
+                "label": "Both heads"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both heads is only one listing. Exactly one head has two listings."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "One head has more ways."
+        },
+        {
+          "id": "four",
+          "prompt": "List HH, HT, TH, and TT. Set how many outcomes that is.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Each listing is an outcome. Move up.",
+            "too_high": "You counted a listing twice. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Four listings, four outcomes."
+        },
+        {
+          "id": "order",
+          "prompt": "HT and TH are...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Different outcomes with one head each"
+              },
+              {
+                "id": "b",
+                "label": "The same outcome"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The first toss differs. HT and TH are different listings."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Order makes them different outcomes."
+        },
+        {
+          "id": "why",
+          "prompt": "Both heads is not the same as one head, because...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "They are different outcomes"
+              },
+              {
+                "id": "b",
+                "label": "Both heads includes every toss with a head"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both heads does not include HT or TH. Those are other outcomes."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Different listings, different outcomes."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Both heads is one outcome. One head can happen in more ways."
+    }
+  ]
+}

@@ -44,25 +44,7 @@
         },
         {
           "id": "first",
-          "prompt": "2 times 2. Set the first number.",
-          "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 4,
-            "tolerance": 0
-          },
-          "feedback": {
-            "too_low": "2 times 2 is higher. Move up.",
-            "too_high": "2 times 2 is lower. Move down."
-          },
-          "easyWithinMs": 10000,
-          "correctMessage": "The first place is 4."
-        },
-        {
-          "id": "second",
-          "prompt": "3 times 2. Set the second number.",
+          "prompt": "The first number is 3, times 2. Set the result.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -76,7 +58,25 @@
             "too_high": "3 times 2 is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The second place is 6."
+          "correctMessage": "The first place doubled."
+        },
+        {
+          "id": "second",
+          "prompt": "The second number is 4, times 2. Set the result.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 8,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "4 times 2 is higher. Move up.",
+            "too_high": "4 times 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The second place doubled too."
         },
         {
           "id": "result",
@@ -91,19 +91,23 @@
               {
                 "id": "b",
                 "label": "(2, 6)"
+              },
+              {
+                "id": "c",
+                "label": "(4, 3)"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "(2, 6) leaves the first number unscaled."
+            "wrong_option": "(2, 6) leaves the first number. (4, 3) leaves the second."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Both numbers doubled."
         },
         {
           "id": "draw",
-          "prompt": "Draw the doubled arrow (4, 2) from (1, 1).",
+          "prompt": "The short move is (2, 1) from (1, 1). Draw it doubled.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -116,11 +120,12 @@
               "x": 5,
               "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The doubled arrow goes right and up.",
-            "wrong_length": "The direction matches. Stop at (5, 3)."
+            "wrong_length": "The direction matches. Both parts of (2, 1) double."
           },
           "easyWithinMs": 12000,
           "correctMessage": "Doubling scales the whole arrow."
@@ -137,7 +142,25 @@
       "screens": [
         {
           "id": "half-first",
-          "prompt": "Half of 6. Set the first number of (6, 4) halved.",
+          "prompt": "Half of 8. Set the first number of (8, 6) halved.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Half of 8 is higher. Move up.",
+            "too_high": "Half of 8 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The first place is halved."
+        },
+        {
+          "id": "half-second",
+          "prompt": "Half of the second number, which is 6. Set it.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -151,25 +174,7 @@
             "too_high": "Half of 6 is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The first place is 3."
-        },
-        {
-          "id": "half-second",
-          "prompt": "Half of 4. Set the second number.",
-          "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 2,
-            "tolerance": 0
-          },
-          "feedback": {
-            "too_low": "Half of 4 is higher. Move up.",
-            "too_high": "Half of 4 is lower. Move down."
-          },
-          "easyWithinMs": 10000,
-          "correctMessage": "The second place is 2."
+          "correctMessage": "The second place is halved too."
         },
         {
           "id": "pair",
@@ -184,12 +189,16 @@
               {
                 "id": "b",
                 "label": "(6, 2)"
+              },
+              {
+                "id": "c",
+                "label": "(3, 4)"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "(6, 2) halves only the second number."
+            "wrong_option": "(6, 2) halves only the second. (3, 4) halves only the first."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Both places are halved."
@@ -219,7 +228,7 @@
         },
         {
           "id": "weight",
-          "prompt": "A weight multiplies a signal by scaling...",
+          "prompt": "A weight scales a signal by changing...",
           "primitive": {
             "type": "choice",
             "options": [
@@ -229,7 +238,7 @@
               },
               {
                 "id": "b",
-                "label": "Only the label"
+                "label": "Only the first component"
               }
             ],
             "correctOptionId": "a"
@@ -263,33 +272,37 @@
               {
                 "id": "b",
                 "label": "(-3, 2)"
+              },
+              {
+                "id": "c",
+                "label": "(3, 6)"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "3 times 1 is 3. 3 times -2 is -6. The signs stay with their places."
+            "wrong_option": "(-3, 2) flips the signs. (3, 6) drops the minus on the second place."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Both places triple, signs included."
         },
         {
           "id": "three",
-          "prompt": "1 times 3. Set the first number.",
+          "prompt": "2 times 4. Set the first number.",
           "primitive": {
             "type": "slider",
             "min": -8,
             "max": 8,
             "step": 1,
-            "correctValue": 3,
+            "correctValue": 8,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "1 times 3 is higher. Move up.",
-            "too_high": "1 times 3 is lower. Move down."
+            "too_low": "2 times 4 is higher. Move up.",
+            "too_high": "2 times 4 is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The first place is 3."
+          "correctMessage": "The first place is scaled."
         },
         {
           "id": "neg",
@@ -304,31 +317,32 @@
           },
           "feedback": {
             "too_low": "That is past -6. Move toward zero.",
-            "too_high": "-2 times 3 is -6. Move lower."
+            "too_high": "-2 times 3 is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The second place is -6."
+          "correctMessage": "The sign stays with the second place."
         },
         {
           "id": "flat",
-          "prompt": "Draw (3, 0) from (2, 4).",
+          "prompt": "Draw (4, 0) from (2, 3).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
             "planeHeight": 10,
             "start": {
               "x": 2,
-              "y": 4
+              "y": 3
             },
             "targetTip": {
-              "x": 5,
-              "y": 4
+              "x": 6,
+              "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "This scaled arrow is straight right.",
-            "wrong_length": "The aim is right. The run is 3."
+            "wrong_length": "The aim is right. The run is 4."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The second number stayed 0."
@@ -345,7 +359,7 @@
               },
               {
                 "id": "b",
-                "label": "Must turn"
+                "label": "Must turn around"
               }
             ],
             "correctOptionId": "a"

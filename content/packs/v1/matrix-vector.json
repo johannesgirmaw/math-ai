@@ -31,20 +31,24 @@
               },
               {
                 "id": "b",
+                "label": "y"
+              },
+              {
+                "id": "c",
                 "label": "Both, by the same amount"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The bottom right is 1, so y stays. The top left 2 doubles x."
+            "wrong_option": "The bottom right is 1, so y stays. Both would need two 2s."
           },
           "easyWithinMs": 8000,
           "correctMessage": "x doubles. y stays."
         },
         {
           "id": "set",
-          "prompt": "Set 2, 0 / 0, 1.",
+          "prompt": "Set the table that doubles x and leaves y.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -59,18 +63,17 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
-            "wrong_cell": "Top left is 2 and bottom right is 1. The other cells stay 0."
+            "wrong_cell": "Top left doubles x. Bottom right keeps y. The other cells stay 0."
           },
           "easyWithinMs": 12000,
           "correctMessage": "That table doubles x."
         },
         {
           "id": "x",
-          "prompt": "A point at x = 3 becomes x = ...",
+          "prompt": "x doubles. Start at x = 3. Set the new x.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -84,11 +87,11 @@
             "too_high": "3 doubled is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "x lands at 6."
+          "correctMessage": "x lands at twice the start."
         },
         {
           "id": "y",
-          "prompt": "Its y...",
+          "prompt": "Its y, under 2, 0 / 0, 1, ...",
           "primitive": {
             "type": "choice",
             "options": [
@@ -111,24 +114,25 @@
         },
         {
           "id": "move",
-          "prompt": "The point moves from (2, 2) to (4, 2). Drag the tip.",
+          "prompt": "From (2, 3), x doubles and y stays. Drag the tip.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
             "planeHeight": 10,
             "start": {
               "x": 2,
-              "y": 2
+              "y": 3
             },
             "targetTip": {
               "x": 4,
-              "y": 2
+              "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "x doubles, so the move is straight right.",
-            "wrong_length": "The aim is right. x goes from 2 to 4."
+            "wrong_length": "The aim is right. x grows and y stays."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The point slid right."
@@ -168,7 +172,7 @@
         },
         {
           "id": "set",
-          "prompt": "Set 1, 0 / 0, 2.",
+          "prompt": "Set the table that doubles y and leaves x.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -183,18 +187,17 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
-            "wrong_cell": "Top left is 1 and bottom right is 2. Off-diagonal cells stay 0."
+            "wrong_cell": "Top left keeps x. Bottom right doubles y. The other cells stay 0."
           },
           "easyWithinMs": 12000,
           "correctMessage": "That table doubles y."
         },
         {
           "id": "y",
-          "prompt": "y = 3 becomes...",
+          "prompt": "y starts at 3 and doubles. Set the new y.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -208,11 +211,11 @@
             "too_high": "3 doubled is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "y lands at 6."
+          "correctMessage": "y lands at twice the start."
         },
         {
           "id": "x",
-          "prompt": "x...",
+          "prompt": "x under that table...",
           "primitive": {
             "type": "choice",
             "options": [
@@ -222,37 +225,38 @@
               },
               {
                 "id": "b",
-                "label": "Becomes zero"
+                "label": "Doubles"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "x is multiplied by 1, so it stays."
+            "wrong_option": "The top left weight is 1, so x is unchanged."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "x is unchanged."
+          "correctMessage": "x stays."
         },
         {
           "id": "move",
-          "prompt": "From (2, 2) the point goes to (2, 4). Drag the tip.",
+          "prompt": "From (3, 2), y doubles and x stays. Drag the tip.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
             "planeHeight": 10,
             "start": {
-              "x": 2,
+              "x": 3,
               "y": 2
             },
             "targetTip": {
-              "x": 2,
+              "x": 3,
               "y": 4
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "y doubles, so the move is straight up.",
-            "wrong_length": "The aim is up. y goes from 2 to 4."
+            "wrong_length": "The aim is up. y grows and x stays."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The point rose."
@@ -268,31 +272,35 @@
       "version": 1,
       "screens": [
         {
-          "id": "land",
-          "prompt": "(2, 1) through 1, 1 / 0, 1 lands at...",
+          "id": "send",
+          "prompt": "1, 1 / 0, 1 sends (0, 1) to...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "(3, 1)"
+                "label": "(1, 1)"
               },
               {
                 "id": "b",
-                "label": "(2, 1)"
+                "label": "(0, 1)"
+              },
+              {
+                "id": "c",
+                "label": "(1, 0)"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "New x is 1 times 2 plus 1 times 1. y stays 1."
+            "wrong_option": "(0, 1) forgets the mix. (1, 0) drops y."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "x picks up the y. y stays."
+          "correctMessage": "y is added into x. y stays."
         },
         {
           "id": "set",
-          "prompt": "Set the table that slides x by y.",
+          "prompt": "Set the slide that adds y into x and keeps y.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -313,69 +321,70 @@
             "wrong_cell": "Top row is 1, 1. Bottom row is 0, 1."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "That table slides x by y."
+          "correctMessage": "That table mixes y into x."
         },
         {
           "id": "x",
-          "prompt": "Set the new x, which is 3.",
+          "prompt": "Start at x = 2, y = 4, and x becomes x + y. Set the new x.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 3,
+            "correctValue": 6,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "The new x is higher. Move up.",
-            "too_high": "The new x is lower. Move down."
+            "too_low": "Add y onto x. Move up.",
+            "too_high": "x plus y is lower than that. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The new x is 3."
+          "correctMessage": "The new x is the sum."
         },
         {
           "id": "y",
-          "prompt": "y is unchanged at...",
+          "prompt": "y under 1, 1 / 0, 1...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "1"
+                "label": "Stays the same"
               },
               {
                 "id": "b",
-                "label": "3"
+                "label": "Becomes x"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The bottom row keeps y and does not take from x."
+            "wrong_option": "The bottom row keeps y and adds nothing from x."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "y stays 1."
+          "correctMessage": "y is unchanged."
         },
         {
           "id": "move",
-          "prompt": "Drag from (1, 1) to the image (2, 1).",
+          "prompt": "From (2, 3), add y into x. Drag the tip.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
             "planeHeight": 10,
             "start": {
-              "x": 1,
-              "y": 1
+              "x": 2,
+              "y": 3
             },
             "targetTip": {
-              "x": 2,
-              "y": 1
+              "x": 5,
+              "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
-            "wrong_direction": "The image is straight right of the start.",
-            "wrong_length": "The aim is right. x grows by 1."
+            "wrong_direction": "The slide is straight right. y stays.",
+            "wrong_length": "The aim is right. x grows by the size of y."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The point slid sideways."
@@ -415,7 +424,7 @@
         },
         {
           "id": "both",
-          "prompt": "Set a double on both axes: 2, 0 / 0, 2.",
+          "prompt": "Set a double on both axes.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -433,46 +442,46 @@
             "tolerance": 0.1
           },
           "feedback": {
-            "wrong_cell": "The diagonal cells are 2. The other cells stay 0."
+            "wrong_cell": "Both diagonal cells are 2. The other cells stay 0."
           },
           "easyWithinMs": 12000,
           "correctMessage": "Both axes double."
         },
         {
           "id": "x",
-          "prompt": "x = 2 becomes...",
+          "prompt": "x starts at 3 and both axes double. Set the new x.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 4,
+            "correctValue": 6,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "2 doubled is higher. Move up.",
-            "too_high": "2 doubled is lower. Move down."
+            "too_low": "3 doubled is higher. Move up.",
+            "too_high": "3 doubled is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "x lands at 4."
+          "correctMessage": "x lands at twice the start."
         },
         {
           "id": "y",
-          "prompt": "y = 2 becomes...",
+          "prompt": "y starts at 4 under that same double. Set the new y.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 4,
+            "correctValue": 8,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "2 doubled is higher. Move up.",
-            "too_high": "2 doubled is lower. Move down."
+            "too_low": "4 doubled is higher. Move up.",
+            "too_high": "4 doubled is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "y lands at 4."
+          "correctMessage": "y lands at twice the start."
         },
         {
           "id": "decide",
@@ -486,13 +495,13 @@
               },
               {
                 "id": "b",
-                "label": "The point's color"
+                "label": "Only which point is first"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The table moves the point. It does not paint it."
+            "wrong_option": "Order in a list is not the warp. The table moves the point."
           },
           "easyWithinMs": 8000,
           "correctMessage": "The warp is the move."

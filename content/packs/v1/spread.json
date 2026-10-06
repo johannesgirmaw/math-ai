@@ -1,0 +1,257 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000026",
+    "worldId": "10000000-0000-4000-8000-000000000004",
+    "slug": "spread",
+    "title": "Spread",
+    "promise": "You can tell a tight batch from a wide one.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000025"
+    ],
+    "sortOrder": 37,
+    "pipAbility": "Pip can compare spread.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000058",
+      "skillNodeId": "20000000-0000-4000-8000-000000000026",
+      "title": "Same mean",
+      "version": 1,
+      "screens": [
+        {
+          "id": "match",
+          "prompt": "Batch A is 4, 4, 4. Batch B is 0, 4, 8. The means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Match"
+              },
+              {
+                "id": "b",
+                "label": "Differ"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "B is spread out, but 0, 4, and 8 still balance at 4."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same mean, different spread."
+        },
+        {
+          "id": "odd",
+          "prompt": "Set the mean of 1, 2, and 9.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Share the total across three scores. Move up.",
+            "too_high": "The mean is lower than the 9. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The wide batch still has a mean."
+        },
+        {
+          "id": "level",
+          "prompt": "1, 2, and 9 versus 4, 4, and 4. The means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Match"
+              },
+              {
+                "id": "b",
+                "label": "Differ"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The shapes differ. Both batches balance at 4."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The means match."
+        },
+        {
+          "id": "wide",
+          "prompt": "The batch 1, 2, 9 is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "More spread out"
+              },
+              {
+                "id": "b",
+                "label": "The tighter batch"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "4, 4, 4 sits in one place. 1, 2, 9 travels."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same mean, wider spread."
+        },
+        {
+          "id": "not",
+          "prompt": "Same mean does not mean...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Same spread"
+              },
+              {
+                "id": "b",
+                "label": "The batches are unrelated"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The means match, so the batches are related. The spreads can still differ."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Mean and spread are different facts."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Two batches can share a mean and still differ in spread."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000059",
+      "skillNodeId": "20000000-0000-4000-8000-000000000026",
+      "title": "More predictable",
+      "version": 1,
+      "screens": [
+        {
+          "id": "which",
+          "prompt": "Batch A is 5, 5, 5. Batch B is 1, 5, 9. Which is more predictable?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A"
+              },
+              {
+                "id": "b",
+                "label": "B, because the numbers travel farther"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Traveling farther is less predictable. The tight batch stays put."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The tighter batch is more predictable."
+        },
+        {
+          "id": "means",
+          "prompt": "Predictable means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The scores stay near the mean"
+              },
+              {
+                "id": "b",
+                "label": "The mean is larger"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A larger mean can still be wild. Predictable means the scores stay close."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Close to the mean, more predictable."
+        },
+        {
+          "id": "wild",
+          "prompt": "Batch 3, 3, and 9. Set the mean.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Share the total across three scores. Move up.",
+            "too_high": "The mean is lower than the 9. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The outlier pulls the mean up."
+        },
+        {
+          "id": "even",
+          "prompt": "The tighter set is more predictable even when...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The means match"
+              },
+              {
+                "id": "b",
+                "label": "Only when its mean is larger"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A larger mean is not what makes a forecast steady. Tightness is."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same mean, tighter set, steadier forecast."
+        },
+        {
+          "id": "trust",
+          "prompt": "You would trust a forecast more from...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The tighter batch"
+              },
+              {
+                "id": "b",
+                "label": "The batch with the wild outlier"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The outlier makes the next score harder to guess."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Tight scores, steadier forecast."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A tighter batch is the more predictable one."
+    }
+  ]
+}

@@ -1,0 +1,251 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000023",
+    "worldId": "10000000-0000-4000-8000-000000000004",
+    "slug": "the-other-way",
+    "title": "The other way",
+    "promise": "You can find the chance of not happening.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000022"
+    ],
+    "sortOrder": 34,
+    "pipAbility": "Pip can take the other way.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000050",
+      "skillNodeId": "20000000-0000-4000-8000-000000000023",
+      "title": "Not happening",
+      "version": 1,
+      "screens": [
+        {
+          "id": "left",
+          "prompt": "The chance of red is 1 out of 4. The chance of not red is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "3 out of 4"
+              },
+              {
+                "id": "b",
+                "label": "1 out of 4"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "1 out of 4 is red again. Not red is the rest."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The rest is not red."
+        },
+        {
+          "id": "ten",
+          "prompt": "Chance of red is 3 out of 10. Set the chance of not red, out of 10.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 7,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Not red is the rest. Move up.",
+            "too_high": "Not red is not the whole scale. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Not red is what remains."
+        },
+        {
+          "id": "rain",
+          "prompt": "Chance of rain is 4 out of 10. Set the chance of no rain, out of 10.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "No rain is the rest. Move up.",
+            "too_high": "No rain is smaller than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "No rain is the other way."
+        },
+        {
+          "id": "uses",
+          "prompt": "Not happening uses...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The outcomes left over"
+              },
+              {
+                "id": "b",
+                "label": "The same outcomes again"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The same outcomes would repeat the first chance. The other way is the rest."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The leftover outcomes."
+        },
+        {
+          "id": "sure",
+          "prompt": "If red is sure, not red is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Impossible"
+              },
+              {
+                "id": "b",
+                "label": "Also sure"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both cannot be sure. If red must happen, not red cannot."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Sure one way, impossible the other."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The chance of the other result is what remains."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000051",
+      "skillNodeId": "20000000-0000-4000-8000-000000000023",
+      "title": "The miss",
+      "version": 1,
+      "screens": [
+        {
+          "id": "want",
+          "prompt": "You want a miss. The stated chance is a hit, 2 out of 5. You need...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "3 out of 5"
+              },
+              {
+                "id": "b",
+                "label": "2 out of 5"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "2 out of 5 is the hit. A miss is the rest."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Flip to the event you want."
+        },
+        {
+          "id": "hits",
+          "prompt": "Hits are 7 out of 10. Set the miss chance out of 10.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Misses are the rest. Move up.",
+            "too_high": "Misses are fewer than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The miss is the other way from the hit."
+        },
+        {
+          "id": "should",
+          "prompt": "The prompt names the event you do not want. You should...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Take the other way"
+              },
+              {
+                "id": "b",
+                "label": "Copy the stated chance"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Copying keeps the event you do not want."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Take what remains."
+        },
+        {
+          "id": "five",
+          "prompt": "The unwanted event is 1 out of 5. Set its complement out of 5.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The complement is the rest of 5. Move up.",
+            "too_high": "The complement is smaller than that. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "One unwanted, four the other way."
+        },
+        {
+          "id": "small",
+          "prompt": "A hit chance of 9 out of 10. The miss chance is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "1 out of 10"
+              },
+              {
+                "id": "b",
+                "label": "9 out of 10"
+              },
+              {
+                "id": "c",
+                "label": "0"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "9 out of 10 is the hit again. 0 would mean a miss cannot happen."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "One miss remains."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The stated event may be the one you do not want."
+    }
+  ]
+}

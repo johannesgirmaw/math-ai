@@ -34,30 +34,7 @@
                 "label": "A"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 4,
-                  "y": 3
-                },
-                "guide": true
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 6
-                },
-                "tip": {
-                  "x": 8,
-                  "y": 6
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "6 is a bigger move than 2."
@@ -67,13 +44,13 @@
         },
         {
           "id": "span",
-          "prompt": "How long is a flat arrow from x = 1 to x = 7?",
+          "prompt": "How long is a flat arrow from x = 1 to x = 8?",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 6,
+            "correctValue": 7,
             "tolerance": 0
           },
           "feedback": {
@@ -81,47 +58,24 @@
             "too_high": "The ends are closer than that. Move lower."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The length is the gap, 6."
+          "correctMessage": "The length is the gap."
         },
         {
           "id": "aim",
-          "prompt": "A longer arrow is a larger move. Its direction can...",
+          "prompt": "A longer arrow can...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "Stay the same"
+                "label": "Keep the same direction"
               },
               {
                 "id": "b",
                 "label": "Be forced to turn"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 4,
-                  "y": 3
-                },
-                "guide": true
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 6
-                },
-                "tip": {
-                  "x": 8,
-                  "y": 6
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "Length and direction are separate. You can stretch without turning."
@@ -131,7 +85,7 @@
         },
         {
           "id": "draw",
-          "prompt": "Draw the longer move, 6 right from (1, 4).",
+          "prompt": "Draw the longer move, 5 right from (1, 4).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -141,21 +95,22 @@
               "y": 4
             },
             "targetTip": {
-              "x": 7,
+              "x": 6,
               "y": 4
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The longer move is straight right.",
-            "wrong_length": "The direction is right. The length is 6."
+            "wrong_length": "The direction is right. The length is 5."
           },
           "easyWithinMs": 12000,
           "correctMessage": "That arrow is the long one."
         },
         {
           "id": "compare",
-          "prompt": "A model can compare two features by...",
+          "prompt": "Two arrows point different ways. You compare their size by...",
           "primitive": {
             "type": "choice",
             "options": [
@@ -165,36 +120,17 @@
               },
               {
                 "id": "b",
-                "label": "Which name is louder"
-              }
-            ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 4,
-                  "y": 3
-                },
-                "guide": true
+                "label": "Which arrow points right"
               },
               {
-                "start": {
-                  "x": 2,
-                  "y": 6
-                },
-                "tip": {
-                  "x": 8,
-                  "y": 6
-                }
+                "id": "c",
+                "label": "Which tail is higher"
               }
-            ]
+            ],
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "Length is the size you can compare."
+            "wrong_option": "Direction and the tail's place are not the size. Length is."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Bigger length, bigger feature."

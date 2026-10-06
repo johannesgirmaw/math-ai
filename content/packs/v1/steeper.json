@@ -1,0 +1,255 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-00000000001a",
+    "worldId": "10000000-0000-4000-8000-000000000003",
+    "slug": "steeper",
+    "title": "Steeper",
+    "promise": "You can tell which slope is steeper.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000019"
+    ],
+    "sortOrder": 25,
+    "pipAbility": "Pip can pick the steeper slope.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000003d",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001a",
+      "title": "See the steep one",
+      "version": 1,
+      "screens": [
+        {
+          "id": "pair",
+          "prompt": "A rises 4 over run 1. B rises 1 over run 4. Which is steeper?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A"
+              },
+              {
+                "id": "b",
+                "label": "B"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "B is the longer, flatter arrow. A climbs more per step."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "More rise on a shorter run is steeper."
+        },
+        {
+          "id": "mark",
+          "prompt": "Drag the steeper arrow onto the mark.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 6
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The steep mark climbs sharply.",
+            "wrong_length": "The run is short and the rise is tall."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That is the steep arrow."
+        },
+        {
+          "id": "slope",
+          "prompt": "Rise 6, run 3. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "6 over 3 is higher. Move up.",
+            "too_high": "6 over 3 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The slope is 2."
+        },
+        {
+          "id": "means",
+          "prompt": "Steeper means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "More rise for the same run"
+              },
+              {
+                "id": "b",
+                "label": "A longer arrow"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A longer arrow can be flatter. Steep is rise compared with run."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Compare rise with run."
+        },
+        {
+          "id": "flat",
+          "prompt": "A flat arrow and a rising arrow. The rising one is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Steeper"
+              },
+              {
+                "id": "b",
+                "label": "Flatter"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Flat has slope zero. Any rise is steeper than that."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A rise is steeper than level."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Steeper means more rise for the same run."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000003e",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001a",
+      "title": "Longer but flatter",
+      "version": 1,
+      "screens": [
+        {
+          "id": "trap",
+          "prompt": "A is rise 3, run 1. B is rise 3, run 6. Which is steeper?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A"
+              },
+              {
+                "id": "b",
+                "label": "B, because it is longer"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "B travels farther, but the same rise over a longer run is flatter."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The short steep arrow wins."
+        },
+        {
+          "id": "steep",
+          "prompt": "The steep arrow: rise 8, run 2. Set its slope.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 4,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "8 over 2 is higher. Move up.",
+            "too_high": "8 over 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The short arrow is steep."
+        },
+        {
+          "id": "long",
+          "prompt": "The long arrow: rise 8, run 4. Set its slope.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "8 over 4 is higher. Move up.",
+            "too_high": "8 over 4 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The long arrow is flatter."
+        },
+        {
+          "id": "winner",
+          "prompt": "You compared slopes, not lengths. The winner is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The larger slope"
+              },
+              {
+                "id": "b",
+                "label": "The longer drawing"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The longer drawing can hide a smaller slope."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The larger slope is steeper."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw the steeper move, not the longer one: rise 4, run 1, from (2, 2).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 2
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 6
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "The steep move climbs sharply, not along a long shallow line.",
+            "wrong_length": "The run is 1 and the rise is 4."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "Short and steep."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "The longer arrow can be the flatter one."
+    }
+  ]
+}

@@ -21,7 +21,7 @@
       "screens": [
         {
           "id": "draw",
-          "prompt": "This arrow runs 4 right and 2 up. Drag the tip.",
+          "prompt": "Drag the tip onto the mark. Read the move it makes.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -38,14 +38,14 @@
           },
           "feedback": {
             "wrong_direction": "The move goes right and up.",
-            "wrong_length": "The direction matches. The move is 4 right and 2 up."
+            "wrong_length": "The direction matches. Stretch until the tip meets the mark."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "The tip matches the pair."
+          "correctMessage": "The tip shows the pair."
         },
         {
           "id": "dx",
-          "prompt": "How many right? Set the first number.",
+          "prompt": "Tip x is 6. Tail x is 2. Set the run.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -55,7 +55,7 @@
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "The first number is the run to the right. Move higher.",
+            "too_low": "Subtract the tail from the tip. Move higher.",
             "too_high": "The run is shorter than that. Move lower."
           },
           "easyWithinMs": 10000,
@@ -63,91 +63,67 @@
         },
         {
           "id": "dy",
-          "prompt": "How many up? Set the second number.",
+          "prompt": "Tip y is 7. Tail y is 2. Set the rise.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 2,
+            "correctValue": 5,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "The second number is the rise. Move higher.",
-            "too_high": "The rise is smaller than that. Move lower."
+            "too_low": "The rise is larger. Move higher.",
+            "too_high": "The rise is smaller. Move lower."
           },
           "easyWithinMs": 10000,
           "correctMessage": "The second number is the vertical move."
         },
         {
           "id": "pair",
-          "prompt": "You write that arrow as which pair?",
+          "prompt": "You write run 4 and rise 5 as which pair?",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "(4, 2)"
+                "label": "(4, 5)"
               },
               {
                 "id": "b",
-                "label": "(2, 4)"
+                "label": "(5, 4)"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 2
-                },
-                "tip": {
-                  "x": 6,
-                  "y": 4
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "Right is first. Up is second. (2, 4) swaps them."
+            "wrong_option": "Right is first. Up is second. (5, 4) swaps them."
           },
           "easyWithinMs": 8000,
           "correctMessage": "The pair is (run, rise)."
         },
         {
           "id": "store",
-          "prompt": "The pair records the move, not the place. A model stores it as...",
+          "prompt": "The pair records the move, not the place. It stores...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "A feature vector"
+                "label": "The move"
               },
               {
                 "id": "b",
-                "label": "A color name"
+                "label": "Only the tail's place"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 2
-                },
-                "tip": {
-                  "x": 6,
-                  "y": 4
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The numbers and their direction are the feature."
+            "wrong_option": "The tail can sit anywhere. The pair is the displacement."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "A feature vector is this pair."
+          "correctMessage": "The pair is the move."
         }
       ],
       "capstone": false,
@@ -161,7 +137,7 @@
       "screens": [
         {
           "id": "left",
-          "prompt": "The arrow goes 3 left. Tail (6, 4), tip (3, 4).",
+          "prompt": "The arrow goes 3 left from (6, 4).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -174,7 +150,8 @@
               "x": 3,
               "y": 4
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "Left stays on the horizontal line.",
@@ -185,21 +162,21 @@
         },
         {
           "id": "neg",
-          "prompt": "Left is a negative first number. Set the move of 3 left.",
+          "prompt": "A move of 4 left. Set the first number.",
           "primitive": {
             "type": "slider",
             "min": -5,
             "max": 5,
             "step": 1,
-            "correctValue": -3,
+            "correctValue": -4,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "More negative is farther left. This move is only 3 left.",
+            "too_low": "Four left is not farther than that. Move toward zero.",
             "too_high": "Left is negative. Stay below zero."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "Three left is -3."
+          "correctMessage": "Four left is a negative first number."
         },
         {
           "id": "up",
@@ -216,19 +193,7 @@
                 "label": "(5, 0)"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 5,
-                  "y": 2
-                },
-                "tip": {
-                  "x": 5,
-                  "y": 7
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "(5, 0) is right 5. You want no right and 5 up."
@@ -238,7 +203,7 @@
         },
         {
           "id": "rise",
-          "prompt": "Set the second number for a rise of 5.",
+          "prompt": "The rise is the change from y = 1 to y = 6. Set the second number.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -252,11 +217,11 @@
             "too_high": "The rise is lower. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The second number is 5."
+          "correctMessage": "The second number is the change in y."
         },
         {
           "id": "tail",
-          "prompt": "Changing the tail does not change the pair. The pair records...",
+          "prompt": "The tip shifts with the tail. The pair still records...",
           "primitive": {
             "type": "choice",
             "options": [
@@ -269,33 +234,10 @@
                 "label": "The tail's place"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 2
-                },
-                "tip": {
-                  "x": 6,
-                  "y": 4
-                }
-              },
-              {
-                "start": {
-                  "x": 3,
-                  "y": 5
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 7
-                },
-                "guide": true
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The place of the tail can change. The pair is the displacement."
+            "wrong_option": "A shared shift moves the whole arrow. The pair is the displacement."
           },
           "easyWithinMs": 8000,
           "correctMessage": "The pair is the move."
@@ -325,19 +267,7 @@
                 "label": "(4, 0)"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 2
-                },
-                "tip": {
-                  "x": 2,
-                  "y": 6
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "x does not change. y grows by 4, so the pair is (0, 4)."
@@ -347,25 +277,25 @@
         },
         {
           "id": "part",
-          "prompt": "Set the vertical part of that pair.",
+          "prompt": "y goes from 3 to 8. Set the vertical part.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 4,
+            "correctValue": 5,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "y goes from 2 to 6. Move higher.",
+            "too_low": "y climbs more than that. Move higher.",
             "too_high": "The rise is smaller than that. Move lower."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The vertical part is 4."
+          "correctMessage": "The vertical part is the change in y."
         },
         {
           "id": "three",
-          "prompt": "Draw (3, 1) from (2, 2). The tip is at (5, 3).",
+          "prompt": "Draw the pair (3, 1) from (2, 2).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -378,11 +308,12 @@
               "x": 5,
               "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The pair goes right and a little up.",
-            "wrong_length": "The direction matches. Stop at (5, 3)."
+            "wrong_length": "The direction matches. The run is 3 and the rise is 1."
           },
           "easyWithinMs": 12000,
           "correctMessage": "The tip is tail plus the pair."
@@ -402,19 +333,7 @@
                 "label": "A quadrant"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 5
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "A quadrant is a region. This pair is a vector."
@@ -435,21 +354,13 @@
               {
                 "id": "b",
                 "label": "Left and up"
+              },
+              {
+                "id": "c",
+                "label": "Right and up"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 3,
-                  "y": 7
-                },
-                "tip": {
-                  "x": 5,
-                  "y": 3
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "Positive first number is right. Negative second number is down."

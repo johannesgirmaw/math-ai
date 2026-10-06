@@ -1,0 +1,256 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000022",
+    "worldId": "10000000-0000-4000-8000-000000000004",
+    "slug": "sure-and-none",
+    "title": "Sure and impossible",
+    "promise": "You can tell sure from impossible.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000021"
+    ],
+    "sortOrder": 33,
+    "pipAbility": "Pip can tell sure from impossible.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-00000000004e",
+      "skillNodeId": "20000000-0000-4000-8000-000000000022",
+      "title": "Zero and one",
+      "version": 1,
+      "screens": [
+        {
+          "id": "none",
+          "prompt": "An outcome that cannot happen has chance...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "0"
+              },
+              {
+                "id": "b",
+                "label": "1"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "1 would mean it must happen. Impossible is 0."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Impossible is 0."
+        },
+        {
+          "id": "sure",
+          "prompt": "An outcome that must happen has chance...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "1"
+              },
+              {
+                "id": "b",
+                "label": "0"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "0 would mean it cannot happen. Sure is 1."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Sure is 1."
+        },
+        {
+          "id": "cannot",
+          "prompt": "Set the chance of a result that cannot happen.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 0,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Impossible is not below zero. The chance is zero.",
+            "too_high": "A result that cannot happen is not a positive chance. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Impossible sits at zero."
+        },
+        {
+          "id": "must",
+          "prompt": "Set the chance of a result that must happen.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 10,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Sure is the top of this scale. Move up.",
+            "too_high": "Sure is not past the top. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Sure sits at the top."
+        },
+        {
+          "id": "one",
+          "prompt": "A chance of 1 means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Sure"
+              },
+              {
+                "id": "b",
+                "label": "Impossible"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Impossible is 0. 1 means it must happen."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "1 means sure."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A model can be sure, unsure, or sure something will not happen."
+    },
+    {
+      "id": "30000000-0000-4000-8000-00000000004f",
+      "skillNodeId": "20000000-0000-4000-8000-000000000022",
+      "title": "Almost is not sure",
+      "version": 1,
+      "screens": [
+        {
+          "id": "nine",
+          "prompt": "9 out of 10 is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Likely, not sure"
+              },
+              {
+                "id": "b",
+                "label": "Sure"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "One way still fails. Likely is not sure."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "9 out of 10 can still fail."
+        },
+        {
+          "id": "zero",
+          "prompt": "0 out of 10 is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Impossible"
+              },
+              {
+                "id": "b",
+                "label": "Unlikely but possible"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Unlikely still has a way to happen. 0 out of 10 has none."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "None means impossible."
+        },
+        {
+          "id": "red",
+          "prompt": "A bag has 10 chips and 3 are blue. Set the red chance out of 10.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 7,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "Red is the rest of the bag. Move up.",
+            "too_high": "Red is not every chip. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Red is the chips that are not blue."
+        },
+        {
+          "id": "almost",
+          "prompt": "Almost sure still leaves...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "A way to fail"
+              },
+              {
+                "id": "b",
+                "label": "No way to fail"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "No way to fail is sure. Almost sure still has a miss."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Almost is not sure."
+        },
+        {
+          "id": "which",
+          "prompt": "Which can you call sure?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "10 out of 10"
+              },
+              {
+                "id": "b",
+                "label": "9 out of 10"
+              },
+              {
+                "id": "c",
+                "label": "1 out of 10"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "9 out of 10 can fail. 1 out of 10 is unlikely. Sure needs every outcome."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Every outcome, or it is not sure."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Almost sure still leaves a way to fail."
+    }
+  ]
+}

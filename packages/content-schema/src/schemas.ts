@@ -61,6 +61,7 @@ export const dragArrowPrimitiveSchema = z.object({
   guideStart: pointSchema.optional(),
   guideTip: pointSchema.optional(),
   score: z.enum(["positive", "zero", "negative"]).optional(),
+  showTarget: z.boolean().optional(),
 });
 
 export const matrixWarpPrimitiveSchema = z.object({

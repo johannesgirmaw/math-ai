@@ -54,7 +54,7 @@
               },
               {
                 "id": "b",
-                "label": "Upper right"
+                "label": "Lower right"
               }
             ],
             "correctOptionId": "a"
@@ -67,21 +67,21 @@
         },
         {
           "id": "neg-x",
-          "prompt": "A point in the upper left has negative x. Set x.",
+          "prompt": "The point is 3 left of the origin. Set x.",
           "primitive": {
             "type": "slider",
             "min": -5,
             "max": 5,
             "step": 1,
-            "correctValue": -2,
+            "correctValue": -3,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "That x is farther left than this point. Move toward zero.",
-            "too_high": "The upper left stays negative. Move left of zero."
+            "too_low": "Three left is not farther than that. Move toward zero.",
+            "too_high": "Left of the origin is negative. Move below zero."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "Negative x sits left of the origin."
+          "correctMessage": "Three left is a negative x."
         },
         {
           "id": "q3",
@@ -95,40 +95,43 @@
               },
               {
                 "id": "b",
-                "label": "Upper right"
+                "label": "Upper left"
               }
             ],
             "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "Negative x is left and negative y is down."
+            "wrong_option": "Negative y is down. Negative x alone would stay up."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Both negative means the lower left."
         },
         {
-          "id": "place",
-          "prompt": "Drag the tip onto the mark in the upper right.",
+          "id": "trap",
+          "prompt": "Which point is in the lower right?",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
-            "start": {
-              "x": 1,
-              "y": 1
-            },
-            "targetTip": {
-              "x": 8,
-              "y": 7
-            },
-            "tolerance": 0.8
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "(4, -1)"
+              },
+              {
+                "id": "b",
+                "label": "(-4, -1)"
+              },
+              {
+                "id": "c",
+                "label": "(4, 1)"
+              }
+            ],
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_direction": "The mark sits up and to the right.",
-            "wrong_length": "The aim is right. Stretch or shorten until the tip meets the mark."
+            "wrong_option": "Lower right needs positive x and negative y. (-4, -1) is left. (4, 1) is up."
           },
-          "easyWithinMs": 12000,
-          "correctMessage": "The tip is in the upper right."
+          "easyWithinMs": 8000,
+          "correctMessage": "Right and down is the lower right."
         }
       ],
       "capstone": false,

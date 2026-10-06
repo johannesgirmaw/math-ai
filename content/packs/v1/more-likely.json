@@ -1,0 +1,382 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-000000000024",
+    "worldId": "10000000-0000-4000-8000-000000000004",
+    "slug": "more-likely",
+    "title": "More likely",
+    "promise": "You can tell which chance is larger.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-000000000023"
+    ],
+    "sortOrder": 35,
+    "pipAbility": "Pip can pick the more likely result.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000052",
+      "skillNodeId": "20000000-0000-4000-8000-000000000024",
+      "title": "Same total",
+      "version": 1,
+      "screens": [
+        {
+          "id": "three",
+          "prompt": "3 out of 4, or 1 out of 4. Which is more likely?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "3 out of 4"
+              },
+              {
+                "id": "b",
+                "label": "1 out of 4"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The totals match. 3 favorable beats 1."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same total, larger favorable count."
+        },
+        {
+          "id": "four",
+          "prompt": "2 out of 5, or 4 out of 5. Which is more likely?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "4 out of 5"
+              },
+              {
+                "id": "b",
+                "label": "2 out of 5"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The totals match. 4 favorable beats 2."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The larger favorable count wins."
+        },
+        {
+          "id": "zero",
+          "prompt": "0 out of 4, or 2 out of 4. Which is more likely?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "2 out of 4"
+              },
+              {
+                "id": "b",
+                "label": "0 out of 4"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "0 cannot happen. 2 out of 4 still can."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A real chance beats none."
+        },
+        {
+          "id": "means",
+          "prompt": "More likely means...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The larger chance"
+              },
+              {
+                "id": "b",
+                "label": "The larger possible count"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A larger possible count can make a chance smaller. Compare the chances."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Larger chance, more likely."
+        },
+        {
+          "id": "same",
+          "prompt": "Same possible count. You compare...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The favorable counts"
+              },
+              {
+                "id": "b",
+                "label": "The names of the bags"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Names do not change the chance. The favorable counts do."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Compare the favorable counts."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Picking the more likely result is how a model chooses."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000053",
+      "skillNodeId": "20000000-0000-4000-8000-000000000024",
+      "title": "Different totals",
+      "version": 1,
+      "screens": [
+        {
+          "id": "half",
+          "prompt": "1 out of 2, or 1 out of 6. Which is more likely?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "1 out of 2"
+              },
+              {
+                "id": "b",
+                "label": "1 out of 6"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The favorable counts match. The smaller total is the larger chance."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "1 out of 2 is the larger chance."
+        },
+        {
+          "id": "ten",
+          "prompt": "Bag A: 2 red out of 4. Set A's red chance out of 10.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 5,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "2 out of 4 is half of 10. Move up.",
+            "too_high": "2 out of 4 is not more than half. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "2 out of 4 is half."
+        },
+        {
+          "id": "six",
+          "prompt": "3 out of 6, or 1 out of 6. Which is more likely?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "3 out of 6"
+              },
+              {
+                "id": "b",
+                "label": "1 out of 6"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The totals match here. 3 favorable beats 1."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Same total, more favorable."
+        },
+        {
+          "id": "compare",
+          "prompt": "A bigger bag is not automatically more likely. You compare...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Favorable divided by possible"
+              },
+              {
+                "id": "b",
+                "label": "Only the bag size"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Bag size alone ignores how many are favorable."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Compare the fractions."
+        },
+        {
+          "id": "two",
+          "prompt": "2 out of 3, or 3 out of 6. Which is more likely?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "2 out of 3"
+              },
+              {
+                "id": "b",
+                "label": "3 out of 6"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "3 out of 6 is half. 2 out of 3 is more than half."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "2 out of 3 is the larger chance."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A bigger bag is not automatically more likely."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000054",
+      "skillNodeId": "20000000-0000-4000-8000-000000000024",
+      "title": "Bigger count",
+      "version": 1,
+      "screens": [
+        {
+          "id": "trap",
+          "prompt": "3 out of 4, or 5 out of 8. Which is more likely?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "3 out of 4"
+              },
+              {
+                "id": "b",
+                "label": "5 out of 8"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "5 is the bigger count, but 5 out of 8 is the smaller chance."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "3 out of 4 wins."
+        },
+        {
+          "id": "why",
+          "prompt": "Why does 5 out of 8 lose?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Its possible count grew faster than its favorable count"
+              },
+              {
+                "id": "b",
+                "label": "5 is smaller than 3"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "5 is larger than 3. The total grew more than the favorable count."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The fraction shrank."
+        },
+        {
+          "id": "eighths",
+          "prompt": "3 out of 4 is how many out of 8?",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 6,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "3 out of 4 is more than half of 8. Move up.",
+            "too_high": "3 out of 4 is not that many eighths. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "6 out of 8 matches 3 out of 4."
+        },
+        {
+          "id": "third",
+          "prompt": "1 out of 3, or 3 out of 10. Which is more likely?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "1 out of 3"
+              },
+              {
+                "id": "b",
+                "label": "3 out of 10"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "3 is the bigger count. 3 out of 10 is still the smaller chance."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "1 out of 3 wins."
+        },
+        {
+          "id": "winner",
+          "prompt": "You compare chances, not raw counts. The winner is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The larger fraction"
+              },
+              {
+                "id": "b",
+                "label": "The larger favorable count"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The larger favorable count can sit in a larger total and lose."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The larger fraction wins."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A bigger favorable count can still be the smaller chance."
+    }
+  ]
+}

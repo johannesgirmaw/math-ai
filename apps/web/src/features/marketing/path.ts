@@ -26,6 +26,22 @@ export const seedPathTitles = [
   "Two warps",
   "Eigen direction",
   "Teach Pip",
+  "Rise and run",
+  "Sign of a slope",
+  "Steeper",
+  "Rate",
+  "Tiny step",
+  "Hilltop",
+  "Accumulation",
+  "Downhill step",
+  "Outcomes",
+  "Size of a chance",
+  "Sure and impossible",
+  "The other way",
+  "More likely",
+  "Balance point",
+  "Spread",
+  "A new clue",
 ];
 
 export async function getPublicPathTitles() {

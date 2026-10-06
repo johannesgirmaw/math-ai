@@ -1,0 +1,253 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-00000000001d",
+    "worldId": "10000000-0000-4000-8000-000000000003",
+    "slug": "hilltop",
+    "title": "Hilltop",
+    "promise": "You can find where the slope goes flat.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000001c"
+    ],
+    "sortOrder": 28,
+    "pipAbility": "Pip can find a flat top.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000044",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001d",
+      "title": "Flat on top",
+      "version": 1,
+      "screens": [
+        {
+          "id": "top",
+          "prompt": "At the top, the next tiny step is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Flat"
+              },
+              {
+                "id": "b",
+                "label": "Still climbing"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Still climbing means you have not reached the top."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The step at the top is flat."
+        },
+        {
+          "id": "zero",
+          "prompt": "The step at the top does not rise or fall. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": 0,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "A flat step is not negative. The slope is zero.",
+            "too_high": "A flat step is not positive. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Slope zero, for this one step."
+        },
+        {
+          "id": "right",
+          "prompt": "Left of the top, the slope is positive. Right of the top, the slope is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Negative"
+              },
+              {
+                "id": "b",
+                "label": "Still positive"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Past the top, the path falls. The slope changes sign."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Right of the top, the slope is negative."
+        },
+        {
+          "id": "flat",
+          "prompt": "At the top, drag a flat step onto the mark.",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 3,
+              "y": 6
+            },
+            "targetTip": {
+              "x": 7,
+              "y": 6
+            },
+            "tolerance": 0.8
+          },
+          "feedback": {
+            "wrong_direction": "The step at the top stays level.",
+            "wrong_length": "The aim is right. The rise is zero."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "A flat step on the top."
+        },
+        {
+          "id": "train",
+          "prompt": "A training step at a flat top...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Shrinks toward nothing"
+              },
+              {
+                "id": "b",
+                "label": "Keeps a large climb"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "There is no climb left to follow. The step shrinks."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A flat top quiets the step."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A flat top is where a training step shrinks toward nothing."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000045",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001d",
+      "title": "Not the top",
+      "version": 1,
+      "screens": [
+        {
+          "id": "shelf",
+          "prompt": "A path climbs, goes flat for one step, then climbs again. That flat step is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Not the top"
+              },
+              {
+                "id": "b",
+                "label": "The top, because the slope is zero"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The climb continues after the flat step. The top is still ahead."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A shelf in a climb is not the top."
+        },
+        {
+          "id": "true",
+          "prompt": "The true top is where...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The slope changes from up to down"
+              },
+              {
+                "id": "b",
+                "label": "The slope is zero for any reason"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Zero in the middle of a climb is a shelf, not a top."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Up, then down, marks the top."
+        },
+        {
+          "id": "left",
+          "prompt": "Just left of the top: rise 6, run 2. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "6 over 2 is higher. Move up.",
+            "too_high": "6 over 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Left of the top, the slope is positive."
+        },
+        {
+          "id": "right",
+          "prompt": "Just right of the top: fall 6, run 2. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": -3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "A fall of 6 over 2 is lower. Move down.",
+            "too_high": "That is past the fall. Move toward zero."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "Right of the top, the slope is negative."
+        },
+        {
+          "id": "keep",
+          "prompt": "You found a flat step in the middle of a climb. You should...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Keep going, the top is still ahead"
+              },
+              {
+                "id": "b",
+                "label": "Stop, every flat step is the top"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The next piece still climbs. This flat step is not the top."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "A shelf is not a reason to stop."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A zero slope is the top only when the sides point opposite ways."
+    }
+  ]
+}

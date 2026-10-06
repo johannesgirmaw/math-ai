@@ -77,6 +77,7 @@ export function drag(
   correctMessage: string,
   guide?: { start: [number, number]; tip: [number, number] },
   score?: "positive" | "zero" | "negative",
+  showTarget = true,
 ): Screen {
   const [sx, sy] = start;
   const [tx, ty] = tip;
@@ -97,6 +98,7 @@ export function drag(
           }
         : {}),
       ...(score ? { score } : {}),
+      ...(showTarget ? {} : { showTarget: false }),
     },
     feedback: {
       wrong_direction: must(wrongDirection, 160, `${id} direction`),
@@ -171,7 +173,7 @@ export type SkillDraft = {
   title: string;
   promise: string;
   pipAbility: string;
-  world: "space" | "vectors";
+  world: "space" | "vectors" | "change" | "chance";
   lessons: LessonDraft[];
 };
 
@@ -180,7 +182,7 @@ export function skill(
   title: string,
   promise: string,
   pipAbility: string,
-  world: "space" | "vectors",
+  world: "space" | "vectors" | "change" | "chance",
   lessons: LessonDraft[],
 ): SkillDraft {
   return {

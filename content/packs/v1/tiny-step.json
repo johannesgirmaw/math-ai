@@ -1,0 +1,394 @@
+{
+  "skill": {
+    "id": "20000000-0000-4000-8000-00000000001c",
+    "worldId": "10000000-0000-4000-8000-000000000003",
+    "slug": "tiny-step",
+    "title": "Tiny step",
+    "promise": "You can read the slope where you stand.",
+    "prereqIds": [
+      "20000000-0000-4000-8000-00000000001b"
+    ],
+    "sortOrder": 27,
+    "pipAbility": "Pip can read a local slope.",
+    "status": "published"
+  },
+  "lessons": [
+    {
+      "id": "30000000-0000-4000-8000-000000000041",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001c",
+      "title": "Straight hill",
+      "version": 1,
+      "screens": [
+        {
+          "id": "match",
+          "prompt": "A hill rises 4 over run 4. A small step rises 1 over run 1. The slopes...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Match"
+              },
+              {
+                "id": "b",
+                "label": "Differ"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "Both are 1. On a straight hill the small step copies the hill."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The tiny step matches the hill."
+        },
+        {
+          "id": "whole",
+          "prompt": "The whole hill: rise 6, run 3. Set the slope.",
+          "primitive": {
+            "type": "slider",
+            "min": 0,
+            "max": 10,
+            "step": 1,
+            "correctValue": 2,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "6 over 3 is higher. Move up.",
+            "too_high": "6 over 3 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The hill's slope is 2."
+        },
+        {
+          "id": "small",
+          "prompt": "A small step on that hill rises 2 over run 1. Its slope is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "2"
+              },
+              {
+                "id": "b",
+                "label": "6"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "6 was the whole rise. The small step is 2 over 1."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The small step copies the slope."
+        },
+        {
+          "id": "copies",
+          "prompt": "On a straight hill, the tiny step...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Copies the hill's slope"
+              },
+              {
+                "id": "b",
+                "label": "Has slope zero"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "A straight hill has the same slope everywhere on it."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The tiny step agrees with the hill."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw that small step: run 2, rise 2, from (3, 3).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 3,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 5,
+              "y": 5
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "The small step climbs with the hill.",
+            "wrong_length": "The run is 2 and the rise is 2."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "The small step has the hill's slope."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "On a straight slope, one small step matches the whole hill."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000042",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001c",
+      "title": "At this spot",
+      "version": 1,
+      "screens": [
+        {
+          "id": "which",
+          "prompt": "The path climbs, then falls. The slope at the start is the slope of...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The first small piece"
+              },
+              {
+                "id": "b",
+                "label": "The whole path, start to end"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The whole path mixes the climb and the fall. You stand on the first piece."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Use the slope under your feet."
+        },
+        {
+          "id": "sign",
+          "prompt": "The first piece rises. The path ends lower. The slope at the start is...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Positive"
+              },
+              {
+                "id": "b",
+                "label": "Negative"
+              }
+            ],
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 4,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 3
+                }
+              }
+            ]
+          },
+          "feedback": {
+            "wrong_option": "The ending is lower, but you are still on the rising piece."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "The local slope is positive."
+        },
+        {
+          "id": "local",
+          "prompt": "First piece: rise 6, run 2. Set the local slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "6 over 2 is higher. Move up.",
+            "too_high": "6 over 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The local slope is the first piece."
+        },
+        {
+          "id": "average",
+          "prompt": "The whole trip starts and ends at the same height. Set the average slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": 0,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "No net climb is not a negative slope. The average is zero.",
+            "too_high": "No net climb. Move down to zero."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The average can be zero while the start still climbs."
+        },
+        {
+          "id": "disagree",
+          "prompt": "The local slope and the average slope...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "Can disagree"
+              },
+              {
+                "id": "b",
+                "label": "Must match"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The start can climb while the whole trip ends where it began."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Local and average can disagree."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "A derivative is the slope of a tiny step, not of the whole trip."
+    },
+    {
+      "id": "30000000-0000-4000-8000-000000000043",
+      "skillNodeId": "20000000-0000-4000-8000-00000000001c",
+      "title": "Hill then valley",
+      "version": 1,
+      "screens": [
+        {
+          "id": "trust",
+          "prompt": "You stand on the rising side. The valley is ahead. Your next step uses...",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The rising slope under you"
+              },
+              {
+                "id": "b",
+                "label": "The slope from the hilltop to the valley floor"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The valley is ahead. The step uses the slope where you stand."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Use the local slope."
+        },
+        {
+          "id": "local",
+          "prompt": "Under you: rise 6, run 2. Set the local slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": 3,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "6 over 2 is higher. Move up.",
+            "too_high": "6 over 2 is lower. Move down."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The ground under you still climbs."
+        },
+        {
+          "id": "net",
+          "prompt": "The path rises 2, then falls 6, over a total run of 4. Set the average slope.",
+          "primitive": {
+            "type": "slider",
+            "min": -5,
+            "max": 5,
+            "step": 1,
+            "correctValue": -1,
+            "tolerance": 0
+          },
+          "feedback": {
+            "too_low": "The net change is a fall. Move down.",
+            "too_high": "The fall is spread over the whole run. Move toward zero."
+          },
+          "easyWithinMs": 10000,
+          "correctMessage": "The average falls. The start still climbed."
+        },
+        {
+          "id": "which",
+          "prompt": "Which slope should the step trust?",
+          "primitive": {
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "The local slope"
+              },
+              {
+                "id": "b",
+                "label": "The average slope"
+              }
+            ],
+            "correctOptionId": "a"
+          },
+          "feedback": {
+            "wrong_option": "The average includes ground you have not reached."
+          },
+          "easyWithinMs": 8000,
+          "correctMessage": "Trust the slope where you stand."
+        },
+        {
+          "id": "draw",
+          "prompt": "Draw the local uphill step: run 1, rise 2, from (2, 3).",
+          "primitive": {
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 2,
+              "y": 3
+            },
+            "targetTip": {
+              "x": 3,
+              "y": 5
+            },
+            "tolerance": 0.8,
+            "showTarget": false
+          },
+          "feedback": {
+            "wrong_direction": "The local step still climbs, even if a valley is ahead.",
+            "wrong_length": "The run is 1 and the rise is 2."
+          },
+          "easyWithinMs": 12000,
+          "correctMessage": "That is the slope under you."
+        }
+      ],
+      "capstone": false,
+      "whyItMatters": "Training looks at the slope where you stand."
+    }
+  ]
+}

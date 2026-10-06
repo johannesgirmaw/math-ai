@@ -120,21 +120,21 @@
         },
         {
           "id": "high",
-          "prompt": "The matching pattern scores higher. Set 8.",
+          "prompt": "(2, 0) dot (3, 0) for the match. Set the score.",
           "primitive": {
             "type": "slider",
             "min": 0,
             "max": 10,
             "step": 1,
-            "correctValue": 8,
+            "correctValue": 6,
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "A match scores high. Move up.",
-            "too_high": "8 is the high mark here. Move down a little."
+            "too_low": "The runs multiply. Move up.",
+            "too_high": "The second places are zero. Move down."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "The match scores higher."
+          "correctMessage": "The match scores the product of the runs."
         },
         {
           "id": "low",
@@ -151,31 +151,7 @@
                 "label": "Match"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 5
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 5
-                }
-              },
-              {
-                "start": {
-                  "x": 7,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 2,
-                  "y": 3
-                },
-                "guide": true
-              }
-            ],
-            "score": "negative"
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "A match scores high. A low score means they point apart."
@@ -185,47 +161,23 @@
         },
         {
           "id": "tool",
-          "prompt": "Pip compares the patterns with a...",
+          "prompt": "Pip compares the patterns with...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "Dot product"
+                "label": "A dot product"
               },
               {
                 "id": "b",
-                "label": "Coin flip"
+                "label": "The order they were drawn"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 4
-                }
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 6
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 7
-                },
-                "guide": true
-              }
-            ],
-            "score": "positive"
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The comparison is the agreement score, the dot product."
+            "wrong_option": "Drawing order is not a score. The comparison is the dot product."
           },
           "easyWithinMs": 8000,
           "correctMessage": "The dot product is the comparison."
@@ -255,40 +207,7 @@
                 "label": "B"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 5
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 5
-                }
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 7
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 7
-                },
-                "guide": true
-              },
-              {
-                "start": {
-                  "x": 5,
-                  "y": 2
-                },
-                "tip": {
-                  "x": 5,
-                  "y": 6
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "Perpendicular scores zero. The agreeing pattern scores higher."
@@ -298,20 +217,25 @@
         },
         {
           "id": "zero",
-          "prompt": "Set the agreement of the perpendicular pattern.",
+          "prompt": "The perpendicular pattern scores...",
           "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 0,
-            "tolerance": 0
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "0"
+              },
+              {
+                "id": "b",
+                "label": "A high positive number"
+              }
+            ],
+            "correctOptionId": "a"
           },
           "feedback": {
-            "too_low": "A right angle does not score below zero here. The score is zero.",
-            "too_high": "A right angle scores zero. Move down."
+            "wrong_option": "A right angle shares no direction, so the score is 0."
           },
-          "easyWithinMs": 10000,
+          "easyWithinMs": 8000,
           "correctMessage": "Perpendicular agreement is 0."
         },
         {
@@ -329,31 +253,7 @@
                 "label": "Drawn nearer on the page"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 4
-                }
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 6
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 7
-                },
-                "guide": true
-              }
-            ],
-            "score": "positive"
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "The page position is not the score. Agreement is."
@@ -363,7 +263,7 @@
         },
         {
           "id": "aim",
-          "prompt": "Aim at the matching pattern, to the right.",
+          "prompt": "Aim with the matching pattern: 4 right from (2, 3).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -373,21 +273,22 @@
               "y": 3
             },
             "targetTip": {
-              "x": 8,
+              "x": 6,
               "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The matching pattern sits to the right.",
-            "wrong_length": "The aim is right. Reach the mark."
+            "wrong_length": "The aim is right. The run is 4."
           },
           "easyWithinMs": 12000,
           "correctMessage": "You aimed at the match."
         },
         {
           "id": "store",
-          "prompt": "You did not store a photo. You stored...",
+          "prompt": "The match you keep is...",
           "primitive": {
             "type": "choice",
             "options": [
@@ -397,26 +298,13 @@
               },
               {
                 "id": "b",
-                "label": "A filename"
+                "label": "Whichever pattern was drawn first"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 4
-                },
-                "tip": {
-                  "x": 7,
-                  "y": 5
-                }
-              }
-            ],
-            "score": "positive"
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The match is a number, the agreement."
+            "wrong_option": "The first drawing is not the winner. The agreement is."
           },
           "easyWithinMs": 8000,
           "correctMessage": "The match is a score."
@@ -433,68 +321,53 @@
       "screens": [
         {
           "id": "winner",
-          "prompt": "Scores are 1, 5, and 0. Pip keeps...",
+          "prompt": "Scores are 1, 6, and 0. Pip keeps...",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "The score of 5"
+                "label": "The score of 6"
               },
               {
                 "id": "b",
+                "label": "The score of 1"
+              },
+              {
+                "id": "c",
                 "label": "The score of 0"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 5
-                },
-                "tip": {
-                  "x": 8,
-                  "y": 6
-                }
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 4,
-                  "y": 3
-                },
-                "guide": true
-              }
-            ],
-            "score": "positive"
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "5 agrees more than 1 or 0."
+            "wrong_option": "6 agrees more than 1 or 0."
           },
           "easyWithinMs": 8000,
           "correctMessage": "The highest score wins."
         },
         {
           "id": "five",
-          "prompt": "Set that winning score.",
+          "prompt": "A score of 2 and a score of 5. The winner is...",
           "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 5,
-            "tolerance": 0
+            "type": "choice",
+            "options": [
+              {
+                "id": "a",
+                "label": "5"
+              },
+              {
+                "id": "b",
+                "label": "2"
+              }
+            ],
+            "correctOptionId": "a"
           },
           "feedback": {
-            "too_low": "The winner is higher. Move up.",
-            "too_high": "The winner is lower. Move down."
+            "wrong_option": "5 agrees more than 2."
           },
-          "easyWithinMs": 10000,
-          "correctMessage": "The winner is 5."
+          "easyWithinMs": 8000,
+          "correctMessage": "The higher score wins."
         },
         {
           "id": "tie",
@@ -508,37 +381,13 @@
               },
               {
                 "id": "b",
-                "label": "Cancel the lesson"
+                "label": "The left one wins anyway"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 6,
-                  "y": 4
-                }
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 6
-                },
-                "tip": {
-                  "x": 6,
-                  "y": 7
-                },
-                "guide": true
-              }
-            ],
-            "score": "positive"
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "A tie means the agreements match. Nothing is cancelled."
+            "wrong_option": "A tie means the agreements match. Place on the page is not the score."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Equal scores, equal agreement."
@@ -601,31 +450,7 @@
                 "label": "Keep every pattern equally"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 5
-                },
-                "tip": {
-                  "x": 8,
-                  "y": 6
-                }
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 2
-                },
-                "tip": {
-                  "x": 4,
-                  "y": 2
-                },
-                "guide": true
-              }
-            ],
-            "score": "positive"
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "Equal keeping ignores the score you just computed."

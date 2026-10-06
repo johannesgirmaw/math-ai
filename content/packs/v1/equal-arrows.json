@@ -34,30 +34,7 @@
                 "label": "Different because the tails differ"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 1,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 4,
-                  "y": 3
-                }
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 6
-                },
-                "tip": {
-                  "x": 5,
-                  "y": 6
-                },
-                "guide": true
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "The tails can sit anywhere. The shared move is what matches."
@@ -67,7 +44,7 @@
         },
         {
           "id": "rise",
-          "prompt": "Both arrows rise 4. Set that shared rise.",
+          "prompt": "Both arrows rise the same amount. One rises from 1 to 5. Set the shared rise.",
           "primitive": {
             "type": "slider",
             "min": 0,
@@ -77,15 +54,15 @@
             "tolerance": 0
           },
           "feedback": {
-            "too_low": "The shared rise is higher. Move up.",
-            "too_high": "The shared rise is lower. Move down."
+            "too_low": "The shared rise is the change, and it is larger. Move up.",
+            "too_high": "The shared rise is the change, and it is smaller. Move down."
           },
           "easyWithinMs": 10000,
           "correctMessage": "Equal arrows share this rise."
         },
         {
           "id": "copy",
-          "prompt": "Match the move: 4 right and 2 up. Start at (1, 1).",
+          "prompt": "Match the move of 3 right and 2 up. Start at (1, 1).",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -95,14 +72,15 @@
               "y": 1
             },
             "targetTip": {
-              "x": 5,
+              "x": 4,
               "y": 3
             },
-            "tolerance": 0.8
+            "tolerance": 0.8,
+            "showTarget": false
           },
           "feedback": {
             "wrong_direction": "The move goes right and a little up.",
-            "wrong_length": "The direction matches. The move is 4 right and 2 up."
+            "wrong_length": "The direction matches. The run is 3 and the rise is 2."
           },
           "easyWithinMs": 12000,
           "correctMessage": "That displacement matches the other arrow."
@@ -119,36 +97,13 @@
               },
               {
                 "id": "b",
-                "label": "Unrelated pictures"
+                "label": "Different features, because they start apart"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 1,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 4,
-                  "y": 3
-                }
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 6
-                },
-                "tip": {
-                  "x": 5,
-                  "y": 6
-                },
-                "guide": true
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
-            "wrong_option": "The start point can change. The move is the feature."
+            "wrong_option": "The start can change. The move is the feature."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Same displacement, same feature."
@@ -165,32 +120,10 @@
               },
               {
                 "id": "b",
-                "label": "Yes"
+                "label": "Yes, they share the run"
               }
             ],
-            "correctOptionId": "a",
-            "arrows": [
-              {
-                "start": {
-                  "x": 2,
-                  "y": 3
-                },
-                "tip": {
-                  "x": 6,
-                  "y": 3
-                }
-              },
-              {
-                "start": {
-                  "x": 2,
-                  "y": 6
-                },
-                "tip": {
-                  "x": 6,
-                  "y": 8
-                }
-              }
-            ]
+            "correctOptionId": "a"
           },
           "feedback": {
             "wrong_option": "They share the run, but B also rises. The moves differ."

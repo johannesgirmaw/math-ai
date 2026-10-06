@@ -55,6 +55,22 @@ const lessonCounts: Record<string, number> = {
   "two-warps": 3,
   "eigen-direction": 3,
   "pip-capstone": 1,
+  "rise-run": 3,
+  "slope-sign": 3,
+  steeper: 2,
+  rate: 2,
+  "tiny-step": 3,
+  hilltop: 2,
+  accumulation: 2,
+  "downhill-step": 1,
+  outcomes: 2,
+  "chance-size": 3,
+  "sure-and-none": 2,
+  "the-other-way": 2,
+  "more-likely": 3,
+  "balance-point": 3,
+  spread: 2,
+  "new-clue": 1,
 };
 
 const matrixSlugs = new Set(["matrix-numbers", "matrix-vector", "drawing-stretch", "two-warps", "eigen-direction"]);
@@ -62,6 +78,14 @@ const matrixSlugs = new Set(["matrix-numbers", "matrix-vector", "drawing-stretch
 function forbid(text: string, where: string, problems: string[]) {
   if (text.includes("!")) problems.push(`${where} contains an exclamation mark`);
   if (/incorrect/i.test(text)) problems.push(`${where} says Incorrect`);
+}
+
+const nonsenseOption = /\b(color|photo|coin|label)\b/i;
+
+function promptStatesValue(prompt: string, value: number) {
+  const rendered = String(value);
+  const escaped = rendered.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`(?<![\\d.])${escaped}(?![\\d.])`).test(prompt);
 }
 
 export function validateLoadedPack(loaded = loadV1Files()) {
@@ -100,6 +124,16 @@ export function validateLoadedPack(loaded = loadV1Files()) {
       screenIds.add(screen.id);
       forbid(screen.prompt, `${lesson.title}/${screen.id} prompt`, problems);
       forbid(screen.correctMessage, `${lesson.title}/${screen.id} correct`, problems);
+      if (screen.primitive.type === "slider" && promptStatesValue(screen.prompt, screen.primitive.correctValue)) {
+        problems.push(`${lesson.title}/${screen.id} states the slider answer`);
+      }
+      if (screen.primitive.type === "choice") {
+        for (const option of screen.primitive.options) {
+          if (nonsenseOption.test(option.label)) {
+            problems.push(`${lesson.title}/${screen.id} uses a nonsense option: ${option.label}`);
+          }
+        }
+      }
       for (const [code, message] of Object.entries(screen.feedback)) {
         forbid(message, `${lesson.title}/${screen.id}/${code}`, problems);
       }
@@ -134,6 +168,26 @@ export function validateLoadedPack(loaded = loadV1Files()) {
     "eigen-direction",
     "pip-capstone",
   ];
+  const changeOrder = [
+    "rise-run",
+    "slope-sign",
+    "steeper",
+    "rate",
+    "tiny-step",
+    "hilltop",
+    "accumulation",
+    "downhill-step",
+  ];
+  const chanceOrder = [
+    "outcomes",
+    "chance-size",
+    "sure-and-none",
+    "the-other-way",
+    "more-likely",
+    "balance-point",
+    "spread",
+    "new-clue",
+  ];
 
   const chain = (order: string[], firstExtra: string[] | null) => {
     order.forEach((slug, index) => {
@@ -149,6 +203,8 @@ export function validateLoadedPack(loaded = loadV1Files()) {
   };
   chain(spaceOrder, []);
   chain(vectorOrder, [bySlug.get("pip-checkpoint")?.id].filter((id): id is string => Boolean(id)));
+  chain(changeOrder, [bySlug.get("pip-capstone")?.id].filter((id): id is string => Boolean(id)));
+  chain(chanceOrder, [bySlug.get("downhill-step")?.id].filter((id): id is string => Boolean(id)));
 
   const spaceIds = new Set(spaceOrder.map((slug) => bySlug.get(slug)?.id));
   const dragCount = lessons
@@ -195,6 +251,12 @@ export function validateLoadedPack(loaded = loadV1Files()) {
   const capstone = lessons.filter((lesson) => lesson.skillNodeId === bySlug.get("pip-capstone")?.id);
   if (capstone.length !== 1 || capstone[0]?.screens.length !== 8 || !capstone[0]?.capstone) {
     problems.push("pip-capstone needs one 8-screen lesson marked capstone");
+  }
+  for (const slug of ["downhill-step", "new-clue"]) {
+    const lessonsForSkill = lessons.filter((lesson) => lesson.skillNodeId === bySlug.get(slug)?.id);
+    if (lessonsForSkill.length !== 1 || lessonsForSkill[0]?.screens.length !== 8 || !lessonsForSkill[0]?.capstone) {
+      problems.push(`${slug} needs one 8-screen lesson marked capstone`);
+    }
   }
 
   try {
