@@ -167,11 +167,14 @@ function PrimitiveFields({ screen, onChange }: { screen: Screen; onChange: (scre
       </>
     );
   }
-  return (
-    <p className="text-sm text-muted-foreground">
-      Pairs: {primitive.pairs.map((pair) => `${pair.leftId} → ${pair.rightId}`).join(", ")}. Edit labels in the JSON pane.
-    </p>
-  );
+  if (primitive.type === "match") {
+    return (
+      <p className="text-sm text-muted-foreground">
+        Pairs: {primitive.pairs.map((pair) => `${pair.leftId} → ${pair.rightId}`).join(", ")}. Edit labels in the JSON pane.
+      </p>
+    );
+  }
+  return <p className="text-sm text-muted-foreground">This toy is edited in the lesson source.</p>;
 }
 
 export function LessonEditor({ initial }: { initial: Lesson }) {

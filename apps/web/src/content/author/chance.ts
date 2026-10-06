@@ -1,4 +1,4 @@
-import { choice, lesson, skill, slider, type SkillDraft } from "./helpers";
+import { bagCount, bagPick, bagSelect, beamBalance, beamPick, choice, lesson, skill, slider, type SkillDraft } from "./helpers";
 
 export const chanceSkills: SkillDraft[] = [
   skill(
@@ -76,16 +76,19 @@ export const chanceSkills: SkillDraft[] = [
           "Results with one head are different outcomes. Both heads is one of them.",
           "Both heads is a single outcome.",
         ),
-        choice(
+        bagSelect(
           "more",
-          "Which can happen in more ways?",
+          "Tap every landing that is exactly one head.",
           [
-            ["a", "Exactly one head"],
-            ["b", "Both heads"],
+            ["hh", "HH"],
+            ["ht", "HT"],
+            ["th", "TH"],
+            ["tt", "TT"],
           ],
-          "a",
-          "Both heads is only one listing. Exactly one head has two listings.",
-          "One head has more ways.",
+          ["ht", "th"],
+          "Tap both one-head landings.",
+          "HH is both heads. TT has none.",
+          "Exactly one head has two landings.",
         ),
         slider(
           "four",
@@ -141,15 +144,15 @@ export const chanceSkills: SkillDraft[] = [
           "2 out of 1 swaps the counts. Favorable comes first.",
           "Favorable out of possible.",
         ),
-        slider(
+        bagCount(
           "scale",
-          "1 favorable out of 2. Set that chance out of 10.",
-          0,
-          10,
-          5,
-          "Half of 10 is higher. Move up.",
-          "Half of 10 is lower. Move down.",
-          "1 out of 2 is half.",
+          "Count the red chips in the bag.",
+          ["R", "R", "B", "B"],
+          "R",
+          2,
+          "More chips are red. Count higher.",
+          "Fewer chips are red. Count lower.",
+          "Two of the four chips are red.",
         ),
         choice(
           "more",
@@ -660,16 +663,17 @@ export const chanceSkills: SkillDraft[] = [
         ),
       ]),
       lesson("Bigger count", "A bigger favorable count can still be the smaller chance.", [
-        choice(
+        bagPick(
           "trap",
-          "3 out of 4, or 5 out of 8. Which is more likely?",
+          "Tap the bag that spills red more often.",
           [
-            ["a", "3 out of 4"],
-            ["b", "5 out of 8"],
+            ["few", ["R", "R", "R", "B"]],
+            ["many", ["R", "R", "R", "R", "R", "B", "B", "B"]],
           ],
-          "a",
-          "5 is the bigger count, but 5 out of 8 is the smaller chance.",
-          "3 out of 4 wins.",
+          "R",
+          "few",
+          "Five red looks bigger. Three out of four spills red more often.",
+          "The smaller bag is the more likely one.",
         ),
         choice(
           "why",
@@ -725,15 +729,13 @@ export const chanceSkills: SkillDraft[] = [
     "chance",
     [
       lesson("A level set", "An average is the balance point of a batch of scores.", [
-        choice(
+        beamBalance(
           "level",
-          "The numbers 4, 4, and 4 balance at...",
-          [
-            ["a", "4"],
-            ["b", "12"],
-          ],
-          "a",
-          "12 adds them and forgets to share. The balance is 4.",
+          "Slide the fulcrum until the beam sits still.",
+          [4, 4, 4],
+          4,
+          "The fulcrum is left of the balance. Move higher.",
+          "The fulcrum is right of the balance. Move lower.",
           "A level set balances at the repeated number.",
         ),
         slider(
@@ -902,16 +904,16 @@ export const chanceSkills: SkillDraft[] = [
     "chance",
     [
       lesson("Same mean", "Two batches can share a mean and still differ in spread.", [
-        choice(
+        beamPick(
           "match",
-          "Batch A is 4, 4, 4. Batch B is 0, 4, 8. The means...",
+          "Tap the beam that jitters.",
           [
-            ["a", "Match"],
-            ["b", "Differ"],
+            ["tight", [4, 4, 4]],
+            ["wide", [0, 4, 8]],
           ],
-          "a",
-          "B is spread out, but 0, 4, and 8 still balance at 4.",
-          "Same mean, different spread.",
+          "wide",
+          "The tight beam sits still. The wide one jitters.",
+          "Same mean, and the wide beam is the jittery one.",
         ),
         slider(
           "odd",
@@ -1047,16 +1049,17 @@ export const chanceSkills: SkillDraft[] = [
             "Red is not every chip. Move down.",
             "Four chips are red.",
           ),
-          choice(
+          bagPick(
             "red",
-            "You draw a red chip. Which bag becomes more likely?",
+            "A red chip lands. Tap the bag it fits.",
             [
-              ["a", "Bag A"],
-              ["b", "Bag B"],
+              ["a", ["R", "R", "R", "R", "B"]],
+              ["b", ["R", "B", "B", "B", "B"]],
             ],
+            "R",
             "a",
-            "A red chip fits Bag A better. Bag B is mostly blue.",
-            "The red clue raises Bag A.",
+            "Bag B is mostly blue. Red fits bag A.",
+            "The red clue raises bag A.",
           ),
           choice(
             "raises",

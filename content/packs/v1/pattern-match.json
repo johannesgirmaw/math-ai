@@ -263,11 +263,9 @@
         },
         {
           "id": "aim",
-          "prompt": "Aim with the matching pattern: 4 right from (2, 3).",
+          "prompt": "Aim with the gray pattern until the glow is green.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "meter",
             "start": {
               "x": 2,
               "y": 3
@@ -277,11 +275,19 @@
               "y": 3
             },
             "tolerance": 0.8,
-            "showTarget": false
+            "guideStart": {
+              "x": 2,
+              "y": 6
+            },
+            "guideTip": {
+              "x": 6,
+              "y": 6
+            },
+            "band": "positive"
           },
           "feedback": {
-            "wrong_direction": "The matching pattern sits to the right.",
-            "wrong_length": "The aim is right. The run is 4."
+            "wrong_direction": "The matching pattern points right.",
+            "wrong_length": "The glow is green. Stretch to the mark."
           },
           "easyWithinMs": 12000,
           "correctMessage": "You aimed at the match."

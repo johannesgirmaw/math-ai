@@ -79,12 +79,75 @@ export const matchPrimitiveSchema = z.object({
   pairs: z.array(z.object({ leftId: z.string(), rightId: z.string() })).min(1),
 });
 
+export const meterPrimitiveSchema = z.object({
+  type: z.literal("meter"),
+  start: pointSchema,
+  targetTip: pointSchema,
+  tolerance: z.number().positive(),
+  guideStart: pointSchema,
+  guideTip: pointSchema,
+  band: z.enum(["positive", "zero", "negative"]),
+});
+
+export const sheetPrimitiveSchema = z.object({
+  type: z.literal("sheet"),
+  target: z.tuple([z.number(), z.number(), z.number(), z.number()]),
+  initial: z.tuple([z.number(), z.number(), z.number(), z.number()]),
+  tolerance: z.number().positive(),
+  showGhost: z.boolean().optional(),
+});
+
+export const hillPrimitiveSchema = z.object({
+  type: z.literal("hill"),
+  start: pointSchema,
+  slope: z.number(),
+  correctRun: z.number(),
+  correctRise: z.number(),
+  tolerance: z.number().positive(),
+});
+
+const bagSideSchema = z.object({
+  id: z.string().min(1),
+  chips: z.array(z.string().min(1)).min(1),
+});
+
+export const bagPrimitiveSchema = z.object({
+  type: z.literal("bag"),
+  task: z.enum(["pick", "count", "select"]),
+  bags: z.array(bagSideSchema).max(2).optional(),
+  face: z.string().optional(),
+  correctBagId: z.string().optional(),
+  correctCount: z.number().int().nonnegative().optional(),
+  options: z.array(optionSchema).max(6).optional(),
+  correctIds: z.array(z.string()).optional(),
+});
+
+const beamSideSchema = z.object({
+  id: z.string().min(1),
+  blocks: z.array(z.number()).min(1),
+});
+
+export const beamPrimitiveSchema = z.object({
+  type: z.literal("beam"),
+  task: z.enum(["balance", "pick"]),
+  blocks: z.array(z.number()).optional(),
+  correctFulcrum: z.number().optional(),
+  tolerance: z.number().positive().optional(),
+  beams: z.array(beamSideSchema).max(2).optional(),
+  correctId: z.string().optional(),
+});
+
 export const primitiveSchema = z.discriminatedUnion("type", [
   choicePrimitiveSchema,
   sliderPrimitiveSchema,
   dragArrowPrimitiveSchema,
   matrixWarpPrimitiveSchema,
   matchPrimitiveSchema,
+  meterPrimitiveSchema,
+  sheetPrimitiveSchema,
+  hillPrimitiveSchema,
+  bagPrimitiveSchema,
+  beamPrimitiveSchema,
 ]);
 
 const requiredErrors: Record<string, string[]> = {
@@ -93,6 +156,11 @@ const requiredErrors: Record<string, string[]> = {
   dragArrow: ["wrong_direction", "wrong_length"],
   matrixWarp: ["wrong_cell"],
   match: ["incomplete", "wrong_pair"],
+  meter: ["wrong_direction", "wrong_length"],
+  sheet: ["wrong_cell"],
+  hill: ["wrong_direction", "wrong_length"],
+  bag: [],
+  beam: [],
 };
 
 export const screenSchema = z
@@ -140,6 +208,35 @@ export const screenSchema = z
           message: "correctOptionId is not an option",
           path: ["primitive", "correctOptionId"],
         });
+      }
+    }
+    if (screen.primitive.type === "bag") {
+      const taskKeys =
+        screen.primitive.task === "pick"
+          ? ["wrong_bag"]
+          : screen.primitive.task === "count"
+            ? ["too_low", "too_high"]
+            : ["incomplete", "wrong_chip"];
+      for (const code of taskKeys) {
+        if (!screen.feedback[code]) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `Missing feedback for ${code}`,
+            path: ["feedback", code],
+          });
+        }
+      }
+    }
+    if (screen.primitive.type === "beam") {
+      const taskKeys = screen.primitive.task === "balance" ? ["too_low", "too_high"] : ["wrong_beam"];
+      for (const code of taskKeys) {
+        if (!screen.feedback[code]) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: `Missing feedback for ${code}`,
+            path: ["feedback", code],
+          });
+        }
       }
     }
   });

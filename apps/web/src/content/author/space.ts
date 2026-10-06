@@ -11,7 +11,7 @@ export const spaceSkills: SkillDraft[] = [
       lesson("Place a point", "A model stores a position as two numbers.", [
         drag(
           "land",
-          "Drag the tip onto the mark.",
+          "Drag Pip onto the mark.",
           [1, 1],
           [7, 3],
           "The mark sits up and to the right of the tail.",
@@ -408,7 +408,7 @@ export const spaceSkills: SkillDraft[] = [
         ),
         drag(
           "aim",
-          "The tail stays. Drag the tip onto the mark.",
+          "The tail stays. Drag Pip onto the mark.",
           [2, 2],
           [8, 5],
           "The mark is up and to the right of the tail.",
@@ -441,7 +441,7 @@ export const spaceSkills: SkillDraft[] = [
       lesson("Read the move", "The move stays the same when tail and tip shift together.", [
         drag(
           "flat",
-          "Leave the tail fixed. Drag the tip onto the mark.",
+          "Leave the tail fixed. Drag Pip onto the mark.",
           [1, 4],
           [6, 4],
           "The mark is straight to the right.",

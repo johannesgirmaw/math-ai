@@ -50,7 +50,7 @@
           "id": "identity",
           "prompt": "Match the shown table. It leaves a point where it was.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               1,
               0,
@@ -58,18 +58,18 @@
               1
             ],
             "initial": [
+              1.4,
+              0.2,
               0,
-              0,
-              0,
-              0
+              0.8
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.35,
+            "showGhost": true
           },
           "feedback": {
             "wrong_cell": "The diagonal cells stay 1. The other two stay 0."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "That table leaves a point where it was."
         },
         {
@@ -103,7 +103,7 @@
           "id": "row",
           "prompt": "Top row 2, 1. Bottom row 0, 3. The phone does not show them.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               2,
               1,
@@ -111,17 +111,17 @@
               3
             ],
             "initial": [
+              1,
               0,
               0,
-              0,
-              0
+              1
             ],
-            "tolerance": 0.1
+            "tolerance": 0.35
           },
           "feedback": {
             "wrong_cell": "Read left to right, top row first. Bottom left stays 0."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "You set all four weights."
         },
         {
@@ -161,7 +161,7 @@
           "id": "build",
           "prompt": "Build the identity: the table that keeps every point.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               1,
               0,
@@ -169,17 +169,17 @@
               1
             ],
             "initial": [
+              1.4,
+              0.2,
               0,
-              0,
-              0,
-              0
+              0.8
             ],
-            "tolerance": 0.1
+            "tolerance": 0.35
           },
           "feedback": {
             "wrong_cell": "The diagonal cells are 1. The other two stay 0."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "Those four weights keep the point."
         },
         {
@@ -236,7 +236,7 @@
           "id": "again",
           "prompt": "Build the identity again, with no numbers shown.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               1,
               0,
@@ -244,17 +244,17 @@
               1
             ],
             "initial": [
+              1.4,
+              0.2,
               0,
-              0,
-              0,
-              0
+              0.8
             ],
-            "tolerance": 0.1
+            "tolerance": 0.35
           },
           "feedback": {
             "wrong_cell": "The diagonal cells are 1. The other two stay 0."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "You can rebuild the identity from the rule."
         },
         {

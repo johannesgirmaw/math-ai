@@ -107,28 +107,24 @@
         },
         {
           "id": "two",
-          "prompt": "Each step runs 2 right. Draw two steps from (1, 3).",
+          "prompt": "Each hop runs 2 right. Walk two hops from the dot.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "hill",
             "start": {
               "x": 1,
               "y": 3
             },
-            "targetTip": {
-              "x": 5,
-              "y": 3
-            },
-            "tolerance": 0.8,
-            "showTarget": false
+            "slope": 0,
+            "correctRun": 4,
+            "correctRise": 0,
+            "tolerance": 0.7
           },
           "feedback": {
-            "wrong_direction": "The steps stay on the horizontal line.",
-            "wrong_length": "Two steps of 2 land 4 to the right."
+            "wrong_direction": "The hops stay level.",
+            "wrong_length": "Two hops of 2 land 4 to the right."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "The rate is 2, and two steps use it twice."
+          "correctMessage": "That is the faster spacing."
         }
       ],
       "capstone": false,

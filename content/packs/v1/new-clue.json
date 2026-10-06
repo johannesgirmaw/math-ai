@@ -62,26 +62,40 @@
         },
         {
           "id": "red",
-          "prompt": "You draw a red chip. Which bag becomes more likely?",
+          "prompt": "A red chip lands. Tap the bag it fits.",
           "primitive": {
-            "type": "choice",
-            "options": [
+            "type": "bag",
+            "task": "pick",
+            "bags": [
               {
                 "id": "a",
-                "label": "Bag A"
+                "chips": [
+                  "R",
+                  "R",
+                  "R",
+                  "R",
+                  "B"
+                ]
               },
               {
                 "id": "b",
-                "label": "Bag B"
+                "chips": [
+                  "R",
+                  "B",
+                  "B",
+                  "B",
+                  "B"
+                ]
               }
             ],
-            "correctOptionId": "a"
+            "face": "R",
+            "correctBagId": "a"
           },
           "feedback": {
-            "wrong_option": "A red chip fits Bag A better. Bag B is mostly blue."
+            "wrong_bag": "Bag B is mostly blue. Red fits bag A."
           },
-          "easyWithinMs": 8000,
-          "correctMessage": "The red clue raises Bag A."
+          "easyWithinMs": 10000,
+          "correctMessage": "The red clue raises bag A."
         },
         {
           "id": "raises",

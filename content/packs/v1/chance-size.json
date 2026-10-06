@@ -44,21 +44,30 @@
         },
         {
           "id": "scale",
-          "prompt": "1 favorable out of 2. Set that chance out of 10.",
+          "prompt": "Count the red chips in the bag.",
           "primitive": {
-            "type": "slider",
-            "min": 0,
-            "max": 10,
-            "step": 1,
-            "correctValue": 5,
-            "tolerance": 0
+            "type": "bag",
+            "task": "count",
+            "bags": [
+              {
+                "id": "bag",
+                "chips": [
+                  "R",
+                  "R",
+                  "B",
+                  "B"
+                ]
+              }
+            ],
+            "face": "R",
+            "correctCount": 2
           },
           "feedback": {
-            "too_low": "Half of 10 is higher. Move up.",
-            "too_high": "Half of 10 is lower. Move down."
+            "too_low": "More chips are red. Count higher.",
+            "too_high": "Fewer chips are red. Count lower."
           },
           "easyWithinMs": 10000,
-          "correctMessage": "1 out of 2 is half."
+          "correctMessage": "Two of the four chips are red."
         },
         {
           "id": "more",

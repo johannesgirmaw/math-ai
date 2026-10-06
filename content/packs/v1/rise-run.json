@@ -116,28 +116,24 @@
         },
         {
           "id": "draw",
-          "prompt": "Draw run 3 and rise 2. Tail at (2, 2).",
+          "prompt": "Walk Pip run 3 and rise 2 from the dot.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "hill",
             "start": {
               "x": 2,
               "y": 2
             },
-            "targetTip": {
-              "x": 5,
-              "y": 4
-            },
-            "tolerance": 0.8,
-            "showTarget": false
+            "slope": 0.6666666666666666,
+            "correctRun": 3,
+            "correctRise": 2,
+            "tolerance": 0.7
           },
           "feedback": {
-            "wrong_direction": "The arrow goes right and up.",
+            "wrong_direction": "The step climbs as it runs right.",
             "wrong_length": "The run is 3 and the rise is 2."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "That arrow has the rise and the run."
+          "correctMessage": "Pip walked that stair."
         }
       ],
       "capstone": false,
@@ -237,28 +233,24 @@
         },
         {
           "id": "along",
-          "prompt": "The slope is 2. From (2, 2), go 2 right along that slope.",
+          "prompt": "The slope is 2. From the dot, go 2 right along the hill.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "hill",
             "start": {
               "x": 2,
               "y": 2
             },
-            "targetTip": {
-              "x": 4,
-              "y": 6
-            },
-            "tolerance": 0.8,
-            "showTarget": false
+            "slope": 2,
+            "correctRun": 2,
+            "correctRise": 4,
+            "tolerance": 0.7
           },
           "feedback": {
-            "wrong_direction": "Slope 2 climbs as it runs right.",
+            "wrong_direction": "The hill climbs as Pip runs right.",
             "wrong_length": "Each step right climbs 2. Two steps climb 4."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "The tip follows the slope."
+          "correctMessage": "Pip followed the slope."
         }
       ],
       "capstone": false,

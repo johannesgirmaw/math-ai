@@ -1,4 +1,4 @@
-import { choice, drag, lesson, match, matrix, skill, slider, type SkillDraft } from "./helpers";
+import { choice, drag, lesson, match, meter, sheet, skill, slider, type SkillDraft } from "./helpers";
 
 const right = { start: [2, 5] as [number, number], tip: [7, 5] as [number, number] };
 
@@ -727,38 +727,38 @@ export const vectorSkills: SkillDraft[] = [
     "vectors",
     [
       lesson("Same, opposite, right angle", "A neuron's first step is this agreement score.", [
-        drag(
+        meter(
           "same",
-          "Drag your tip the same way as the gray arrow.",
+          "Drag with the gray arrow until the glow turns green.",
           [2, 2],
           [7, 2],
-          "Your arrow turns away. The gray arrow points right.",
-          "The direction matches. Stretch or shorten to the mark.",
-          "Same direction means a positive agreement.",
           right,
           "positive",
+          "Your arrow turns away. The gray arrow points right.",
+          "The glow is green. Stretch until the tip meets the mark.",
+          "Same direction fills the meter.",
         ),
-        drag(
+        meter(
           "opposite",
-          "Drag your tip the opposite way from the gray arrow.",
+          "Drag against the gray arrow until the glow turns red.",
           [7, 2],
           [2, 2],
-          "Opposite means the other way. The gray arrow points right.",
-          "You are aimed the other way. Match the length of the mark.",
-          "Opposite arrows disagree.",
           right,
           "negative",
+          "Opposite means the other way. The gray arrow points right.",
+          "The glow is red. Match the length of the mark.",
+          "Opposite arrows turn the meter red.",
         ),
-        drag(
+        meter(
           "perp",
-          "Drag your tip so it meets the gray arrow at a right angle.",
+          "Drag straight up so the meter empties.",
           [4, 1],
           [4, 6],
-          "Straight up meets the gray arrow at a right angle.",
-          "The aim is up. Match the length of the mark.",
-          "A right angle means no agreement.",
           { start: [2, 3], tip: [7, 3] },
           "zero",
+          "Straight up meets the gray arrow at a right angle.",
+          "The meter is empty. Match the length of the mark.",
+          "A right angle empties the meter.",
         ),
         slider(
           "score",
@@ -1122,17 +1122,16 @@ export const vectorSkills: SkillDraft[] = [
           "The page position is not the score. Agreement is.",
           "Closer means the higher score.",
         ),
-        drag(
+        meter(
           "aim",
-          "Aim with the matching pattern: 4 right from (2, 3).",
+          "Aim with the gray pattern until the glow is green.",
           [2, 3],
           [6, 3],
-          "The matching pattern sits to the right.",
-          "The aim is right. The run is 4.",
+          { start: [2, 6], tip: [6, 6] },
+          "positive",
+          "The matching pattern points right.",
+          "The glow is green. Stretch to the mark.",
           "You aimed at the match.",
-          undefined,
-          undefined,
-          false,
         ),
         choice(
           "store",
@@ -1473,7 +1472,7 @@ export const vectorSkills: SkillDraft[] = [
           "Two rows of two numbers is four cells, not one reused cell.",
           "Four cells, two rows.",
         ),
-        matrix(
+        sheet(
           "identity",
           "Match the shown table. It leaves a point where it was.",
           [1, 0, 0, 1],
@@ -1493,7 +1492,7 @@ export const vectorSkills: SkillDraft[] = [
           "Top left is the first cell. 0 is beside it. 1 is bottom right.",
           "Top left is the first weight.",
         ),
-        matrix(
+        sheet(
           "row",
           "Top row 2, 1. Bottom row 0, 3. The phone does not show them.",
           [2, 1, 0, 3],
@@ -1513,7 +1512,7 @@ export const vectorSkills: SkillDraft[] = [
         ),
       ]),
       lesson("Read the cells", "The identity table is 1, 0 on the top row and 0, 1 below.", [
-        matrix(
+        sheet(
           "build",
           "Build the identity: the table that keeps every point.",
           [1, 0, 0, 1],
@@ -1543,7 +1542,7 @@ export const vectorSkills: SkillDraft[] = [
           "The identity keeps each point. It does not send everything to the origin.",
           "The identity keeps the point.",
         ),
-        matrix(
+        sheet(
           "again",
           "Build the identity again, with no numbers shown.",
           [1, 0, 0, 1],
@@ -1592,7 +1591,7 @@ export const vectorSkills: SkillDraft[] = [
           "The bottom right is 1, so y stays. Both would need two 2s.",
           "x doubles. y stays.",
         ),
-        matrix(
+        sheet(
           "set",
           "Set the table that doubles x and leaves y.",
           [2, 0, 0, 1],
@@ -1645,7 +1644,7 @@ export const vectorSkills: SkillDraft[] = [
           "Top left is 1, so x stays. Bottom right 2 doubles y.",
           "y doubles.",
         ),
-        matrix(
+        sheet(
           "set",
           "Set the table that doubles y and leaves x.",
           [1, 0, 0, 2],
@@ -1699,7 +1698,7 @@ export const vectorSkills: SkillDraft[] = [
           "(0, 1) forgets the mix. (1, 0) drops y.",
           "y is added into x. y stays.",
         ),
-        matrix(
+        sheet(
           "set",
           "Set the slide that adds y into x and keeps y.",
           [1, 1, 0, 1],
@@ -1752,7 +1751,7 @@ export const vectorSkills: SkillDraft[] = [
           "Every weight is 0, so both new coordinates are 0.",
           "A zero table sends points to the origin.",
         ),
-        matrix(
+        sheet(
           "both",
           "Set a double on both axes.",
           [2, 0, 0, 2],
@@ -1812,7 +1811,7 @@ export const vectorSkills: SkillDraft[] = [
           "One table applies to every point in the drawing.",
           "Every point uses the same warp.",
         ),
-        matrix(
+        sheet(
           "wide",
           "Set the table that doubles width and keeps height.",
           [2, 0, 0, 1],
@@ -1854,7 +1853,7 @@ export const vectorSkills: SkillDraft[] = [
         ),
       ]),
       lesson("Stretch upward", "The same rule can stretch height instead of width.", [
-        matrix(
+        sheet(
           "tall",
           "Set the table that doubles height and leaves width.",
           [1, 0, 0, 2],
@@ -1907,7 +1906,7 @@ export const vectorSkills: SkillDraft[] = [
         ),
       ]),
       lesson("Grow both ways", "Doubling both axes grows the drawing and keeps its shape.", [
-        matrix(
+        sheet(
           "both",
           "Set the table that doubles both axes.",
           [2, 0, 0, 2],
@@ -1979,14 +1978,14 @@ export const vectorSkills: SkillDraft[] = [
           "The second matrix sees the point the first matrix produced.",
           "Two warps, in order.",
         ),
-        matrix(
+        sheet(
           "first",
           "Set the first warp, the one that doubles x and leaves y.",
           [2, 0, 0, 1],
           "Top left doubles x. Bottom right keeps y. The other cells stay 0.",
           "The first warp doubles x.",
         ),
-        matrix(
+        sheet(
           "second",
           "Set the second warp, the one that doubles y and leaves x.",
           [1, 0, 0, 2],
@@ -2026,7 +2025,7 @@ export const vectorSkills: SkillDraft[] = [
           "The second warp acts on an already moved point.",
           "Order can change the result.",
         ),
-        matrix(
+        sheet(
           "a",
           "Warp A adds y into x and keeps y. Set it.",
           [1, 1, 0, 1],
@@ -2045,7 +2044,7 @@ export const vectorSkills: SkillDraft[] = [
           "(2, 3) skips the mix. (2, 5) adds into y instead of x.",
           "A slides the point by adding y into x.",
         ),
-        matrix(
+        sheet(
           "b",
           "Set the table that doubles width and leaves height.",
           [2, 0, 0, 1],
@@ -2076,14 +2075,14 @@ export const vectorSkills: SkillDraft[] = [
           "Each identity keeps the point, so two of them still keep it.",
           "The point never moves.",
         ),
-        matrix(
+        sheet(
           "one",
           "Set the identity.",
           [1, 0, 0, 1],
           "Diagonal cells are 1. The other two stay 0.",
           "The first identity is set.",
         ),
-        matrix(
+        sheet(
           "two",
           "Set the second identity.",
           [1, 0, 0, 1],
@@ -2147,7 +2146,7 @@ export const vectorSkills: SkillDraft[] = [
           undefined,
           false,
         ),
-        matrix(
+        sheet(
           "set",
           "Set the table that stretches x and leaves y.",
           [2, 0, 0, 1],
@@ -2189,7 +2188,7 @@ export const vectorSkills: SkillDraft[] = [
           "Both coordinates double, so the aim of any arrow stays.",
           "Everything stretches, nothing turns.",
         ),
-        matrix(
+        sheet(
           "set",
           "Set the table that scales both axes by the same amount.",
           [2, 0, 0, 2],
@@ -2265,7 +2264,7 @@ export const vectorSkills: SkillDraft[] = [
           "A new horizontal part means it is no longer vertical.",
           "It turns.",
         ),
-        matrix(
+        sheet(
           "set",
           "Set the sideways slide.",
           [1, 1, 0, 1],
@@ -2297,15 +2296,16 @@ export const vectorSkills: SkillDraft[] = [
         "Match by agreement",
         "Matching by agreement is how a tiny network recognizes a pattern.",
         [
-          drag(
+          meter(
             "same",
-            "Match the gray arrow. It points right.",
+            "Match the gray arrow until the glow is green.",
             [2, 2],
             [7, 2],
-            "The gray arrow points right. Aim the same way.",
-            "The direction matches. Reach the mark.",
-            "Same direction means the patterns agree.",
             right,
+            "positive",
+            "The gray arrow points right. Aim the same way.",
+            "The glow is green. Reach the mark.",
+            "Same direction means the patterns agree.",
           ),
           choice(
             "agree",
@@ -2318,15 +2318,16 @@ export const vectorSkills: SkillDraft[] = [
             "Same direction is agreement, not opposition.",
             "The patterns agree.",
           ),
-          drag(
+          meter(
             "opposite",
-            "Now point the opposite way from the gray arrow.",
+            "Now point against the gray arrow until the glow is red.",
             [7, 3],
             [2, 3],
-            "Opposite is left if the gray arrow points right.",
-            "You are aimed the other way. Match the length.",
-            "Opposite arrows get a negative score.",
             right,
+            "negative",
+            "Opposite is left if the gray arrow points right.",
+            "The glow is red. Match the length.",
+            "Opposite arrows turn the meter red.",
           ),
           choice(
             "keep",

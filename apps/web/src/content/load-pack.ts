@@ -217,8 +217,10 @@ export function validateLoadedPack(loaded = loadV1Files()) {
     const skill = bySlug.get(slug);
     const usesMatrix = lessons
       .filter((lesson) => lesson.skillNodeId === skill?.id)
-      .some((lesson) => lesson.screens.some((screen) => screen.primitive.type === "matrixWarp"));
-    if (!usesMatrix) problems.push(`${slug} never uses matrixWarp`);
+      .some((lesson) =>
+        lesson.screens.some((screen) => screen.primitive.type === "sheet" || screen.primitive.type === "matrixWarp"),
+      );
+    if (!usesMatrix) problems.push(`${slug} never uses a rubber sheet`);
   }
 
   const vectorIds = new Set(vectorOrder.map((slug) => bySlug.get(slug)?.id));
@@ -236,7 +238,11 @@ export function validateLoadedPack(loaded = loadV1Files()) {
       if (!ids.has(id)) problems.push(`First dot-agreement lesson is missing ${id}`);
     }
     const same = firstDot.screens.find((screen) => screen.id === "same");
-    if (same?.primitive.type === "dragArrow" && same.primitive.guideTip && same.primitive.guideStart) {
+    if (
+      (same?.primitive.type === "dragArrow" || same?.primitive.type === "meter") &&
+      same.primitive.guideTip &&
+      same.primitive.guideStart
+    ) {
       const guideDx = same.primitive.guideTip.x - same.primitive.guideStart.x;
       const guideDy = same.primitive.guideTip.y - same.primitive.guideStart.y;
       const dx = same.primitive.targetTip.x - same.primitive.start.x;

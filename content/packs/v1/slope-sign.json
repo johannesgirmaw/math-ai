@@ -129,27 +129,24 @@
         },
         {
           "id": "mark",
-          "prompt": "Drag an uphill arrow onto the mark.",
+          "prompt": "Walk Pip uphill along the plank.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "hill",
             "start": {
               "x": 2,
               "y": 2
             },
-            "targetTip": {
-              "x": 7,
-              "y": 6
-            },
-            "tolerance": 0.8
+            "slope": 0.8,
+            "correctRun": 5,
+            "correctRise": 4,
+            "tolerance": 0.7
           },
           "feedback": {
             "wrong_direction": "Uphill goes up and to the right.",
-            "wrong_length": "The aim is right. Match the climb of the mark."
+            "wrong_length": "Match the climb of the hill."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "The arrow climbs."
+          "correctMessage": "The ball rolls up."
         },
         {
           "id": "means",
@@ -285,28 +282,24 @@
         },
         {
           "id": "down",
-          "prompt": "Draw a downhill arrow: run 3, fall 2, from (2, 6).",
+          "prompt": "Tip the step downhill: run 3, fall 2.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "hill",
             "start": {
               "x": 2,
               "y": 6
             },
-            "targetTip": {
-              "x": 5,
-              "y": 4
-            },
-            "tolerance": 0.8,
-            "showTarget": false
+            "slope": -0.6666666666666666,
+            "correctRun": 3,
+            "correctRise": -2,
+            "tolerance": 0.7
           },
           "feedback": {
             "wrong_direction": "Downhill to the right falls as it runs.",
             "wrong_length": "The run is 3 and the fall is 2."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "The slope is negative."
+          "correctMessage": "The ball rolls down."
         }
       ],
       "capstone": false,

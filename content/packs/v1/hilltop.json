@@ -85,27 +85,24 @@
         },
         {
           "id": "flat",
-          "prompt": "At the top, drag a flat step onto the mark.",
+          "prompt": "At the top, walk a flat step. The ball should sit.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "hill",
             "start": {
               "x": 3,
               "y": 6
             },
-            "targetTip": {
-              "x": 7,
-              "y": 6
-            },
-            "tolerance": 0.8
+            "slope": 0,
+            "correctRun": 4,
+            "correctRise": 0,
+            "tolerance": 0.7
           },
           "feedback": {
             "wrong_direction": "The step at the top stays level.",
-            "wrong_length": "The aim is right. The rise is zero."
+            "wrong_length": "The run continues and the rise is zero."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "A flat step on the top."
+          "correctMessage": "The ball sits on the top."
         },
         {
           "id": "train",

@@ -44,27 +44,24 @@
         },
         {
           "id": "mark",
-          "prompt": "Drag the steeper arrow onto the mark.",
+          "prompt": "Set Pip on the steeper plank.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "hill",
             "start": {
               "x": 2,
               "y": 2
             },
-            "targetTip": {
-              "x": 3,
-              "y": 6
-            },
-            "tolerance": 0.8
+            "slope": 4,
+            "correctRun": 1,
+            "correctRise": 4,
+            "tolerance": 0.7
           },
           "feedback": {
-            "wrong_direction": "The steep mark climbs sharply.",
-            "wrong_length": "The run is short and the rise is tall."
+            "wrong_direction": "The steep plank climbs sharply.",
+            "wrong_length": "The run is 1 and the rise is 4."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "That is the steep arrow."
+          "correctMessage": "The ball picks the steep plank."
         },
         {
           "id": "slope",

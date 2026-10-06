@@ -108,28 +108,24 @@
         },
         {
           "id": "draw",
-          "prompt": "Draw that small step: run 2, rise 2, from (3, 3).",
+          "prompt": "Take the baby step: run 2, rise 2.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "hill",
             "start": {
               "x": 3,
               "y": 3
             },
-            "targetTip": {
-              "x": 5,
-              "y": 5
-            },
-            "tolerance": 0.8,
-            "showTarget": false
+            "slope": 1,
+            "correctRun": 2,
+            "correctRise": 2,
+            "tolerance": 0.7
           },
           "feedback": {
-            "wrong_direction": "The small step climbs with the hill.",
+            "wrong_direction": "The baby step climbs with the hill.",
             "wrong_length": "The run is 2 and the rise is 2."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "The small step has the hill's slope."
+          "correctMessage": "The baby step matches the hill."
         }
       ],
       "capstone": false,

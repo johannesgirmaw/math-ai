@@ -44,35 +44,24 @@
         },
         {
           "id": "back",
-          "prompt": "The gray arrow climbs. Drag the downhill step onto the mark.",
+          "prompt": "Walk against the slope so the pebble drops.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "hill",
             "start": {
               "x": 6,
               "y": 6
             },
-            "targetTip": {
-              "x": 3,
-              "y": 3
-            },
-            "tolerance": 0.8,
-            "guideStart": {
-              "x": 2,
-              "y": 2
-            },
-            "guideTip": {
-              "x": 6,
-              "y": 6
-            }
+            "slope": 1,
+            "correctRun": -3,
+            "correctRise": -3,
+            "tolerance": 0.7
           },
           "feedback": {
             "wrong_direction": "Downhill goes back along the climb.",
-            "wrong_length": "The aim matches the mark. Step back down the slope."
+            "wrong_length": "The step back matches the hill."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "You stepped against the slope."
+          "correctMessage": "The pebble dropped."
         },
         {
           "id": "with",

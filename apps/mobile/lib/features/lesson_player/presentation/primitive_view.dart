@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:axiom/core/ui/app_theme.dart';
 import 'package:axiom/features/lesson_player/domain/lesson.dart';
+import 'package:axiom/features/lesson_player/presentation/toy_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 
@@ -161,7 +162,18 @@ Widget buildPrimitive({
   required ValueChanged<Object?> onChanged,
   required bool enabled,
   bool settle = false,
+  bool miss = false,
 }) {
+  if (primitive.type == 'dragArrow') {
+    return _arrow(
+      primitive: primitive,
+      draft: draft,
+      onChanged: onChanged,
+      enabled: enabled,
+      settle: settle,
+      miss: miss,
+    );
+  }
   final builder = primitiveBuilders[primitive.type];
   if (builder == null) {
     return const Text('This interaction is not ready.');
@@ -187,9 +199,13 @@ typedef PrimitiveWidgetBuilder =
 final primitiveBuilders = <String, PrimitiveWidgetBuilder>{
   'choice': _choice,
   'slider': _slider,
-  'dragArrow': _arrow,
   'matrixWarp': _matrix,
   'match': _match,
+  'meter': buildMeter,
+  'sheet': buildSheet,
+  'hill': buildHill,
+  'bag': buildBag,
+  'beam': buildBeam,
 };
 
 Widget _choice({
@@ -279,6 +295,7 @@ Widget _arrow({
   required ValueChanged<Object?> onChanged,
   required bool enabled,
   bool settle = false,
+  bool miss = false,
 }) {
   return _ArrowSurface(
     arrow: primitive as DragArrowPrimitive,
@@ -286,6 +303,7 @@ Widget _arrow({
     onChanged: onChanged,
     enabled: enabled,
     settle: settle,
+    miss: miss,
   );
 }
 
@@ -296,6 +314,7 @@ class _ArrowSurface extends StatefulWidget {
     required this.onChanged,
     required this.enabled,
     required this.settle,
+    required this.miss,
   });
 
   final DragArrowPrimitive arrow;
@@ -303,22 +322,30 @@ class _ArrowSurface extends StatefulWidget {
   final ValueChanged<Object?> onChanged;
   final bool enabled;
   final bool settle;
+  final bool miss;
 
   @override
   State<_ArrowSurface> createState() => _ArrowSurfaceState();
 }
 
 class _ArrowSurfaceState extends State<_ArrowSurface>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late final AnimationController _controller;
+  late final AnimationController _bounce;
   PlanePoint? _from;
+  bool _home = false;
+  final List<PlanePoint> _trail = [];
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 220),
+      duration: const Duration(milliseconds: 280),
+    );
+    _bounce = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 420),
     );
   }
 
@@ -327,6 +354,19 @@ class _ArrowSurfaceState extends State<_ArrowSurface>
     super.didUpdateWidget(oldWidget);
     if (widget.settle && !oldWidget.settle) {
       _from = _tip(oldWidget.draft) ?? _tip(widget.draft) ?? widget.arrow.start;
+      _home = false;
+      final reduce = MediaQuery.disableAnimationsOf(context);
+      if (reduce) {
+        _controller.value = 1;
+        _bounce.value = 1;
+      } else {
+        unawaited(_controller.forward(from: 0));
+        unawaited(_bounce.forward(from: 0));
+      }
+    }
+    if (widget.miss && !oldWidget.miss) {
+      _from = _tip(oldWidget.draft) ?? _tip(widget.draft) ?? widget.arrow.start;
+      _home = true;
       final reduce = MediaQuery.disableAnimationsOf(context);
       if (reduce) {
         _controller.value = 1;
@@ -334,24 +374,28 @@ class _ArrowSurfaceState extends State<_ArrowSurface>
         unawaited(_controller.forward(from: 0));
       }
     }
-    if (!widget.settle) {
+    if (!widget.settle && !widget.miss) {
       _from = null;
+      _home = false;
       _controller.value = 0;
+      _bounce.value = 0;
+      if (widget.draft == null) _trail.clear();
     }
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _bounce.dispose();
     super.dispose();
   }
 
   PlanePoint _shown(double t) {
     final live = _tip(widget.draft) ?? widget.arrow.start;
     final from = _from;
-    if (!widget.settle || from == null) return live;
-    final eased = Curves.easeOut.transform(t);
-    final target = widget.arrow.targetTip;
+    if ((!widget.settle && !_home) || from == null) return live;
+    final eased = Curves.easeOutBack.transform(t.clamp(0, 1));
+    final target = _home ? widget.arrow.start : widget.arrow.targetTip;
     return PlanePoint(
       x: from.x + (target.x - from.x) * eased,
       y: from.y + (target.y - from.y) * eased,
@@ -361,7 +405,7 @@ class _ArrowSurfaceState extends State<_ArrowSurface>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _controller,
+      animation: Listenable.merge([_controller, _bounce]),
       builder: (context, _) {
         final tip = _shown(_controller.value);
         return LayoutBuilder(
@@ -382,15 +426,24 @@ class _ArrowSurfaceState extends State<_ArrowSurface>
                         );
                         final width = widget.arrow.planeWidth;
                         final height = widget.arrow.planeHeight;
-                        widget.onChanged({
-                          'x': (local.dx / size.width) * width,
-                          'y': (1 - local.dy / size.height) * height,
-                        });
+                        final next = PlanePoint(
+                          x: (local.dx / size.width) * width,
+                          y: (1 - local.dy / size.height) * height,
+                        );
+                        _trail.add(next);
+                        if (_trail.length > 18) _trail.removeAt(0);
+                        widget.onChanged({'x': next.x, 'y': next.y});
                       }
                     : null,
                 child: CustomPaint(
                   size: size,
-                  painter: _ArrowPainter(arrow: widget.arrow, tip: tip),
+                  painter: _ArrowPainter(
+                    arrow: widget.arrow,
+                    tip: tip,
+                    trail: List<PlanePoint>.from(_trail),
+                    miss: widget.miss,
+                    bounce: widget.settle ? _bounce.value : 0,
+                  ),
                 ),
               ),
             );
@@ -410,10 +463,19 @@ PlanePoint? _tip(Object? draft) {
 }
 
 class _ArrowPainter extends CustomPainter {
-  const _ArrowPainter({required this.arrow, required this.tip});
+  const _ArrowPainter({
+    required this.arrow,
+    required this.tip,
+    required this.trail,
+    required this.miss,
+    required this.bounce,
+  });
 
   final DragArrowPrimitive arrow;
   final PlanePoint tip;
+  final List<PlanePoint> trail;
+  final bool miss;
+  final double bounce;
 
   Offset _pixel(PlanePoint point, Size size) {
     return Offset(
@@ -427,6 +489,17 @@ class _ArrowPainter extends CustomPainter {
     _paintPlane(canvas, size);
     final tail = _pixel(arrow.start, size);
     final head = _pixel(tip, size);
+    for (var index = 0; index < trail.length; index++) {
+      final fade = (index + 1) / trail.length;
+      canvas.drawCircle(
+        _pixel(trail[index], size),
+        3 + bounce * 4,
+        Paint()
+          ..color = (miss ? AxiomColors.miss : AxiomColors.accent).withValues(
+            alpha: 0.15 + 0.35 * fade,
+          ),
+      );
+    }
     final target = _pixel(arrow.targetTip, size);
     final guideStart = arrow.guideStart;
     final guideTip = arrow.guideTip;
@@ -449,7 +522,7 @@ class _ArrowPainter extends CustomPainter {
       );
     }
     _paintArrow(canvas, tail, head, AxiomColors.accent);
-    canvas.drawCircle(head, 10, Paint()..color = AxiomColors.ink);
+    canvas.drawCircle(head, 10 + bounce * 6, Paint()..color = AxiomColors.ink);
     _paintScore(canvas, size, arrow.score);
   }
 
@@ -506,7 +579,10 @@ class _ArrowPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant _ArrowPainter oldDelegate) {
-    return oldDelegate.tip.x != tip.x || oldDelegate.tip.y != tip.y;
+    return oldDelegate.tip.x != tip.x ||
+        oldDelegate.tip.y != tip.y ||
+        oldDelegate.bounce != bounce ||
+        oldDelegate.trail.length != trail.length;
   }
 }
 

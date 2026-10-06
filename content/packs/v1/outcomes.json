@@ -164,26 +164,39 @@
         },
         {
           "id": "more",
-          "prompt": "Which can happen in more ways?",
+          "prompt": "Tap every landing that is exactly one head.",
           "primitive": {
-            "type": "choice",
+            "type": "bag",
+            "task": "select",
             "options": [
               {
-                "id": "a",
-                "label": "Exactly one head"
+                "id": "hh",
+                "label": "HH"
               },
               {
-                "id": "b",
-                "label": "Both heads"
+                "id": "ht",
+                "label": "HT"
+              },
+              {
+                "id": "th",
+                "label": "TH"
+              },
+              {
+                "id": "tt",
+                "label": "TT"
               }
             ],
-            "correctOptionId": "a"
+            "correctIds": [
+              "ht",
+              "th"
+            ]
           },
           "feedback": {
-            "wrong_option": "Both heads is only one listing. Exactly one head has two listings."
+            "incomplete": "Tap both one-head landings.",
+            "wrong_chip": "HH is both heads. TT has none."
           },
-          "easyWithinMs": 8000,
-          "correctMessage": "One head has more ways."
+          "easyWithinMs": 12000,
+          "correctMessage": "Exactly one head has two landings."
         },
         {
           "id": "four",

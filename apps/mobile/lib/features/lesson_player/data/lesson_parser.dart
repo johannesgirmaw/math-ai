@@ -116,6 +116,62 @@ Primitive _primitive(Object? raw) {
         right: _options(json['right']),
         pairs: _pairs(json['pairs']),
       );
+    case 'meter':
+      return MeterPrimitive(
+        start: _point(json['start']),
+        targetTip: _point(json['targetTip']),
+        tolerance: _double(json['tolerance']),
+        guideStart: _point(json['guideStart']),
+        guideTip: _point(json['guideTip']),
+        band: _string(json['band']),
+      );
+    case 'sheet':
+      return SheetPrimitive(
+        target: _doubles(json['target']),
+        initial: _doubles(json['initial']),
+        tolerance: _double(json['tolerance']),
+        showGhost: json['showGhost'] == true,
+      );
+    case 'hill':
+      return HillPrimitive(
+        start: _point(json['start']),
+        slope: _double(json['slope']),
+        correctRun: _double(json['correctRun']),
+        correctRise: _double(json['correctRise']),
+        tolerance: _double(json['tolerance']),
+      );
+    case 'bag':
+      return BagPrimitive(
+        task: _string(json['task']),
+        bags: _bags(json['bags']),
+        face: json['face'] is String ? json['face'] as String : null,
+        correctBagId: json['correctBagId'] is String
+            ? json['correctBagId'] as String
+            : null,
+        correctCount: json['correctCount'] is num
+            ? (json['correctCount'] as num).toInt()
+            : null,
+        options: json['options'] is List ? _options(json['options']) : const [],
+        correctIds: json['correctIds'] is List
+            ? [
+                for (final item in json['correctIds'] as List)
+                  if (item is String) item,
+              ]
+            : const [],
+      );
+    case 'beam':
+      return BeamPrimitive(
+        task: _string(json['task']),
+        blocks: json['blocks'] is List ? _doubles(json['blocks']) : const [],
+        correctFulcrum: json['correctFulcrum'] is num
+            ? (json['correctFulcrum'] as num).toDouble()
+            : null,
+        tolerance: json['tolerance'] is num
+            ? (json['tolerance'] as num).toDouble()
+            : 0.45,
+        beams: _beams(json['beams']),
+        correctId: json['correctId'] is String ? json['correctId'] as String : null,
+      );
     default:
       throw ParseException('Unknown interaction: $type');
   }
@@ -145,6 +201,27 @@ List<SceneArrow> _sceneArrows(Object? raw) {
       tip: _point(item['tip']),
       guide: item['guide'] == true,
     );
+  }).toList();
+}
+
+List<BagSide> _bags(Object? raw) {
+  if (raw is! List) return const [];
+  return raw.map((item) {
+    if (item is! Map) throw ParseException('A bag is missing.');
+    return BagSide(id: _string(item['id']), chips: _labels(item['chips']));
+  }).toList();
+}
+
+List<String> _labels(Object? raw) {
+  if (raw is! List) return const [];
+  return [for (final item in raw) if (item is String) item];
+}
+
+List<BeamSide> _beams(Object? raw) {
+  if (raw is! List) return const [];
+  return raw.map((item) {
+    if (item is! Map) throw ParseException('A beam is missing.');
+    return BeamSide(id: _string(item['id']), blocks: _doubles(item['blocks']));
   }).toList();
 }
 

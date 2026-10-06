@@ -44,6 +44,7 @@ class LessonPage extends ConsumerWidget {
       LessonComplete() => null,
     };
     final settle = state is LessonFeedback && state.correct;
+    final miss = state is LessonFeedback && !state.correct;
     return PopScope(
       canPop: state is LessonComplete,
       onPopInvokedWithResult: (didPop, _) {
@@ -90,6 +91,7 @@ class LessonPage extends ConsumerWidget {
                           draft: draft,
                           enabled: drafting,
                           settle: settle,
+                          miss: miss,
                           onChanged: (answer) {
                             ref
                                 .read(lessonPlayerProvider(lesson).notifier)

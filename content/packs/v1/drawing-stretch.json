@@ -46,7 +46,7 @@
           "id": "wide",
           "prompt": "Set the table that doubles width and keeps height.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               2,
               0,
@@ -54,17 +54,17 @@
               1
             ],
             "initial": [
+              1,
               0,
               0,
-              0,
-              0
+              1
             ],
-            "tolerance": 0.1
+            "tolerance": 0.35
           },
           "feedback": {
             "wrong_cell": "Top left is 2, bottom right is 1, and the other cells stay 0."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "That stretch doubles width."
         },
         {
@@ -147,7 +147,7 @@
           "id": "tall",
           "prompt": "Set the table that doubles height and leaves width.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               1,
               0,
@@ -155,17 +155,17 @@
               2
             ],
             "initial": [
+              1,
               0,
               0,
-              0,
-              0
+              1
             ],
-            "tolerance": 0.1
+            "tolerance": 0.35
           },
           "feedback": {
             "wrong_cell": "Top left is 1 and bottom right is 2. The other cells stay 0."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "That table doubles height."
         },
         {
@@ -271,7 +271,7 @@
           "id": "both",
           "prompt": "Set the table that doubles both axes.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               2,
               0,
@@ -279,17 +279,17 @@
               2
             ],
             "initial": [
+              1,
               0,
               0,
-              0,
-              0
+              1
             ],
-            "tolerance": 0.1
+            "tolerance": 0.35
           },
           "feedback": {
             "wrong_cell": "Both diagonal cells are 2. The other cells stay 0."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "Both axes double."
         },
         {

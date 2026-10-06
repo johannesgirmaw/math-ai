@@ -21,26 +21,35 @@
       "screens": [
         {
           "id": "match",
-          "prompt": "Batch A is 4, 4, 4. Batch B is 0, 4, 8. The means...",
+          "prompt": "Tap the beam that jitters.",
           "primitive": {
-            "type": "choice",
-            "options": [
+            "type": "beam",
+            "task": "pick",
+            "beams": [
               {
-                "id": "a",
-                "label": "Match"
+                "id": "tight",
+                "blocks": [
+                  4,
+                  4,
+                  4
+                ]
               },
               {
-                "id": "b",
-                "label": "Differ"
+                "id": "wide",
+                "blocks": [
+                  0,
+                  4,
+                  8
+                ]
               }
             ],
-            "correctOptionId": "a"
+            "correctId": "wide"
           },
           "feedback": {
-            "wrong_option": "B is spread out, but 0, 4, and 8 still balance at 4."
+            "wrong_beam": "The tight beam sits still. The wide one jitters."
           },
-          "easyWithinMs": 8000,
-          "correctMessage": "Same mean, different spread."
+          "easyWithinMs": 10000,
+          "correctMessage": "Same mean, and the wide beam is the jittery one."
         },
         {
           "id": "odd",

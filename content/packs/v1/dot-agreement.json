@@ -21,11 +21,9 @@
       "screens": [
         {
           "id": "same",
-          "prompt": "Drag your tip the same way as the gray arrow.",
+          "prompt": "Drag with the gray arrow until the glow turns green.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "meter",
             "start": {
               "x": 2,
               "y": 2
@@ -43,22 +41,20 @@
               "x": 7,
               "y": 5
             },
-            "score": "positive"
+            "band": "positive"
           },
           "feedback": {
             "wrong_direction": "Your arrow turns away. The gray arrow points right.",
-            "wrong_length": "The direction matches. Stretch or shorten to the mark."
+            "wrong_length": "The glow is green. Stretch until the tip meets the mark."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "Same direction means a positive agreement."
+          "correctMessage": "Same direction fills the meter."
         },
         {
           "id": "opposite",
-          "prompt": "Drag your tip the opposite way from the gray arrow.",
+          "prompt": "Drag against the gray arrow until the glow turns red.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "meter",
             "start": {
               "x": 7,
               "y": 2
@@ -76,22 +72,20 @@
               "x": 7,
               "y": 5
             },
-            "score": "negative"
+            "band": "negative"
           },
           "feedback": {
             "wrong_direction": "Opposite means the other way. The gray arrow points right.",
-            "wrong_length": "You are aimed the other way. Match the length of the mark."
+            "wrong_length": "The glow is red. Match the length of the mark."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "Opposite arrows disagree."
+          "correctMessage": "Opposite arrows turn the meter red."
         },
         {
           "id": "perp",
-          "prompt": "Drag your tip so it meets the gray arrow at a right angle.",
+          "prompt": "Drag straight up so the meter empties.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "meter",
             "start": {
               "x": 4,
               "y": 1
@@ -109,14 +103,14 @@
               "x": 7,
               "y": 3
             },
-            "score": "zero"
+            "band": "zero"
           },
           "feedback": {
             "wrong_direction": "Straight up meets the gray arrow at a right angle.",
-            "wrong_length": "The aim is up. Match the length of the mark."
+            "wrong_length": "The meter is empty. Match the length of the mark."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "A right angle means no agreement."
+          "correctMessage": "A right angle empties the meter."
         },
         {
           "id": "score",

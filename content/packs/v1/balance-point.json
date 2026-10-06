@@ -21,25 +21,23 @@
       "screens": [
         {
           "id": "level",
-          "prompt": "The numbers 4, 4, and 4 balance at...",
+          "prompt": "Slide the fulcrum until the beam sits still.",
           "primitive": {
-            "type": "choice",
-            "options": [
-              {
-                "id": "a",
-                "label": "4"
-              },
-              {
-                "id": "b",
-                "label": "12"
-              }
+            "type": "beam",
+            "task": "balance",
+            "blocks": [
+              4,
+              4,
+              4
             ],
-            "correctOptionId": "a"
+            "correctFulcrum": 4,
+            "tolerance": 0.45
           },
           "feedback": {
-            "wrong_option": "12 adds them and forgets to share. The balance is 4."
+            "too_low": "The fulcrum is left of the balance. Move higher.",
+            "too_high": "The fulcrum is right of the balance. Move lower."
           },
-          "easyWithinMs": 8000,
+          "easyWithinMs": 12000,
           "correctMessage": "A level set balances at the repeated number."
         },
         {

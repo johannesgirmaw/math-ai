@@ -266,26 +266,42 @@
       "screens": [
         {
           "id": "trap",
-          "prompt": "3 out of 4, or 5 out of 8. Which is more likely?",
+          "prompt": "Tap the bag that spills red more often.",
           "primitive": {
-            "type": "choice",
-            "options": [
+            "type": "bag",
+            "task": "pick",
+            "bags": [
               {
-                "id": "a",
-                "label": "3 out of 4"
+                "id": "few",
+                "chips": [
+                  "R",
+                  "R",
+                  "R",
+                  "B"
+                ]
               },
               {
-                "id": "b",
-                "label": "5 out of 8"
+                "id": "many",
+                "chips": [
+                  "R",
+                  "R",
+                  "R",
+                  "R",
+                  "R",
+                  "B",
+                  "B",
+                  "B"
+                ]
               }
             ],
-            "correctOptionId": "a"
+            "face": "R",
+            "correctBagId": "few"
           },
           "feedback": {
-            "wrong_option": "5 is the bigger count, but 5 out of 8 is the smaller chance."
+            "wrong_bag": "Five red looks bigger. Three out of four spills red more often."
           },
-          "easyWithinMs": 8000,
-          "correctMessage": "3 out of 4 wins."
+          "easyWithinMs": 10000,
+          "correctMessage": "The smaller bag is the more likely one."
         },
         {
           "id": "why",

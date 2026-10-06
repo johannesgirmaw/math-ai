@@ -19,7 +19,7 @@
       "screens": [
         {
           "id": "land",
-          "prompt": "Drag the tip onto the mark.",
+          "prompt": "Drag Pip onto the mark.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,

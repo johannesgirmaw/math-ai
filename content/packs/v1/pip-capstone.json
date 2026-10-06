@@ -21,11 +21,9 @@
       "screens": [
         {
           "id": "same",
-          "prompt": "Match the gray arrow. It points right.",
+          "prompt": "Match the gray arrow until the glow is green.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "meter",
             "start": {
               "x": 2,
               "y": 2
@@ -42,11 +40,12 @@
             "guideTip": {
               "x": 7,
               "y": 5
-            }
+            },
+            "band": "positive"
           },
           "feedback": {
             "wrong_direction": "The gray arrow points right. Aim the same way.",
-            "wrong_length": "The direction matches. Reach the mark."
+            "wrong_length": "The glow is green. Reach the mark."
           },
           "easyWithinMs": 12000,
           "correctMessage": "Same direction means the patterns agree."
@@ -76,11 +75,9 @@
         },
         {
           "id": "opposite",
-          "prompt": "Now point the opposite way from the gray arrow.",
+          "prompt": "Now point against the gray arrow until the glow is red.",
           "primitive": {
-            "type": "dragArrow",
-            "planeWidth": 10,
-            "planeHeight": 10,
+            "type": "meter",
             "start": {
               "x": 7,
               "y": 3
@@ -97,14 +94,15 @@
             "guideTip": {
               "x": 7,
               "y": 5
-            }
+            },
+            "band": "negative"
           },
           "feedback": {
             "wrong_direction": "Opposite is left if the gray arrow points right.",
-            "wrong_length": "You are aimed the other way. Match the length."
+            "wrong_length": "The glow is red. Match the length."
           },
           "easyWithinMs": 12000,
-          "correctMessage": "Opposite arrows get a negative score."
+          "correctMessage": "Opposite arrows turn the meter red."
         },
         {
           "id": "keep",

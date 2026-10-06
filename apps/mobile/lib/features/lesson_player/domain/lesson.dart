@@ -154,6 +154,128 @@ final class MatchPrimitive extends Primitive {
   String get type => 'match';
 }
 
+/// Rotate an arrow until the agreement glow matches.
+final class MeterPrimitive extends Primitive {
+  const MeterPrimitive({
+    required this.start,
+    required this.targetTip,
+    required this.tolerance,
+    required this.guideStart,
+    required this.guideTip,
+    required this.band,
+  });
+
+  final PlanePoint start;
+  final PlanePoint targetTip;
+  final double tolerance;
+  final PlanePoint guideStart;
+  final PlanePoint guideTip;
+  final String band;
+
+  @override
+  String get type => 'meter';
+}
+
+/// Drag the two edges of a drawing until it matches a warp.
+final class SheetPrimitive extends Primitive {
+  const SheetPrimitive({
+    required this.target,
+    required this.initial,
+    required this.tolerance,
+    this.showGhost = false,
+  });
+
+  final List<double> target;
+  final List<double> initial;
+  final double tolerance;
+  final bool showGhost;
+
+  @override
+  String get type => 'sheet';
+}
+
+/// Place Pip's next step on a hill.
+final class HillPrimitive extends Primitive {
+  const HillPrimitive({
+    required this.start,
+    required this.slope,
+    required this.correctRun,
+    required this.correctRise,
+    required this.tolerance,
+  });
+
+  final PlanePoint start;
+  final double slope;
+  final double correctRun;
+  final double correctRise;
+  final double tolerance;
+
+  @override
+  String get type => 'hill';
+}
+
+/// One bag of chips.
+class BagSide {
+  const BagSide({required this.id, required this.chips});
+
+  final String id;
+  final List<String> chips;
+}
+
+/// Spill, count, or choose chips.
+final class BagPrimitive extends Primitive {
+  const BagPrimitive({
+    required this.task,
+    this.bags = const [],
+    this.face,
+    this.correctBagId,
+    this.correctCount,
+    this.options = const [],
+    this.correctIds = const [],
+  });
+
+  final String task;
+  final List<BagSide> bags;
+  final String? face;
+  final String? correctBagId;
+  final int? correctCount;
+  final List<ChoiceOption> options;
+  final List<String> correctIds;
+
+  @override
+  String get type => 'bag';
+}
+
+/// One loaded beam.
+class BeamSide {
+  const BeamSide({required this.id, required this.blocks});
+
+  final String id;
+  final List<double> blocks;
+}
+
+/// Balance a beam or pick the jittery one.
+final class BeamPrimitive extends Primitive {
+  const BeamPrimitive({
+    required this.task,
+    this.blocks = const [],
+    this.correctFulcrum,
+    this.tolerance = 0.45,
+    this.beams = const [],
+    this.correctId,
+  });
+
+  final String task;
+  final List<double> blocks;
+  final double? correctFulcrum;
+  final double tolerance;
+  final List<BeamSide> beams;
+  final String? correctId;
+
+  @override
+  String get type => 'beam';
+}
+
 /// One screen inside a lesson.
 class Screen {
   const Screen({
@@ -365,6 +487,175 @@ class MatchGrader extends Grader {
   }
 }
 
+/// Agreement band first, then how far the tip sits from the mark.
+class MeterGrader extends Grader {
+  const MeterGrader();
+
+  @override
+  Grade grade(Primitive payload, Object? answer) {
+    final meter = payload as MeterPrimitive;
+    final tip = _readPoint(answer);
+    if (tip == null) {
+      return const Grade(correct: false, errorCode: 'wrong_direction');
+    }
+    final guideX = meter.guideTip.x - meter.guideStart.x;
+    final guideY = meter.guideTip.y - meter.guideStart.y;
+    final dx = tip.x - meter.start.x;
+    final dy = tip.y - meter.start.y;
+    final band = _band(guideX, guideY, dx, dy);
+    if (band != meter.band) {
+      return const Grade(correct: false, errorCode: 'wrong_direction');
+    }
+    final distance = math.sqrt(
+      math.pow(tip.x - meter.targetTip.x, 2) +
+          math.pow(tip.y - meter.targetTip.y, 2),
+    );
+    if (distance > meter.tolerance) {
+      return const Grade(correct: false, errorCode: 'wrong_length');
+    }
+    return Grade.correctAnswer;
+  }
+
+  String _band(double gx, double gy, double dx, double dy) {
+    final dot = gx * dx + gy * dy;
+    final scale = math.sqrt(gx * gx + gy * gy) * math.sqrt(dx * dx + dy * dy);
+    if (scale == 0) return 'zero';
+    final agree = dot / scale;
+    if (agree > 0.35) return 'positive';
+    if (agree < -0.35) return 'negative';
+    return 'zero';
+  }
+}
+
+/// The two dragged edges must match the warp.
+class SheetGrader extends Grader {
+  const SheetGrader();
+
+  @override
+  Grade grade(Primitive payload, Object? answer) {
+    final sheet = payload as SheetPrimitive;
+    if (answer is! List || answer.length != 4) {
+      return const Grade(correct: false, errorCode: 'wrong_cell');
+    }
+    for (var index = 0; index < 4; index++) {
+      final value = answer[index];
+      if (value is! num) {
+        return const Grade(correct: false, errorCode: 'wrong_cell');
+      }
+      if ((value.toDouble() - sheet.target[index]).abs() > sheet.tolerance) {
+        return const Grade(correct: false, errorCode: 'wrong_cell');
+      }
+    }
+    return Grade.correctAnswer;
+  }
+}
+
+/// The step's run and rise have to land near the mark.
+class HillGrader extends Grader {
+  const HillGrader();
+
+  @override
+  Grade grade(Primitive payload, Object? answer) {
+    final hill = payload as HillPrimitive;
+    final tip = _readPoint(answer);
+    if (tip == null) {
+      return const Grade(correct: false, errorCode: 'wrong_direction');
+    }
+    final run = tip.x - hill.start.x;
+    final rise = tip.y - hill.start.y;
+    final wantedX = hill.correctRun;
+    final wantedY = hill.correctRise;
+    if (wantedX == 0 && wantedY == 0) {
+      final distance = math.sqrt(run * run + rise * rise);
+      if (distance > hill.tolerance) {
+        return const Grade(correct: false, errorCode: 'wrong_length');
+      }
+      return Grade.correctAnswer;
+    }
+    if (_angleDegrees(wantedX, wantedY, run, rise) > 28) {
+      return const Grade(correct: false, errorCode: 'wrong_direction');
+    }
+    final distance = math.sqrt(
+      math.pow(run - wantedX, 2) + math.pow(rise - wantedY, 2),
+    );
+    if (distance > hill.tolerance) {
+      return const Grade(correct: false, errorCode: 'wrong_length');
+    }
+    return Grade.correctAnswer;
+  }
+}
+
+/// Pick a bag, count a face, or select landings.
+class BagGrader extends Grader {
+  const BagGrader();
+
+  @override
+  Grade grade(Primitive payload, Object? answer) {
+    final bag = payload as BagPrimitive;
+    if (bag.task == 'pick') {
+      if (answer == bag.correctBagId) return Grade.correctAnswer;
+      return const Grade(correct: false, errorCode: 'wrong_bag');
+    }
+    if (bag.task == 'count') {
+      final value = answer is num ? answer.toInt() : null;
+      final wanted = bag.correctCount ?? 0;
+      if (value == null || value < wanted) {
+        return const Grade(correct: false, errorCode: 'too_low');
+      }
+      if (value > wanted) {
+        return const Grade(correct: false, errorCode: 'too_high');
+      }
+      return Grade.correctAnswer;
+    }
+    final picked = _ids(answer);
+    if (picked.length < bag.correctIds.length) {
+      return const Grade(correct: false, errorCode: 'incomplete');
+    }
+    final wanted = bag.correctIds.toSet();
+    if (picked.length != wanted.length || picked.any((id) => !wanted.contains(id))) {
+      return const Grade(correct: false, errorCode: 'wrong_chip');
+    }
+    return Grade.correctAnswer;
+  }
+
+  List<String> _ids(Object? answer) {
+    final raw = answer is Map ? answer['ids'] : answer;
+    if (raw is! List) return const [];
+    return [for (final item in raw) if (item is String) item];
+  }
+}
+
+/// Slide the fulcrum, or tap the beam that jitters.
+class BeamGrader extends Grader {
+  const BeamGrader();
+
+  @override
+  Grade grade(Primitive payload, Object? answer) {
+    final beam = payload as BeamPrimitive;
+    if (beam.task == 'pick') {
+      if (answer == beam.correctId) return Grade.correctAnswer;
+      return const Grade(correct: false, errorCode: 'wrong_beam');
+    }
+    final value = answer is num ? answer.toDouble() : null;
+    final wanted = beam.correctFulcrum ?? 0;
+    if (value == null || value < wanted - beam.tolerance) {
+      return const Grade(correct: false, errorCode: 'too_low');
+    }
+    if (value > wanted + beam.tolerance) {
+      return const Grade(correct: false, errorCode: 'too_high');
+    }
+    return Grade.correctAnswer;
+  }
+}
+
+PlanePoint? _readPoint(Object? answer) {
+  if (answer is! Map) return null;
+  final x = answer['x'];
+  final y = answer['y'];
+  if (x is! num || y is! num) return null;
+  return PlanePoint(x: x.toDouble(), y: y.toDouble());
+}
+
 /// Maps a primitive type string to its grader.
 class PrimitiveRegistry {
   const PrimitiveRegistry();
@@ -375,6 +666,11 @@ class PrimitiveRegistry {
     'dragArrow': DragArrowGrader(),
     'matrixWarp': MatrixWarpGrader(),
     'match': MatchGrader(),
+    'meter': MeterGrader(),
+    'sheet': SheetGrader(),
+    'hill': HillGrader(),
+    'bag': BagGrader(),
+    'beam': BeamGrader(),
   };
 
   Grade grade(Primitive primitive, Object? answer) {

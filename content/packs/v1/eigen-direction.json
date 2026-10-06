@@ -71,7 +71,7 @@
           "id": "set",
           "prompt": "Set the table that stretches x and leaves y.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               2,
               0,
@@ -79,17 +79,17 @@
               1
             ],
             "initial": [
+              1,
               0,
               0,
-              0,
-              0
+              1
             ],
-            "tolerance": 0.1
+            "tolerance": 0.35
           },
           "feedback": {
             "wrong_cell": "Top left is 2 and bottom right is 1. The other cells stay 0."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "That table stretches x."
         },
         {
@@ -175,7 +175,7 @@
           "id": "set",
           "prompt": "Set the table that scales both axes by the same amount.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               2,
               0,
@@ -183,17 +183,17 @@
               2
             ],
             "initial": [
+              1,
               0,
               0,
-              0,
-              0
+              1
             ],
-            "tolerance": 0.1
+            "tolerance": 0.35
           },
           "feedback": {
             "wrong_cell": "Both diagonal cells are 2. The other cells stay 0."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "Both axes scale together."
         },
         {
@@ -347,7 +347,7 @@
           "id": "set",
           "prompt": "Set the sideways slide.",
           "primitive": {
-            "type": "matrixWarp",
+            "type": "sheet",
             "target": [
               1,
               1,
@@ -355,17 +355,17 @@
               1
             ],
             "initial": [
+              1,
               0,
               0,
-              0,
-              0
+              1
             ],
-            "tolerance": 0.1
+            "tolerance": 0.35
           },
           "feedback": {
             "wrong_cell": "Top row is 1, 1. Bottom row is 0, 1."
           },
-          "easyWithinMs": 12000,
+          "easyWithinMs": 14000,
           "correctMessage": "That is the sideways slide."
         },
         {

@@ -161,6 +161,217 @@ export function match(
   };
 }
 
+export function meter(
+  id: string,
+  prompt: string,
+  start: [number, number],
+  tip: [number, number],
+  guide: { start: [number, number]; tip: [number, number] },
+  band: "positive" | "zero" | "negative",
+  wrongDirection: string,
+  wrongLength: string,
+  correctMessage: string,
+): Screen {
+  return {
+    id,
+    prompt: must(prompt, 120, `${id} prompt`),
+    primitive: {
+      type: "meter",
+      start: { x: start[0], y: start[1] },
+      targetTip: { x: tip[0], y: tip[1] },
+      tolerance: 0.8,
+      guideStart: { x: guide.start[0], y: guide.start[1] },
+      guideTip: { x: guide.tip[0], y: guide.tip[1] },
+      band,
+    },
+    feedback: {
+      wrong_direction: must(wrongDirection, 160, `${id} direction`),
+      wrong_length: must(wrongLength, 160, `${id} length`),
+    },
+    easyWithinMs: 12000,
+    correctMessage: must(correctMessage, 160, `${id} correct`),
+  };
+}
+
+export function sheet(
+  id: string,
+  prompt: string,
+  target: [number, number, number, number],
+  wrongCell: string,
+  correctMessage: string,
+  showGhost = false,
+  initial: [number, number, number, number] = [1, 0, 0, 1],
+): Screen {
+  const resting = target.every((value, index) => value === initial[index])
+    ? ([1.4, 0.2, 0, 0.8] as [number, number, number, number])
+    : initial;
+  return {
+    id,
+    prompt: must(prompt, 120, `${id} prompt`),
+    primitive: {
+      type: "sheet",
+      target,
+      initial: resting,
+      tolerance: 0.35,
+      ...(showGhost ? { showGhost: true } : {}),
+    },
+    feedback: { wrong_cell: must(wrongCell, 160, `${id} cell`) },
+    easyWithinMs: 14000,
+    correctMessage: must(correctMessage, 160, `${id} correct`),
+  };
+}
+
+export function hill(
+  id: string,
+  prompt: string,
+  start: [number, number],
+  slope: number,
+  run: number,
+  rise: number,
+  wrongDirection: string,
+  wrongLength: string,
+  correctMessage: string,
+): Screen {
+  return {
+    id,
+    prompt: must(prompt, 120, `${id} prompt`),
+    primitive: {
+      type: "hill",
+      start: { x: start[0], y: start[1] },
+      slope,
+      correctRun: run,
+      correctRise: rise,
+      tolerance: 0.7,
+    },
+    feedback: {
+      wrong_direction: must(wrongDirection, 160, `${id} direction`),
+      wrong_length: must(wrongLength, 160, `${id} length`),
+    },
+    easyWithinMs: 12000,
+    correctMessage: must(correctMessage, 160, `${id} correct`),
+  };
+}
+
+export function bagPick(
+  id: string,
+  prompt: string,
+  bags: [string, string[]][],
+  face: string,
+  correctBagId: string,
+  wrong: string,
+  correctMessage: string,
+): Screen {
+  return {
+    id,
+    prompt: must(prompt, 120, `${id} prompt`),
+    primitive: {
+      type: "bag",
+      task: "pick",
+      bags: bags.map(([bagId, chips]) => ({ id: bagId, chips })),
+      face,
+      correctBagId,
+    },
+    feedback: { wrong_bag: must(wrong, 160, `${id} bag`) },
+    easyWithinMs: 10000,
+    correctMessage: must(correctMessage, 160, `${id} correct`),
+  };
+}
+
+export function bagCount(
+  id: string,
+  prompt: string,
+  chips: string[],
+  face: string,
+  correctCount: number,
+  tooLow: string,
+  tooHigh: string,
+  correctMessage: string,
+): Screen {
+  return {
+    id,
+    prompt: must(prompt, 120, `${id} prompt`),
+    primitive: { type: "bag", task: "count", bags: [{ id: "bag", chips }], face, correctCount },
+    feedback: {
+      too_low: must(tooLow, 160, `${id} low`),
+      too_high: must(tooHigh, 160, `${id} high`),
+    },
+    easyWithinMs: 10000,
+    correctMessage: must(correctMessage, 160, `${id} correct`),
+  };
+}
+
+export function bagSelect(
+  id: string,
+  prompt: string,
+  options: [string, string][],
+  correctIds: string[],
+  incomplete: string,
+  wrongChip: string,
+  correctMessage: string,
+): Screen {
+  return {
+    id,
+    prompt: must(prompt, 120, `${id} prompt`),
+    primitive: {
+      type: "bag",
+      task: "select",
+      options: options.map(([optionId, label]) => ({ id: optionId, label })),
+      correctIds,
+    },
+    feedback: {
+      incomplete: must(incomplete, 160, `${id} incomplete`),
+      wrong_chip: must(wrongChip, 160, `${id} chip`),
+    },
+    easyWithinMs: 12000,
+    correctMessage: must(correctMessage, 160, `${id} correct`),
+  };
+}
+
+export function beamBalance(
+  id: string,
+  prompt: string,
+  blocks: number[],
+  fulcrum: number,
+  tooLow: string,
+  tooHigh: string,
+  correctMessage: string,
+): Screen {
+  return {
+    id,
+    prompt: must(prompt, 120, `${id} prompt`),
+    primitive: { type: "beam", task: "balance", blocks, correctFulcrum: fulcrum, tolerance: 0.45 },
+    feedback: {
+      too_low: must(tooLow, 160, `${id} low`),
+      too_high: must(tooHigh, 160, `${id} high`),
+    },
+    easyWithinMs: 12000,
+    correctMessage: must(correctMessage, 160, `${id} correct`),
+  };
+}
+
+export function beamPick(
+  id: string,
+  prompt: string,
+  beams: [string, number[]][],
+  correctId: string,
+  wrong: string,
+  correctMessage: string,
+): Screen {
+  return {
+    id,
+    prompt: must(prompt, 120, `${id} prompt`),
+    primitive: {
+      type: "beam",
+      task: "pick",
+      beams: beams.map(([beamId, blocks]) => ({ id: beamId, blocks })),
+      correctId,
+    },
+    feedback: { wrong_beam: must(wrong, 160, `${id} beam`) },
+    easyWithinMs: 10000,
+    correctMessage: must(correctMessage, 160, `${id} correct`),
+  };
+}
+
 export type LessonDraft = {
   title: string;
   why: string;
