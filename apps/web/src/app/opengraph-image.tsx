@@ -7,8 +7,8 @@ export const contentType = "image/png";
 export const runtime = "nodejs";
 
 export default async function OpenGraphImage() {
-  const logo = await readFile(join(process.cwd(), "public/brand/math-si-logo.png"));
-  const src = `data:image/png;base64,${logo.toString("base64")}`;
+  const icon = await readFile(join(process.cwd(), "src/app/icon.png"));
+  const src = `data:image/png;base64,${icon.toString("base64")}`;
   return new ImageResponse(
     <div
       style={{
@@ -16,12 +16,13 @@ export default async function OpenGraphImage() {
         width: "100%",
         height: "100%",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
       }}
     >
-      {/* ImageResponse only accepts a plain img. */}
-      <img src={src} alt="" height={420} />
+      <img src={src} alt="" height={340} />
+      <div style={{ color: "#005F73", fontSize: 64, letterSpacing: 14, marginTop: 8 }}>MATH SI</div>
     </div>,
     { ...size },
   );

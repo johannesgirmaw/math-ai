@@ -71,7 +71,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
           padding: const EdgeInsets.all(24),
           children: [
             const SizedBox(height: 24),
-            const Center(child: BrandLockup(height: 160)),
+            const Center(child: BrandLockup(symbolSize: 96)),
             const SizedBox(height: 12),
             const SizedBox(
               height: 2,

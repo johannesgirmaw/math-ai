@@ -1,44 +1,68 @@
 import 'package:axiom/core/ui/app_theme.dart';
 import 'package:flutter/material.dart';
 
-/// MATH SI lockup. Full plaque at header size, or the mark plus wordmark.
-class BrandLockup extends StatelessWidget {
-  const BrandLockup({this.height = 120, this.compact = false, super.key});
+/// The f(brain) mark in Analytical Teal.
+class BrandMark extends StatelessWidget {
+  const BrandMark({this.size = 36, this.onDark = false, super.key});
 
-  /// Logical height of the full plaque. Headers stay at or above 120.
-  final double height;
-
-  /// Mark plus Montserrat wordmark for bars, at least 32px tall.
-  final bool compact;
+  final double size;
+  final bool onDark;
 
   @override
   Widget build(BuildContext context) {
-    if (!compact) {
-      return Image.asset(
-        'assets/brand/math-si-logo.png',
-        height: height,
-        fit: BoxFit.contain,
-        semanticLabel: 'MATH SI',
-      );
-    }
-    final wordmark = Theme.of(context).textTheme.titleLarge;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Image.asset(
-          'assets/brand/math-si-mark.png',
-          height: 40,
-          fit: BoxFit.contain,
-          excludeFromSemantics: true,
-        ),
-        const SizedBox(width: 10),
-        Text('MATH SI', style: wordmark),
-      ],
+    return Image.asset(
+      'assets/brand/math-si-mark.png',
+      key: ValueKey(onDark),
+      height: size,
+      fit: BoxFit.contain,
+      excludeFromSemantics: true,
     );
   }
 }
 
-/// Page bar with the compact lockup and the theme's gold rule.
+/// Stacked symbol over MATH SI, or the symbol alone where height is tight.
+class BrandLockup extends StatelessWidget {
+  const BrandLockup({
+    this.stacked = true,
+    this.symbolSize = 88,
+    this.onDark = false,
+    super.key,
+  });
+
+  final bool stacked;
+  final double symbolSize;
+  final bool onDark;
+
+  @override
+  Widget build(BuildContext context) {
+    final mark = BrandMark(size: symbolSize, onDark: onDark);
+    return Semantics(
+      label: 'MATH SI',
+      excludeSemantics: true,
+      child: stacked
+          ? Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                mark,
+                SizedBox(height: symbolSize * 0.16),
+                Text(
+                  'MATH SI',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                    fontSize: symbolSize * 0.2,
+                    height: 1,
+                    fontWeight: FontWeight.w700,
+                    letterSpacing: symbolSize * 0.055,
+                    color: onDark ? Colors.white : AxiomColors.ink,
+                  ),
+                ),
+              ],
+            )
+          : mark,
+    );
+  }
+}
+
+/// Page bar with the symbol only. The name is reserved for stacked lockups.
 AppBar brandAppBar({
   Widget? leading,
   List<Widget>? actions,
@@ -48,16 +72,12 @@ AppBar brandAppBar({
     automaticallyImplyLeading: automaticallyImplyLeading,
     leading: leading,
     titleSpacing: 8,
-    title: const FittedBox(
-      fit: BoxFit.scaleDown,
-      alignment: Alignment.centerLeft,
-      child: BrandLockup(compact: true),
-    ),
+    title: const BrandLockup(stacked: false, symbolSize: 36),
     actions: actions,
   );
 }
 
-/// Compact lockup and gold rule for screens that do not use an app bar.
+/// Symbol and gold rule for screens that do not use an app bar.
 class BrandStrip extends StatelessWidget {
   const BrandStrip({super.key});
 
@@ -66,7 +86,7 @@ class BrandStrip extends StatelessWidget {
     return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        BrandLockup(compact: true),
+        BrandLockup(stacked: false, symbolSize: 36),
         SizedBox(height: 10),
         SizedBox(
           height: 2,

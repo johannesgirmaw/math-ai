@@ -35,7 +35,7 @@ class MissingConfigApp extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                BrandLockup(height: 160),
+                BrandLockup(symbolSize: 96),
                 SizedBox(height: 24),
                 Text(
                   'API_BASE_URL is required. Run with '
