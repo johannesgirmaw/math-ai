@@ -34,7 +34,19 @@
                 "label": "Where it points"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The tail stays put. The tip is where it points."
@@ -57,7 +69,19 @@
                 "label": "The middle of the shaft"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The tip is the end you move. The middle is not a new place."
@@ -104,7 +128,19 @@
                 "label": "Only a color"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The useful part is the move from tail to tip."
@@ -179,7 +215,30 @@
                 "label": "Becomes a new direction"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 4
+                }
+              },
+              {
+                "start": {
+                  "x": 3,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 7
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "A shared shift moves the whole arrow. The move itself stays."
@@ -220,7 +279,19 @@
                 "label": "Right"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 8,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 2,
+                  "y": 5
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The tip leads. If the tip is left, the arrow points left."

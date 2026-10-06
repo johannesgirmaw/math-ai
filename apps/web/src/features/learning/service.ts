@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, lte, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, lte, sql } from "drizzle-orm";
 import { formatInTimeZone } from "date-fns-tz";
 import { differenceInCalendarDays, parseISO } from "date-fns";
 import { topoOrder, topoRank, zigzag, type GraphNode } from "@axiom/content-schema";
@@ -266,8 +266,18 @@ export async function completeAttempt(userId: string, attemptId: string) {
     .select({ total: sql<number>`coalesce(sum(${xpEvents.amount}), 0)` })
     .from(xpEvents)
     .where(eq(xpEvents.userId, userId));
-  const facts = await db.select({ correct: itemResults.correct }).from(itemResults).where(eq(itemResults.attemptId, attemptId));
+  const facts = await db
+    .select({ id: itemResults.id, correct: itemResults.correct })
+    .from(itemResults)
+    .where(eq(itemResults.attemptId, attemptId));
   const misses = facts.filter((fact) => !fact.correct).length;
+  const keys = facts.map((fact) => fact.id);
+  const [awarded] = keys.length
+    ? await db
+        .select({ total: sql<number>`coalesce(sum(${xpEvents.amount}), 0)` })
+        .from(xpEvents)
+        .where(inArray(xpEvents.idempotencyKey, keys))
+    : [{ total: 0 }];
   const mastery = snapshotFrom(
     lesson
       ? (
@@ -298,6 +308,7 @@ export async function completeAttempt(userId: string, attemptId: string) {
   return {
     streakCurrent: current,
     xpTotal: Number(xp?.total ?? 0),
+    xpAwarded: Number(awarded?.total ?? 0),
     pipAbility: skill?.pipAbility ?? "",
     whyItMatters: definition?.whyItMatters ?? "",
     skillMastered: isMastered(mastery),

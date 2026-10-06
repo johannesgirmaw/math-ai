@@ -34,7 +34,30 @@
                 "label": "A"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 3
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 6
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "6 is a bigger move than 2."
@@ -75,7 +98,30 @@
                 "label": "Be forced to turn"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 3
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 6
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "Length and direction are separate. You can stretch without turning."
@@ -122,7 +168,30 @@
                 "label": "Which name is louder"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 3
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 6
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "Length is the size you can compare."

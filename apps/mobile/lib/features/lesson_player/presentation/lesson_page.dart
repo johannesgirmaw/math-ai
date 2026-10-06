@@ -38,6 +38,12 @@ class LessonPage extends ConsumerWidget {
     final screen = lesson.screens[index];
     final drafting = state is LessonPresenting;
     final hasAnswer = state is LessonPresenting && _hasAnswer(state.draft);
+    final draft = switch (state) {
+      LessonPresenting(:final draft) => draft,
+      LessonFeedback(:final answer) => answer,
+      LessonComplete() => null,
+    };
+    final settle = state is LessonFeedback && state.correct;
     return PopScope(
       canPop: state is LessonComplete,
       onPopInvokedWithResult: (didPop, _) {
@@ -81,8 +87,9 @@ class LessonPage extends ConsumerWidget {
                       ? const Text('Lesson complete.')
                       : buildPrimitive(
                           primitive: screen.primitive,
-                          draft: state is LessonPresenting ? state.draft : null,
+                          draft: draft,
                           enabled: drafting,
+                          settle: settle,
                           onChanged: (answer) {
                             ref
                                 .read(lessonPlayerProvider(lesson).notifier)

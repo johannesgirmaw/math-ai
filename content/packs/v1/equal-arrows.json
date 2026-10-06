@@ -34,7 +34,30 @@
                 "label": "Different because the tails differ"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 1,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 3
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 6
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The tails can sit anywhere. The shared move is what matches."
@@ -99,7 +122,30 @@
                 "label": "Unrelated pictures"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 1,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 3
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 6
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The start point can change. The move is the feature."
@@ -122,7 +168,29 @@
                 "label": "Yes"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 3
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 8
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "They share the run, but B also rises. The moves differ."

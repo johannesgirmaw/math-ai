@@ -27,15 +27,8 @@ class CompletePage extends StatelessWidget {
           child: Column(
             children: [
               const Spacer(),
-              PipMark(mastered: mission.skillMastered),
+              PipMark(mastered: mission.skillMastered, size: 96),
               const SizedBox(height: 24),
-              Text(
-                mission.whyItMatters,
-                key: const Key('why-it-matters'),
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineSmall,
-              ),
-              const SizedBox(height: 16),
               DecoratedBox(
                 decoration: BoxDecoration(
                   color: AxiomColors.surface,
@@ -46,36 +39,48 @@ class CompletePage extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
-              Text(
-                mission.skillMastered
-                    ? 'Pip can do this now.'
-                    : 'Pip is still learning this.',
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                mission.pipAbility,
-                key: const Key('pip-ability'),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              Text('Streak ${mission.streakCurrent}'),
-              if (mission.nextLessonTitle case final lesson?
-                  when lesson.isNotEmpty) ...[
-                const SizedBox(height: 8),
-                Text(
-                  'Next lesson: $lesson',
-                  key: const Key('next-lesson'),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-              if (_unlockLine(mission) case final line?) ...[
-                const SizedBox(height: 8),
-                Text(line, textAlign: TextAlign.center),
-              ],
+                      Text(
+                        mission.skillMastered
+                            ? 'Pip can do this now.'
+                            : 'Pip is still learning this.',
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        mission.pipAbility,
+                        key: const Key('pip-ability'),
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                      const SizedBox(height: 12),
+                      Text('Streak ${mission.streakCurrent}'),
+                      Text(
+                        '+${mission.xpAwarded} XP',
+                        key: const Key('xp-awarded'),
+                      ),
+                      if (mission.nextLessonTitle case final lesson?
+                          when lesson.isNotEmpty) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          'Next lesson: $lesson',
+                          key: const Key('next-lesson'),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                      if (_unlockLine(mission) case final line?) ...[
+                        const SizedBox(height: 8),
+                        Text(line, textAlign: TextAlign.center),
+                      ],
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                mission.whyItMatters,
+                key: const Key('why-it-matters'),
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
               if (mission.offlineNote != null) ...[
                 const SizedBox(height: 12),

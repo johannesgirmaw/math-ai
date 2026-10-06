@@ -34,7 +34,30 @@
                 "label": "The upward part"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 2
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The line points right, so the shadow keeps the rightward part."
@@ -99,7 +122,30 @@
                 "label": "Added onto the shadow"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 2
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The shadow keeps only the part along the line."
@@ -122,7 +168,30 @@
                 "label": "Doubles"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 2
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "Doubling would grow the leftover. A projection removes it."
@@ -173,7 +242,30 @@
                 "label": "(2, 0)"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 7
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 2,
+                  "y": 7
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "(2, 0) is the shadow on the x axis. The y axis keeps (0, 5)."
@@ -220,7 +312,30 @@
                 "label": "A full copy"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 5
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 5,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 8
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "Perpendicular means no shared direction, so the shadow length is 0."
@@ -271,7 +386,19 @@
                 "label": "(0, 3)"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 5
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "It already lies on the x axis. The shadow is itself."
@@ -312,7 +439,30 @@
                 "label": "Doubles the arrow"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 5
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The second projection sees an arrow that is already on the line."
@@ -359,7 +509,30 @@
                 "label": "Random crop"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 2
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The kept part is chosen by the direction, not by chance."
@@ -392,7 +565,30 @@
                 "label": "(0, 2)"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 5
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 3
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "(1, 0) is horizontal, so the shadow keeps 4 and drops 2."
@@ -433,7 +629,30 @@
                 "label": "2"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 5
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 3
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "2 was the part off the line. The shadow drops it."
@@ -474,7 +693,30 @@
                 "label": "Becomes the shadow"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 2
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The shadow is the matching part. The rest is discarded."

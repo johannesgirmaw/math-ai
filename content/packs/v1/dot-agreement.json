@@ -370,7 +370,31 @@
                 "label": "5"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 3
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                },
+                "guide": true
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "2 times 3 is 6. Adding the zeros changes nothing."
@@ -467,7 +491,31 @@
                 "label": "3"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 4
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 8
+                },
+                "guide": true
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "2 times 1 is 2, and 1 times 2 is 2. The sum is 4."
@@ -508,7 +556,31 @@
                 "label": "Must be perpendicular"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 4
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 7
+                },
+                "guide": true
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "Perpendicular is zero. More shared direction raises the score."
@@ -662,7 +734,31 @@
                 "label": "Are equal"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 5
+                }
+              },
+              {
+                "start": {
+                  "x": 5,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 8
+                },
+                "guide": true
+              }
+            ],
+            "score": "zero"
           },
           "feedback": {
             "wrong_option": "Equal arrows agree. A right angle shares no direction."

@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 
 /// Geometric robot. Eyes grow when a skill is mastered.
 class PipMark extends StatelessWidget {
-  const PipMark({this.mastered = false, super.key});
+  const PipMark({this.mastered = false, this.size = 64, super.key});
 
   final bool mastered;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +15,13 @@ class PipMark extends StatelessWidget {
     return Semantics(
       label: mastered ? 'Pip mastered' : 'Pip resting',
       child: TweenAnimationBuilder<double>(
-        tween: Tween<double>(end: scale),
+        tween: Tween<double>(begin: mastered ? 0.6 : scale, end: scale),
         duration: reduce ? Duration.zero : const Duration(milliseconds: 400),
         curve: Curves.easeOut,
         builder: (context, value, _) {
           return CustomPaint(
             key: const Key('pip-mark'),
-            size: const Size(64, 64),
+            size: Size(size, size),
             painter: _PipPainter(eyeScale: value),
           );
         },

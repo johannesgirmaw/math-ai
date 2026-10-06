@@ -94,7 +94,19 @@
                 "label": "(2, 4)"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 4
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "Right is first. Up is second. (2, 4) swaps them."
@@ -117,7 +129,19 @@
                 "label": "A color name"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 4
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The numbers and their direction are the feature."
@@ -192,7 +216,19 @@
                 "label": "(5, 0)"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 5,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 7
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "(5, 0) is right 5. You want no right and 5 up."
@@ -233,7 +269,30 @@
                 "label": "The tail's place"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 4
+                }
+              },
+              {
+                "start": {
+                  "x": 3,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 7
+                },
+                "guide": true
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The place of the tail can change. The pair is the displacement."
@@ -266,7 +325,19 @@
                 "label": "(4, 0)"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 2,
+                  "y": 6
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "x does not change. y grows by 4, so the pair is (0, 4)."
@@ -331,7 +402,19 @@
                 "label": "A quadrant"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 5
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "A quadrant is a region. This pair is a vector."
@@ -354,7 +437,19 @@
                 "label": "Left and up"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 3,
+                  "y": 7
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 3
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "Positive first number is right. Negative second number is down."

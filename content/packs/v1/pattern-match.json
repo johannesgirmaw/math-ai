@@ -151,7 +151,31 @@
                 "label": "Match"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 5
+                }
+              },
+              {
+                "start": {
+                  "x": 7,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 2,
+                  "y": 3
+                },
+                "guide": true
+              }
+            ],
+            "score": "negative"
           },
           "feedback": {
             "wrong_option": "A match scores high. A low score means they point apart."
@@ -174,7 +198,31 @@
                 "label": "Coin flip"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 4
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 7
+                },
+                "guide": true
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "The comparison is the agreement score, the dot product."
@@ -207,7 +255,40 @@
                 "label": "B"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 5
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 7
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 7
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 5,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 6
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "Perpendicular scores zero. The agreeing pattern scores higher."
@@ -248,7 +329,31 @@
                 "label": "Drawn nearer on the page"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 4
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 7
+                },
+                "guide": true
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "The page position is not the score. Agreement is."
@@ -295,7 +400,20 @@
                 "label": "A filename"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 4
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 5
+                }
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "The match is a number, the agreement."
@@ -328,7 +446,31 @@
                 "label": "The score of 0"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 6
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 3
+                },
+                "guide": true
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "5 agrees more than 1 or 0."
@@ -369,7 +511,31 @@
                 "label": "Cancel the lesson"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 4
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 7
+                },
+                "guide": true
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "A tie means the agreements match. Nothing is cancelled."
@@ -435,7 +601,31 @@
                 "label": "Keep every pattern equally"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 6
+                }
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 2
+                },
+                "guide": true
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "Equal keeping ignores the score you just computed."

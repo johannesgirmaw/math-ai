@@ -26,6 +26,7 @@ class LessonFeedback extends LessonState {
     required this.message,
     required this.hadMiss,
     required this.correctCount,
+    this.answer,
   });
 
   final int screenIndex;
@@ -34,6 +35,7 @@ class LessonFeedback extends LessonState {
   final String message;
   final Map<int, bool> hadMiss;
   final int correctCount;
+  final Object? answer;
 }
 
 /// Every screen has been checked.
@@ -148,6 +150,7 @@ LessonState _presenting(
         message: message,
         hadMiss: missed,
         correctCount: correctCount,
+        answer: state.draft,
       );
     case ContinuePressed():
       return state;

@@ -173,6 +173,7 @@ class _Submitter implements LessonSubmitter {
       MissionComplete(
         streakCurrent: 1,
         xpTotal: 10,
+        xpAwarded: 10,
         pipAbility: launch.pipAbility,
         whyItMatters: launch.lesson.whyItMatters,
       ),
@@ -241,6 +242,8 @@ void main() {
 
     expect(find.byKey(const Key('path-lane-left')), findsOneWidget);
     expect(find.byKey(const Key('path-lane-right')), findsOneWidget);
+    expect(find.byKey(const Key('path-streak')), findsOneWidget);
+    expect(find.byKey(const Key('current-halo')), findsOneWidget);
 
     await tester.tap(find.text('Arrow parts'));
     await tester.pumpAndSettle();
@@ -253,6 +256,7 @@ void main() {
 
     expect(find.byKey(const Key('pip-ability')), findsOneWidget);
     expect(find.text('Pip can aim an arrow.'), findsOneWidget);
+    expect(find.text('+10 XP'), findsOneWidget);
     expect(
       find.text('A vector is an arrow a model can add and scale.'),
       findsOneWidget,

@@ -76,6 +76,7 @@ class HttpSyncApi implements SyncApi {
         MissionComplete(
           streakCurrent: data['streakCurrent'] as int? ?? 0,
           xpTotal: (data['xpTotal'] as num?)?.toInt() ?? 0,
+          xpAwarded: (data['xpAwarded'] as num?)?.toInt() ?? 0,
           pipAbility: data['pipAbility'] as String? ?? '',
           whyItMatters: data['whyItMatters'] as String? ?? '',
           skillMastered: data['skillMastered'] as bool? ?? false,

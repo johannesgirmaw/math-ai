@@ -78,6 +78,7 @@ class MissionComplete {
     required this.xpTotal,
     required this.pipAbility,
     required this.whyItMatters,
+    this.xpAwarded = 0,
     this.offlineNote,
     this.skillMastered = false,
     this.nextTitle,
@@ -87,6 +88,7 @@ class MissionComplete {
 
   final int streakCurrent;
   final int xpTotal;
+  final int xpAwarded;
   final String pipAbility;
   final String whyItMatters;
   final String? offlineNote;

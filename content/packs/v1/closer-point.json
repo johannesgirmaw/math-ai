@@ -34,7 +34,40 @@
                 "label": "x = 9"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 1,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 1,
+                  "y": 6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 2,
+                  "y": 5
+                }
+              },
+              {
+                "start": {
+                  "x": 9,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 9,
+                  "y": 5
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "x = 2 is one step away. x = 9 is eight steps away."
@@ -75,7 +108,40 @@
                 "label": "y = 1"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 5,
+                  "y": 1
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 8
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 3,
+                  "y": 1
+                },
+                "tip": {
+                  "x": 3,
+                  "y": 7
+                }
+              },
+              {
+                "start": {
+                  "x": 7,
+                  "y": 1
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 2
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "y = 7 is one step from 8. y = 1 is much farther down."
@@ -122,7 +188,40 @@
                 "label": "The left one, always"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 5,
+                  "y": 4
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 8
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 4
+                },
+                "tip": {
+                  "x": 2,
+                  "y": 7
+                }
+              },
+              {
+                "start": {
+                  "x": 8,
+                  "y": 4
+                },
+                "tip": {
+                  "x": 8,
+                  "y": 7
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "The same gap means neither point wins."
@@ -155,7 +254,40 @@
                 "label": "(5, 1)"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 5,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 5.6,
+                  "y": 5.6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 5,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 5
+                }
+              },
+              {
+                "start": {
+                  "x": 5,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 1
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "(6, 5) is one step right. (5, 1) is four steps down."
@@ -196,7 +328,40 @@
                 "label": "(4, 4)"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 1,
+                  "y": 1
+                },
+                "tip": {
+                  "x": 1.8,
+                  "y": 1.8
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 1
+                },
+                "tip": {
+                  "x": 3,
+                  "y": 1
+                }
+              },
+              {
+                "start": {
+                  "x": 4,
+                  "y": 4
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 7
+                }
+              }
+            ]
           },
           "feedback": {
             "wrong_option": "(1, 0) is one step away. (4, 4) is far on both axes."

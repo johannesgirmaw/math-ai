@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:axiom/core/ui/app_theme.dart';
 import 'package:axiom/features/lesson_player/domain/lesson.dart';
 import 'package:flutter/material.dart';
@@ -158,6 +160,7 @@ Widget buildPrimitive({
   required Object? draft,
   required ValueChanged<Object?> onChanged,
   required bool enabled,
+  bool settle = false,
 }) {
   final builder = primitiveBuilders[primitive.type];
   if (builder == null) {
@@ -168,6 +171,7 @@ Widget buildPrimitive({
     draft: draft,
     onChanged: onChanged,
     enabled: enabled,
+    settle: settle,
   );
 }
 
@@ -177,6 +181,7 @@ typedef PrimitiveWidgetBuilder =
       required Object? draft,
       required ValueChanged<Object?> onChanged,
       required bool enabled,
+      bool settle,
     });
 
 final primitiveBuilders = <String, PrimitiveWidgetBuilder>{
@@ -192,14 +197,15 @@ Widget _choice({
   required Object? draft,
   required ValueChanged<Object?> onChanged,
   required bool enabled,
+  bool settle = false,
 }) {
   final choice = primitive as ChoicePrimitive;
+  final scene = choice.arrows.isNotEmpty || choice.score != null;
   return Column(
     crossAxisAlignment: CrossAxisAlignment.stretch,
     children: [
-      if (choice.arrows.isNotEmpty || choice.score != null)
-        SizedBox(
-          height: 160,
+      if (scene)
+        Expanded(
           child: CustomPaint(
             painter: _ScenePainter(arrows: choice.arrows, score: choice.score),
             child: const SizedBox.expand(),
@@ -237,6 +243,7 @@ Widget _slider({
   required Object? draft,
   required ValueChanged<Object?> onChanged,
   required bool enabled,
+  bool settle = false,
 }) {
   final slider = primitive as SliderPrimitive;
   final value = draft is num ? draft.toDouble() : slider.min;
@@ -271,31 +278,127 @@ Widget _arrow({
   required Object? draft,
   required ValueChanged<Object?> onChanged,
   required bool enabled,
+  bool settle = false,
 }) {
-  final arrow = primitive as DragArrowPrimitive;
-  return LayoutBuilder(
-    builder: (context, constraints) {
-      final size = Size(constraints.maxWidth, constraints.maxHeight);
-      final tip = _tip(draft) ?? arrow.start;
-      return GestureDetector(
-        onPanUpdate: enabled
-            ? (details) {
-                final object = context.findRenderObject();
-                if (object is! RenderBox || size.height == 0) return;
-                final local = object.globalToLocal(details.globalPosition);
-                onChanged({
-                  'x': (local.dx / size.width) * arrow.planeWidth,
-                  'y': (1 - local.dy / size.height) * arrow.planeHeight,
-                });
-              }
-            : null,
-        child: CustomPaint(
-          size: size,
-          painter: _ArrowPainter(arrow: arrow, tip: tip),
-        ),
-      );
-    },
+  return _ArrowSurface(
+    arrow: primitive as DragArrowPrimitive,
+    draft: draft,
+    onChanged: onChanged,
+    enabled: enabled,
+    settle: settle,
   );
+}
+
+class _ArrowSurface extends StatefulWidget {
+  const _ArrowSurface({
+    required this.arrow,
+    required this.draft,
+    required this.onChanged,
+    required this.enabled,
+    required this.settle,
+  });
+
+  final DragArrowPrimitive arrow;
+  final Object? draft;
+  final ValueChanged<Object?> onChanged;
+  final bool enabled;
+  final bool settle;
+
+  @override
+  State<_ArrowSurface> createState() => _ArrowSurfaceState();
+}
+
+class _ArrowSurfaceState extends State<_ArrowSurface>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  PlanePoint? _from;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 220),
+    );
+  }
+
+  @override
+  void didUpdateWidget(covariant _ArrowSurface oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.settle && !oldWidget.settle) {
+      _from = _tip(oldWidget.draft) ?? _tip(widget.draft) ?? widget.arrow.start;
+      final reduce = MediaQuery.disableAnimationsOf(context);
+      if (reduce) {
+        _controller.value = 1;
+      } else {
+        unawaited(_controller.forward(from: 0));
+      }
+    }
+    if (!widget.settle) {
+      _from = null;
+      _controller.value = 0;
+    }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  PlanePoint _shown(double t) {
+    final live = _tip(widget.draft) ?? widget.arrow.start;
+    final from = _from;
+    if (!widget.settle || from == null) return live;
+    final eased = Curves.easeOut.transform(t);
+    final target = widget.arrow.targetTip;
+    return PlanePoint(
+      x: from.x + (target.x - from.x) * eased,
+      y: from.y + (target.y - from.y) * eased,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, _) {
+        final tip = _shown(_controller.value);
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            final size = Size(constraints.maxWidth, constraints.maxHeight);
+            final label =
+                'Arrow tip ${tip.x.toStringAsFixed(1)}, '
+                '${tip.y.toStringAsFixed(1)}';
+            return Semantics(
+              label: label,
+              child: GestureDetector(
+                onPanUpdate: widget.enabled
+                    ? (details) {
+                        final object = context.findRenderObject();
+                        if (object is! RenderBox || size.height == 0) return;
+                        final local = object.globalToLocal(
+                          details.globalPosition,
+                        );
+                        final width = widget.arrow.planeWidth;
+                        final height = widget.arrow.planeHeight;
+                        widget.onChanged({
+                          'x': (local.dx / size.width) * width,
+                          'y': (1 - local.dy / size.height) * height,
+                        });
+                      }
+                    : null,
+                child: CustomPaint(
+                  size: size,
+                  painter: _ArrowPainter(arrow: widget.arrow, tip: tip),
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 }
 
 PlanePoint? _tip(Object? draft) {
@@ -410,6 +513,7 @@ Widget _matrix({
   required Object? draft,
   required ValueChanged<Object?> onChanged,
   required bool enabled,
+  bool settle = false,
 }) {
   final matrix = primitive as MatrixWarpPrimitive;
   final cells = draft is List
@@ -462,7 +566,21 @@ Widget _cell({
       padding: const EdgeInsets.all(8),
       child: Column(
         children: [
-          Text(cells[index].toStringAsFixed(1)),
+          GestureDetector(
+            key: Key('matrix-cell-$index'),
+            onVerticalDragUpdate: enabled
+                ? (details) {
+                    final next = List<double>.from(cells);
+                    next[index] = next[index] - details.delta.dy / 24;
+                    onChanged(next);
+                  }
+                : null,
+            child: SizedBox(
+              height: 48,
+              width: double.infinity,
+              child: Center(child: Text(cells[index].toStringAsFixed(1))),
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -499,85 +617,215 @@ Widget _match({
   required Object? draft,
   required ValueChanged<Object?> onChanged,
   required bool enabled,
+  bool settle = false,
 }) {
-  final match = primitive as MatchPrimitive;
-  final pairs = _pairs(draft);
-  final pending = draft is Map ? draft['pendingLeft'] : null;
-  String? partner(String leftId) {
-    for (final pair in pairs) {
-      if (pair.leftId == leftId) return pair.rightId;
-    }
-    return null;
-  }
-
-  return Row(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Expanded(
-        child: Column(
-          children: [
-            for (final option in match.left)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    side: BorderSide(
-                      color: pending == option.id
-                          ? AxiomColors.accent
-                          : AxiomColors.line,
-                      width: pending == option.id ? 2 : 1,
-                    ),
-                  ),
-                  onPressed: enabled
-                      ? () => onChanged({
-                          'pendingLeft': option.id,
-                          'pairs': _encode(pairs),
-                        })
-                      : null,
-                  child: Text(_pairLabel(option, partner(option.id), match)),
-                ),
-              ),
-          ],
-        ),
-      ),
-      Expanded(
-        child: Column(
-          children: [
-            for (final option in match.right)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor:
-                        pairs.any((pair) => pair.rightId == option.id)
-                        ? AxiomColors.line
-                        : null,
-                  ),
-                  onPressed: enabled
-                      ? () {
-                          if (pending is! String) return;
-                          final next = [
-                            ...pairs.where((pair) => pair.leftId != pending),
-                            MatchPair(leftId: pending, rightId: option.id),
-                          ];
-                          onChanged({'pairs': _encode(next)});
-                        }
-                      : null,
-                  child: Text(option.label),
-                ),
-              ),
-          ],
-        ),
-      ),
-    ],
+  return _MatchBoard(
+    match: primitive as MatchPrimitive,
+    draft: draft,
+    onChanged: onChanged,
+    enabled: enabled,
   );
 }
 
-String _pairLabel(ChoiceOption option, String? rightId, MatchPrimitive match) {
-  if (rightId == null) return option.label;
-  final right = match.right.where((item) => item.id == rightId);
-  final label = right.isEmpty ? option.label : right.first.label;
-  return '${option.label} → $label';
+class _MatchBoard extends StatefulWidget {
+  const _MatchBoard({
+    required this.match,
+    required this.draft,
+    required this.onChanged,
+    required this.enabled,
+  });
+
+  final MatchPrimitive match;
+  final Object? draft;
+  final ValueChanged<Object?> onChanged;
+  final bool enabled;
+
+  @override
+  State<_MatchBoard> createState() => _MatchBoardState();
+}
+
+class _MatchBoardState extends State<_MatchBoard> {
+  final GlobalKey _boardKey = GlobalKey();
+  late final List<GlobalKey> _leftKeys = [
+    for (final _ in widget.match.left) GlobalKey(),
+  ];
+  late final List<GlobalKey> _rightKeys = [
+    for (final _ in widget.match.right) GlobalKey(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final draft = widget.draft;
+    final pairs = _pairs(draft);
+    final pending = draft is Map ? draft['pendingLeft'] : null;
+    return Stack(
+      key: _boardKey,
+      children: [
+        Positioned.fill(
+          child: IgnorePointer(
+            child: CustomPaint(
+              painter: _PairLinkPainter(
+                pairs: pairs,
+                left: widget.match.left,
+                right: widget.match.right,
+                leftKeys: _leftKeys,
+                rightKeys: _rightKeys,
+                boardKey: _boardKey,
+              ),
+            ),
+          ),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  for (var index = 0; index < widget.match.left.length; index++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: OutlinedButton(
+                        key: _leftKeys[index],
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(
+                            color: pending == widget.match.left[index].id
+                                ? AxiomColors.accent
+                                : AxiomColors.line,
+                            width: pending == widget.match.left[index].id
+                                ? 2
+                                : 1,
+                          ),
+                        ),
+                        onPressed: widget.enabled
+                            ? () => widget.onChanged({
+                                'pendingLeft': widget.match.left[index].id,
+                                'pairs': _encode(pairs),
+                              })
+                            : null,
+                        child: Text(widget.match.left[index].label),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  for (var index = 0;
+                      index < widget.match.right.length;
+                      index++)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: OutlinedButton(
+                        key: _rightKeys[index],
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: _paired(
+                            pairs,
+                            widget.match.right[index].id,
+                          )
+                              ? AxiomColors.line
+                              : null,
+                        ),
+                        onPressed: widget.enabled
+                            ? () {
+                                if (pending is! String) return;
+                                final next = [
+                                  ...pairs.where(
+                                    (pair) => pair.leftId != pending,
+                                  ),
+                                  MatchPair(
+                                    leftId: pending,
+                                    rightId: widget.match.right[index].id,
+                                  ),
+                                ];
+                                widget.onChanged({'pairs': _encode(next)});
+                              }
+                            : null,
+                        child: Text(widget.match.right[index].label),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        for (final pair in pairs)
+          Semantics(
+            label: _connectionLabel(pair, widget.match),
+            container: true,
+            child: const SizedBox.shrink(),
+          ),
+      ],
+    );
+  }
+}
+
+bool _paired(List<MatchPair> pairs, String rightId) {
+  return pairs.any((pair) => pair.rightId == rightId);
+}
+
+String _connectionLabel(MatchPair pair, MatchPrimitive match) {
+  final left = match.left.where((item) => item.id == pair.leftId);
+  final right = match.right.where((item) => item.id == pair.rightId);
+  final leftLabel = left.isEmpty ? pair.leftId : left.first.label;
+  final rightLabel = right.isEmpty ? pair.rightId : right.first.label;
+  return 'Connected $leftLabel to $rightLabel';
+}
+
+class _PairLinkPainter extends CustomPainter {
+  const _PairLinkPainter({
+    required this.pairs,
+    required this.left,
+    required this.right,
+    required this.leftKeys,
+    required this.rightKeys,
+    required this.boardKey,
+  });
+
+  final List<MatchPair> pairs;
+  final List<ChoiceOption> left;
+  final List<ChoiceOption> right;
+  final List<GlobalKey> leftKeys;
+  final List<GlobalKey> rightKeys;
+  final GlobalKey boardKey;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final board = boardKey.currentContext?.findRenderObject() as RenderBox?;
+    if (board == null || !board.hasSize) return;
+    final paint = Paint()
+      ..color = AxiomColors.ink
+      ..strokeWidth = 2
+      ..strokeCap = StrokeCap.round;
+    for (final pair in pairs) {
+      final leftIndex = left.indexWhere((item) => item.id == pair.leftId);
+      final rightIndex = right.indexWhere((item) => item.id == pair.rightId);
+      if (leftIndex < 0 || rightIndex < 0) continue;
+      final leftBox =
+          leftKeys[leftIndex].currentContext?.findRenderObject() as RenderBox?;
+      final rightBox =
+          rightKeys[rightIndex].currentContext?.findRenderObject()
+              as RenderBox?;
+      if (leftBox == null ||
+          rightBox == null ||
+          !leftBox.hasSize ||
+          !rightBox.hasSize) {
+        continue;
+      }
+      final start = board.globalToLocal(
+        leftBox.localToGlobal(
+          Offset(leftBox.size.width, leftBox.size.height / 2),
+        ),
+      );
+      final end = board.globalToLocal(
+        rightBox.localToGlobal(Offset(0, rightBox.size.height / 2)),
+      );
+      canvas.drawLine(start, end, paint);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant _PairLinkPainter oldDelegate) => true;
 }
 
 List<MatchPair> _pairs(Object? draft) {

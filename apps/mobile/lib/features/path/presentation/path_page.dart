@@ -184,6 +184,7 @@ class _PathHeader extends ConsumerWidget {
                   style: theme.bodyLarge,
                 ),
                 const _TodayGoal(),
+                const _PathStreak(),
               ],
             ),
           ),
@@ -207,6 +208,23 @@ class _TodayGoal extends ConsumerWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8),
       child: Text(text, key: const Key('today-goal')),
+    );
+  }
+}
+
+class _PathStreak extends ConsumerWidget {
+  const _PathStreak();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final summary = ref.watch(profileSummaryProvider).asData?.value;
+    if (summary == null) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.only(top: 4),
+      child: Text(
+        'Streak ${summary.streakCurrent}',
+        key: const Key('path-streak'),
+      ),
     );
   }
 }
@@ -248,7 +266,7 @@ class _Station extends ConsumerWidget {
             children: [
               Positioned.fill(
                 child: CustomPaint(
-                  painter: _BridgePainter(fromLeft: fromLeft, toLeft: left),
+                  painter: PathBridgePainter(fromLeft: fromLeft, toLeft: left),
                 ),
               ),
               Align(
@@ -303,11 +321,33 @@ class _RevealState extends State<_Reveal> {
   Widget build(BuildContext context) => widget.child;
 }
 
-class _BridgePainter extends CustomPainter {
-  const _BridgePainter({required this.fromLeft, required this.toLeft});
+/// Stroke from the previous lane to this node's lane.
+class PathBridgePainter extends CustomPainter {
+  const PathBridgePainter({required this.fromLeft, required this.toLeft});
 
   final bool fromLeft;
   final bool toLeft;
+
+  double _laneX(Size size, bool left) {
+    final align = left ? -0.62 : 0.62;
+    return size.width * (0.5 + align / 2);
+  }
+
+  /// Curve used by the path. Tests read this instead of the pixels.
+  Path pathFor(Size size) {
+    final fromX = _laneX(size, fromLeft);
+    final toX = _laneX(size, toLeft);
+    return Path()
+      ..moveTo(fromX, 0)
+      ..cubicTo(
+        fromX,
+        size.height * 0.28,
+        toX,
+        size.height * 0.42,
+        toX,
+        size.height,
+      );
+  }
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -316,15 +356,11 @@ class _BridgePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 8
       ..strokeCap = StrokeCap.round;
-    canvas.drawLine(
-      Offset(size.width / 2, 0),
-      Offset(size.width / 2, size.height),
-      paint,
-    );
+    canvas.drawPath(pathFor(size), paint);
   }
 
   @override
-  bool shouldRepaint(covariant _BridgePainter oldDelegate) {
+  bool shouldRepaint(covariant PathBridgePainter oldDelegate) {
     return oldDelegate.fromLeft != fromLeft || oldDelegate.toLeft != toLeft;
   }
 }
@@ -373,7 +409,10 @@ class _NodeButton extends ConsumerWidget {
                   ),
                 ),
               ),
-            _Marker(node: node, current: current),
+            _CurrentHalo(
+              active: current,
+              child: _Marker(node: node, current: current),
+            ),
             const SizedBox(height: 6),
             Text(
               node.title,
@@ -488,6 +527,40 @@ class _NodeButton extends ConsumerWidget {
       (value) => value,
     );
     context.go('/complete', extra: complete);
+  }
+}
+
+class _CurrentHalo extends StatelessWidget {
+  const _CurrentHalo({required this.active, required this.child});
+
+  final bool active;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    if (!active) return child;
+    final reduce = MediaQuery.disableAnimationsOf(context);
+    return TweenAnimationBuilder<double>(
+      key: const Key('current-halo'),
+      tween: Tween(begin: reduce ? 1 : 0.86, end: 1),
+      duration: reduce ? Duration.zero : const Duration(milliseconds: 400),
+      curve: Curves.easeOut,
+      builder: (context, value, child) {
+        return DecoratedBox(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: AxiomColors.accent.withValues(alpha: 0.35 * value),
+                spreadRadius: 6 * value,
+              ),
+            ],
+          ),
+          child: child,
+        );
+      },
+      child: child,
+    );
   }
 }
 
