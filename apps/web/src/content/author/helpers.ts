@@ -14,6 +14,10 @@ export function choice(
   correctOptionId: string,
   wrong: string,
   correctMessage: string,
+  picture?: {
+    arrows?: { start: [number, number]; tip: [number, number]; guide?: boolean }[];
+    score?: "positive" | "zero" | "negative";
+  },
 ): Screen {
   return {
     id,
@@ -22,6 +26,16 @@ export function choice(
       type: "choice",
       options: options.map(([optionId, label]) => ({ id: optionId, label })),
       correctOptionId,
+      ...(picture?.arrows
+        ? {
+            arrows: picture.arrows.map((arrow) => ({
+              start: { x: arrow.start[0], y: arrow.start[1] },
+              tip: { x: arrow.tip[0], y: arrow.tip[1] },
+              ...(arrow.guide ? { guide: true } : {}),
+            })),
+          }
+        : {}),
+      ...(picture?.score ? { score: picture.score } : {}),
     },
     feedback: { wrong_option: must(wrong, 160, `${id} feedback`) },
     easyWithinMs: 8000,
@@ -62,6 +76,7 @@ export function drag(
   wrongLength: string,
   correctMessage: string,
   guide?: { start: [number, number]; tip: [number, number] },
+  score?: "positive" | "zero" | "negative",
 ): Screen {
   const [sx, sy] = start;
   const [tx, ty] = tip;
@@ -81,6 +96,7 @@ export function drag(
             guideTip: { x: guide.tip[0], y: guide.tip[1] },
           }
         : {}),
+      ...(score ? { score } : {}),
     },
     feedback: {
       wrong_direction: must(wrongDirection, 160, `${id} direction`),

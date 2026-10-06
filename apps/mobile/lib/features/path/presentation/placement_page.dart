@@ -145,6 +145,8 @@ class _PlacementPageState extends ConsumerState<PlacementPage> {
     return LessonPage(
       key: ValueKey(lesson.id),
       lesson: lesson,
+      banner: 'A few pictures to find your start.',
+      hapticsEnabled: ref.watch(hapticsEnabledProvider),
       onFinished: (result) => unawaited(_answered(result)),
     );
   }

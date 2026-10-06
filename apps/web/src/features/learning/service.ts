@@ -16,6 +16,7 @@ import {
   skillMastery,
   skillNodes,
   streaks,
+  worlds,
   user,
   xpEvents,
 } from "@/server/db/schema";
@@ -71,6 +72,8 @@ export async function getPath(userId: string) {
     for (const lane of zigzag(group)) lanes.set(lane.nodeId, lane.lane);
   }
   const mastery = await masteryMap(userId);
+  const worldRows = await getDb().select().from(worlds);
+  const worldName = new Map(worldRows.map((world) => [world.id, world.title]));
   const publishedLessons = await getDb().select().from(lessons).where(eq(lessons.status, "published"));
   const completed = await getDb()
     .select({ lessonId: lessonAttempts.lessonId })
@@ -101,8 +104,14 @@ export async function getPath(userId: string) {
       rank,
       lane,
       progress: Number(snap.score.toFixed(2)),
+      worldTitle: worldName.get(skill.worldId) ?? "",
       state,
       lessonId: (lessonsBySkill.get(skill.id) ?? []).find((id) => !done.has(id)) ?? lessonsBySkill.get(skill.id)?.[0] ?? null,
+      waitsOn:
+        skill.prereqIds
+          .filter((id) => !isMastered(mastery.get(id) ?? emptyMastery()))
+          .map((id) => byId.get(id)?.title)
+          .find((title) => Boolean(title)) ?? "",
     };
   });
 }
@@ -272,6 +281,20 @@ export async function completeAttempt(userId: string, attemptId: string) {
   const published = await getPublishedSkills();
   const index = skill ? published.findIndex((item) => item.id === skill.id) : -1;
   const follower = index >= 0 ? published.slice(index + 1).find((item) => item.worldId === skill?.worldId) : undefined;
+  const publishedLessons = await db
+    .select()
+    .from(lessons)
+    .where(and(eq(lessons.skillNodeId, lesson?.skillNodeId ?? ""), eq(lessons.status, "published")));
+  const finished = await db
+    .select({ lessonId: lessonAttempts.lessonId })
+    .from(lessonAttempts)
+    .where(and(eq(lessonAttempts.userId, userId), sql`${lessonAttempts.completedAt} is not null`));
+  const finishedIds = new Set(finished.map((row) => row.lessonId));
+  finishedIds.add(attempt.lessonId);
+  const nextLesson = [...publishedLessons]
+    .filter((item) => !finishedIds.has(item.id))
+    .sort((a, b) => a.id.localeCompare(b.id))[0];
+  const nextLessonTitle = nextLesson ? (nextLesson.definition as Lesson).title : null;
   return {
     streakCurrent: current,
     xpTotal: Number(xp?.total ?? 0),
@@ -279,6 +302,7 @@ export async function completeAttempt(userId: string, attemptId: string) {
     whyItMatters: definition?.whyItMatters ?? "",
     skillMastered: isMastered(mastery),
     nextTitle: follower?.title ?? null,
+    nextLessonTitle,
     misses,
   };
 }
@@ -328,6 +352,10 @@ export async function profileSummary(userId: string) {
     streakCurrent: streak?.current ?? 0,
     streakLongest: streak?.longest ?? 0,
     xpTotal: Number(xp?.total ?? 0),
+    todayDone:
+      Boolean(streak?.lastActiveDate) &&
+      String(streak?.lastActiveDate).slice(0, 10) ===
+        formatInTimeZone(new Date(), profile?.timezone || "UTC", "yyyy-MM-dd"),
   };
 }
 

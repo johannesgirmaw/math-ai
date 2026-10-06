@@ -152,7 +152,7 @@
       "screens": [
         {
           "id": "build",
-          "prompt": "Build 1, 2 / 3, 0 from zeros.",
+          "prompt": "Build the table that puts 1 and 2 on top, 3 and 0 below.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -167,8 +167,7 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
             "wrong_cell": "A cell is still off 1, 2, 3, 0. Bottom right stays 0."

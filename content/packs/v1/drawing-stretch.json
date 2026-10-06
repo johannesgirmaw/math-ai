@@ -145,7 +145,7 @@
       "screens": [
         {
           "id": "tall",
-          "prompt": "Set 1, 0 / 0, 2 to stretch upward.",
+          "prompt": "Set the table that doubles height and leaves width alone.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -160,8 +160,7 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
             "wrong_cell": "Top left is 1 and bottom right is 2. The other cells stay 0."

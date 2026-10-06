@@ -21,7 +21,7 @@
       "screens": [
         {
           "id": "same",
-          "prompt": "The gray arrow points right. Drag your tip so yours points the same way.",
+          "prompt": "Drag your tip the same way as the gray arrow.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -42,7 +42,8 @@
             "guideTip": {
               "x": 7,
               "y": 5
-            }
+            },
+            "score": "positive"
           },
           "feedback": {
             "wrong_direction": "Your arrow turns away. The gray arrow points right.",
@@ -53,7 +54,7 @@
         },
         {
           "id": "opposite",
-          "prompt": "The gray arrow points right. Drag your tip so yours points the opposite way.",
+          "prompt": "Drag your tip the opposite way from the gray arrow.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -74,7 +75,8 @@
             "guideTip": {
               "x": 7,
               "y": 5
-            }
+            },
+            "score": "negative"
           },
           "feedback": {
             "wrong_direction": "Opposite means the other way. The gray arrow points right.",
@@ -85,7 +87,7 @@
         },
         {
           "id": "perp",
-          "prompt": "The gray arrow points right. Drag your tip so yours points straight up.",
+          "prompt": "Drag your tip so it meets the gray arrow at a right angle.",
           "primitive": {
             "type": "dragArrow",
             "planeWidth": 10,
@@ -106,7 +108,8 @@
             "guideTip": {
               "x": 7,
               "y": 3
-            }
+            },
+            "score": "zero"
           },
           "feedback": {
             "wrong_direction": "Straight up meets the gray arrow at a right angle.",
@@ -135,26 +138,53 @@
         },
         {
           "id": "neuron",
-          "prompt": "A neuron starts by scoring this agreement. That score is the...",
+          "prompt": "What score do these arrows earn?",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "Dot product"
+                "label": "Positive"
               },
               {
                 "id": "b",
-                "label": "Random label"
+                "label": "Zero"
+              },
+              {
+                "id": "c",
+                "label": "Negative"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 3
+                }
+              }
+            ]
           },
           "feedback": {
-            "wrong_option": "The score has a name. It is the dot product, not a coin flip."
+            "wrong_option": "They point the same way, so the score is positive."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "The dot product is the agreement score."
+          "correctMessage": "Same direction scores positive."
         }
       ],
       "capstone": false,
@@ -181,7 +211,31 @@
                 "label": "0"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 3
+                }
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
             "wrong_option": "1 times 1, plus 0 times 0, is 1."
@@ -204,7 +258,31 @@
                 "label": "1"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 7,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 2,
+                  "y": 3
+                }
+              }
+            ],
+            "score": "negative"
           },
           "feedback": {
             "wrong_option": "1 times -1 is -1. The zeros add nothing."
@@ -227,7 +305,31 @@
                 "label": "1"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 4
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 4
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 4,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 4,
+                  "y": 7
+                }
+              }
+            ],
+            "score": "zero"
           },
           "feedback": {
             "wrong_option": "1 times 0 plus 0 times 1 is 0. A right angle shares nothing."
@@ -306,26 +408,49 @@
         },
         {
           "id": "apart",
-          "prompt": "A negative score means the arrows...",
+          "prompt": "What score do these arrows earn?",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "Point against each other"
+                "label": "Negative"
               },
               {
                 "id": "b",
-                "label": "Point the same way"
+                "label": "Positive"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 7,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 2,
+                  "y": 3
+                }
+              }
+            ]
           },
           "feedback": {
-            "wrong_option": "Same way is positive. Against each other is negative."
+            "wrong_option": "They point against each other, so the score is negative."
           },
           "easyWithinMs": 8000,
-          "correctMessage": "Negative means they disagree."
+          "correctMessage": "Opposite arrows score negative."
         },
         {
           "id": "four-sum",
@@ -409,17 +534,50 @@
             "options": [
               {
                 "id": "a",
-                "label": "(1, 0) with (2, 0)"
+                "label": "The pair that points the same way"
               },
               {
                 "id": "b",
-                "label": "(1, 0) with (0, 1)"
+                "label": "The pair at a right angle"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 1,
+                  "y": 7
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 7
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 1,
+                  "y": 5
+                },
+                "tip": {
+                  "x": 5,
+                  "y": 5
+                }
+              },
+              {
+                "start": {
+                  "x": 6,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 6
+                }
+              }
+            ]
           },
           "feedback": {
-            "wrong_option": "(1, 0) with (0, 1) is a right angle, score 0. The other pair points the same way."
+            "wrong_option": "A right angle scores 0. The pair that points the same way scores higher."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Same direction beats a right angle."
@@ -432,17 +590,41 @@
             "options": [
               {
                 "id": "a",
-                "label": "(1, 0) with (-1, 0)"
+                "label": "The pair that points opposite ways"
               },
               {
                 "id": "b",
-                "label": "(1, 0) with (1, 0)"
+                "label": "The pair that points the same way"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 7
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 7
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 7,
+                  "y": 4
+                },
+                "tip": {
+                  "x": 2,
+                  "y": 4
+                }
+              }
+            ],
+            "score": "negative"
           },
           "feedback": {
-            "wrong_option": "(1, 0) with itself scores 1. The opposite pair scores -1."
+            "wrong_option": "Same direction scores positive. Opposite scores negative."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Opposite is the low score."
@@ -490,23 +672,47 @@
         },
         {
           "id": "winner",
-          "prompt": "You rank patterns by this score. The winner...",
+          "prompt": "What score wins?",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "Agrees most"
+                "label": "Positive"
               },
               {
                 "id": "b",
-                "label": "Has the longer name"
+                "label": "Zero"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 2,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 2,
+                  "y": 3
+                },
+                "tip": {
+                  "x": 7,
+                  "y": 3
+                }
+              }
+            ],
+            "score": "positive"
           },
           "feedback": {
-            "wrong_option": "The name is not the score. The highest agreement wins."
+            "wrong_option": "Zero shares nothing. The positive pair wins."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Keep the strongest agreement."

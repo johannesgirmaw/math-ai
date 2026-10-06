@@ -171,3 +171,17 @@ final profileSummaryProvider = FutureProvider.autoDispose<ProfileSummary>((
     return summary;
   });
 });
+
+/// Haptics on a correct check. The profile page is the switch.
+class HapticsSetting extends Notifier<bool> {
+  @override
+  bool build() => true;
+
+  // setEnabled is a method so the profile switch can pass the new value.
+  // ignore: use_setters_to_change_properties
+  void setEnabled({required bool enabled}) => state = enabled;
+}
+
+final hapticsEnabledProvider = NotifierProvider<HapticsSetting, bool>(
+  HapticsSetting.new,
+);

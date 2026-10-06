@@ -13,6 +13,14 @@ class CompletePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          key: const Key('complete-back'),
+          tooltip: 'Back',
+          onPressed: () => context.go('/path'),
+          icon: const Icon(Icons.arrow_back),
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -38,17 +46,33 @@ class CompletePage extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   child: Column(
                     children: [
-                      Text(
-                        mission.pipAbility,
-                        key: const Key('pip-ability'),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 8),
-                      Text('Streak ${mission.streakCurrent}'),
-                      if (_unlockLine(mission) case final line?) ...[
-                        const SizedBox(height: 8),
-                        Text(line, textAlign: TextAlign.center),
-                      ],
+              Text(
+                mission.skillMastered
+                    ? 'Pip can do this now.'
+                    : 'Pip is still learning this.',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                mission.pipAbility,
+                key: const Key('pip-ability'),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 8),
+              Text('Streak ${mission.streakCurrent}'),
+              if (mission.nextLessonTitle case final lesson?
+                  when lesson.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                Text(
+                  'Next lesson: $lesson',
+                  key: const Key('next-lesson'),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+              if (_unlockLine(mission) case final line?) ...[
+                const SizedBox(height: 8),
+                Text(line, textAlign: TextAlign.center),
+              ],
                     ],
                   ),
                 ),
@@ -79,7 +103,9 @@ class CompletePage extends StatelessWidget {
 String? _unlockLine(MissionComplete mission) {
   final next = mission.nextTitle;
   if (next == null || next.isEmpty) return null;
-  if (mission.skillMastered) return '$next is open.';
+  if (mission.skillMastered) return 'Next node: $next.';
+  final lesson = mission.nextLessonTitle;
+  if (lesson != null && lesson.isNotEmpty) return null;
   if (mission.misses == 1) return 'One miss keeps $next locked.';
   if (mission.misses > 1) {
     return '${mission.misses} misses keep $next locked.';

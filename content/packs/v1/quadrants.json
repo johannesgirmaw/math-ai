@@ -107,27 +107,28 @@
           "correctMessage": "Both negative means the lower left."
         },
         {
-          "id": "axis",
-          "prompt": "A point with y = 0 sits where?",
+          "id": "place",
+          "prompt": "Drag the tip onto the mark in the upper right.",
           "primitive": {
-            "type": "choice",
-            "options": [
-              {
-                "id": "a",
-                "label": "On the x axis"
-              },
-              {
-                "id": "b",
-                "label": "Inside a quadrant"
-              }
-            ],
-            "correctOptionId": "a"
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 1,
+              "y": 1
+            },
+            "targetTip": {
+              "x": 8,
+              "y": 7
+            },
+            "tolerance": 0.8
           },
           "feedback": {
-            "wrong_option": "y = 0 means no step up or down, so the point is on the x axis."
+            "wrong_direction": "The mark sits up and to the right.",
+            "wrong_length": "The aim is right. Stretch or shorten until the tip meets the mark."
           },
-          "easyWithinMs": 8000,
-          "correctMessage": "A zero coordinate puts the point on an axis, not in a quadrant."
+          "easyWithinMs": 12000,
+          "correctMessage": "The tip is in the upper right."
         }
       ],
       "capstone": false,

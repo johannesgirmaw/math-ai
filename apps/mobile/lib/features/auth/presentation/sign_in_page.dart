@@ -15,7 +15,9 @@ class SignInPage extends ConsumerStatefulWidget {
 class _SignInPageState extends ConsumerState<SignInPage> {
   final _email = TextEditingController();
   final _password = TextEditingController();
-  String? _error;
+  String? _emailError;
+  String? _passwordError;
+  String? _formError;
   var _busy = false;
 
   @override
@@ -29,16 +31,26 @@ class _SignInPageState extends ConsumerState<SignInPage> {
     final email = _email.text.trim();
     final password = _password.text;
     if (email.isEmpty) {
-      setState(() => _error = 'Enter your email.');
+      setState(() {
+        _emailError = 'Enter your email.';
+        _passwordError = null;
+        _formError = null;
+      });
       return;
     }
     if (password.isEmpty) {
-      setState(() => _error = 'Enter your password.');
+      setState(() {
+        _emailError = null;
+        _passwordError = 'Enter your password.';
+        _formError = null;
+      });
       return;
     }
     setState(() {
       _busy = true;
-      _error = null;
+      _emailError = null;
+      _passwordError = null;
+      _formError = null;
     });
     final message = await ref
         .read(sessionControllerProvider.notifier)
@@ -46,7 +58,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
     if (!mounted) return;
     setState(() {
       _busy = false;
-      _error = message;
+      _formError = message;
     });
   }
 
@@ -63,23 +75,35 @@ class _SignInPageState extends ConsumerState<SignInPage> {
             Text('Axiom', style: Theme.of(context).textTheme.headlineLarge),
             const SizedBox(height: 8),
             const Text('Sign in to continue the path.'),
-            const SizedBox(height: 32),
+            const SizedBox(height: 8),
+            TextButton(
+              key: const Key('create-account'),
+              onPressed: () => context.go('/sign-up'),
+              child: const Text('Create an account'),
+            ),
+            const SizedBox(height: 16),
             TextField(
               controller: _email,
               keyboardType: TextInputType.emailAddress,
               autofillHints: const [AutofillHints.email],
-              decoration: const InputDecoration(labelText: 'Email'),
+              decoration: InputDecoration(
+                labelText: 'Email',
+                errorText: _emailError,
+              ),
             ),
             const SizedBox(height: 12),
             TextField(
               controller: _password,
               obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
+              decoration: InputDecoration(
+                labelText: 'Password',
+                errorText: _passwordError,
+              ),
             ),
-            if (_error != null) ...[
+            if (_formError != null) ...[
               const SizedBox(height: 12),
               Text(
-                _error!,
+                _formError!,
                 style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
             ],
@@ -88,10 +112,6 @@ class _SignInPageState extends ConsumerState<SignInPage> {
               key: const Key('sign-in-submit'),
               onPressed: _busy ? null : _submit,
               child: Text(_busy ? 'Signing in' : 'Sign in'),
-            ),
-            TextButton(
-              onPressed: () => context.go('/sign-up'),
-              child: const Text('Create an account'),
             ),
           ],
         ),

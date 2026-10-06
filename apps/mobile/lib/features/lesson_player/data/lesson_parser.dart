@@ -78,6 +78,8 @@ Primitive _primitive(Object? raw) {
       return ChoicePrimitive(
         options: _options(json['options']),
         correctOptionId: _string(json['correctOptionId']),
+        arrows: _sceneArrows(json['arrows']),
+        score: json['score'] is String ? json['score'] as String : null,
       );
     case 'slider':
       return SliderPrimitive(
@@ -98,6 +100,7 @@ Primitive _primitive(Object? raw) {
             ? null
             : _point(json['guideStart']),
         guideTip: json['guideTip'] == null ? null : _point(json['guideTip']),
+        score: json['score'] is String ? json['score'] as String : null,
       );
     case 'matrixWarp':
       return MatrixWarpPrimitive(
@@ -128,6 +131,18 @@ List<ChoiceOption> _options(Object? raw) {
     return ChoiceOption(
       id: _string(item['id']),
       label: _string(item['label']),
+    );
+  }).toList();
+}
+
+List<SceneArrow> _sceneArrows(Object? raw) {
+  if (raw is! List) return const [];
+  return raw.map((item) {
+    if (item is! Map) throw ParseException('An arrow picture is missing.');
+    return SceneArrow(
+      start: _point(item['start']),
+      tip: _point(item['tip']),
+      guide: item['guide'] == true,
     );
   }).toList();
 }

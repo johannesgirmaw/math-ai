@@ -694,33 +694,36 @@ export const vectorSkills: SkillDraft[] = [
       lesson("Same, opposite, right angle", "A neuron's first step is this agreement score.", [
         drag(
           "same",
-          "The gray arrow points right. Drag your tip so yours points the same way.",
+          "Drag your tip the same way as the gray arrow.",
           [2, 2],
           [7, 2],
           "Your arrow turns away. The gray arrow points right.",
           "The direction matches. Stretch or shorten to the mark.",
           "Same direction means a positive agreement.",
           right,
+          "positive",
         ),
         drag(
           "opposite",
-          "The gray arrow points right. Drag your tip so yours points the opposite way.",
+          "Drag your tip the opposite way from the gray arrow.",
           [7, 2],
           [2, 2],
           "Opposite means the other way. The gray arrow points right.",
           "You are aimed the other way. Match the length of the mark.",
           "Opposite arrows disagree.",
           right,
+          "negative",
         ),
         drag(
           "perp",
-          "The gray arrow points right. Drag your tip so yours points straight up.",
+          "Drag your tip so it meets the gray arrow at a right angle.",
           [4, 1],
           [4, 6],
           "Straight up meets the gray arrow at a right angle.",
           "The aim is up. Match the length of the mark.",
           "A right angle means no agreement.",
           { start: [2, 3], tip: [7, 3] },
+          "zero",
         ),
         slider(
           "score",
@@ -734,14 +737,21 @@ export const vectorSkills: SkillDraft[] = [
         ),
         choice(
           "neuron",
-          "A neuron starts by scoring this agreement. That score is the...",
+          "What score do these arrows earn?",
           [
-            ["a", "Dot product"],
-            ["b", "Random label"],
+            ["a", "Positive"],
+            ["b", "Zero"],
+            ["c", "Negative"],
           ],
           "a",
-          "The score has a name. It is the dot product, not a coin flip.",
-          "The dot product is the agreement score.",
+          "They point the same way, so the score is positive.",
+          "Same direction scores positive.",
+          {
+            arrows: [
+              { start: [2, 6], tip: [7, 6], guide: true },
+              { start: [2, 3], tip: [7, 3] },
+            ],
+          },
         ),
       ]),
       lesson("Compute the score", "You multiply matching places, then add those products.", [
@@ -755,6 +765,13 @@ export const vectorSkills: SkillDraft[] = [
           "a",
           "1 times 1, plus 0 times 0, is 1.",
           "Same unit arrows score 1.",
+          {
+            arrows: [
+              { start: [2, 6], tip: [6, 6], guide: true },
+              { start: [2, 3], tip: [6, 3] },
+            ],
+            score: "positive",
+          },
         ),
         choice(
           "against",
@@ -766,6 +783,13 @@ export const vectorSkills: SkillDraft[] = [
           "a",
           "1 times -1 is -1. The zeros add nothing.",
           "Opposite unit arrows score -1.",
+          {
+            arrows: [
+              { start: [2, 6], tip: [7, 6], guide: true },
+              { start: [7, 3], tip: [2, 3] },
+            ],
+            score: "negative",
+          },
         ),
         choice(
           "square",
@@ -777,6 +801,13 @@ export const vectorSkills: SkillDraft[] = [
           "a",
           "1 times 0 plus 0 times 1 is 0. A right angle shares nothing.",
           "A right angle scores 0.",
+          {
+            arrows: [
+              { start: [2, 4], tip: [7, 4], guide: true },
+              { start: [4, 2], tip: [4, 7] },
+            ],
+            score: "zero",
+          },
         ),
         slider(
           "high",
@@ -813,14 +844,20 @@ export const vectorSkills: SkillDraft[] = [
         ),
         choice(
           "apart",
-          "A negative score means the arrows...",
+          "What score do these arrows earn?",
           [
-            ["a", "Point against each other"],
-            ["b", "Point the same way"],
+            ["a", "Negative"],
+            ["b", "Positive"],
           ],
           "a",
-          "Same way is positive. Against each other is negative.",
-          "Negative means they disagree.",
+          "They point against each other, so the score is negative.",
+          "Opposite arrows score negative.",
+          {
+            arrows: [
+              { start: [2, 6], tip: [7, 6], guide: true },
+              { start: [7, 3], tip: [2, 3] },
+            ],
+          },
         ),
         choice(
           "four-sum",
@@ -860,23 +897,37 @@ export const vectorSkills: SkillDraft[] = [
           "most",
           "Which pair agrees most?",
           [
-            ["a", "(1, 0) with (2, 0)"],
-            ["b", "(1, 0) with (0, 1)"],
+            ["a", "The pair that points the same way"],
+            ["b", "The pair at a right angle"],
           ],
           "a",
-          "(1, 0) with (0, 1) is a right angle, score 0. The other pair points the same way.",
+          "A right angle scores 0. The pair that points the same way scores higher.",
           "Same direction beats a right angle.",
+          {
+            arrows: [
+              { start: [1, 7], tip: [5, 7], guide: true },
+              { start: [1, 5], tip: [5, 5] },
+              { start: [6, 2], tip: [6, 6] },
+            ],
+          },
         ),
         choice(
           "least",
           "Which pair agrees least?",
           [
-            ["a", "(1, 0) with (-1, 0)"],
-            ["b", "(1, 0) with (1, 0)"],
+            ["a", "The pair that points opposite ways"],
+            ["b", "The pair that points the same way"],
           ],
           "a",
-          "(1, 0) with itself scores 1. The opposite pair scores -1.",
+          "Same direction scores positive. Opposite scores negative.",
           "Opposite is the low score.",
+          {
+            arrows: [
+              { start: [2, 7], tip: [7, 7], guide: true },
+              { start: [7, 4], tip: [2, 4] },
+            ],
+            score: "negative",
+          },
         ),
         slider(
           "zero",
@@ -901,14 +952,21 @@ export const vectorSkills: SkillDraft[] = [
         ),
         choice(
           "winner",
-          "You rank patterns by this score. The winner...",
+          "What score wins?",
           [
-            ["a", "Agrees most"],
-            ["b", "Has the longer name"],
+            ["a", "Positive"],
+            ["b", "Zero"],
           ],
           "a",
-          "The name is not the score. The highest agreement wins.",
+          "Zero shares nothing. The positive pair wins.",
           "Keep the strongest agreement.",
+          {
+            arrows: [
+              { start: [2, 6], tip: [7, 6], guide: true },
+              { start: [2, 3], tip: [7, 3] },
+            ],
+            score: "positive",
+          },
         ),
       ]),
     ],
@@ -923,14 +981,21 @@ export const vectorSkills: SkillDraft[] = [
       lesson("Keep the match", "Attention starts by scoring which pattern agrees.", [
         choice(
           "keep",
-          "One pattern points with the sample. One points against it. Pip keeps...",
+          "Which pattern should Pip keep?",
           [
-            ["a", "The one that agrees"],
-            ["b", "The longer title"],
+            ["a", "The one that points the same way"],
+            ["b", "The one that points the other way"],
           ],
           "a",
-          "Agreement is the score. The title length is not.",
+          "The gray arrow and the blue arrow point the same way.",
           "Pip keeps the agreeing pattern.",
+          {
+            arrows: [
+              { start: [1, 6], tip: [6, 6], guide: true },
+              { start: [1, 4], tip: [6, 4] },
+              { start: [8, 2], tip: [3, 2] },
+            ],
+          },
         ),
         match(
           "pairs",
@@ -1390,11 +1455,10 @@ export const vectorSkills: SkillDraft[] = [
       lesson("Read the cells", "The identity table is 1, 0 on the top row and 0, 1 below.", [
         matrix(
           "build",
-          "Build 1, 2 / 3, 0 from zeros.",
+          "Build the table that puts 1 and 2 on top, 3 and 0 below.",
           [1, 2, 3, 0],
           "A cell is still off 1, 2, 3, 0. Bottom right stays 0.",
           "Those are the four weights.",
-          true,
         ),
         choice(
           "c",
@@ -1570,11 +1634,10 @@ export const vectorSkills: SkillDraft[] = [
         ),
         matrix(
           "set",
-          "Set 1, 1 / 0, 1.",
+          "Set the table that slides x by y.",
           [1, 1, 0, 1],
           "Top row is 1, 1. Bottom row is 0, 1.",
           "That table slides x by y.",
-          true,
         ),
         slider(
           "x",
@@ -1721,11 +1784,10 @@ export const vectorSkills: SkillDraft[] = [
       lesson("Stretch upward", "The same rule can stretch height instead of width.", [
         matrix(
           "tall",
-          "Set 1, 0 / 0, 2 to stretch upward.",
+          "Set the table that doubles height and leaves width alone.",
           [1, 0, 0, 2],
           "Top left is 1 and bottom right is 2. The other cells stay 0.",
           "That table doubles height.",
-          true,
         ),
         choice(
           "gets",
@@ -1911,11 +1973,10 @@ export const vectorSkills: SkillDraft[] = [
         ),
         matrix(
           "b",
-          "Warp B is 2, 0 / 0, 1. Set it.",
+          "Set the table that doubles width and leaves height alone.",
           [2, 0, 0, 1],
           "Top left is 2 and bottom right is 1. The other cells stay 0.",
           "Warp B doubles x.",
-          true,
         ),
         choice(
           "sees",
@@ -2122,11 +2183,10 @@ export const vectorSkills: SkillDraft[] = [
         ),
         matrix(
           "set",
-          "Set 1, 1 / 0, 1.",
+          "Set the sideways slide: top row 1, 1 and bottom row 0, 1.",
           [1, 1, 0, 1],
           "Top row is 1, 1. Bottom row is 0, 1.",
           "That is the sideways slide.",
-          true,
         ),
         choice(
           "organize",

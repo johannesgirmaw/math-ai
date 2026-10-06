@@ -41,15 +41,32 @@ sealed class Primitive {
   String get type;
 }
 
+/// An arrow drawn behind a choice, not graded.
+class SceneArrow {
+  const SceneArrow({
+    required this.start,
+    required this.tip,
+    this.guide = false,
+  });
+
+  final PlanePoint start;
+  final PlanePoint tip;
+  final bool guide;
+}
+
 /// Pick one option id.
 final class ChoicePrimitive extends Primitive {
   const ChoicePrimitive({
     required this.options,
     required this.correctOptionId,
+    this.arrows = const [],
+    this.score,
   });
 
   final List<ChoiceOption> options;
   final String correctOptionId;
+  final List<SceneArrow> arrows;
+  final String? score;
 
   @override
   String get type => 'choice';
@@ -85,6 +102,7 @@ final class DragArrowPrimitive extends Primitive {
     required this.tolerance,
     this.guideStart,
     this.guideTip,
+    this.score,
   });
 
   final double planeWidth;
@@ -94,6 +112,7 @@ final class DragArrowPrimitive extends Primitive {
   final double tolerance;
   final PlanePoint? guideStart;
   final PlanePoint? guideTip;
+  final String? score;
 
   @override
   String get type => 'dragArrow';

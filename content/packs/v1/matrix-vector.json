@@ -292,7 +292,7 @@
         },
         {
           "id": "set",
-          "prompt": "Set 1, 1 / 0, 1.",
+          "prompt": "Set the table that slides x by y.",
           "primitive": {
             "type": "matrixWarp",
             "target": [
@@ -307,8 +307,7 @@
               0,
               0
             ],
-            "tolerance": 0.1,
-            "showTarget": true
+            "tolerance": 0.1
           },
           "feedback": {
             "wrong_cell": "Top row is 1, 1. Bottom row is 0, 1."

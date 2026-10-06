@@ -70,5 +70,6 @@ ProfileSummary profileFromJson(Map<String, dynamic> json) {
     streakCurrent: json['streakCurrent'] as int? ?? 0,
     streakLongest: json['streakLongest'] as int? ?? 0,
     xpTotal: (json['xpTotal'] as num?)?.toInt() ?? 0,
+    todayDone: json['todayDone'] == true,
   );
 }

@@ -34,7 +34,7 @@ class PathPage extends ConsumerWidget {
             ),
           IconButton(
             key: const Key('open-profile'),
-            onPressed: () => context.go('/profile'),
+            onPressed: () => context.push('/profile'),
             icon: const Icon(Icons.person_outline),
           ),
         ],
@@ -70,6 +70,13 @@ class _PathList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final sync = ref.watch(syncControllerProvider);
     final seen = <String>{};
+    String? currentId;
+    for (final node in nodes) {
+      if (node.available) {
+        currentId = node.id;
+        break;
+      }
+    }
     return ListView(
       padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
       children: [
@@ -92,11 +99,17 @@ class _PathList extends ConsumerWidget {
             ],
           ),
         const _PathHeader(),
-        for (final node in nodes)
+        for (var index = 0; index < nodes.length; index++)
           _Station(
-            node: node,
-            laneKey: _laneKey(node, seen),
-            continues: node != nodes.last,
+            node: nodes[index],
+            laneKey: _laneKey(nodes[index], seen),
+            fromLeft: index == 0
+                ? nodes[index].lane != 'right'
+                : nodes[index - 1].lane != 'right',
+            current: nodes[index].id == currentId,
+            showWorld:
+                index > 0 &&
+                nodes[index].worldTitle != nodes[index - 1].worldTitle,
           ),
         if (kDebugMode) ...[
           TextButton(
@@ -160,11 +173,17 @@ class _PathHeader extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Your path', style: theme.headlineSmall),
+                Text(
+                  current != null && current.worldTitle.isNotEmpty
+                      ? current.worldTitle
+                      : 'Your path',
+                  style: theme.headlineSmall,
+                ),
                 Text(
                   current?.promise ?? 'Skills unlock in order.',
                   style: theme.bodyLarge,
                 ),
+                const _TodayGoal(),
               ],
             ),
           ),
@@ -174,93 +193,207 @@ class _PathHeader extends ConsumerWidget {
   }
 }
 
-class _Station extends ConsumerWidget {
-  const _Station({
-    required this.node,
-    required this.laneKey,
-    required this.continues,
-  });
-
-  final PathNode node;
-  final Key laneKey;
-  final bool continues;
+class _TodayGoal extends ConsumerWidget {
+  const _TodayGoal();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final left = node.lane != 'right';
-    return SizedBox(
-      height: 220,
-      child: Stack(
-        children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-              width: 2,
-              height: continues ? 220 : 110,
-              color: AxiomColors.line,
-            ),
-          ),
-          Align(
-            alignment: left
-                ? const Alignment(-0.55, 0)
-                : const Alignment(0.55, 0),
-            child: _NodeButton(node: node, laneKey: laneKey),
-          ),
-        ],
-      ),
+    final summary = ref.watch(profileSummaryProvider).asData?.value;
+    if (summary == null) return const SizedBox.shrink();
+    final minutes = summary.dailyGoalMinutes;
+    final text = summary.todayDone
+        ? "Today's $minutes-minute mission is done."
+        : "Today's goal is $minutes minutes.";
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Text(text, key: const Key('today-goal')),
     );
   }
 }
 
-class _NodeButton extends ConsumerWidget {
-  const _NodeButton({required this.node, required this.laneKey});
+class _Station extends ConsumerWidget {
+  const _Station({
+    required this.node,
+    required this.laneKey,
+    required this.fromLeft,
+    required this.current,
+    required this.showWorld,
+  });
 
   final PathNode node;
   final Key laneKey;
+  final bool fromLeft;
+  final bool current;
+  final bool showWorld;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final left = node.lane != 'right';
+    return Column(
+      children: [
+        if (showWorld && node.worldTitle.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                node.worldTitle,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ),
+          ),
+        SizedBox(
+          height: 176,
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: CustomPaint(
+                  painter: _BridgePainter(fromLeft: fromLeft, toLeft: left),
+                ),
+              ),
+              Align(
+                alignment: left
+                    ? const Alignment(-0.62, 0.15)
+                    : const Alignment(0.62, 0.15),
+                child: _Reveal(
+                  active: current,
+                  child: _NodeButton(
+                    node: node,
+                    laneKey: laneKey,
+                    current: current,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _Reveal extends StatefulWidget {
+  const _Reveal({required this.active, required this.child});
+
+  final bool active;
+  final Widget child;
+
+  @override
+  State<_Reveal> createState() => _RevealState();
+}
+
+class _RevealState extends State<_Reveal> {
+  @override
+  void initState() {
+    super.initState();
+    _show();
+  }
+
+  void _show() {
+    if (!widget.active) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      unawaited(
+        Scrollable.ensureVisible(context, alignment: 0.35),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) => widget.child;
+}
+
+class _BridgePainter extends CustomPainter {
+  const _BridgePainter({required this.fromLeft, required this.toLeft});
+
+  final bool fromLeft;
+  final bool toLeft;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = AxiomColors.line
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 8
+      ..strokeCap = StrokeCap.round;
+    canvas.drawLine(
+      Offset(size.width / 2, 0),
+      Offset(size.width / 2, size.height),
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant _BridgePainter oldDelegate) {
+    return oldDelegate.fromLeft != fromLeft || oldDelegate.toLeft != toLeft;
+  }
+}
+
+class _NodeButton extends ConsumerWidget {
+  const _NodeButton({
+    required this.node,
+    required this.laneKey,
+    required this.current,
+  });
+
+  final PathNode node;
+  final Key laneKey;
+  final bool current;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final locked = node.state == 'locked' || node.lessonId == null;
-    final mastered = node.state == 'mastered';
     final theme = Theme.of(context).textTheme;
     return SizedBox(
       key: laneKey,
-      width: 148,
+      width: 132,
       child: TextButton(
         onPressed: locked ? null : () => unawaited(_open(context, ref)),
         style: TextButton.styleFrom(
           foregroundColor: AxiomColors.ink,
           disabledForegroundColor: AxiomColors.ink.withValues(alpha: 0.45),
-          padding: const EdgeInsets.symmetric(horizontal: 4),
+          padding: EdgeInsets.zero,
+          minimumSize: Size.zero,
+          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            _Marker(node: node),
-            const SizedBox(height: 8),
+            if (current)
+              const DecoratedBox(
+                decoration: BoxDecoration(
+                  color: AxiomColors.accent,
+                  borderRadius: BorderRadius.all(Radius.circular(12)),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                  child: Text(
+                    'You are here',
+                    style: TextStyle(color: AxiomColors.surface, fontSize: 12),
+                  ),
+                ),
+              ),
+            _Marker(node: node, current: current),
+            const SizedBox(height: 6),
             Text(
               node.title,
               textAlign: TextAlign.center,
+              maxLines: 2,
               style: theme.titleMedium,
             ),
-            if (!locked && !mastered)
-              Text(
-                node.promise,
-                textAlign: TextAlign.center,
-                style: theme.bodyMedium,
-              ),
-            if (node.available && node.progress > 0 && node.progress < 0.8)
+            if (current && node.progress > 0 && node.progress < 0.8)
               Text(
                 'Not solid yet.',
                 textAlign: TextAlign.center,
                 style: theme.bodyMedium,
               ),
-            if (mastered)
+            if (node.lessonId == null) const Text('Lessons publish soon.'),
+            if (locked && node.waitsOn.isNotEmpty)
               Text(
-                node.pipAbility,
+                'After ${node.waitsOn}',
                 textAlign: TextAlign.center,
                 style: theme.bodyMedium,
               ),
-            if (node.lessonId == null) const Text('Lessons publish soon.'),
           ],
         ),
       ),
@@ -291,6 +424,7 @@ class _NodeButton extends ConsumerWidget {
             MaterialPageRoute<void>(
               builder: (_) => LessonPage(
                 lesson: launch.lesson,
+                hapticsEnabled: ref.read(hapticsEnabledProvider),
                 onQuit: () {
                   unawaited(
                     ref.read(telemetryProvider).capture(
@@ -358,9 +492,10 @@ class _NodeButton extends ConsumerWidget {
 }
 
 class _Marker extends StatelessWidget {
-  const _Marker({required this.node});
+  const _Marker({required this.node, required this.current});
 
   final PathNode node;
+  final bool current;
 
   @override
   Widget build(BuildContext context) {
@@ -371,9 +506,10 @@ class _Marker extends StatelessWidget {
         : available
         ? AxiomColors.accent
         : AxiomColors.line;
+    final size = current ? 68.0 : 56.0;
     final face = Container(
-      width: 64,
-      height: 64,
+      width: size,
+      height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         color: available ? AxiomColors.accent : AxiomColors.surface,

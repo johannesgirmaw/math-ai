@@ -4,6 +4,7 @@ import { useState } from "react";
 import { canonicalJson, lessonSchema, type Lesson, type Screen } from "@axiom/content-schema";
 import { saveLesson } from "@/features/studio/actions";
 import { MathText } from "@/components/math-text";
+import { ScreenPicture } from "@/features/studio/screen-picture";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -269,6 +270,7 @@ export function LessonEditor({ initial }: { initial: Lesson }) {
           {lesson.screens.map((screen) => (
             <article key={screen.id} className="rounded-[20px] border border-border bg-card p-4">
               <MathText text={screen.prompt} />
+              <ScreenPicture screen={screen} />
               <p className="mt-2 text-sm text-muted-foreground">Answer: {answerOf(screen)}</p>
             </article>
           ))}

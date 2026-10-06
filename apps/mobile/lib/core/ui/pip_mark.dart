@@ -36,24 +36,37 @@ class _PipPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final body = Paint()..color = AxiomColors.accent;
+    final fill = Paint()..color = AxiomColors.accent;
     final eye = Paint()..color = AxiomColors.paper;
-    final radius = size.shortestSide * 0.07 * eyeScale;
     canvas
       ..drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromLTWH(
+            size.width * 0.22,
+            size.height * 0.5,
+            size.width * 0.56,
+            size.height * 0.38,
+          ),
+          Radius.circular(size.shortestSide * 0.14),
+        ),
+        fill,
+      )
+      ..drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(
             size.width * 0.16,
-            size.height * 0.22,
+            size.height * 0.1,
             size.width * 0.68,
-            size.height * 0.62,
+            size.height * 0.42,
           ),
           Radius.circular(size.shortestSide * 0.18),
         ),
-        body,
-      )
-      ..drawCircle(Offset(size.width * 0.38, size.height * 0.48), radius, eye)
-      ..drawCircle(Offset(size.width * 0.62, size.height * 0.48), radius, eye);
+        fill,
+      );
+    final radius = size.shortestSide * 0.08 * eyeScale;
+    canvas
+      ..drawCircle(Offset(size.width * 0.38, size.height * 0.3), radius, eye)
+      ..drawCircle(Offset(size.width * 0.62, size.height * 0.3), radius, eye);
   }
 
   @override

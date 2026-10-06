@@ -63,7 +63,16 @@ class _SignUpPageState extends ConsumerState<SignUpPage> {
         child: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            const SizedBox(height: 48),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: IconButton(
+                key: const Key('sign-up-back'),
+                tooltip: 'Back',
+                onPressed: () => context.go('/sign-in'),
+                icon: const Icon(Icons.arrow_back),
+              ),
+            ),
+            const SizedBox(height: 16),
             Text(
               'Create account',
               style: Theme.of(context).textTheme.headlineLarge,

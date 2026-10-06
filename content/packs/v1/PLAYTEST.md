@@ -53,4 +53,6 @@ Where they stalled: not run yet.
 
 ## After the five sessions
 
+The first dot-agreement lesson now opens on the gray arrow and the mark, and the score sits on the picture. The other three dot-agreement lessons show the same pictures. Those edits follow the picture-first rules. They are not a substitute for the five think-alouds.
+
 Rewrite any screen that needed a spoken paragraph, bump that lesson version, and publish a new pack. Do not mark a session complete from a guess.

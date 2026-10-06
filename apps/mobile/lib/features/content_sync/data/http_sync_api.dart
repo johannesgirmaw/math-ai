@@ -80,6 +80,7 @@ class HttpSyncApi implements SyncApi {
           whyItMatters: data['whyItMatters'] as String? ?? '',
           skillMastered: data['skillMastered'] as bool? ?? false,
           nextTitle: data['nextTitle'] as String?,
+          nextLessonTitle: data['nextLessonTitle'] as String?,
           misses: (data['misses'] as num?)?.toInt() ?? 0,
         ),
       );

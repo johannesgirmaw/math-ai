@@ -16,6 +16,7 @@ class LessonPage extends ConsumerWidget {
     this.onFinished,
     this.onChecked,
     this.onQuit,
+    this.banner,
     super.key,
   });
 
@@ -24,6 +25,7 @@ class LessonPage extends ConsumerWidget {
   final ValueChanged<LessonResult>? onFinished;
   final ValueChanged<ScreenFact>? onChecked;
   final VoidCallback? onQuit;
+  final String? banner;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,9 +37,11 @@ class LessonPage extends ConsumerWidget {
     };
     final screen = lesson.screens[index];
     final drafting = state is LessonPresenting;
+    final hasAnswer = state is LessonPresenting && _hasAnswer(state.draft);
     return PopScope(
+      canPop: state is LessonComplete,
       onPopInvokedWithResult: (didPop, _) {
-        if (didPop && state is! LessonComplete) onQuit?.call();
+        if (!didPop) unawaited(_confirmQuit(context));
       },
       child: Scaffold(
         body: SafeArea(
@@ -46,8 +50,30 @@ class LessonPage extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ProgressDots(count: lesson.screens.length, index: index),
+                Row(
+                  children: [
+                    if (Navigator.of(context).canPop())
+                      IconButton(
+                        key: const Key('lesson-back'),
+                        tooltip: 'Back',
+                        onPressed: state is LessonComplete
+                            ? () => Navigator.of(context).pop()
+                            : () => _confirmQuit(context),
+                        icon: const Icon(Icons.arrow_back),
+                      ),
+                    Expanded(
+                      child: ProgressDots(
+                        count: lesson.screens.length,
+                        index: index,
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(height: 24),
+                if (banner != null) ...[
+                  Text(banner!),
+                  const SizedBox(height: 12),
+                ],
                 PromptText(text: screen.prompt),
                 const SizedBox(height: 24),
                 Expanded(
@@ -64,11 +90,6 @@ class LessonPage extends ConsumerWidget {
                           },
                         ),
                 ),
-                if (state is LessonPresenting && state.needsAnswer)
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 12),
-                    child: Text('Answer first.'),
-                  ),
                 if (state is LessonFeedback)
                   Padding(
                     padding: const EdgeInsets.only(bottom: 12),
@@ -79,7 +100,8 @@ class LessonPage extends ConsumerWidget {
                   ),
                 AxiomButton(
                   label: state is LessonFeedback ? 'Continue' : 'Check',
-                  onPressed: state is LessonComplete
+                  onPressed: state is LessonComplete ||
+                          (state is LessonPresenting && !hasAnswer)
                       ? null
                       : () => _act(ref, state),
                 ),
@@ -89,6 +111,33 @@ class LessonPage extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _confirmQuit(BuildContext context) async {
+    final leave = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Leave this mission?'),
+          content: const Text('This mission will start over next time.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: const Text('Stay'),
+            ),
+            TextButton(
+              key: const Key('leave-mission'),
+              onPressed: () => Navigator.of(context).pop(true),
+              child: const Text('Leave'),
+            ),
+          ],
+        );
+      },
+    );
+    if (leave == true && context.mounted) {
+      onQuit?.call();
+      Navigator.of(context).pop();
+    }
   }
 
   void _act(WidgetRef ref, LessonState state) {
@@ -111,4 +160,10 @@ class LessonPage extends ConsumerWidget {
       });
     }
   }
+}
+
+bool _hasAnswer(Object? draft) {
+  if (draft == null || draft == '') return false;
+  if (draft is List && draft.isEmpty) return false;
+  return true;
 }

@@ -12,6 +12,8 @@ class PathNode {
     required this.state,
     required this.lessonId,
     this.progress = 0,
+    this.worldTitle = '',
+    this.waitsOn = '',
   });
 
   final String id;
@@ -23,6 +25,8 @@ class PathNode {
   final String state;
   final String? lessonId;
   final double progress;
+  final String worldTitle;
+  final String waitsOn;
 
   bool get available => state == 'available' && lessonId != null;
 }
@@ -38,6 +42,7 @@ class ProfileSummary {
     required this.streakCurrent,
     required this.streakLongest,
     required this.xpTotal,
+    this.todayDone = false,
   });
 
   final String displayName;
@@ -48,6 +53,7 @@ class ProfileSummary {
   final int streakCurrent;
   final int streakLongest;
   final int xpTotal;
+  final bool todayDone;
 }
 
 /// One placement step from the server.
@@ -76,6 +82,7 @@ class MissionComplete {
     this.skillMastered = false,
     this.nextTitle,
     this.misses = 0,
+    this.nextLessonTitle,
   });
 
   final int streakCurrent;
@@ -85,6 +92,7 @@ class MissionComplete {
   final String? offlineNote;
   final bool skillMastered;
   final String? nextTitle;
+  final String? nextLessonTitle;
   final int misses;
 }
 

@@ -23,6 +23,11 @@ class OnboardingPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const PipMark(),
+              const SizedBox(height: 16),
+              Text(
+                'Skills you master become things Pip can do.',
+                style: Theme.of(context).textTheme.bodyLarge,
+              ),
               const SizedBox(height: 24),
               Text(
                 'How many minutes a day?',

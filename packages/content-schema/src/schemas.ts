@@ -26,10 +26,20 @@ const optionSchema = z.object({
   label: z.string().min(1),
 });
 
+const pointSchema = z.object({ x: z.number(), y: z.number() });
+
+const sceneArrowSchema = z.object({
+  start: pointSchema,
+  tip: pointSchema,
+  guide: z.boolean().optional(),
+});
+
 export const choicePrimitiveSchema = z.object({
   type: z.literal("choice"),
   options: z.array(optionSchema).min(2).max(4),
   correctOptionId: z.string().min(1),
+  arrows: z.array(sceneArrowSchema).max(3).optional(),
+  score: z.enum(["positive", "zero", "negative"]).optional(),
 });
 
 export const sliderPrimitiveSchema = z.object({
@@ -41,8 +51,6 @@ export const sliderPrimitiveSchema = z.object({
   tolerance: z.number().nonnegative(),
 });
 
-const pointSchema = z.object({ x: z.number(), y: z.number() });
-
 export const dragArrowPrimitiveSchema = z.object({
   type: z.literal("dragArrow"),
   planeWidth: z.number().positive(),
@@ -52,6 +60,7 @@ export const dragArrowPrimitiveSchema = z.object({
   tolerance: z.number().positive(),
   guideStart: pointSchema.optional(),
   guideTip: pointSchema.optional(),
+  score: z.enum(["positive", "zero", "negative"]).optional(),
 });
 
 export const matrixWarpPrimitiveSchema = z.object({

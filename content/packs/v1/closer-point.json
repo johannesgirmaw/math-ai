@@ -223,27 +223,28 @@
           "correctMessage": "A point is zero away from itself."
         },
         {
-          "id": "model",
-          "prompt": "A model uses the smaller gap to do what?",
+          "id": "near",
+          "prompt": "Drag the tip onto the nearer mark.",
           "primitive": {
-            "type": "choice",
-            "options": [
-              {
-                "id": "a",
-                "label": "Pick a nearest match"
-              },
-              {
-                "id": "b",
-                "label": "Pick a random label"
-              }
-            ],
-            "correctOptionId": "a"
+            "type": "dragArrow",
+            "planeWidth": 10,
+            "planeHeight": 10,
+            "start": {
+              "x": 5,
+              "y": 5
+            },
+            "targetTip": {
+              "x": 6,
+              "y": 5
+            },
+            "tolerance": 0.8
           },
           "feedback": {
-            "wrong_option": "The smaller gap is the nearer match, not a coin flip."
+            "wrong_direction": "The nearer mark is one step to the right.",
+            "wrong_length": "The aim is right. The nearer mark is one step away."
           },
-          "easyWithinMs": 8000,
-          "correctMessage": "Nearest match is the smaller gap."
+          "easyWithinMs": 12000,
+          "correctMessage": "One step beats a long step."
         }
       ],
       "capstone": false,

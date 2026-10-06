@@ -21,23 +21,56 @@
       "screens": [
         {
           "id": "keep",
-          "prompt": "One pattern points with the sample. One points against it. Pip keeps...",
+          "prompt": "Which pattern should Pip keep?",
           "primitive": {
             "type": "choice",
             "options": [
               {
                 "id": "a",
-                "label": "The one that agrees"
+                "label": "The one that points the same way"
               },
               {
                 "id": "b",
-                "label": "The longer title"
+                "label": "The one that points the other way"
               }
             ],
-            "correctOptionId": "a"
+            "correctOptionId": "a",
+            "arrows": [
+              {
+                "start": {
+                  "x": 1,
+                  "y": 6
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 6
+                },
+                "guide": true
+              },
+              {
+                "start": {
+                  "x": 1,
+                  "y": 4
+                },
+                "tip": {
+                  "x": 6,
+                  "y": 4
+                }
+              },
+              {
+                "start": {
+                  "x": 8,
+                  "y": 2
+                },
+                "tip": {
+                  "x": 3,
+                  "y": 2
+                }
+              }
+            ]
           },
           "feedback": {
-            "wrong_option": "Agreement is the score. The title length is not."
+            "wrong_option": "The gray arrow and the blue arrow point the same way."
           },
           "easyWithinMs": 8000,
           "correctMessage": "Pip keeps the agreeing pattern."
