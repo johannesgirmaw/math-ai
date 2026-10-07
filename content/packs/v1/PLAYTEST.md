@@ -1,6 +1,6 @@
 # Version 1 playtest
 
-Beachhead: teens and adults, about 14 to 35, curious about AI. Each session is a think-aloud on the first dot-agreement lesson, on a phone build. These notes are the protocol and the release checklist. Live sessions have not been run yet, so this file does not invent what a person said or where they stalled.
+Beachhead: teens and adults, about 14 to 35, curious about super intelligence. Each session is a think-aloud on the first dot-agreement lesson, on a phone build. These notes are the protocol and the release checklist. Live sessions have not been run yet, so this file does not invent what a person said or where they stalled.
 
 ## Product acceptance
 

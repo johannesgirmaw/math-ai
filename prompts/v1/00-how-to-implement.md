@@ -4,7 +4,7 @@ You are a staff engineer opening the Axiom repository. This file is the working 
 
 ## Product context
 
-Axiom trains the math that makes machine learning, robotics, and modern AI possible. The beachhead is teens and adults, roughly 14 to 35, who bounce off textbooks. Version 1 teaches Space (coordinates and arrows) and Vectors and matrices. A short adaptive placement drops a beginner at the on-ramp and a stronger learner nearer matrices.
+MATH SI trains the math that makes machine learning, robotics, and super intelligence possible. The beachhead is teens and adults, roughly 14 to 35, who bounce off textbooks. Version 1 teaches Space (coordinates and arrows) and Vectors and matrices. A short adaptive placement drops a beginner at the on-ramp and a stronger learner nearer matrices.
 
 The emotional hook is Pip, a small robot whose abilities are the skills the learner masters. Dot product lets Pip tell two patterns apart. Progress should feel like a machine getting smarter.
 

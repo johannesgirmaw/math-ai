@@ -1,0 +1,11 @@
+node_modules
+**/.next
+.git
+apps/mobile
+**/.dart_tool
+**/.turbo
+coverage
+.env
+.env.local
+.env.prod
+**/*.apk

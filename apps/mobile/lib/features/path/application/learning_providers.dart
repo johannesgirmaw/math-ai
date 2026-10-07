@@ -44,6 +44,15 @@ class PluginNetworkStatus implements NetworkStatus {
   }
 }
 
+final class LearnerVisible implements Exception {
+  LearnerVisible(this.message);
+
+  final String message;
+
+  @override
+  String toString() => message;
+}
+
 /// Quiet sync state for the path app bar.
 class SyncSnapshot {
   const SyncSnapshot({this.running = false, this.message});
@@ -156,9 +165,10 @@ final pathNodesProvider = FutureProvider.autoDispose<List<PathNode>>((
   ref,
 ) async {
   final result = await ref.watch(pathRepositoryProvider).load();
-  return result.fold((failure) => throw Exception(failure.message), (nodes) {
-    return nodes;
-  });
+  return result.fold(
+    (failure) => throw LearnerVisible(failure.message),
+    (nodes) => nodes,
+  );
 });
 
 // FutureProvider's typedef is noisy next to the explicit type arguments.
@@ -167,9 +177,10 @@ final profileSummaryProvider = FutureProvider.autoDispose<ProfileSummary>((
   ref,
 ) async {
   final result = await ref.watch(profileRepositoryProvider).summary();
-  return result.fold((failure) => throw Exception(failure.message), (summary) {
-    return summary;
-  });
+  return result.fold(
+    (failure) => throw LearnerVisible(failure.message),
+    (summary) => summary,
+  );
 });
 
 /// Haptics on a correct check. The profile page is the switch.

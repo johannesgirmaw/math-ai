@@ -79,6 +79,11 @@ export function createApi() {
     await next();
   });
 
+  app.onError((error, c) => {
+    console.error(error);
+    return c.json(fail("unavailable", "The service is busy. Try again in a moment."), 503);
+  });
+
   app.get("/me", async (c) => c.json(await getLearner(c.get("userId"))));
   app.get("/profile/summary", async (c) => c.json(await profileSummary(c.get("userId"))));
 

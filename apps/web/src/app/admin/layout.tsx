@@ -5,6 +5,8 @@ import { Toaster } from "sonner";
 import { SiteHeader, studioLinks } from "@/components/brand/site-frame";
 import { getAuth } from "@/server/auth";
 
+export const dynamic = "force-dynamic";
+
 const allowed = new Set(["author", "reviewer", "admin"]);
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {

@@ -41,21 +41,51 @@ class PathPage extends ConsumerWidget {
       ),
       body: nodes.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (error, _) => Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('$error'),
-              const SizedBox(height: 12),
-              FilledButton(
-                key: const Key('error-retry'),
-                onPressed: () => ref.invalidate(pathNodesProvider),
-                child: const Text('Try again'),
-              ),
-            ],
-          ),
+        error: (error, _) => _PathProblem(
+          message: error is LearnerVisible
+              ? error.message
+              : 'The path did not load. Try again.',
+          onRetry: () => ref.invalidate(pathNodesProvider),
         ),
         data: (items) => _PathList(nodes: items),
+      ),
+    );
+  }
+}
+
+class _PathProblem extends StatelessWidget {
+  const _PathProblem({required this.message, required this.onRetry});
+
+  final String message;
+  final VoidCallback onRetry;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
+    final detail = message == 'Something went wrong.'
+        ? 'The path is busy. Try again in a moment.'
+        : message;
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              'The path did not load.',
+              textAlign: TextAlign.center,
+              style: theme.titleLarge,
+            ),
+            const SizedBox(height: 8),
+            Text(detail, textAlign: TextAlign.center),
+            const SizedBox(height: 16),
+            FilledButton(
+              key: const Key('error-retry'),
+              onPressed: onRetry,
+              child: const Text('Try again'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -444,66 +474,73 @@ class _NodeButton extends ConsumerWidget {
   }
 
   Future<void> _open(BuildContext context, WidgetRef ref) async {
-    final opened = await ref.read(lessonLauncherProvider).open(node);
-    if (!context.mounted) return;
-    opened.fold(
-      (failure) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(failure.message)),
-        );
-      },
-      (launch) {
-        unawaited(
-          ref
-              .read(telemetryProvider)
-              .capture(
-                'lesson_started',
-                properties: {
-                  'lessonId': launch.lesson.id,
-                  'skillId': node.id,
-                },
-              ),
-        );
-        unawaited(
-          Navigator.of(context).push(
-            MaterialPageRoute<void>(
-              builder: (_) => LessonPage(
-                lesson: launch.lesson,
-                hapticsEnabled: ref.read(hapticsEnabledProvider),
-                onQuit: () {
-                  unawaited(
-                    ref
-                        .read(telemetryProvider)
-                        .capture(
-                          'lesson_quit',
-                          properties: {'lessonId': launch.lesson.id},
-                        ),
-                  );
-                },
-                onChecked: (fact) {
-                  unawaited(
-                    ref
-                        .read(telemetryProvider)
-                        .capture(
-                          'screen_checked',
-                          properties: {
-                            'lessonId': launch.lesson.id,
-                            'screenId': fact.screenId,
-                            'correct': fact.correct,
-                            'latencyMs': fact.latencyMs,
-                          },
-                        ),
-                  );
-                },
-                onFinished: (result) {
-                  unawaited(_finish(context, ref, launch, result));
-                },
+    try {
+      final opened = await ref.read(lessonLauncherProvider).open(node);
+      if (!context.mounted) return;
+      opened.fold(
+        (failure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(failure.message)),
+          );
+        },
+        (launch) {
+          unawaited(
+            ref
+                .read(telemetryProvider)
+                .capture(
+                  'lesson_started',
+                  properties: {
+                    'lessonId': launch.lesson.id,
+                    'skillId': node.id,
+                  },
+                ),
+          );
+          unawaited(
+            Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => LessonPage(
+                  lesson: launch.lesson,
+                  hapticsEnabled: ref.read(hapticsEnabledProvider),
+                  onQuit: () {
+                    unawaited(
+                      ref
+                          .read(telemetryProvider)
+                          .capture(
+                            'lesson_quit',
+                            properties: {'lessonId': launch.lesson.id},
+                          ),
+                    );
+                  },
+                  onChecked: (fact) {
+                    unawaited(
+                      ref
+                          .read(telemetryProvider)
+                          .capture(
+                            'screen_checked',
+                            properties: {
+                              'lessonId': launch.lesson.id,
+                              'screenId': fact.screenId,
+                              'correct': fact.correct,
+                              'latencyMs': fact.latencyMs,
+                            },
+                          ),
+                    );
+                  },
+                  onFinished: (result) {
+                    unawaited(_finish(context, ref, launch, result));
+                  },
+                ),
               ),
             ),
-          ),
-        );
-      },
-    );
+          );
+        },
+      );
+    } catch (_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Could not open this lesson.')),
+      );
+    }
   }
 
   Future<void> _finish(

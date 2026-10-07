@@ -5,13 +5,13 @@ import { nextCookies } from "better-auth/next-js";
 import { getDb } from "./db/client";
 import { account, profiles, session, streaks, user, verification } from "./db/schema";
 
-/** Loopback hosts the phone and browser use for the same local API port. */
-function localTrustedOrigins(): string[] {
+/** The public site, plus loopback hosts used by the phone and browser in local dev. */
+function trustedOrigins(): string[] {
   const configured = process.env.BETTER_AUTH_URL ?? "http://localhost:3000";
   const url = new URL(configured);
   const port = url.port ? `:${url.port}` : "";
   const hosts = ["localhost", "127.0.0.1", "10.0.2.2"];
-  return hosts.map((host) => `${url.protocol}//${host}${port}`);
+  return Array.from(new Set([configured, ...hosts.map((host) => `${url.protocol}//${host}${port}`)]));
 }
 
 export function createAuth() {
@@ -20,7 +20,7 @@ export function createAuth() {
     secret: process.env.BETTER_AUTH_SECRET,
     baseURL: process.env.BETTER_AUTH_URL,
     basePath: "/api/v1/auth",
-    trustedOrigins: localTrustedOrigins(),
+    trustedOrigins: trustedOrigins(),
     database: drizzleAdapter(db, {
       provider: "pg",
       schema: { user, session, account, verification },

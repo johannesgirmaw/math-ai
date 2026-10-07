@@ -80,7 +80,7 @@ class _SignInPageState extends ConsumerState<SignInPage> {
             ),
             const SizedBox(height: 16),
             Text(
-              'Function of AI',
+              'Function of SI',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: AxiomColors.accent,

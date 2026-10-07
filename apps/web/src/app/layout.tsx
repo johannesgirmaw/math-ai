@@ -10,7 +10,7 @@ const montserrat = Montserrat({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const description = "Intelligent systems rooted in precise mathematical logic.";
+const description = "Super intelligence rooted in precise mathematical logic.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

@@ -3,6 +3,7 @@ import { BrandLockup, BrandMark } from "@/components/brand/brand-mark";
 
 const marketingLinks = [
   { href: "/method", label: "Method" },
+  { href: "/sign-in", label: "Sign in" },
   { href: "/privacy", label: "Privacy" },
 ];
 
@@ -43,7 +44,7 @@ export function SiteFooter() {
     <footer className="mt-auto bg-charcoal text-white">
       <div className="mx-auto flex max-w-5xl flex-col gap-6 px-6 py-10">
         <BrandLockup tone="dark" />
-        <p className="max-w-md text-sm text-white/80">Intelligent systems rooted in precise mathematical logic.</p>
+        <p className="max-w-md text-sm text-white/80">Super intelligence rooted in precise mathematical logic.</p>
         <nav className="flex flex-wrap gap-4 text-sm">
           <Link href="/method" className="hover:text-gold">
             Method

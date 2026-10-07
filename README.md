@@ -1,6 +1,6 @@
 # Axiom
 
-Daily practice for the math inside AI. Flutter is the learning app. Next.js serves the marketing site, the admin studio, and the mobile API.
+Daily practice for the math inside super intelligence. Flutter is the learning app. Next.js serves the marketing site, the admin studio, and the mobile API.
 
 ## Local
 

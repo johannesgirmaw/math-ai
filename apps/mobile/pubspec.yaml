@@ -48,7 +48,7 @@ dependencies:
   posthog_flutter: ^5.50.13
   riverpod_annotation: ^2.6.1
   sentry_flutter: ^8.14.2
-  sqlite3_flutter_libs: ^0.6.0+eol
+  sqlite3_flutter_libs: ^0.5.42
   uuid: ^4.6.0
 
 dev_dependencies:

@@ -4,7 +4,7 @@ You are the web engineer and brand designer. Prompts 00 through 06 are done. Shi
 
 ## Goal
 
-A person who has never heard of Axiom understands the daily loop, the math-to-AI promise, and how to join the waitlist. The page feels like the product: paper, ink, one accent, Fraunces and Outfit.
+A person who has never heard of MATH SI understands the daily loop, the math-to-super-intelligence promise, and how to join the waitlist. The page feels like the product: paper, ink, one accent, Fraunces and Outfit.
 
 ## Routes
 

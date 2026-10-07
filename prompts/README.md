@@ -1,12 +1,12 @@
 # Axiom implementation prompts
 
-Axiom is a daily practice app for the math inside AI. The phone client is Flutter. One Next.js app serves the marketing site, the admin studio, and the versioned mobile API.
+MATH SI is a daily practice app for the math inside super intelligence. The phone client is Flutter. One Next.js app serves the marketing site, the admin studio, and the versioned mobile API.
 
 Execute `v1/` in numeric order. Finish a prompt’s acceptance checks before opening the next file. When two prompts disagree, the earlier prompt wins until a human revises it.
 
 Product rules that every prompt inherits:
 
-- Beachhead users are teens and adults who want the math inside AI to feel obvious.
+- Beachhead users are teens and adults who want the math inside super intelligence to feel obvious.
 - Version 1 ships the Space world and the Vectors and matrices world, plus a short placement.
 - A mission is 5 to 8 screens and can be finished in a few minutes.
 - One idea per screen. Prompt copy stays under about 120 characters.

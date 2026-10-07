@@ -6,6 +6,8 @@ coverage
 .turbo
 .env
 .env.local
+.env.prod
+apps/web/public/download/*.apk
 *.tsbuildinfo
 .DS_Store
 apps/mobile/.dart_tool

@@ -7,10 +7,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getPublicPathTitles } from "@/features/marketing/path";
 import { WaitlistForm } from "@/features/waitlist/form";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: { absolute: "MATH SI" },
   description:
-    "Train the mind that trains the machine. Intelligent systems rooted in precise mathematical logic.",
+    "Train the mind that trains the machine. Super intelligence rooted in precise mathematical logic.",
   alternates: { canonical: "/" },
 };
 
@@ -43,7 +45,7 @@ const steps = [
 ];
 
 const questions = [
-  { question: "Who is it for?", answer: "Teens and adults who want the math inside AI to feel obvious." },
+  { question: "Who is it for?", answer: "Teens and adults who want the math inside super intelligence to feel obvious." },
   { question: "How long is a session?", answer: "A few minutes. One mission, one idea." },
   { question: "Do the lessons cost money?", answer: "The learning path is free." },
   { question: "Is it a chatbot?", answer: "You do the math yourself." },
@@ -55,14 +57,19 @@ export default async function HomePage() {
     <SiteFrame>
     <main className="mx-auto flex max-w-5xl flex-col gap-16 px-6 py-10 md:py-16">
       <section className="flex max-w-xl flex-col gap-6">
-        <p className="text-sm font-semibold tracking-[0.16em] text-teal">FUNCTION OF AI</p>
+        <p className="text-sm font-semibold tracking-[0.16em] text-teal">FUNCTION OF SI</p>
         <h1 className="font-heading text-4xl leading-tight md:text-5xl">Train the mind that trains the machine.</h1>
         <p className="text-lg text-muted-foreground">
           MATH SI turns precise mathematical ideas into short missions. Five quiet minutes. One idea. A small ability at the end.
         </p>
-        <Button asChild>
-          <a href="#waitlist">Join the waitlist</a>
-        </Button>
+        <div className="flex flex-wrap gap-3">
+          <Button asChild>
+            <a href="/download/math-si.apk">Download for Android</a>
+          </Button>
+          <Button asChild variant="outline">
+            <a href="#waitlist">Join the waitlist</a>
+          </Button>
+        </div>
       </section>
       <section className="grid gap-4 md:grid-cols-3">
         {steps.map((step) => (

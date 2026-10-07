@@ -15,7 +15,7 @@ Follow `design/voice.md`.
 - Each lesson has 5 to 8 screens and fades support: the first screens make the correct move obvious, the last screen asks for the move with less scaffolding.
 - Every screen sets `easyWithinMs`: choice 8000, slider 10000, drag 12000, matrix 12000, match 10000, unless a slower interaction needs more.
 - Every required error code for that primitive has specific copy. Name the direction, the cell, or the pair that went wrong.
-- The lesson `whyItMatters` is one concrete AI sentence, maximum 140 characters.
+- The lesson `whyItMatters` is one concrete super-intelligence sentence, maximum 140 characters.
 - `pipAbility` on the skill is a short capability, maximum 80 characters. Example: “Pip can tell which pattern is closer.”
 - No paragraphs, no “Incorrect”, no exclamation marks in feedback.
 
